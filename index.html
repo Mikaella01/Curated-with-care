@@ -1,1 +1,430 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Curated with Care by M. | Beauty & Little Luxuries</title>
+
+  <meta name="description" content="Discover thoughtfully selected beauty products and beautifully curated gift boxes.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="announcement">
+    A LITTLE LUXURY, THOUGHTFULLY CURATED
+  </div>
+
+  <header class="header">
+
+    <a href="index.html" class="brand">
+      <span class="brand-script">Curated with Care</span>
+      <span class="brand-by">BY M.</span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle">
+      ☰
+    </button>
+
+    <nav id="navigation">
+      <a href="#home">Home</a>
+      <a href="#collections">Collections</a>
+      <a href="#shop">Beauty Edit</a>
+      <a href="#gifts">Gift Boxes</a>
+      <a href="#about">Our Story</a>
+    </nav>
+
+    <button class="bag-button" id="bagButton">
+      Bag (<span id="bagCount">0</span>)
+    </button>
+
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+
+      <div class="hero-content">
+
+        <span class="eyebrow">
+          THE ART OF THOUGHTFUL BEAUTY
+        </span>
+
+        <h1>
+          Beauty, curated<br>
+          with <em>intention.</em>
+        </h1>
+
+        <p>
+          Discover beautiful finds, considered favourites
+          and little luxuries, selected just for you.
+        </p>
+
+        <a href="#shop" class="primary-button">
+          EXPLORE THE COLLECTION
+        </a>
+
+      </div>
+
+      <div class="hero-image"></div>
+
+    </section>
+
+
+    <section class="intro section-padding">
+
+      <span class="eyebrow">
+        A MORE PERSONAL KIND OF BEAUTY
+      </span>
+
+      <h2>
+        Not just beauty products.<br>
+        <em>Beautifully considered moments.</em>
+      </h2>
+
+      <p>
+        From everyday essentials to thoughtful gifts,
+        every selection is made with care, detail
+        and a little touch of luxury.
+      </p>
+
+    </section>
+
+
+    <section class="collections section-padding" id="collections">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">DISCOVER YOUR FAVOURITES</span>
+          <h2>Explore our <em>world.</em></h2>
+        </div>
+
+      </div>
+
+      <div class="collection-grid">
+
+        <a href="#shop" class="collection-card">
+
+          <div class="collection-photo photo-skincare"></div>
+
+          <div class="collection-caption">
+            <span>01 / DAILY RITUALS</span>
+            <h3>The Beauty Edit</h3>
+            <span class="discover">DISCOVER MORE ↗</span>
+          </div>
+
+        </a>
+
+
+        <a href="#gifts" class="collection-card">
+
+          <div class="collection-photo photo-gifts"></div>
+
+          <div class="collection-caption">
+            <span>02 / THOUGHTFUL GESTURES</span>
+            <h3>Gift Boxes</h3>
+            <span class="discover">DISCOVER MORE ↗</span>
+          </div>
+
+        </a>
+
+
+        <a href="#shop" class="collection-card">
+
+          <div class="collection-photo photo-glow"></div>
+
+          <div class="collection-caption">
+            <span>03 / LITTLE LUXURIES</span>
+            <h3>Beauty Discoveries</h3>
+            <span class="discover">DISCOVER MORE ↗</span>
+          </div>
+
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <section class="featured section-padding" id="shop">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">THE CURRENT OBSESSION</span>
+          <h2>Our <em>beauty favourites.</em></h2>
+        </div>
+
+        <a href="#shop" class="text-link">
+          VIEW ALL PRODUCTS ↗
+        </a>
+
+      </div>
+
+      <div class="filters">
+
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="skincare">Skincare</button>
+        <button class="filter" data-filter="glow">Glow & Hydration</button>
+        <button class="filter" data-filter="gifts">Gift Sets</button>
+
+      </div>
+
+      <div class="product-grid" id="productGrid">
+
+        <article class="product-card" data-category="skincare">
+
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b" alt="Skincare product">
+            <span class="product-tag">THE EDIT</span>
+          </div>
+
+          <div class="product-info">
+            <span class="product-type">SKINCARE</span>
+            <h3>The Daily Ritual</h3>
+            <p class="product-description">A considered skincare essential.</p>
+
+            <div class="product-bottom">
+              <span>€24.00</span>
+              <button class="add-button" data-name="The Daily Ritual" data-price="24">ADD +</button>
+            </div>
+          </div>
+
+        </article>
+
+
+        <article class="product-card" data-category="glow">
+
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19" alt="Beauty serum">
+            <span class="product-tag">GLOW FAVOURITE</span>
+          </div>
+
+          <div class="product-info">
+            <span class="product-type">GLOW & HYDRATION</span>
+            <h3>The Glow Essential</h3>
+            <p class="product-description">A little moment of radiance.</p>
+
+            <div class="product-bottom">
+              <span>€29.00</span>
+              <button class="add-button" data-name="The Glow Essential" data-price="29">ADD +</button>
+            </div>
+          </div>
+
+        </article>
+
+
+        <article class="product-card" data-category="skincare">
+
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8" alt="Skincare collection">
+            <span class="product-tag">EDITOR'S PICK</span>
+          </div>
+
+          <div class="product-info">
+            <span class="product-type">SKINCARE</span>
+            <h3>The Skin Comfort</h3>
+            <p class="product-description">Thoughtful care for everyday rituals.</p>
+
+            <div class="product-bottom">
+              <span>€32.00</span>
+              <button class="add-button" data-name="The Skin Comfort" data-price="32">ADD +</button>
+            </div>
+          </div>
+
+        </article>
+
+
+        <article class="product-card" data-category="gifts">
+
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da" alt="Gift box">
+            <span class="product-tag">BEAUTIFULLY GIFTED</span>
+          </div>
+
+          <div class="product-info">
+            <span class="product-type">GIFT COLLECTION</span>
+            <h3>The Little Luxury Box</h3>
+            <p class="product-description">A beautiful gift, thoughtfully chosen.</p>
+
+            <div class="product-bottom">
+              <span>€49.00</span>
+              <button class="add-button" data-name="The Little Luxury Box" data-price="49">ADD +</button>
+            </div>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <section class="gift-section" id="gifts">
+
+      <div class="gift-image"></div>
+
+      <div class="gift-content">
+
+        <span class="eyebrow">THE GIFTING COLLECTION</span>
+
+        <h2>
+          Because the best gifts<br>
+          are <em>thoughtful.</em>
+        </h2>
+
+        <p>
+          Birthdays, celebrations, little thank-yous
+          or simply because. Discover curated boxes
+          designed to make someone feel special.
+        </p>
+
+        <a href="#gift-finder" class="primary-button">
+          EXPLORE GIFTING
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <section class="gift-finder section-padding" id="gift-finder">
+
+      <span class="eyebrow">A LITTLE HELP FROM US</span>
+
+      <h2>Find something <em>beautiful.</em></h2>
+
+      <p>Let us help you discover the perfect gift.</p>
+
+      <div class="finder-box">
+
+        <label for="giftOccasion">
+          What are you shopping for?
+        </label>
+
+        <select id="giftOccasion">
+          <option value="">Choose an occasion</option>
+          <option>Birthday</option>
+          <option>Christmas</option>
+          <option>Thank you</option>
+          <option>Self-care treat</option>
+          <option>Just because</option>
+        </select>
+
+        <label for="giftBudget">
+          Your preferred budget
+        </label>
+
+        <select id="giftBudget">
+          <option value="">Choose your budget</option>
+          <option>Under €30</option>
+          <option>€30–€60</option>
+          <option>€60–€100</option>
+          <option>€100+</option>
+        </select>
+
+        <button class="primary-button" id="findGift">
+          FIND MY GIFT
+        </button>
+
+        <p id="giftResult" class="gift-result"></p>
+
+      </div>
+
+    </section>
+
+
+    <section class="newsletter">
+
+      <span class="eyebrow">A NOTE FROM US</span>
+
+      <h2>Little luxuries, delivered.</h2>
+
+      <p>
+        Discover new beauty finds, curated collections
+        and thoughtful gifting inspiration.
+      </p>
+
+      <form id="newsletterForm">
+
+        <input type="email" placeholder="Your email address" required>
+
+        <button type="submit">SUBSCRIBE ↗</button>
+
+      </form>
+
+      <p id="newsletterMessage"></p>
+
+    </section>
+
+  </main>
+
+
+  <footer id="about">
+
+    <a href="#" class="brand footer-brand">
+      <span class="brand-script">Curated with Care</span>
+      <span class="brand-by">BY M.</span>
+    </a>
+
+    <p>
+      Beauty, thoughtfully selected.<br>
+      Little luxuries, beautifully packaged.
+    </p>
+
+    <div class="footer-links">
+      <a href="#shop">Shop</a>
+      <a href="#gifts">Gifting</a>
+      <a href="#about">Our Story</a>
+      <a href="https://www.instagram.com/">Instagram ↗</a>
+    </div>
+
+    <span class="copyright">
+      © 2026 CURATED WITH CARE BY M. ALL RIGHTS RESERVED.
+    </span>
+
+  </footer>
+
+
+  <div class="cart-overlay" id="cartOverlay">
+
+    <div class="cart-panel">
+
+      <button class="close-cart" id="closeCart">×</button>
+
+      <span class="eyebrow">YOUR SELECTION</span>
+
+      <h2>Your shopping bag.</h2>
+
+      <div id="cartItems"></div>
+
+      <div class="cart-total">
+        Total: <span id="cartTotal">€0.00</span>
+      </div>
+
+      <button class="primary-button checkout-button" id="checkoutButton">
+        CONTINUE TO ORDER
+      </button>
+
+      <p class="cart-note">
+        Ordering and payment will be arranged with us.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <script src="js/script.js"></script>
+
+</body>
+</html>
