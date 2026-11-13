@@ -11,8 +11,6 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* CHECKOUT PAGE */
-
     .checkout-page {
       max-width: 1120px;
       margin: 55px auto;
@@ -45,8 +43,6 @@
       gap: 65px;
       align-items: start;
     }
-
-    /* FORM */
 
     .checkout-section {
       margin-bottom: 42px;
@@ -97,8 +93,6 @@
       gap: 16px;
     }
 
-    /* ORDER SUMMARY */
-
     .order-summary {
       background: #f5f1e9;
       padding: 32px;
@@ -147,8 +141,6 @@
       color: #655650;
     }
 
-    /* TOTALS */
-
     .checkout-totals {
       margin-top: 25px;
       font-size: 13px;
@@ -169,8 +161,6 @@
       font-size: 19px;
       color: #655650;
     }
-
-    /* BUTTON */
 
     .checkout-button {
       display: block;
@@ -207,8 +197,6 @@
       color: #986b72;
     }
 
-    /* DELIVERY AND PAYMENT INFORMATION */
-
     .checkout-message {
       font-size: 12px;
       line-height: 1.9;
@@ -225,10 +213,7 @@
       color: #897c74;
     }
 
-    /* MOBILE */
-
     @media (max-width: 750px) {
-
       .checkout-page {
         margin: 25px auto;
         padding: 18px;
@@ -254,11 +239,9 @@
       .checkout-section {
         margin-bottom: 35px;
       }
-
     }
 
     @media (max-width: 420px) {
-
       .checkout-row {
         grid-template-columns: 1fr;
         gap: 0;
@@ -268,9 +251,7 @@
         width: 75px;
         height: 95px;
       }
-
     }
-
   </style>
 </head>
 
@@ -279,132 +260,78 @@
   <main class="checkout-page">
 
     <div class="checkout-heading">
-
       <p>CURATED WITH CARE BY M.</p>
-
       <h1>Complete Your Order</h1>
-
       <p>A little care, thoughtfully curated.</p>
-
     </div>
 
-
     <div class="checkout-layout">
-
-      <!-- CUSTOMER INFORMATION -->
 
       <form class="checkout-form" id="checkoutForm">
 
         <section class="checkout-section">
-
           <h2>Contact Information</h2>
 
           <label for="email">Email Address</label>
-
-          <input
-            type="email"
-            id="email"
-            required
-            placeholder="Your email address"
-          >
-
+          <input type="email" id="email" required placeholder="Your email address">
         </section>
 
-
         <section class="checkout-section">
-
           <h2>Delivery Information</h2>
 
           <label for="firstName">First Name</label>
-
           <input type="text" id="firstName" required>
 
-
           <label for="lastName">Last Name</label>
-
           <input type="text" id="lastName" required>
 
-
           <label for="address">Street Address</label>
-
           <input type="text" id="address" required>
 
-
           <label for="apartment">Apartment / Suite (Optional)</label>
-
           <input type="text" id="apartment">
 
-
           <div class="checkout-row">
-
             <div>
-
               <label for="city">City</label>
-
               <input type="text" id="city" required>
-
             </div>
 
             <div>
-
               <label for="postcode">Postcode</label>
-
               <input type="text" id="postcode" required>
-
             </div>
-
           </div>
 
-
           <label for="country">Country</label>
-
           <input type="text" id="country" required>
-
         </section>
 
-
         <section class="checkout-section">
-
           <h2>Delivery Method</h2>
 
           <div class="checkout-note">
-
             Delivery options and costs will be confirmed
             when the ordering system is connected.
-
           </div>
-
         </section>
 
-
         <section class="checkout-section">
-
           <h2>Payment</h2>
 
           <div class="checkout-note">
-
             Secure payment options will be available once
             a payment provider is connected.
-
           </div>
-
         </section>
 
-
         <button type="submit" class="checkout-button">
-
           CONTINUE
-
         </button>
-
 
         <p class="checkout-message" id="checkoutMessage"></p>
 
       </form>
-
-
-
-      <!-- ORDER SUMMARY -->
 
       <aside class="order-summary">
 
@@ -412,42 +339,27 @@
 
         <div id="checkoutItems"></div>
 
-
         <div class="checkout-totals">
 
           <div class="checkout-total-line">
-
             <span>Subtotal</span>
-
             <span id="checkoutSubtotal">€0.00</span>
-
           </div>
-
 
           <div class="checkout-total-line">
-
             <span>Delivery</span>
-
             <span>Calculated later</span>
-
           </div>
 
-
           <div class="checkout-total-line checkout-grand-total">
-
             <span>Order Subtotal</span>
-
             <span id="checkoutTotal">€0.00</span>
-
           </div>
 
         </div>
 
-
         <a href="index.html" class="checkout-back">
-
           ← CONTINUE SHOPPING
-
         </a>
 
       </aside>
@@ -456,23 +368,16 @@
 
   </main>
 
-
-
-  <!-- CHECKOUT FUNCTIONALITY -->
-
   <script>
 
     const checkoutItems = document.getElementById("checkoutItems");
-
     const checkoutSubtotal = document.getElementById("checkoutSubtotal");
-
     const checkoutTotal = document.getElementById("checkoutTotal");
-
+    const checkoutForm = document.getElementById("checkoutForm");
 
     let cart = [];
 
     try {
-
       cart = JSON.parse(
         localStorage.getItem("curatedCart") || "[]"
       );
@@ -482,11 +387,8 @@
       }
 
     } catch (error) {
-
       cart = [];
-
     }
-
 
     function displayCheckout() {
 
@@ -494,22 +396,18 @@
 
       let subtotal = 0;
 
-
       if (cart.length === 0) {
 
         checkoutItems.innerHTML =
           "<p>Your shopping bag is currently empty.</p>";
 
-        document.getElementById("checkoutForm").style.display = "none";
+        checkoutForm.style.display = "none";
 
         checkoutSubtotal.textContent = "€0.00";
-
         checkoutTotal.textContent = "€0.00";
 
         return;
-
       }
-
 
       cart.forEach(product => {
 
@@ -527,73 +425,56 @@
 
         subtotal += itemTotal;
 
-
         const item = document.createElement("div");
-
         item.className = "checkout-product";
 
-
         const image = document.createElement("img");
-
         image.src = product.image || "";
-
         image.alt = product.name || "Beauty product";
 
-
         const info = document.createElement("div");
-
         info.className = "checkout-product-info";
 
-
         const name = document.createElement("p");
-
         name.textContent = product.name || "Beauty product";
 
-
         const quantityText = document.createElement("p");
-
         quantityText.textContent = "Quantity: " + quantity;
 
-
         const priceText = document.createElement("p");
-
         priceText.textContent = "€" + itemTotal.toFixed(2);
 
-
         info.append(name, quantityText, priceText);
-
         item.append(image, info);
 
         checkoutItems.appendChild(item);
 
       });
 
-
       checkoutSubtotal.textContent = "€" + subtotal.toFixed(2);
-
       checkoutTotal.textContent = "€" + subtotal.toFixed(2);
 
     }
 
-
     displayCheckout();
 
+    checkoutForm.addEventListener("submit", function(event) {
 
-    document.getElementById("checkoutForm").addEventListener(
-      "submit",
-      function(event) {
+      event.preventDefault();
 
-        event.preventDefault();
-
-        document.getElementById("checkoutMessage").textContent =
-
-          "Your checkout details are ready for the next stage. Payment and order submission are not connected yet.";
-
+      if (!checkoutForm.reportValidity()) {
+        return;
       }
-    );
+
+      if (cart.length === 0) {
+        return;
+      }
+
+      window.location.href = "order-confirmation.html";
+
+    });
 
   </script>
 
 </body>
-
 </html>
