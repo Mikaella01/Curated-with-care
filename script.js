@@ -88,7 +88,7 @@ let activeView = "all";
 let searchTerm = "";
 let sortOrder = "featured";
 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("curatedCart")) || [];
 
 let currentProduct = null;
 
