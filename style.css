@@ -1150,3 +1150,23 @@ select:focus-visible {
 [hidden] {
   display: none !important;
 }
+
+.instagram-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #a66f7d;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.instagram-link:hover {
+    color: #d19aa7;
+    transform: translateY(-2px);
+}
+
+.instagram-link svg {
+    display: block;
+    width: 21px;
+    height: 21px;
+}
