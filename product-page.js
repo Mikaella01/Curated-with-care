@@ -37,17 +37,30 @@ let cart = JSON.parse(
 /* 4. SHOPPING BAG HELPERS */
 
 function formatPrice(price) {
-  return "€" + Number(price).toFixed(2);
+  return "€" + Number(price || 0).toFixed(2);
 }
 
 
 function saveCart() {
-
   localStorage.setItem(
     "curatedCart",
     JSON.stringify(cart)
   );
+}
 
+
+function refreshCartFromStorage() {
+  try {
+    cart = JSON.parse(
+      localStorage.getItem("curatedCart") || "[]"
+    );
+
+    if (!Array.isArray(cart)) {
+      cart = [];
+    }
+  } catch (error) {
+    cart = [];
+  }
 }
 
 
@@ -62,13 +75,16 @@ function updateCart() {
   const cartTotal = document.getElementById("cartTotal");
 
   const totalItems = cart.reduce(
-    (total, item) => total + Number(item.quantity || 0),
+    (total, item) =>
+      total + Math.max(0, Number(item.quantity) || 0),
     0
   );
 
   const totalPrice = cart.reduce(
     (total, item) =>
-      total + Number(item.price) * Number(item.quantity || 0),
+      total +
+      Number(item.price || 0) *
+      Math.max(0, Number(item.quantity) || 0),
     0
   );
 
@@ -91,7 +107,6 @@ function updateCart() {
     `;
 
     return;
-
   }
 
 
@@ -104,15 +119,50 @@ function updateCart() {
       </p>
 
       <p>
-        ${formatPrice(item.price)} × ${item.quantity}
+        ${formatPrice(item.price)} each
+      </p>
+
+      <div class="cart-item-quantity">
+
+        <button
+          class="quantity-button"
+          type="button"
+          data-quantity-change="-1"
+          data-quantity-id="${item.id}"
+          aria-label="Remove one ${item.name}"
+        >
+          −
+        </button>
+
+        <span class="quantity-number">
+          ${item.quantity}
+        </span>
+
+        <button
+          class="quantity-button"
+          type="button"
+          data-quantity-change="1"
+          data-quantity-id="${item.id}"
+          aria-label="Add one ${item.name}"
+        >
+          +
+        </button>
+
+      </div>
+
+      <p>
+        Subtotal: ${formatPrice(
+          Number(item.price || 0) *
+          Number(item.quantity || 0)
+        )}
       </p>
 
       <button
         class="remove-cart-item"
-        data-remove="${item.id}"
         type="button"
+        data-remove="${item.id}"
       >
-        REMOVE
+        REMOVE ENTIRE PRODUCT
       </button>
 
     </div>
@@ -155,16 +205,12 @@ function addProductToBag() {
   const button = document.getElementById("productAddToCart");
 
   if (message) {
-
     message.textContent =
       "Beautiful choice! This item has been added to your bag.";
-
   }
 
   if (button) {
-
     button.textContent = "ADDED TO BAG ✓";
-
   }
 
 
@@ -173,7 +219,36 @@ function addProductToBag() {
 }
 
 
-/* 7. REMOVE PRODUCT FROM BAG */
+/* 7. CHANGE PRODUCT QUANTITY */
+
+function changeQuantity(productId, change) {
+
+  const item = cart.find(item =>
+    String(item.id) === String(productId)
+  );
+
+  if (!item) return;
+
+
+  item.quantity =
+    Number(item.quantity || 0) + Number(change);
+
+
+  if (item.quantity <= 0) {
+
+    cart = cart.filter(item =>
+      String(item.id) !== String(productId)
+    );
+
+  }
+
+
+  updateCart();
+
+}
+
+
+/* 8. REMOVE ENTIRE PRODUCT */
 
 function removeFromCart(productId) {
 
@@ -186,9 +261,27 @@ function removeFromCart(productId) {
 }
 
 
-/* CONNECT REMOVE BUTTONS */
+/* 9. CONNECT BAG QUANTITY AND REMOVE BUTTONS */
 
 document.addEventListener("click", event => {
+
+  const quantityButton = event.target.closest(
+    "[data-quantity-change]"
+  );
+
+  if (quantityButton) {
+
+    const id = quantityButton.dataset.quantityId;
+
+    const change = Number(
+      quantityButton.dataset.quantityChange
+    );
+
+    changeQuantity(id, change);
+
+    return;
+  }
+
 
   const removeButton = event.target.closest("[data-remove]");
 
@@ -201,7 +294,7 @@ document.addEventListener("click", event => {
 });
 
 
-/* 8. OPEN AND CLOSE SHOPPING BAG */
+/* 10. OPEN AND CLOSE SHOPPING BAG */
 
 const bagButton = document.getElementById("bagButton");
 const cartOverlay = document.getElementById("cartOverlay");
@@ -211,6 +304,8 @@ const closeCart = document.getElementById("closeCart");
 function openCart() {
 
   if (!cartOverlay) return;
+
+  refreshCartFromStorage();
 
   updateCart();
 
@@ -234,7 +329,13 @@ function closeCartPanel() {
 
 if (bagButton) {
 
-  bagButton.addEventListener("click", openCart);
+  bagButton.addEventListener("click", event => {
+
+    event.preventDefault();
+
+    openCart();
+
+  });
 
 }
 
@@ -261,7 +362,7 @@ if (cartOverlay) {
 }
 
 
-/* 9. CONNECT VIEW MY BAG LINK */
+/* 11. CONNECT VIEW MY BAG LINK */
 
 const bagToastView = document.getElementById("bagToastView");
 
@@ -280,7 +381,7 @@ if (bagToastView) {
 }
 
 
-/* 10. CHECKOUT BUTTON */
+/* 12. CHECKOUT BUTTON */
 
 const checkoutButton = document.getElementById("checkoutButton");
 
@@ -306,7 +407,7 @@ if (checkoutButton) {
 }
 
 
-/* 11. SHOPPING BAG NOTIFICATION */
+/* 13. SHOPPING BAG NOTIFICATION */
 
 let toastTimer;
 
@@ -325,13 +426,21 @@ function showBagToast() {
   if (!toast || !product) return;
 
 
-  toastImage.src = product.image;
+  if (toastImage) {
 
-  toastImage.alt = product.name;
+    toastImage.src = product.image;
 
-  toastName.textContent = product.name;
+    toastImage.alt = product.name;
 
-  toastPrice.textContent = formatPrice(product.price);
+  }
+
+  if (toastName) {
+    toastName.textContent = product.name;
+  }
+
+  if (toastPrice) {
+    toastPrice.textContent = formatPrice(product.price);
+  }
 
 
   toast.classList.add("show");
@@ -374,15 +483,17 @@ if (toastCloseButton) {
 }
 
 
-/* 12. DISPLAY PRODUCT PHOTOS */
+/* 14. DISPLAY PRODUCT PHOTOS */
 
 function showPhoto(index) {
 
-  if (!product) return;
+  if (!product || !mainPhoto) return;
 
   const gallery = product.gallery?.length
     ? product.gallery
     : [product.image];
+
+  if (!gallery.length) return;
 
   currentPhoto = (index + gallery.length) % gallery.length;
 
@@ -400,14 +511,22 @@ function showPhoto(index) {
 }
 
 
-/* 13. INITIALISE PRODUCT PAGE */
+/* 15. INITIALISE PRODUCT PAGE */
 
 function initialiseProductPage() {
 
   if (!product) {
 
-    document.querySelector(".standalone-product-page").innerHTML =
-      "<p>Product not found. Please return to the shop.</p>";
+    const productPage = document.querySelector(
+      ".standalone-product-page"
+    );
+
+    if (productPage) {
+
+      productPage.innerHTML =
+        "<p>Product not found. Please return to the shop.</p>";
+
+    }
 
     return;
 
@@ -419,7 +538,7 @@ function initialiseProductPage() {
 
 
   document.getElementById("productBrand").textContent =
-    product.brandName || product.brand;
+    product.brandName || product.brand || "";
 
   document.getElementById("productName").textContent =
     product.name;
@@ -437,18 +556,21 @@ function initialiseProductPage() {
 
   const benefits = document.getElementById("productBenefits");
 
-  benefits.innerHTML = "";
+  if (benefits) {
 
+    benefits.innerHTML = "";
 
-  (product.benefits || []).forEach(benefit => {
+    (product.benefits || []).forEach(benefit => {
 
-    const li = document.createElement("li");
+      const li = document.createElement("li");
 
-    li.textContent = benefit;
+      li.textContent = benefit;
 
-    benefits.appendChild(li);
+      benefits.appendChild(li);
 
-  });
+    });
+
+  }
 
 
   /* CREATE PHOTO THUMBNAILS */
@@ -457,38 +579,41 @@ function initialiseProductPage() {
     ? product.gallery
     : [product.image];
 
-  thumbnails.innerHTML = "";
+  if (thumbnails) {
+
+    thumbnails.innerHTML = "";
+
+    gallery.forEach((photo, index) => {
+
+      const button = document.createElement("button");
+
+      button.className = "product-thumbnail";
+
+      button.type = "button";
 
 
-  gallery.forEach((photo, index) => {
+      const image = document.createElement("img");
 
-    const button = document.createElement("button");
+      image.src = photo;
 
-    button.className = "product-thumbnail";
-
-    button.type = "button";
+      image.alt = product.name + " photo " + (index + 1);
 
 
-    const image = document.createElement("img");
-
-    image.src = photo;
-
-    image.alt = product.name + " photo " + (index + 1);
+      button.appendChild(image);
 
 
-    button.appendChild(image);
+      button.addEventListener("click", () => {
+
+        showPhoto(index);
+
+      });
 
 
-    button.addEventListener("click", () => {
-
-      showPhoto(index);
+      thumbnails.appendChild(button);
 
     });
 
-
-    thumbnails.appendChild(button);
-
-  });
+  }
 
 
   showPhoto(0);
@@ -507,59 +632,75 @@ function initialiseProductPage() {
 }
 
 
-/* 14. PREVIOUS AND NEXT PHOTOS */
+/* 16. PREVIOUS AND NEXT PHOTOS */
 
-document.getElementById("previousPhoto").addEventListener("click", () => {
-
-  showPhoto(currentPhoto - 1);
-
-});
+const previousPhoto = document.getElementById("previousPhoto");
+const nextPhoto = document.getElementById("nextPhoto");
 
 
-document.getElementById("nextPhoto").addEventListener("click", () => {
+if (previousPhoto) {
 
-  showPhoto(currentPhoto + 1);
+  previousPhoto.addEventListener("click", () => {
 
-});
+    showPhoto(currentPhoto - 1);
+
+  });
+
+}
 
 
-/* 15. MOBILE PHOTO SWIPING */
+if (nextPhoto) {
+
+  nextPhoto.addEventListener("click", () => {
+
+    showPhoto(currentPhoto + 1);
+
+  });
+
+}
+
+
+/* 17. MOBILE PHOTO SWIPING */
 
 let touchStartX = 0;
 
 
-mainPhoto.addEventListener("touchstart", event => {
+if (mainPhoto) {
 
-  touchStartX = event.changedTouches[0].screenX;
+  mainPhoto.addEventListener("touchstart", event => {
 
-}, { passive: true });
+    touchStartX = event.changedTouches[0].screenX;
 
-
-mainPhoto.addEventListener("touchend", event => {
-
-  const touchEndX = event.changedTouches[0].screenX;
-
-  const difference = touchStartX - touchEndX;
+  }, { passive: true });
 
 
-  if (Math.abs(difference) > 45) {
+  mainPhoto.addEventListener("touchend", event => {
 
-    if (difference > 0) {
+    const touchEndX = event.changedTouches[0].screenX;
 
-      showPhoto(currentPhoto + 1);
+    const difference = touchStartX - touchEndX;
 
-    } else {
 
-      showPhoto(currentPhoto - 1);
+    if (Math.abs(difference) > 45) {
+
+      if (difference > 0) {
+
+        showPhoto(currentPhoto + 1);
+
+      } else {
+
+        showPhoto(currentPhoto - 1);
+
+      }
 
     }
 
-  }
+  }, { passive: true });
 
-}, { passive: true });
+}
 
 
-/* 16. START THE PAGE */
+/* 18. START THE PAGE */
 
 updateCart();
 
