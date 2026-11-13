@@ -438,7 +438,7 @@ if (checkoutButton) {
 let toastTimer;
 
 
-function showBagToast() {
+function showBagToast(selectedProduct = product) {
 
   const toast = document.getElementById("bagToast");
 
@@ -449,23 +449,22 @@ function showBagToast() {
   const toastPrice = document.getElementById("bagToastPrice");
 
 
-  if (!toast || !product) return;
+  function showBagToast(selectedProduct = product) {
 
 
   if (toastImage) {
 
-    toastImage.src = product.image;
-
-    toastImage.alt = product.name;
+    toastImage.src = selectedProduct.image;
+    toastImage.alt = selectedProduct.name;
 
   }
 
   if (toastName) {
-    toastName.textContent = product.name;
+    toastName.textContent = selectedProduct.name;
   }
 
   if (toastPrice) {
-    toastPrice.textContent = formatPrice(product.price);
+    toastPrice.textContent = formatPrice(selectedProduct.price);
   }
 
 
