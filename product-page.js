@@ -69,6 +69,7 @@ function refreshCartFromStorage() {
     if (!Array.isArray(cart)) {
       cart = [];
     }
+
   } catch (error) {
     cart = [];
   }
@@ -449,22 +450,27 @@ function showBagToast(selectedProduct = product) {
   const toastPrice = document.getElementById("bagToastPrice");
 
 
-  function showBagToast(selectedProduct = product) {
+  if (!toast || !selectedProduct) return;
 
 
   if (toastImage) {
 
-    toastImage.src = selectedProduct.image;
-    toastImage.alt = selectedProduct.name;
+    toastImage.src = selectedProduct.image || "";
+
+    toastImage.alt = selectedProduct.name || "";
 
   }
 
   if (toastName) {
-    toastName.textContent = selectedProduct.name;
+
+    toastName.textContent = selectedProduct.name || "";
+
   }
 
   if (toastPrice) {
+
     toastPrice.textContent = formatPrice(selectedProduct.price);
+
   }
 
 
@@ -490,9 +496,11 @@ function closeBagToast() {
 
   if (!toast) return;
 
+
   toast.classList.remove("show");
 
   toast.setAttribute("aria-hidden", "true");
+
 
   clearTimeout(toastTimer);
 
@@ -514,11 +522,14 @@ function showPhoto(index) {
 
   if (!product || !mainPhoto) return;
 
+
   const gallery = product.gallery?.length
     ? product.gallery
     : [product.image];
 
+
   if (!gallery.length) return;
+
 
   currentPhoto = (index + gallery.length) % gallery.length;
 
@@ -604,6 +615,7 @@ function initialiseProductPage() {
     ? product.gallery
     : [product.image];
 
+
   if (thumbnails) {
 
     thumbnails.innerHTML = "";
@@ -660,6 +672,7 @@ function initialiseProductPage() {
 /* 16. PREVIOUS AND NEXT PHOTOS */
 
 const previousPhoto = document.getElementById("previousPhoto");
+
 const nextPhoto = document.getElementById("nextPhoto");
 
 
@@ -725,23 +738,29 @@ if (mainPhoto) {
 }
 
 
-
 /* 18. RELATED PRODUCTS — YOU MAY ALSO LOVE */
 
 function getRelatedProducts() {
 
   if (!product) return [];
 
+
   return products
+
     .filter(item => String(item.id) !== String(product.id))
+
     .map(item => {
 
       let score = 0;
 
+
       const currentCollections = product.collection || [];
+
       const otherCollections = item.collection || [];
 
+
       const currentConcerns = product.concerns || [];
+
       const otherConcerns = item.concerns || [];
 
 
@@ -791,16 +810,19 @@ function getRelatedProducts() {
       };
 
     })
+
     .filter(item => item.recommendationScore > 0)
+
     .sort((a, b) =>
       b.recommendationScore - a.recommendationScore
     )
+
     .slice(0, 4);
 
 }
 
 
-/* DISPLAY RELATED PRODUCTS */
+/* 19. DISPLAY RELATED PRODUCTS */
 
 function displayRelatedProducts() {
 
@@ -847,7 +869,7 @@ function displayRelatedProducts() {
         <a href="product.html?id=${encodeURIComponent(item.id)}">
 
           <img
-            src="${escapeHTML(item.image)}"
+            src="${escapeHTML(item.image || "")}"
             alt="${escapeHTML(item.name)}"
             loading="lazy"
           >
@@ -916,13 +938,14 @@ function displayRelatedProducts() {
 }
 
 
-/* ADD RECOMMENDED PRODUCT TO SHOPPING BAG */
+/* 20. ADD RECOMMENDED PRODUCT TO SHOPPING BAG */
 
 function addRelatedProductToBag(productId) {
 
   const selectedProduct = products.find(item =>
     String(item.id) === String(productId)
   );
+
 
   if (!selectedProduct) return;
 
@@ -954,7 +977,7 @@ function addRelatedProductToBag(productId) {
 }
 
 
-/* CONNECT RELATED PRODUCT BUTTONS */
+/* 21. CONNECT RELATED PRODUCT BUTTONS */
 
 document.addEventListener("click", event => {
 
@@ -968,7 +991,7 @@ document.addEventListener("click", event => {
 });
 
 
-/* 19. START THE PAGE */
+/* 22. START THE PAGE */
 
 updateCart();
 
