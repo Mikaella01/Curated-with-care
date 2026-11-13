@@ -1959,3 +1959,61 @@ footer {
 }
 
    
+/* =========================================
+   23. BOTANICAL TEXTURE REFINEMENT
+========================================= */
+
+/* Remove the noticeable horizontal stripes */
+
+body {
+  background-color: #f8f5ef;
+
+  background-image:
+    radial-gradient(
+      ellipse at 10% 15%,
+      rgba(220, 201, 193, 0.12),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 90% 80%,
+      rgba(198, 184, 164, 0.09),
+      transparent 45%
+    );
+  background-attachment: fixed;
+}
+
+/* Make header completely opaque */
+
+.header {
+  background: #f8f5ef;
+}
+
+/* Make the floral decoration more delicate */
+
+.intro::before {
+  font-size: 145px;
+  opacity: 0.055;
+  left: 0;
+  top: -15px;
+  color: #b99b91;
+}
+
+/* Add a little more depth to the gift section */
+
+.gift-section {
+  background:
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(255,255,255,0.45),
+      transparent 40%
+    ),
+    #eee4dc;
+}
+
+/* Softer product backgrounds */
+
+.product-image,
+.gallery-main {
+  background-color: #f4eee8;
+}
+
