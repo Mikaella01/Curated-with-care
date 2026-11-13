@@ -773,6 +773,7 @@ function removeFromCart(productId) {
 
 /* UPDATE SHOPPING BAG DISPLAY */
 
+
 function updateCart() {
 
   localStorage.setItem(
@@ -780,20 +781,15 @@ function updateCart() {
     JSON.stringify(cart)
   );
 
-
   const cartItems = document.getElementById("cartItems");
-
   const cartCount = document.getElementById("bagCount");
-
   const cartTotal = document.getElementById("cartTotal");
-
 
   const totalItems = cart.reduce(
     (total, item) =>
       total + Math.max(0, Number(item.quantity) || 0),
     0
   );
-
 
   const totalPrice = cart.reduce(
     (total, item) =>
@@ -803,90 +799,87 @@ function updateCart() {
     0
   );
 
-
   if (cartCount) {
-
     cartCount.textContent = totalItems;
-
   }
-
 
   if (cartTotal) {
-
     cartTotal.textContent = formatPrice(totalPrice);
-
   }
-
 
   if (!cartItems) return;
 
-
   if (cart.length === 0) {
-
     cartItems.innerHTML = `
       <p>Your bag is currently empty.</p>
     `;
-
     return;
-
   }
-
 
   cartItems.innerHTML = cart.map(item => `
 
     <div class="cart-item">
 
-      <p>
-        <strong>${escapeHTML(item.name)}</strong>
-      </p>
+      <div class="cart-item-layout">
 
-      <p>
-        ${formatPrice(item.price)} each
-      </p>
-
-      <div class="cart-item-quantity">
-
-        <button
-          class="quantity-button"
-          type="button"
-          data-quantity-change="-1"
-          data-quantity-id="${escapeHTML(item.id)}"
-          aria-label="Remove one ${escapeHTML(item.name)}"
+        <img
+          class="cart-item-image"
+          src="${escapeHTML(item.image || "")}"
+          alt="${escapeHTML(item.name)}"
+          loading="lazy"
         >
-          −
-        </button>
 
-        <span class="quantity-number">
-          ${Number(item.quantity) || 0}
-        </span>
+        <div class="cart-item-details">
 
-        <button
-          class="quantity-button"
-          type="button"
-          data-quantity-change="1"
-          data-quantity-id="${escapeHTML(item.id)}"
-          aria-label="Add one ${escapeHTML(item.name)}"
-        >
-          +
-        </button>
+          <p>
+            <strong>${escapeHTML(item.name)}</strong>
+          </p>
+
+          <p>
+            ${formatPrice(item.price)} each
+          </p>
+
+          <div class="cart-item-quantity">
+
+            <button
+              class="quantity-button"
+              type="button"
+              data-quantity-change="-1"
+              data-quantity-id="${escapeHTML(item.id)}"
+              aria-label="Remove one ${escapeHTML(item.name)}"
+            >−</button>
+
+            <span class="quantity-number">
+              ${Number(item.quantity) || 0}
+            </span>
+
+            <button
+              class="quantity-button"
+              type="button"
+              data-quantity-change="1"
+              data-quantity-id="${escapeHTML(item.id)}"
+              aria-label="Add one ${escapeHTML(item.name)}"
+            >+</button>
+
+          </div>
+
+          <p>
+            Subtotal: ${formatPrice(
+              Number(item.price || 0) *
+              Number(item.quantity || 0)
+            )}
+          </p>
+
+        </div>
 
       </div>
-
-      <p>
-        Subtotal: ${formatPrice(
-          Number(item.price || 0) *
-          Number(item.quantity || 0)
-        )}
-      </p>
 
       <button
         class="remove-cart-item"
         type="button"
         data-remove="${escapeHTML(item.id)}"
       >
-
         REMOVE ENTIRE PRODUCT
-
       </button>
 
     </div>
@@ -894,6 +887,7 @@ function updateCart() {
   `).join("");
 
 }
+
 
 
 /* CONNECT SHOPPING BAG BUTTONS */
