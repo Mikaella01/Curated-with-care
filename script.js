@@ -14,34 +14,55 @@
 */
 
 const products = [
+{
 
-  /*
-  EXAMPLE PRODUCT FORMAT:
-
-  {
     id: 1,
-    name: "Product Name",
-    brand: "medicube",
-    brandName: "Medicube",
-    collection: ["pdrn", "hydration"],
-    concerns: ["dryness", "dullness"],
-    category: "skincare",
-    description: "Product description goes here.",
-    benefits: [
-      "Benefit one",
-      "Benefit two"
-    ],
-    size: "30ml",
-    price: 29.00,
-    image: "images/medicube/pdrn-pink/product-name.jpg",
-    gallery: [
-      "images/medicube/pdrn-pink/product-name.jpg"
-    ],
-    tag: "THE BEAUTY EDIT",
-    featured: true
-  }
 
-  */
+    name: "PDRN Pink Collagen Bubble Serum",
+
+    brand: "medicube",
+
+    brandName: "Medicube",
+
+    collection: ["pdrn", "pink-pdrn-line"],
+
+    concerns: [],
+
+    category: "skincare",
+
+    description: "",
+
+    benefits: [],
+
+    size: "95ml",
+
+    price: 25.00,
+
+    image: "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9212.webp",
+
+    gallery: [
+
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9212.webp",
+
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9242.webp",
+
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9243.webp",
+
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9244.webp",
+
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9245.webp",
+
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9246.webp",
+
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9247.webp"
+
+    ],
+
+    tag: "THE BEAUTY EDIT",
+
+    featured: true
+
+  }
 
 ];
 
