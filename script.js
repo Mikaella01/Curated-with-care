@@ -38,51 +38,50 @@ const products = [
     featured: true
   },
 
-   
-{
-  id: 11,
-  name: "PDRN Pink Collagen Volume Multi Balm",
-  brand: "medicube",
-  brandName: "Medicube",
+  {
+    id: 11,
+    name: "PDRN Pink Collagen Volume Multi Balm",
+    brand: "medicube",
+    brandName: "Medicube",
 
-  collection: ["pdrn", "pink-pdrn-line"],
+    collection: ["pdrn", "pink-pdrn-line"],
 
-  concerns: [
-    "dryness",
-    "dullness",
-    "fine-lines",
-    "skin-elasticity"
-  ],
+    concerns: [
+      "dryness",
+      "dullness",
+      "fine-lines",
+      "skin-elasticity"
+    ],
 
-  category: "skincare",
+    category: "skincare",
 
-  description: "A convenient multi-purpose balm from Medicube's Pink PDRN collection, designed to nourish the skin and add a moisturised, radiant finish.",
+    description: "A convenient multi-purpose balm from Medicube's Pink PDRN collection, designed to nourish the skin and add a moisturised, radiant finish.",
 
-  benefits: [
-    "Helps moisturise dry areas",
-    "Leaves skin feeling nourished",
-    "Convenient balm format",
-    "Easy to carry and reapply"
-  ],
+    benefits: [
+      "Helps moisturise dry areas",
+      "Leaves skin feeling nourished",
+      "Convenient balm format",
+      "Easy to carry and reapply"
+    ],
 
-  size: "10g",
+    size: "10g",
 
-  price: 20.00,
+    price: 20.00,
 
-  image: "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9209.webp",
+    image: "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9209.webp",
 
-  gallery: [
-    "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9209.webp",
-    "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9249.webp",
-    "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9250.webp",
-    "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9251.webp",
-    "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9252.webp",
-    "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9253.webp"
-  ],
+    gallery: [
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9209.webp",
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9249.webp",
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9250.webp",
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9251.webp",
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9252.webp",
+      "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9253.webp"
+    ],
 
-  tag: "THE BEAUTY EDIT",
-  featured: true
-},
+    tag: "THE BEAUTY EDIT",
+    featured: true
+  }
 
 ];
 
@@ -585,66 +584,87 @@ document.querySelectorAll("[data-concern]").forEach(button => {
 });
 
 
-/* 11. BRAND CARDS ON HOMEPAGE */
+/* 11. BRAND LINKS AND URL FILTERING */
 
-document.querySelectorAll("[data-brand-link]").forEach(button => {
+const availableBrands = [
 
-  button.addEventListener("click", () => {
+  "medicube",
+  "anua",
+  "beauty-of-joseon",
+  "cosrx",
+  "vt-cosmetics",
+  "skin1004",
+  "torriden"
 
-    activeBrand = button.dataset.brandLink;
+];
+
+
+function initialiseBrandFromURL() {
+
+  const urlParams = new URLSearchParams(
+    window.location.search
+  );
+
+  const requestedBrand = urlParams.get("brand");
+
+
+  if (
+    requestedBrand &&
+    availableBrands.includes(requestedBrand)
+  ) {
+
+    activeBrand = requestedBrand;
 
     activeCollection = "all";
+
     activeConcern = "all";
 
+    searchTerm = "";
 
-    document.querySelectorAll("[data-brand]").forEach(item => {
+    activeView = "brands";
 
-      item.classList.toggle(
-        "active",
-        item.dataset.brand === activeBrand
-      );
-
-    });
+  }
 
 
-    document.querySelectorAll("[data-collection]").forEach(item => {
+  document.querySelectorAll("[data-brand]").forEach(button => {
 
-      item.classList.toggle(
-        "active",
-        item.dataset.collection === "all"
-      );
-
-    });
-
-
-    document.querySelectorAll("[data-concern]").forEach(item => {
-
-      item.classList.toggle(
-        "active",
-        item.dataset.concern === "all"
-      );
-
-    });
-
-
-    updateShopView("brands");
-
-    displayProducts();
-
-
-    const shop = document.getElementById("shop");
-
-    if (shop) {
-
-      shop.scrollIntoView({
-        behavior: "smooth"
-      });
-
-    }
+    button.classList.toggle(
+      "active",
+      button.dataset.brand === activeBrand
+    );
 
   });
 
-});
+
+  document.querySelectorAll("[data-collection]").forEach(button => {
+
+    button.classList.toggle(
+      "active",
+      button.dataset.collection === activeCollection
+    );
+
+  });
+
+
+  document.querySelectorAll("[data-concern]").forEach(button => {
+
+    button.classList.toggle(
+      "active",
+      button.dataset.concern === activeConcern
+    );
+
+  });
+
+
+  const searchInput = document.getElementById("productSearch");
+
+  if (searchInput) {
+
+    searchInput.value = "";
+
+  }
+
+}
 
 
 /* 12. SEARCH PRODUCTS */
@@ -819,23 +839,35 @@ function removeFromCart(productId) {
 
 /* UPDATE SHOPPING BAG DISPLAY */
 
-
 function updateCart() {
 
-  localStorage.setItem(
-    "curatedCart",
-    JSON.stringify(cart)
-  );
+  try {
+
+    localStorage.setItem(
+      "curatedCart",
+      JSON.stringify(cart)
+    );
+
+  } catch (error) {
+
+    console.warn("Shopping bag could not be saved.", error);
+
+  }
+
 
   const cartItems = document.getElementById("cartItems");
+
   const cartCount = document.getElementById("bagCount");
+
   const cartTotal = document.getElementById("cartTotal");
+
 
   const totalItems = cart.reduce(
     (total, item) =>
       total + Math.max(0, Number(item.quantity) || 0),
     0
   );
+
 
   const totalPrice = cart.reduce(
     (total, item) =>
@@ -845,22 +877,36 @@ function updateCart() {
     0
   );
 
+
   if (cartCount) {
+
     cartCount.textContent = totalItems;
+
   }
 
+
   if (cartTotal) {
+
     cartTotal.textContent = formatPrice(totalPrice);
+
   }
+
 
   if (!cartItems) return;
 
+
   if (cart.length === 0) {
+
     cartItems.innerHTML = `
+
       <p>Your bag is currently empty.</p>
+
     `;
+
     return;
+
   }
+
 
   cartItems.innerHTML = cart.map(item => `
 
@@ -933,7 +979,6 @@ function updateCart() {
   `).join("");
 
 }
-
 
 
 /* CONNECT SHOPPING BAG BUTTONS */
@@ -1189,9 +1234,22 @@ if (newsletterForm) {
 
 /* 22. INITIALISE WEBSITE */
 
-updateShopView("all");
+// Read a brand selection from the homepage URL
+
+initialiseBrandFromURL();
+
+
+// Display the correct shop tab
+
+updateShopView(activeView);
+
+
+// Display products
 
 displayProducts();
+
+
+// Update shopping bag
 
 updateCart();
 
@@ -1207,7 +1265,9 @@ window.addEventListener("pageshow", () => {
     );
 
     if (!Array.isArray(cart)) {
+
       cart = [];
+
     }
 
   } catch (error) {
