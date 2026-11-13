@@ -36,7 +36,7 @@ const products = [
 
     tag: "THE BEAUTY EDIT",
     featured: true
-  }
+  },
 
    
 {
