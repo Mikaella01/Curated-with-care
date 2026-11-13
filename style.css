@@ -1760,4 +1760,202 @@ select:focus-visible {
   }
 }
 
+
+
+/* =========================================
+   22. BOTANICAL EDITORIAL BACKGROUND
+   CURATED WITH CARE BY M.
+========================================= */
+
+/* Subtle textured paper background */
+
+body {
+  background-color: #f8f5ef;
+
+  background-image:
+    radial-gradient(
+      ellipse at 12% 15%,
+      rgba(220, 201, 193, 0.13),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 88% 65%,
+      rgba(198, 184, 164, 0.10),
+      transparent 45%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(125, 105, 90, 0.012) 0px,
+      rgba(125, 105, 90, 0.012) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+/* Softer, warmer header */
+
+.header {
+  background: rgba(248, 245, 239, 0.96);
+  border-bottom: 1px solid #e8ded5;
+}
+
+/* Elegant hero background */
+
+.hero {
+  background-color: #f1eae3;
+}
+
+.hero-content {
+  background:
+    radial-gradient(
+      circle at 5% 10%,
+      rgba(255,255,255,0.55),
+      transparent 55%
+    ),
+    #f1eae3;
+}
+
+/* Introduction with botanical atmosphere */
+
+.intro {
+  position: relative;
+  isolation: isolate;
+  padding: 30px 20px;
+}
+
+.intro::before {
+  content: "❀";
+  position: absolute;
+  z-index: -1;
+  left: 2%;
+  top: -45px;
+  font-family: Georgia, serif;
+  font-size: 180px;
+  color: #c9b2a8;
+  opacity: 0.10;
+  pointer-events: none;
+}
+
+/* Collection sections */
+
+.collections {
+  background:
+    radial-gradient(
+      ellipse at 95% 10%,
+      rgba(220, 201, 193, 0.15),
+      transparent 40%
+    ),
+    #f8f5ef;
+}
+
+/* Brand section */
+
+.brands-section {
+  background:
+    linear-gradient(
+      135deg,
+      #f5eee8,
+      #faf7f2,
+      #f2ebe5
+    );
+}
+
+/* Beauty edit */
+
+.featured {
+  background-color: #fbf9f5;
+}
+
+/* Gift section */
+
+.gift-section {
+  background:
+    radial-gradient(
+      circle at 95% 15%,
+      rgba(255,255,255,0.55),
+      transparent 45%
+    ),
+    #f0e7df;
+}
+
+.gift-content {
+  background: transparent;
+}
+
+/* Gift finder */
+
+.gift-finder {
+  background:
+    radial-gradient(
+      ellipse at 10% 90%,
+      rgba(220, 201, 193, 0.16),
+      transparent 40%
+    ),
+    #faf7f2;
+}
+
+/* Newsletter */
+
+.newsletter {
+  background:
+    linear-gradient(
+      120deg,
+      #eadbd7,
+      #f1e5e0,
+      #e8d8d3
+    );
+}
+
+/* Footer */
+
+footer {
+  background: #eee5de;
+}
+
+/* Product page backgrounds */
+
+.standalone-product-page {
+  background: transparent;
+}
+
+.gallery-main {
+  background-color: #f3ede7;
+}
+
+/* Subtle card finishing */
+
+.brand-card {
+  background: rgba(255,255,255,0.75);
+  border-color: #e8ddd4;
+}
+
+.product-card {
+  background: rgba(255,255,255,0.88);
+}
+
+/* Delicate hover transitions */
+
+.collection-photo,
+.brand-card,
+.product-card,
+.primary-button {
+  transition: all 0.35s ease;
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 650px) {
+
+  .intro::before {
+    font-size: 110px;
+    left: -5px;
+    top: -20px;
+  }
+
+  .hero-content {
+    background-color: #f1eae3;
+  }
+
+}
+
    
