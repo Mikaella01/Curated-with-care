@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Product | Curated with Care by M.</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="product-page-header">
+    <a href="index.html" class="product-back-link">
+      ← BACK TO SHOP
+    </a>
+
+    <a href="index.html" class="product-brand-name">
+      Curated with Care by M.
+    </a>
+  </header>
+
+  <main class="standalone-product-page">
+
+    <div class="product-page-gallery">
+
+      <div class="gallery-main">
+
+        <button id="previousPhoto" class="gallery-arrow">
+          ‹
+        </button>
+
+        <img id="mainProductPhoto" src="" alt="Product photo">
+
+        <button id="nextPhoto" class="gallery-arrow">
+          ›
+        </button>
+
+      </div>
+
+      <div id="productThumbnails" class="product-thumbnails"></div>
+
+      <p class="gallery-hint">
+        Swipe or select a photo to explore the product.
+      </p>
+
+    </div>
+
+    <section class="standalone-product-info">
+
+      <p id="productBrand" class="eyebrow"></p>
+
+      <h1 id="productName"></h1>
+
+      <p id="productSize"></p>
+
+      <p id="productPrice" class="product-detail-price"></p>
+
+      <div class="product-description-block">
+        <h3>THE PRODUCT</h3>
+        <p id="productDescription"></p>
+      </div>
+
+      <div class="product-description-block">
+        <h3>WHY WE LOVE IT</h3>
+        <ul id="productBenefits"></ul>
+      </div>
+
+      <a href="index.html#shop" class="primary-button">
+        CONTINUE SHOPPING
+      </a>
+
+    </section>
+
+  </main>
+
+  <script src="product-page.js"></script>
+
+</body>
+</html>
