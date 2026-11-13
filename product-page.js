@@ -726,8 +726,253 @@ if (mainPhoto) {
 }
 
 
-/* 18. START THE PAGE */
+
+/* 18. RELATED PRODUCTS — YOU MAY ALSO LOVE */
+
+function getRelatedProducts() {
+
+  if (!product) return [];
+
+  return products
+    .filter(item => String(item.id) !== String(product.id))
+    .map(item => {
+
+      let score = 0;
+
+      const currentCollections = product.collection || [];
+      const otherCollections = item.collection || [];
+
+      const currentConcerns = product.concerns || [];
+      const otherConcerns = item.concerns || [];
+
+
+      // SAME COLLECTION
+
+      const sharedCollections = currentCollections.filter(value =>
+        otherCollections.includes(value)
+      );
+
+      score += sharedCollections.length * 4;
+
+
+      // SIMILAR SKIN CONCERNS
+
+      const sharedConcerns = currentConcerns.filter(value =>
+        otherConcerns.includes(value)
+      );
+
+      score += sharedConcerns.length * 3;
+
+
+      // SAME PRODUCT CATEGORY
+
+      if (
+        product.category &&
+        item.category &&
+        product.category === item.category
+      ) {
+
+        score += 1;
+
+      }
+
+
+      // SAME BRAND
+
+      if (product.brand === item.brand) {
+
+        score += 0.5;
+
+      }
+
+
+      return {
+        ...item,
+        recommendationScore: score
+      };
+
+    })
+    .filter(item => item.recommendationScore > 0)
+    .sort((a, b) =>
+      b.recommendationScore - a.recommendationScore
+    )
+    .slice(0, 4);
+
+}
+
+
+/* DISPLAY RELATED PRODUCTS */
+
+function displayRelatedProducts() {
+
+  const section = document.getElementById(
+    "relatedProductsSection"
+  );
+
+  const grid = document.getElementById(
+    "relatedProductsGrid"
+  );
+
+
+  if (!section || !grid || !product) return;
+
+
+  const relatedProducts = getRelatedProducts();
+
+
+  if (relatedProducts.length === 0) {
+
+    section.hidden = true;
+
+    return;
+
+  }
+
+
+  section.hidden = false;
+
+  grid.innerHTML = "";
+
+
+  relatedProducts.forEach(item => {
+
+    const card = document.createElement("article");
+
+    card.className = "related-product-card";
+
+
+    card.innerHTML = `
+
+      <div class="related-product-image">
+
+        <a href="product.html?id=${encodeURIComponent(item.id)}">
+
+          <img
+            src="${escapeHTML(item.image)}"
+            alt="${escapeHTML(item.name)}"
+            loading="lazy"
+          >
+
+        </a>
+
+      </div>
+
+
+      <div class="related-product-info">
+
+        <p class="related-product-brand">
+
+          ${escapeHTML(item.brandName || item.brand || "")}
+
+        </p>
+
+
+        <h3>
+
+          <a href="product.html?id=${encodeURIComponent(item.id)}">
+
+            ${escapeHTML(item.name)}
+
+          </a>
+
+        </h3>
+
+
+        <p class="related-product-price">
+
+          ${formatPrice(item.price)}
+
+        </p>
+
+
+        <button
+          type="button"
+          class="related-add-button"
+          data-related-add="${escapeHTML(item.id)}"
+        >
+
+          ADD +
+
+        </button>
+
+
+        <a
+          class="related-view-link"
+          href="product.html?id=${encodeURIComponent(item.id)}"
+        >
+
+          VIEW DETAILS ↗
+
+        </a>
+
+      </div>
+
+    `;
+
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+
+/* ADD RECOMMENDED PRODUCT TO SHOPPING BAG */
+
+function addRelatedProductToBag(productId) {
+
+  const selectedProduct = products.find(item =>
+    String(item.id) === String(productId)
+  );
+
+  if (!selectedProduct) return;
+
+
+  const existingItem = cart.find(item =>
+    String(item.id) === String(productId)
+  );
+
+
+  if (existingItem) {
+
+    existingItem.quantity =
+      Number(existingItem.quantity || 0) + 1;
+
+  } else {
+
+    cart.push({
+      ...selectedProduct,
+      quantity: 1
+    });
+
+  }
+
+
+  updateCart();
+
+  showBagToast(selectedProduct);
+
+}
+
+
+/* CONNECT RELATED PRODUCT BUTTONS */
+
+document.addEventListener("click", event => {
+
+  const button = event.target.closest("[data-related-add]");
+
+  if (!button) return;
+
+
+  addRelatedProductToBag(button.dataset.relatedAdd);
+
+});
+
+
+/* 19. START THE PAGE */
 
 updateCart();
 
 initialiseProductPage();
+
+displayRelatedProducts();
