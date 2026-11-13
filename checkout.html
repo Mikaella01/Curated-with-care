@@ -5,138 +5,188 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Checkout | Curated with Care by M.</title>
 
   <link rel="stylesheet" href="style.css">
 
   <style>
+    /* CHECKOUT PAGE */
+
     .checkout-page {
-      max-width: 1100px;
-      margin: 50px auto;
-      padding: 20px;
+      max-width: 1120px;
+      margin: 55px auto;
+      padding: 25px;
       color: #756963;
     }
 
     .checkout-heading {
       text-align: center;
-      margin-bottom: 45px;
+      margin-bottom: 55px;
     }
 
     .checkout-heading h1 {
       font-family: Georgia, serif;
       font-weight: normal;
-      font-size: 34px;
+      font-size: 38px;
+      color: #655650;
+      margin: 18px 0;
     }
 
     .checkout-heading p {
-      font-size: 13px;
-      letter-spacing: 2px;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      color: #987b75;
     }
 
     .checkout-layout {
       display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
-      gap: 55px;
+      grid-template-columns: 1.25fr 0.85fr;
+      gap: 65px;
+      align-items: start;
     }
 
+    /* FORM */
+
     .checkout-section {
-      margin-bottom: 35px;
+      margin-bottom: 42px;
     }
 
     .checkout-section h2,
     .order-summary h2 {
       font-family: Georgia, serif;
-      font-size: 23px;
+      font-size: 24px;
       font-weight: normal;
-      margin-bottom: 20px;
+      color: #655650;
+      margin-bottom: 22px;
     }
 
     .checkout-form label {
       display: block;
-      font-size: 12px;
-      margin: 15px 0 7px;
-      letter-spacing: 0.5px;
+      font-size: 11px;
+      margin: 17px 0 8px;
+      letter-spacing: 0.7px;
+      color: #756963;
     }
 
     .checkout-form input {
       width: 100%;
-      padding: 13px;
-      border: 1px solid #d9c9b9;
+      padding: 15px;
+      border: 1px solid #e1d5cc;
       background: #fffdfa;
       color: #756963;
       font-family: inherit;
       font-size: 14px;
       box-sizing: border-box;
+      border-radius: 2px;
+      transition: border-color 0.2s;
     }
 
     .checkout-form input:focus {
       outline: none;
-      border-color: #986b72;
+      border-color: #a98285;
+    }
+
+    .checkout-form input::placeholder {
+      color: #b9aaa1;
     }
 
     .checkout-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 15px;
+      gap: 16px;
     }
 
+    /* ORDER SUMMARY */
+
     .order-summary {
-      background: #f5eeea;
-      padding: 28px;
+      background: #f5f1e9;
+      padding: 32px;
       height: fit-content;
+      border: 1px solid #e8ded5;
+    }
+
+    .order-summary h2 {
+      margin-top: 0;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #ded1c7;
     }
 
     .checkout-product {
       display: flex;
-      gap: 15px;
-      padding: 15px 0;
-      border-bottom: 1px solid #d9c9b9;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid #e1d5cc;
     }
 
     .checkout-product img {
-      width: 75px;
-      height: 85px;
-      object-fit: cover;
+      width: 88px;
+      height: 105px;
+      object-fit: contain;
       background: #fffdfa;
+      padding: 5px;
+      box-sizing: border-box;
+      flex-shrink: 0;
     }
 
     .checkout-product-info {
       flex: 1;
       font-size: 13px;
+      min-width: 0;
     }
 
     .checkout-product-info p {
-      margin: 5px 0;
+      margin: 6px 0;
+      line-height: 1.5;
     }
 
+    .checkout-product-info p:first-child {
+      font-family: Georgia, serif;
+      font-size: 15px;
+      color: #655650;
+    }
+
+    /* TOTALS */
+
     .checkout-totals {
-      margin-top: 20px;
-      font-size: 14px;
+      margin-top: 25px;
+      font-size: 13px;
     }
 
     .checkout-total-line {
       display: flex;
       justify-content: space-between;
-      margin: 13px 0;
+      gap: 12px;
+      margin: 16px 0;
     }
 
     .checkout-grand-total {
       border-top: 1px solid #c8b8ad;
-      padding-top: 18px;
-      font-size: 17px;
-      font-weight: bold;
+      padding-top: 22px;
+      margin-top: 22px;
+      font-family: Georgia, serif;
+      font-size: 19px;
+      color: #655650;
     }
 
+    /* BUTTON */
+
     .checkout-button {
+      display: block;
       width: 100%;
-      padding: 16px;
-      margin-top: 20px;
+      padding: 17px;
+      margin-top: 28px;
       border: none;
       background: #986b72;
       color: white;
       letter-spacing: 2px;
       cursor: pointer;
-      font-size: 12px;
+      font-size: 11px;
+      font-family: inherit;
+      text-align: center;
+      box-sizing: border-box;
+      transition: background 0.3s;
     }
 
     .checkout-button:hover {
@@ -146,32 +196,81 @@
     .checkout-back {
       display: block;
       text-align: center;
-      margin-top: 25px;
+      margin-top: 28px;
       color: #756963;
-      font-size: 12px;
+      font-size: 10px;
+      letter-spacing: 1.5px;
       text-decoration: none;
     }
 
-    .checkout-message {
-      font-size: 13px;
-      line-height: 1.7;
-      margin-top: 15px;
+    .checkout-back:hover {
+      color: #986b72;
     }
 
+    /* DELIVERY AND PAYMENT INFORMATION */
+
+    .checkout-message {
+      font-size: 12px;
+      line-height: 1.9;
+      color: #897c74;
+      margin-top: 12px;
+    }
+
+    .checkout-note {
+      background: #fbf7f4;
+      border-left: 2px solid #c8b8ad;
+      padding: 15px 18px;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #897c74;
+    }
+
+    /* MOBILE */
+
     @media (max-width: 750px) {
-      .checkout-layout {
-        grid-template-columns: 1fr;
-        gap: 25px;
+
+      .checkout-page {
+        margin: 25px auto;
+        padding: 18px;
+      }
+
+      .checkout-heading {
+        margin-bottom: 38px;
       }
 
       .checkout-heading h1 {
-        font-size: 28px;
+        font-size: 30px;
+      }
+
+      .checkout-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
       }
 
       .order-summary {
-        padding: 20px;
+        padding: 22px;
       }
+
+      .checkout-section {
+        margin-bottom: 35px;
+      }
+
     }
+
+    @media (max-width: 420px) {
+
+      .checkout-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .checkout-product img {
+        width: 75px;
+        height: 95px;
+      }
+
+    }
+
   </style>
 </head>
 
@@ -180,77 +279,132 @@
   <main class="checkout-page">
 
     <div class="checkout-heading">
+
       <p>CURATED WITH CARE BY M.</p>
+
       <h1>Complete Your Order</h1>
+
       <p>A little care, thoughtfully curated.</p>
+
     </div>
 
+
     <div class="checkout-layout">
+
+      <!-- CUSTOMER INFORMATION -->
 
       <form class="checkout-form" id="checkoutForm">
 
         <section class="checkout-section">
+
           <h2>Contact Information</h2>
 
           <label for="email">Email Address</label>
-          <input type="email" id="email" required
-            placeholder="Your email address">
+
+          <input
+            type="email"
+            id="email"
+            required
+            placeholder="Your email address"
+          >
+
         </section>
 
+
         <section class="checkout-section">
+
           <h2>Delivery Information</h2>
 
           <label for="firstName">First Name</label>
+
           <input type="text" id="firstName" required>
 
+
           <label for="lastName">Last Name</label>
+
           <input type="text" id="lastName" required>
 
+
           <label for="address">Street Address</label>
+
           <input type="text" id="address" required>
 
+
           <label for="apartment">Apartment / Suite (Optional)</label>
+
           <input type="text" id="apartment">
 
+
           <div class="checkout-row">
+
             <div>
+
               <label for="city">City</label>
+
               <input type="text" id="city" required>
+
             </div>
 
             <div>
+
               <label for="postcode">Postcode</label>
+
               <input type="text" id="postcode" required>
+
             </div>
+
           </div>
 
+
           <label for="country">Country</label>
+
           <input type="text" id="country" required>
+
         </section>
 
+
         <section class="checkout-section">
+
           <h2>Delivery Method</h2>
-          <p class="checkout-message">
+
+          <div class="checkout-note">
+
             Delivery options and costs will be confirmed
             when the ordering system is connected.
-          </p>
+
+          </div>
+
         </section>
+
 
         <section class="checkout-section">
+
           <h2>Payment</h2>
-          <p class="checkout-message">
+
+          <div class="checkout-note">
+
             Secure payment options will be available once
             a payment provider is connected.
-          </p>
+
+          </div>
+
         </section>
 
+
         <button type="submit" class="checkout-button">
+
           CONTINUE
+
         </button>
+
 
         <p class="checkout-message" id="checkoutMessage"></p>
 
       </form>
+
+
+
+      <!-- ORDER SUMMARY -->
 
       <aside class="order-summary">
 
@@ -258,27 +412,42 @@
 
         <div id="checkoutItems"></div>
 
+
         <div class="checkout-totals">
 
           <div class="checkout-total-line">
+
             <span>Subtotal</span>
+
             <span id="checkoutSubtotal">€0.00</span>
+
           </div>
+
 
           <div class="checkout-total-line">
+
             <span>Delivery</span>
+
             <span>Calculated later</span>
+
           </div>
 
+
           <div class="checkout-total-line checkout-grand-total">
+
             <span>Order Subtotal</span>
+
             <span id="checkoutTotal">€0.00</span>
+
           </div>
 
         </div>
 
+
         <a href="index.html" class="checkout-back">
+
           ← CONTINUE SHOPPING
+
         </a>
 
       </aside>
@@ -287,72 +456,144 @@
 
   </main>
 
+
+
+  <!-- CHECKOUT FUNCTIONALITY -->
+
   <script>
+
     const checkoutItems = document.getElementById("checkoutItems");
+
     const checkoutSubtotal = document.getElementById("checkoutSubtotal");
+
     const checkoutTotal = document.getElementById("checkoutTotal");
 
-    const cart = JSON.parse(localStorage.getItem("curatedCart")) || [];
+
+    let cart = [];
+
+    try {
+
+      cart = JSON.parse(
+        localStorage.getItem("curatedCart") || "[]"
+      );
+
+      if (!Array.isArray(cart)) {
+        cart = [];
+      }
+
+    } catch (error) {
+
+      cart = [];
+
+    }
+
 
     function displayCheckout() {
+
       checkoutItems.innerHTML = "";
 
       let subtotal = 0;
 
+
       if (cart.length === 0) {
+
         checkoutItems.innerHTML =
           "<p>Your shopping bag is currently empty.</p>";
 
         document.getElementById("checkoutForm").style.display = "none";
+
         checkoutSubtotal.textContent = "€0.00";
+
         checkoutTotal.textContent = "€0.00";
+
         return;
+
       }
 
+
       cart.forEach(product => {
-        const quantity = Number(product.quantity) || 1;
-        const price = Number(product.price) || 0;
+
+        const quantity = Math.max(
+          0,
+          Number(product.quantity) || 0
+        );
+
+        const price = Math.max(
+          0,
+          Number(product.price) || 0
+        );
+
         const itemTotal = price * quantity;
 
         subtotal += itemTotal;
 
+
         const item = document.createElement("div");
+
         item.className = "checkout-product";
 
+
         const image = document.createElement("img");
-        image.src = product.image;
-        image.alt = product.name || "Product";
+
+        image.src = product.image || "";
+
+        image.alt = product.name || "Beauty product";
+
 
         const info = document.createElement("div");
+
         info.className = "checkout-product-info";
 
+
         const name = document.createElement("p");
+
         name.textContent = product.name || "Beauty product";
 
+
         const quantityText = document.createElement("p");
+
         quantityText.textContent = "Quantity: " + quantity;
 
+
         const priceText = document.createElement("p");
+
         priceText.textContent = "€" + itemTotal.toFixed(2);
 
+
         info.append(name, quantityText, priceText);
+
         item.append(image, info);
+
         checkoutItems.appendChild(item);
+
       });
 
+
       checkoutSubtotal.textContent = "€" + subtotal.toFixed(2);
+
       checkoutTotal.textContent = "€" + subtotal.toFixed(2);
+
     }
+
 
     displayCheckout();
 
-    document.getElementById("checkoutForm").addEventListener("submit", function(event) {
-      event.preventDefault();
 
-      document.getElementById("checkoutMessage").textContent =
-        "Your checkout details are ready for the next stage. Payment and order submission are not connected yet.";
-    });
+    document.getElementById("checkoutForm").addEventListener(
+      "submit",
+      function(event) {
+
+        event.preventDefault();
+
+        document.getElementById("checkoutMessage").textContent =
+
+          "Your checkout details are ready for the next stage. Payment and order submission are not connected yet.";
+
+      }
+    );
+
   </script>
 
 </body>
+
 </html>
