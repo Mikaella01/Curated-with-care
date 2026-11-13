@@ -1,39 +1,56 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Curated with Care by M. | Luxury Beauty Boutique</title>
+
   <meta name="description" content="Discover thoughtfully curated Korean skincare, beauty favourites and luxury gift boxes at Curated with Care by M.">
+
   <meta name="theme-color" content="#f8f1ef">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
   <!-- ANNOUNCEMENT BAR -->
+
   <div class="announcement">
     A LITTLE LUXURY, THOUGHTFULLY CURATED
   </div>
+
+
   <!-- HEADER -->
+
   <header class="header">
+
     <a href="index.html#home" class="brand">
       <span class="brand-script">Curated with Care</span>
       <span class="brand-by">BY M.</span>
     </a>
+
     <button class="menu-toggle" id="menuToggle"
       aria-label="Open navigation"
       aria-expanded="false">
       ☰
     </button>
+
     <nav id="navigation">
       <a href="index.html#home">Home</a>
       <a href="shop.html">Shop</a>
-      <a href="index.html#brands">Brands</a>
       <a href="index.html#collections">Collections</a>
       <a href="index.html#gifts">Gift Boxes</a>
       <a href="index.html#about">Our Story</a>
+
       <a href="https://www.instagram.com/curatedwithcarebym/"
          target="_blank"
          rel="noopener noreferrer"
@@ -42,452 +59,689 @@
         Instagram ↗
       </a>
     </nav>
+
     <button class="bag-button" id="bagButton">
       Bag (<span id="bagCount">0</span>)
     </button>
+
   </header>
+
+
   <main>
+
     <!-- HERO SECTION -->
+
     <section class="hero" id="home">
+
       <div class="hero-content">
+
         <span class="eyebrow">
           THE ART OF THOUGHTFUL BEAUTY
         </span>
+
         <h1>
           Beauty, curated<br>
           with <em>intention.</em>
         </h1>
+
         <p>
           Discover beautiful finds, considered favourites
           and little luxuries, selected just for you.
         </p>
+
         <a href="shop.html" class="primary-button">
           EXPLORE THE COLLECTION
         </a>
+
       </div>
+
       <div class="hero-image"></div>
+
     </section>
+
+
     <!-- INTRODUCTION -->
+
     <section class="intro section-padding">
+
       <span class="eyebrow">
         A MORE PERSONAL KIND OF BEAUTY
       </span>
+
       <h2>
         Not just beauty products.<br>
         <em>Beautifully considered moments.</em>
       </h2>
+
       <p>
         From everyday essentials to thoughtful gifts,
         every selection is made with care, detail
         and a little touch of luxury.
       </p>
+
     </section>
+
+
     <!-- MAIN COLLECTIONS -->
+
     <section class="collections section-padding" id="collections">
+
       <div class="section-heading">
+
         <div>
           <span class="eyebrow">
             DISCOVER YOUR FAVOURITES
           </span>
+
           <h2>
             Explore our <em>world.</em>
           </h2>
         </div>
+
       </div>
+
+
       <div class="collection-grid">
+
         <!-- BEAUTY EDIT -->
+
         <a href="shop.html" class="collection-card">
+
           <div class="collection-photo photo-skincare"></div>
+
           <div class="collection-caption">
+
             <span>01 / DAILY RITUALS</span>
+
             <h3>The Beauty Edit</h3>
+
             <span class="discover">
               DISCOVER MORE ↗
             </span>
+
           </div>
+
         </a>
+
+
         <!-- BRANDS -->
+
         <a href="index.html#brands" class="collection-card">
+
           <div class="collection-photo photo-glow"></div>
+
           <div class="collection-caption">
+
             <span>02 / BEAUTY HOUSES</span>
+
             <h3>Our Favourite Brands</h3>
+
             <span class="discover">
               DISCOVER MORE ↗
             </span>
+
           </div>
+
         </a>
+
+
         <!-- GIFT BOXES -->
+
         <a href="index.html#gifts" class="collection-card">
+
           <div class="collection-photo photo-gifts"></div>
+
           <div class="collection-caption">
+
             <span>03 / THOUGHTFUL GESTURES</span>
+
             <h3>Gift Boxes</h3>
+
             <span class="discover">
               DISCOVER MORE ↗
             </span>
+
           </div>
+
         </a>
+
       </div>
+
     </section>
-    <!-- BRANDS SECTION -->
-    <section class="brands-section section-padding" id="brands">
-      <div class="section-heading">
-        <div>
-          <span class="eyebrow">
-            BEAUTY HOUSES WE LOVE
-          </span>
-          <h2>
-            Discover by <em>brand.</em>
-          </h2>
-          <p>
-            Explore thoughtfully selected favourites
-            from our beauty houses.
-          </p>
-        </div>
+
+
+    <!-- EDITORIAL BRAND GALLERY -->
+
+    <section class="brand-edit section-padding" id="brands">
+
+      <div class="brand-edit-heading">
+
+        <span class="eyebrow">
+          THE BRANDS WE LOVE
+        </span>
+
+        <h2>
+          Discover our <em>world of beauty.</em>
+        </h2>
+
+        <p>
+          Thoughtfully selected names in beauty,
+          chosen for their approach to skincare,
+          innovation and everyday rituals.
+        </p>
+
       </div>
-      <div class="brand-grid">
-        <button class="brand-card"
-          data-brand-link="medicube">
-          <span class="brand-card-name">MEDICUBE</span>
-          <span class="discover">EXPLORE ↗</span>
-        </button>
-        <button class="brand-card"
-          data-brand-link="anua">
-          <span class="brand-card-name">ANUA</span>
-          <span class="discover">EXPLORE ↗</span>
-        </button>
-        <button class="brand-card"
-          data-brand-link="beauty-of-joseon">
-          <span class="brand-card-name">BEAUTY OF JOSEON</span>
-          <span class="discover">EXPLORE ↗</span>
-        </button>
-        <button class="brand-card"
-          data-brand-link="cosrx">
-          <span class="brand-card-name">COSRX</span>
-          <span class="discover">EXPLORE ↗</span>
-        </button>
-        <button class="brand-card"
-          data-brand-link="vt-cosmetics">
-          <span class="brand-card-name">VT COSMETICS</span>
-          <span class="discover">EXPLORE ↗</span>
-        </button>
-        <button class="brand-card"
-          data-brand-link="skin1004">
-          <span class="brand-card-name">SKIN1004</span>
-          <span class="discover">EXPLORE ↗</span>
-        </button>
-        <button class="brand-card"
-          data-brand-link="torriden">
-          <span class="brand-card-name">TORRIDEN</span>
-          <span class="discover">EXPLORE ↗</span>
-        </button>
+
+
+      <div class="brand-edit-grid">
+
+        <a href="shop.html?brand=medicube"
+           class="brand-edit-item">
+          <span>MEDICUBE</span>
+          <small>01</small>
+        </a>
+
+        <a href="shop.html?brand=anua"
+           class="brand-edit-item">
+          <span>ANUA</span>
+          <small>02</small>
+        </a>
+
+        <a href="shop.html?brand=beauty-of-joseon"
+           class="brand-edit-item">
+          <span>BEAUTY OF JOSEON</span>
+          <small>03</small>
+        </a>
+
+        <a href="shop.html?brand=cosrx"
+           class="brand-edit-item">
+          <span>COSRX</span>
+          <small>04</small>
+        </a>
+
+        <a href="shop.html?brand=vt-cosmetics"
+           class="brand-edit-item">
+          <span>VT COSMETICS</span>
+          <small>05</small>
+        </a>
+
+        <a href="shop.html?brand=skin1004"
+           class="brand-edit-item">
+          <span>SKIN1004</span>
+          <small>06</small>
+        </a>
+
+        <a href="shop.html?brand=torriden"
+           class="brand-edit-item">
+          <span>TORRIDEN</span>
+          <small>07</small>
+        </a>
+
       </div>
+
+
+      <a href="shop.html" class="brand-edit-link">
+        EXPLORE ALL BEAUTY ↗
+      </a>
+
     </section>
+
+
     <!-- HOMEPAGE PRODUCT PREVIEW -->
+
     <section class="featured section-padding" id="shop">
+
       <div class="section-heading">
+
         <div>
           <span class="eyebrow">
             THE CURRENT BEAUTY EDIT
           </span>
+
           <h2>
             Find your <em>favourites.</em>
           </h2>
+
           <p>
             A considered selection of beauty,
             skincare and little luxuries.
           </p>
         </div>
+
       </div>
+
+
       <!-- SHOP NAVIGATION -->
+
       <div class="shop-navigation">
-        <button class="shop-tab active"
-          data-view="all">
+
+        <button class="shop-tab active" data-view="all">
           All Products
         </button>
-        <button class="shop-tab"
-          data-view="brands">
+
+        <button class="shop-tab" data-view="brands">
           By Brand
         </button>
-        <button class="shop-tab"
-          data-view="collections">
+
+        <button class="shop-tab" data-view="collections">
           By Collection
         </button>
-        <button class="shop-tab"
-          data-view="concerns">
+
+        <button class="shop-tab" data-view="concerns">
           By Skin Concern
         </button>
+
       </div>
+
+
       <!-- BRAND FILTERS -->
+
       <div class="shop-filter-section" id="brandFilters">
+
         <span class="filter-heading">
           DISCOVER BY BRAND
         </span>
+
         <div class="filters">
+
           <button class="filter active" data-brand="all">
             All Brands
           </button>
+
           <button class="filter" data-brand="medicube">
             Medicube
           </button>
+
           <button class="filter" data-brand="anua">
             Anua
           </button>
+
           <button class="filter" data-brand="beauty-of-joseon">
             Beauty of Joseon
           </button>
+
           <button class="filter" data-brand="cosrx">
             COSRX
           </button>
+
           <button class="filter" data-brand="vt-cosmetics">
             VT Cosmetics
           </button>
+
           <button class="filter" data-brand="skin1004">
             SKIN1004
           </button>
+
           <button class="filter" data-brand="torriden">
             Torriden
           </button>
+
         </div>
+
       </div>
+
+
       <!-- COLLECTION FILTERS -->
+
       <div class="shop-filter-section" id="collectionFilters">
+
         <span class="filter-heading">
           DISCOVER BY COLLECTION
         </span>
+
         <div class="filters">
+
           <button class="filter active" data-collection="all">
             All Collections
           </button>
+
           <button class="filter" data-collection="pdrn">
             PDRN
           </button>
+
           <button class="filter" data-collection="collagen">
             Collagen
           </button>
+
           <button class="filter" data-collection="pore-care">
             Pore Care
           </button>
+
           <button class="filter" data-collection="hydration">
             Hydration
           </button>
+
           <button class="filter" data-collection="brightening">
             Brightening
           </button>
+
           <button class="filter" data-collection="sun-care">
             Sun Care
           </button>
+
           <button class="filter" data-collection="beauty-devices">
             Beauty Devices
           </button>
+
         </div>
+
       </div>
+
+
       <!-- SKIN CONCERNS -->
+
       <div class="shop-filter-section" id="concernFilters">
+
         <span class="filter-heading">
           DISCOVER BY SKIN CONCERN
         </span>
+
         <div class="filters">
+
           <button class="filter active" data-concern="all">
             All Concerns
           </button>
+
           <button class="filter" data-concern="dryness">
             Dryness
           </button>
+
           <button class="filter" data-concern="dullness">
             Dullness
           </button>
+
           <button class="filter" data-concern="pores">
             Visible Pores
           </button>
+
           <button class="filter" data-concern="uneven-tone">
             Uneven Tone
           </button>
+
           <button class="filter" data-concern="sensitive-skin">
             Sensitive Skin
           </button>
+
         </div>
+
       </div>
+
+
       <!-- PRODUCT SEARCH AND SORTING -->
+
       <div class="shop-tools">
+
         <input
           type="search"
           id="productSearch"
           placeholder="Search products or brands..."
           aria-label="Search products">
+
         <select id="productSort" aria-label="Sort products">
+
           <option value="featured">Featured</option>
           <option value="price-low">Price: Low to High</option>
           <option value="price-high">Price: High to Low</option>
           <option value="name">Name: A to Z</option>
+
         </select>
+
       </div>
+
+
       <!-- RESULTS -->
+
       <div class="shop-results-heading">
+
         <p id="resultsTitle">
           All beauty favourites
         </p>
+
         <span id="resultsCount"></span>
+
       </div>
+
+
       <div class="product-grid" id="productGrid">
+
         <div class="catalogue-empty">
           <p>Your beauty edit is being prepared.</p>
         </div>
+
       </div>
+
+
       <div class="homepage-shop-link">
+
         <a href="shop.html" class="primary-button">
           DISCOVER ALL PRODUCTS ↗
         </a>
+
       </div>
+
     </section>
+
+
     <!-- PRODUCT DETAILS -->
+
     <section class="product-details-section"
       id="productDetails"
       hidden>
+
       <button type="button"
         class="back-to-shop"
         id="backToShop">
         ← BACK TO SHOP
       </button>
+
       <div id="productDetailContent"></div>
+
     </section>
+
+
     <!-- GIFT COLLECTION -->
+
     <section class="gift-section" id="gifts">
+
       <div class="gift-image"></div>
+
       <div class="gift-content">
+
         <span class="eyebrow">
           THE GIFTING COLLECTION
         </span>
+
         <h2>
           Because the best gifts<br>
           are <em>thoughtful.</em>
         </h2>
+
         <p>
           Birthdays, celebrations, little thank-yous
           or simply because. Discover curated boxes
           designed to make someone feel special.
         </p>
+
         <a href="#gift-finder" class="primary-button">
           EXPLORE GIFTING
         </a>
+
       </div>
+
     </section>
+
+
     <!-- GIFT FINDER -->
+
     <section class="gift-finder section-padding"
       id="gift-finder">
+
       <span class="eyebrow">
         A LITTLE HELP FROM US
       </span>
+
       <h2>
         Find something <em>beautiful.</em>
       </h2>
+
       <p>
         Let us help you discover the perfect gift.
       </p>
+
+
       <div class="finder-box">
+
         <label for="giftOccasion">
           What are you shopping for?
         </label>
+
         <select id="giftOccasion">
+
           <option value="">
             Choose an occasion
           </option>
+
           <option value="birthday">
             Birthday
           </option>
+
           <option value="christmas">
             Christmas
           </option>
+
           <option value="thank-you">
             Thank you
           </option>
+
           <option value="self-care">
             Self-care treat
           </option>
+
           <option value="just-because">
             Just because
           </option>
+
         </select>
+
+
         <label for="giftBudget">
           Your preferred budget
         </label>
+
         <select id="giftBudget">
+
           <option value="">
             Choose your budget
           </option>
+
           <option value="under-30">
             Under €30
           </option>
+
           <option value="30-60">
             €30–€60
           </option>
+
           <option value="60-100">
             €60–€100
           </option>
+
           <option value="100-plus">
             €100+
           </option>
+
         </select>
+
+
         <button class="primary-button" id="findGift">
           FIND MY GIFT
         </button>
+
         <p id="giftResult"
           class="gift-result"
           aria-live="polite">
         </p>
+
       </div>
+
     </section>
+
+
     <!-- NEWSLETTER -->
+
     <section class="newsletter">
+
       <span class="eyebrow">
         A NOTE FROM US
       </span>
+
       <h2>
         Little luxuries, delivered.
       </h2>
+
       <p>
         Discover new beauty finds, curated collections
         and thoughtful gifting inspiration.
       </p>
+
       <form id="newsletterForm">
+
         <input
           type="email"
           id="newsletterEmail"
           placeholder="Your email address"
           aria-label="Your email address"
           required>
+
         <button type="submit">
           SUBSCRIBE ↗
         </button>
+
       </form>
+
       <p id="newsletterMessage" aria-live="polite"></p>
+
     </section>
+
   </main>
+
+
   <!-- FOOTER -->
+
   <footer id="about">
+
     <a href="index.html#home" class="brand footer-brand">
+
       <span class="brand-script">
         Curated with Care
       </span>
+
       <span class="brand-by">
         BY M.
       </span>
+
     </a>
+
+
     <p>
       Beauty, thoughtfully selected.<br>
       Little luxuries, beautifully packaged.
     </p>
+
+
     <div class="footer-links">
+
       <a href="shop.html">Shop</a>
-      <a href="index.html#brands">Brands</a>
+      <a href="index.html#collections">Collections</a>
       <a href="index.html#gifts">Gifting</a>
       <a href="index.html#about">Our Story</a>
+
       <a href="https://www.instagram.com/curatedwithcarebym/"
          target="_blank"
          rel="noopener noreferrer"
          class="instagram-link"
          aria-label="Visit our Instagram">
+
         <svg viewBox="0 0 24 24"
           width="21"
           height="21"
@@ -496,50 +750,74 @@
           stroke-width="1.6"
           stroke-linecap="round"
           stroke-linejoin="round">
+
           <rect x="3" y="3" width="18" height="18" rx="5"/>
           <circle cx="12" cy="12" r="4"/>
           <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/>
+
         </svg>
+
       </a>
+
     </div>
+
+
     <span class="copyright">
       © 2026 CURATED WITH CARE BY M.
       ALL RIGHTS RESERVED.
     </span>
+
   </footer>
+
+
   <!-- SHOPPING BAG -->
+
   <div class="cart-overlay"
     id="cartOverlay"
     aria-hidden="true">
+
     <div class="cart-panel">
+
       <button class="close-cart"
         id="closeCart"
         aria-label="Close shopping bag">
         ×
       </button>
+
       <span class="eyebrow">
         YOUR SELECTION
       </span>
+
       <h2>
         Your shopping bag.
       </h2>
+
       <div id="cartItems">
         <p>Your bag is currently empty.</p>
       </div>
+
       <div class="cart-total">
         Total:
         <span id="cartTotal">€0.00</span>
       </div>
+
       <a href="checkout.html"
         class="primary-button checkout-button">
         CONTINUE TO ORDER
       </a>
+
       <p class="cart-note">
         Ordering and payment will be arranged with us.
       </p>
+
     </div>
+
   </div>
+
+
   <!-- JAVASCRIPT -->
+
   <script src="script.js"></script>
+
 </body>
 </html>
