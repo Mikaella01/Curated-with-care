@@ -1,21 +1,16 @@
 
+
 /* =========================================
    CURATED WITH CARE BY M.
    PRODUCT CATALOGUE & WEBSITE FUNCTIONALITY
 ========================================= */
 
 
-/* 1. PRODUCT DATABASE
-
-   Add every product here.
-   Each product is entered only ONCE.
-
-   Image paths must match your GitHub folders.
-*/
+/* 1. PRODUCT DATABASE */
 
 const products = [
-{
 
+  {
     id: 1,
 
     name: "PDRN Pink Collagen Bubble Serum",
@@ -67,12 +62,29 @@ const products = [
 ];
 
 
-/* 2. WEBSITE STATE */
+/* 2. SAVE PRODUCT CATALOGUE */
+
+try {
+
+  localStorage.setItem(
+    "curatedProducts",
+    JSON.stringify(products)
+  );
+
+} catch (error) {
+
+  console.warn("Product catalogue could not be saved.", error);
+
+}
+
+
+/* 3. WEBSITE STATE */
 
 let activeBrand = "all";
 let activeCollection = "all";
 let activeConcern = "all";
 let activeView = "all";
+
 let searchTerm = "";
 let sortOrder = "featured";
 
@@ -81,27 +93,34 @@ let cart = [];
 let currentProduct = null;
 
 
-/* 3. HELPER FUNCTIONS */
+/* 4. HELPER FUNCTIONS */
 
 function formatPrice(price) {
+
   return "€" + Number(price).toFixed(2);
+
 }
 
 
 function escapeHTML(value) {
+
   return String(value ?? "").replace(/[&<>"']/g, character => ({
+
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
     '"': "&quot;",
     "'": "&#039;"
+
   })[character]);
+
 }
 
 
 function getBrandName(brand) {
 
   const brands = {
+
     "medicube": "Medicube",
     "anua": "Anua",
     "beauty-of-joseon": "Beauty of Joseon",
@@ -109,19 +128,20 @@ function getBrandName(brand) {
     "vt-cosmetics": "VT Cosmetics",
     "skin1004": "SKIN1004",
     "torriden": "Torriden"
+
   };
 
   return brands[brand] || brand;
+
 }
 
 
-/* 4. PRODUCT FILTERING */
+/* 5. PRODUCT FILTERING */
 
 function getFilteredProducts() {
 
   let filtered = [...products];
 
-  // BRAND FILTER
 
   if (activeBrand !== "all") {
 
@@ -132,8 +152,6 @@ function getFilteredProducts() {
   }
 
 
-  // COLLECTION FILTER
-
   if (activeCollection !== "all") {
 
     filtered = filtered.filter(product =>
@@ -142,8 +160,6 @@ function getFilteredProducts() {
 
   }
 
-
-  // SKIN CONCERN FILTER
 
   if (activeConcern !== "all") {
 
@@ -154,8 +170,6 @@ function getFilteredProducts() {
   }
 
 
-  // SEARCH FILTER
-
   if (searchTerm.trim() !== "") {
 
     const search = searchTerm.toLowerCase();
@@ -163,12 +177,14 @@ function getFilteredProducts() {
     filtered = filtered.filter(product => {
 
       const searchableText = [
+
         product.name,
         product.brandName,
         product.brand,
         product.description,
         ...(product.collection || []),
         ...(product.concerns || [])
+
       ].join(" ").toLowerCase();
 
       return searchableText.includes(search);
@@ -177,8 +193,6 @@ function getFilteredProducts() {
 
   }
 
-
-  // SORT PRODUCTS
 
   if (sortOrder === "price-low") {
 
@@ -208,12 +222,13 @@ function getFilteredProducts() {
 
   }
 
+
   return filtered;
 
 }
 
 
-/* 5. DISPLAY PRODUCTS */
+/* 6. DISPLAY PRODUCTS */
 
 function displayProducts() {
 
@@ -223,55 +238,78 @@ function displayProducts() {
 
   const resultsCount = document.getElementById("resultsCount");
 
+
   if (!productGrid) return;
+
 
   const filteredProducts = getFilteredProducts();
 
   productGrid.innerHTML = "";
 
 
-  // RESULTS TITLE
-
   let title = "All beauty favourites";
 
+
   if (activeBrand !== "all") {
+
     title = getBrandName(activeBrand);
+
   }
+
 
   if (activeCollection !== "all") {
+
     title = activeCollection.replace(/-/g, " ").toUpperCase();
+
   }
+
 
   if (activeConcern !== "all") {
+
     title = activeConcern.replace(/-/g, " ") + " favourites";
+
   }
+
 
   if (searchTerm) {
+
     title = "Search results";
+
   }
+
 
   if (resultsTitle) {
+
     resultsTitle.textContent = title;
+
   }
+
 
   if (resultsCount) {
+
     resultsCount.textContent =
       filteredProducts.length + " products";
+
   }
 
-
-  // EMPTY CATALOGUE
 
   if (filteredProducts.length === 0) {
 
     const message = products.length === 0
-      ? "Your product collection is waiting to be added. Start by adding your first beauty favourite."
+
+      ? "Your product collection is waiting to be added."
+
       : "No products found. Try another brand, collection or search.";
 
+
     productGrid.innerHTML = `
+
       <div class="catalogue-empty">
+
         <p>${message}</p>
+
       </div>
+
     `;
 
     return;
@@ -279,41 +317,62 @@ function displayProducts() {
   }
 
 
-  // CREATE PRODUCT CARDS
-
   filteredProducts.forEach(product => {
 
     const card = document.createElement("article");
 
     card.className = "product-card";
 
+
     card.innerHTML = `
 
-      <div class="product-image">
+      <div
+        class="product-image"
+        data-view-product="${escapeHTML(product.id)}"
+        style="cursor:pointer"
+      >
 
         <img
           src="${escapeHTML(product.image)}"
           alt="${escapeHTML(product.name)}"
           loading="lazy"
-          onerror="this.style.opacity='0'">
+          onerror="this.style.opacity='0'"
+        >
 
         <span class="product-tag">
+
           ${escapeHTML(product.tag || "THE BEAUTY EDIT")}
+
         </span>
 
       </div>
 
+
       <div class="product-info">
 
         <span class="product-type">
+
           ${escapeHTML(product.brandName || getBrandName(product.brand))}
+
         </span>
 
-        <h3>${escapeHTML(product.name)}</h3>
+
+        <h3
+          data-view-product="${escapeHTML(product.id)}"
+          style="cursor:pointer"
+        >
+
+          ${escapeHTML(product.name)}
+
+        </h3>
+
 
         <p class="product-description">
+
           ${escapeHTML(product.description)}
+
         </p>
+
 
         <div class="product-bottom">
 
@@ -321,22 +380,30 @@ function displayProducts() {
 
           <button
             class="add-button"
-            data-add="${escapeHTML(product.id)}">
+            data-add="${escapeHTML(product.id)}"
+          >
+
             ADD +
+
           </button>
 
         </div>
 
+
         <button
           class="text-link"
           data-view-product="${escapeHTML(product.id)}"
-          style="margin-top:15px;background:none;border:none;cursor:pointer">
+          style="margin-top:15px;background:none;border:none;cursor:pointer"
+        >
+
           VIEW DETAILS ↗
+
         </button>
 
       </div>
 
     `;
+
 
     productGrid.appendChild(card);
 
@@ -345,11 +412,12 @@ function displayProducts() {
 }
 
 
-/* 6. SHOP NAVIGATION */
+/* 7. SHOP NAVIGATION */
 
 function updateShopView(view) {
 
   activeView = view;
+
 
   document.querySelectorAll(".shop-tab").forEach(button => {
 
@@ -369,15 +437,23 @@ function updateShopView(view) {
 
 
   if (brandFilters) {
+
     brandFilters.hidden = view !== "brands";
+
   }
+
 
   if (collectionFilters) {
+
     collectionFilters.hidden = view !== "collections";
+
   }
 
+
   if (concernFilters) {
+
     concernFilters.hidden = view !== "concerns";
+
   }
 
 }
@@ -394,7 +470,7 @@ document.querySelectorAll(".shop-tab").forEach(button => {
 });
 
 
-/* 7. BRAND FILTERS */
+/* 8. BRAND FILTERS */
 
 document.querySelectorAll("[data-brand]").forEach(button => {
 
@@ -418,7 +494,7 @@ document.querySelectorAll("[data-brand]").forEach(button => {
 });
 
 
-/* 8. COLLECTION FILTERS */
+/* 9. COLLECTION FILTERS */
 
 document.querySelectorAll("[data-collection]").forEach(button => {
 
@@ -442,7 +518,7 @@ document.querySelectorAll("[data-collection]").forEach(button => {
 });
 
 
-/* 9. SKIN CONCERN FILTERS */
+/* 10. SKIN CONCERN FILTERS */
 
 document.querySelectorAll("[data-concern]").forEach(button => {
 
@@ -466,7 +542,7 @@ document.querySelectorAll("[data-concern]").forEach(button => {
 });
 
 
-/* 10. BRAND CARDS ON HOMEPAGE */
+/* 11. BRAND CARDS ON HOMEPAGE */
 
 document.querySelectorAll("[data-brand-link]").forEach(button => {
 
@@ -477,6 +553,7 @@ document.querySelectorAll("[data-brand-link]").forEach(button => {
     activeCollection = "all";
     activeConcern = "all";
 
+
     document.querySelectorAll("[data-brand]").forEach(item => {
 
       item.classList.toggle(
@@ -485,6 +562,7 @@ document.querySelectorAll("[data-brand-link]").forEach(button => {
       );
 
     });
+
 
     document.querySelectorAll("[data-collection]").forEach(item => {
 
@@ -495,6 +573,7 @@ document.querySelectorAll("[data-brand-link]").forEach(button => {
 
     });
 
+
     document.querySelectorAll("[data-concern]").forEach(item => {
 
       item.classList.toggle(
@@ -504,22 +583,31 @@ document.querySelectorAll("[data-brand-link]").forEach(button => {
 
     });
 
+
     updateShopView("brands");
 
     displayProducts();
 
-    document.getElementById("shop").scrollIntoView({
-      behavior: "smooth"
-    });
+
+    const shop = document.getElementById("shop");
+
+    if (shop) {
+
+      shop.scrollIntoView({
+        behavior: "smooth"
+      });
+
+    }
 
   });
 
 });
 
 
-/* 11. SEARCH PRODUCTS */
+/* 12. SEARCH PRODUCTS */
 
 const productSearch = document.getElementById("productSearch");
+
 
 if (productSearch) {
 
@@ -534,9 +622,10 @@ if (productSearch) {
 }
 
 
-/* 12. SORT PRODUCTS */
+/* 13. SORT PRODUCTS */
 
 const productSort = document.getElementById("productSort");
+
 
 if (productSort) {
 
@@ -551,122 +640,61 @@ if (productSort) {
 }
 
 
-/* 13. PRODUCT DETAILS */
-
-function showProductDetails(productId) {
-
-  const product = products.find(item =>
-    String(item.id) === String(productId)
-  );
-
-  if (!product) return;
-
-  currentProduct = product;
-
-  const detailsSection =
-    document.getElementById("productDetails");
-
-  const detailContent =
-    document.getElementById("productDetailContent");
-
-  const gallery = product.gallery?.length
-    ? product.gallery
-    : [product.image];
-
-  const safeGallery = gallery.map(image => `
-    <img
-      src="${escapeHTML(image)}"
-      alt="${escapeHTML(product.name)}"
-      loading="lazy">
-  `).join("");
-
-
-  detailContent.innerHTML = `
-
-    <div class="product-detail-layout">
-
-      <div class="product-detail-gallery">
-        ${safeGallery}
-      </div>
-
-      <div class="product-detail-info">
-
-        <span class="eyebrow">
-          ${escapeHTML(product.brandName || getBrandName(product.brand))}
-        </span>
-
-        <h2>${escapeHTML(product.name)}</h2>
-
-        <p>${escapeHTML(product.description)}</p>
-
-        <div class="product-detail-price">
-          ${formatPrice(product.price)}
-        </div>
-
-        <p><strong>Size:</strong> ${escapeHTML(product.size || "Please enquire")}</p>
-
-        <h3>Product benefits</h3>
-
-        <ul>
-          ${(product.benefits || []).map(benefit =>
-            `<li>${escapeHTML(benefit)}</li>`
-          ).join("")}
-        </ul>
-
-        <button
-          class="primary-button"
-          data-add="${escapeHTML(product.id)}">
-          ADD TO BAG
-        </button>
-
-      </div>
-
-    </div>
-
-  `;
-
-  detailsSection.hidden = false;
-
-  detailsSection.scrollIntoView({
-    behavior: "smooth"
-  });
-
-}
-
+/* 14. OPEN INDIVIDUAL PRODUCT PAGE */
 
 document.addEventListener("click", event => {
 
   const detailButton = event.target.closest("[data-view-product]");
 
+
   if (detailButton) {
 
-    showProductDetails(detailButton.dataset.viewProduct);
+    const productId = detailButton.dataset.viewProduct;
+
+    window.location.href =
+      `product.html?id=${encodeURIComponent(productId)}`;
 
   }
 
 });
 
 
-/* BACK TO SHOP */
+/* 15. OLD PRODUCT DETAILS BACK BUTTON */
 
 const backToShop = document.getElementById("backToShop");
+
 
 if (backToShop) {
 
   backToShop.addEventListener("click", () => {
 
-    document.getElementById("productDetails").hidden = true;
+    const detailsSection =
+      document.getElementById("productDetails");
 
-    document.getElementById("shop").scrollIntoView({
-      behavior: "smooth"
-    });
+    const shop = document.getElementById("shop");
+
+
+    if (detailsSection) {
+
+      detailsSection.hidden = true;
+
+    }
+
+
+    if (shop) {
+
+      shop.scrollIntoView({
+        behavior: "smooth"
+      });
+
+    }
 
   });
 
 }
 
 
-/* 14. SHOPPING BAG */
+/* 16. SHOPPING BAG */
 
 function addToCart(productId) {
 
@@ -676,15 +704,19 @@ function addToCart(productId) {
 
   if (!product) return;
 
+
   const existingItem = cart.find(item =>
     String(item.id) === String(productId)
   );
+
 
   if (existingItem) {
 
     existingItem.quantity++;
 
-  } else {
+  }
+
+  else {
 
     cart.push({
       ...product,
@@ -692,6 +724,7 @@ function addToCart(productId) {
     });
 
   }
+
 
   updateCart();
 
@@ -717,10 +750,12 @@ function updateCart() {
 
   const cartTotal = document.getElementById("cartTotal");
 
+
   const totalItems = cart.reduce(
     (total, item) => total + item.quantity,
     0
   );
+
 
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -728,9 +763,21 @@ function updateCart() {
   );
 
 
-  cartCount.textContent = totalItems;
+  if (cartCount) {
 
-  cartTotal.textContent = formatPrice(totalPrice);
+    cartCount.textContent = totalItems;
+
+  }
+
+
+  if (cartTotal) {
+
+    cartTotal.textContent = formatPrice(totalPrice);
+
+  }
+
+
+  if (!cartItems) return;
 
 
   if (cart.length === 0) {
@@ -748,7 +795,9 @@ function updateCart() {
 
     <div class="cart-item">
 
-      <p><strong>${escapeHTML(item.name)}</strong></p>
+      <p>
+        <strong>${escapeHTML(item.name)}</strong>
+      </p>
 
       <p>
         ${formatPrice(item.price)} × ${item.quantity}
@@ -756,8 +805,11 @@ function updateCart() {
 
       <button
         class="remove-cart-item"
-        data-remove="${escapeHTML(item.id)}">
+        data-remove="${escapeHTML(item.id)}"
+      >
+
         REMOVE
+
       </button>
 
     </div>
@@ -771,13 +823,16 @@ document.addEventListener("click", event => {
 
   const addButton = event.target.closest("[data-add]");
 
+
   if (addButton) {
 
     addToCart(addButton.dataset.add);
 
   }
 
+
   const removeButton = event.target.closest("[data-remove]");
+
 
   if (removeButton) {
 
@@ -788,7 +843,7 @@ document.addEventListener("click", event => {
 });
 
 
-/* OPEN AND CLOSE SHOPPING BAG */
+/* 17. OPEN AND CLOSE SHOPPING BAG */
 
 const bagButton = document.getElementById("bagButton");
 
@@ -799,6 +854,8 @@ const closeCart = document.getElementById("closeCart");
 
 function openCart() {
 
+  if (!cartOverlay) return;
+
   cartOverlay.classList.add("open");
 
   cartOverlay.setAttribute("aria-hidden", "false");
@@ -808,6 +865,8 @@ function openCart() {
 
 function closeCartPanel() {
 
+  if (!cartOverlay) return;
+
   cartOverlay.classList.remove("open");
 
   cartOverlay.setAttribute("aria-hidden", "true");
@@ -815,26 +874,43 @@ function closeCartPanel() {
 }
 
 
-bagButton.addEventListener("click", openCart);
+if (bagButton) {
 
-closeCart.addEventListener("click", closeCartPanel);
+  bagButton.addEventListener("click", openCart);
 
-
-cartOverlay.addEventListener("click", event => {
-
-  if (event.target === cartOverlay) {
-
-    closeCartPanel();
-
-  }
-
-});
+}
 
 
-/* CHECKOUT PLACEHOLDER */
+if (closeCart) {
 
-document.getElementById("checkoutButton")
-  .addEventListener("click", () => {
+  closeCart.addEventListener("click", closeCartPanel);
+
+}
+
+
+if (cartOverlay) {
+
+  cartOverlay.addEventListener("click", event => {
+
+    if (event.target === cartOverlay) {
+
+      closeCartPanel();
+
+    }
+
+  });
+
+}
+
+
+/* 18. CHECKOUT PLACEHOLDER */
+
+const checkoutButton = document.getElementById("checkoutButton");
+
+
+if (checkoutButton) {
+
+  checkoutButton.addEventListener("click", () => {
 
     if (cart.length === 0) {
 
@@ -844,6 +920,7 @@ document.getElementById("checkoutButton")
 
     }
 
+
     alert(
       "Thank you for your selection! " +
       "Our ordering and payment process will be connected here."
@@ -851,101 +928,127 @@ document.getElementById("checkoutButton")
 
   });
 
+}
 
-/* 15. MOBILE NAVIGATION */
+
+/* 19. MOBILE NAVIGATION */
 
 const menuToggle = document.getElementById("menuToggle");
 
 const navigation = document.getElementById("navigation");
 
 
-menuToggle.addEventListener("click", () => {
+if (menuToggle && navigation) {
 
-  const isOpen = navigation.classList.toggle("open");
+  menuToggle.addEventListener("click", () => {
 
-  menuToggle.setAttribute("aria-expanded", isOpen);
+    const isOpen = navigation.classList.toggle("open");
 
-});
-
-
-navigation.querySelectorAll("a").forEach(link => {
-
-  link.addEventListener("click", () => {
-
-    navigation.classList.remove("open");
-
-    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-expanded", isOpen);
 
   });
 
-});
+
+  navigation.querySelectorAll("a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+      navigation.classList.remove("open");
+
+      menuToggle.setAttribute("aria-expanded", "false");
+
+    });
+
+  });
+
+}
 
 
-/* 16. GIFT FINDER */
+/* 20. GIFT FINDER */
 
 const findGift = document.getElementById("findGift");
 
 
-findGift.addEventListener("click", () => {
+if (findGift) {
 
-  const occasion =
-    document.getElementById("giftOccasion").value;
+  findGift.addEventListener("click", () => {
 
-  const budget =
-    document.getElementById("giftBudget").value;
+    const occasion =
+      document.getElementById("giftOccasion")?.value;
 
-  const result =
-    document.getElementById("giftResult");
+    const budget =
+      document.getElementById("giftBudget")?.value;
 
-
-  if (!occasion || !budget) {
-
-    result.textContent =
-      "Please select an occasion and your preferred budget.";
-
-    return;
-
-  }
+    const result =
+      document.getElementById("giftResult");
 
 
-  result.textContent =
-    "Thank you! We're preparing thoughtful gift suggestions for you.";
+    if (!occasion || !budget) {
 
-});
+      if (result) {
+
+        result.textContent =
+          "Please select an occasion and your preferred budget.";
+
+      }
+
+      return;
+
+    }
 
 
-/* 17. NEWSLETTER */
+    if (result) {
+
+      result.textContent =
+        "Thank you! We're preparing thoughtful gift suggestions for you.";
+
+    }
+
+  });
+
+}
+
+
+/* 21. NEWSLETTER */
 
 const newsletterForm =
   document.getElementById("newsletterForm");
 
 
-newsletterForm.addEventListener("submit", event => {
+if (newsletterForm) {
 
-  event.preventDefault();
+  newsletterForm.addEventListener("submit", event => {
 
-  const email =
-    document.getElementById("newsletterEmail").value;
-
-  const message =
-    document.getElementById("newsletterMessage");
+    event.preventDefault();
 
 
-  message.textContent =
-    "Thank you for your interest! Newsletter registration will be connected soon.";
-
-  newsletterForm.reset();
-
-});
+    const message =
+      document.getElementById("newsletterMessage");
 
 
-/* 18. INITIALISE WEBSITE */
+    if (message) {
+
+      message.textContent =
+        "Thank you for your interest! Newsletter registration will be connected soon.";
+
+    }
+
+
+    newsletterForm.reset();
+
+  });
+
+}
+
+
+/* 22. INITIALISE WEBSITE */
 
 updateShopView("all");
 
 displayProducts();
 
 updateCart();
+
 
 console.log(
   "Curated with Care by M. — Website loaded successfully."
