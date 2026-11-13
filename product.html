@@ -26,8 +26,24 @@
     </a>
 
     <button class="bag-button" id="bagButton" type="button">
-      <icon name="shopping-bag" />
+
+      <svg
+        viewBox="0 0 24 24"
+        width="18"
+        height="18"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 8h14l1 13H4L5 8Z"/>
+        <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
+      </svg>
+
       BAG (<span id="bagCount">0</span>)
+
     </button>
 
   </header>
@@ -41,19 +57,34 @@
 
       <div class="gallery-main">
 
-        <button id="previousPhoto" class="gallery-arrow" type="button">
+        <button
+          id="previousPhoto"
+          class="gallery-arrow"
+          type="button"
+        >
           ‹
         </button>
 
-        <img id="mainProductPhoto" src="" alt="Product photo">
+        <img
+          id="mainProductPhoto"
+          src=""
+          alt="Product photo"
+        >
 
-        <button id="nextPhoto" class="gallery-arrow" type="button">
+        <button
+          id="nextPhoto"
+          class="gallery-arrow"
+          type="button"
+        >
           ›
         </button>
 
       </div>
 
-      <div id="productThumbnails" class="product-thumbnails"></div>
+      <div
+        id="productThumbnails"
+        class="product-thumbnails"
+      ></div>
 
       <p class="gallery-hint">
         Swipe or select a photo to explore the product.
@@ -61,6 +92,8 @@
 
     </div>
 
+
+    <!-- PRODUCT INFORMATION -->
 
     <section class="standalone-product-info">
 
@@ -70,7 +103,10 @@
 
       <p id="productSize"></p>
 
-      <p id="productPrice" class="product-detail-price"></p>
+      <p
+        id="productPrice"
+        class="product-detail-price"
+      ></p>
 
       <button
         id="productAddToCart"
@@ -80,22 +116,34 @@
         ADD TO BAG
       </button>
 
-      <p id="addToCartMessage" aria-live="polite"></p>
+      <p
+        id="addToCartMessage"
+        aria-live="polite"
+      ></p>
 
 
       <div class="product-description-block">
+
         <h3>THE PRODUCT</h3>
+
         <p id="productDescription"></p>
+
       </div>
 
 
       <div class="product-description-block">
+
         <h3>WHY WE LOVE IT</h3>
+
         <ul id="productBenefits"></ul>
+
       </div>
 
 
-      <a href="index.html#shop" class="primary-button">
+      <a
+        href="index.html#shop"
+        class="primary-button"
+      >
         CONTINUE SHOPPING
       </a>
 
@@ -142,9 +190,15 @@
 
       <div class="bag-toast-details">
 
-        <p id="bagToastName" class="bag-toast-name"></p>
+        <p
+          id="bagToastName"
+          class="bag-toast-name"
+        ></p>
 
-        <p id="bagToastPrice" class="bag-toast-price"></p>
+        <p
+          id="bagToastPrice"
+          class="bag-toast-price"
+        ></p>
 
       </div>
 
@@ -155,7 +209,11 @@
       ✓ ADDED TO YOUR BAG
     </p>
 
-    <a href="#shoppingBag" id="bagToastView" class="bag-toast-link">
+    <a
+      href="#"
+      id="bagToastView"
+      class="bag-toast-link"
+    >
       VIEW MY BAG
     </a>
 
@@ -190,12 +248,17 @@
       </h2>
 
       <div id="cartItems">
+
         <p>Your bag is currently empty.</p>
+
       </div>
 
       <div class="cart-total">
+
         Total:
+
         <span id="cartTotal">€0.00</span>
+
       </div>
 
       <button
