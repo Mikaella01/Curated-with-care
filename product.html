@@ -87,6 +87,66 @@
 
   </main>
 
+
+  <!-- SHOPPING BAG NOTIFICATION -->
+
+  <div
+    id="bagToast"
+    class="bag-toast"
+    aria-live="polite"
+    aria-hidden="true"
+  >
+
+    <div class="bag-toast-top">
+
+      <span class="bag-toast-heading">
+        Your shopping bag
+      </span>
+
+      <button
+        id="bagToastClose"
+        class="bag-toast-close"
+        type="button"
+        aria-label="Close notification"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="bag-toast-product">
+
+      <img
+        id="bagToastImage"
+        class="bag-toast-image"
+        src=""
+        alt=""
+      >
+
+      <div class="bag-toast-details">
+
+        <p id="bagToastName" class="bag-toast-name"></p>
+
+        <p id="bagToastPrice" class="bag-toast-price"></p>
+
+      </div>
+
+    </div>
+
+    <p class="bag-toast-confirmation">
+      ✓ ADDED TO YOUR BAG
+    </p>
+
+    <a
+      href="index.html?openBag=1#shop"
+      class="bag-toast-link"
+    >
+      VIEW MY BAG
+    </a>
+
+  </div>
+
+
   <script src="product-page.js"></script>
 
 </body>
