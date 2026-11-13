@@ -744,6 +744,8 @@ function removeFromCart(productId) {
 
 function updateCart() {
 
+  localStorage.setItem("curatedCart", JSON.stringify(cart));
+
   const cartItems = document.getElementById("cartItems");
 
   const cartCount = document.getElementById("bagCount");
