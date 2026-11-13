@@ -41,6 +41,17 @@ function formatPrice(price) {
 }
 
 
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
+
 function saveCart() {
   localStorage.setItem(
     "curatedCart",
@@ -114,53 +125,68 @@ function updateCart() {
 
     <div class="cart-item">
 
-      <p>
-        <strong>${item.name}</strong>
-      </p>
+      <div class="cart-item-layout">
 
-      <p>
-        ${formatPrice(item.price)} each
-      </p>
-
-      <div class="cart-item-quantity">
-
-        <button
-          class="quantity-button"
-          type="button"
-          data-quantity-change="-1"
-          data-quantity-id="${item.id}"
-          aria-label="Remove one ${item.name}"
+        <img
+          class="cart-item-image"
+          src="${escapeHTML(item.image || "")}"
+          alt="${escapeHTML(item.name)}"
+          loading="lazy"
         >
-          −
-        </button>
 
-        <span class="quantity-number">
-          ${item.quantity}
-        </span>
+        <div class="cart-item-details">
 
-        <button
-          class="quantity-button"
-          type="button"
-          data-quantity-change="1"
-          data-quantity-id="${item.id}"
-          aria-label="Add one ${item.name}"
-        >
-          +
-        </button>
+          <p>
+            <strong>${escapeHTML(item.name)}</strong>
+          </p>
+
+          <p>
+            ${formatPrice(item.price)} each
+          </p>
+
+          <div class="cart-item-quantity">
+
+            <button
+              class="quantity-button"
+              type="button"
+              data-quantity-change="-1"
+              data-quantity-id="${escapeHTML(item.id)}"
+              aria-label="Remove one ${escapeHTML(item.name)}"
+            >
+              −
+            </button>
+
+            <span class="quantity-number">
+              ${Number(item.quantity) || 0}
+            </span>
+
+            <button
+              class="quantity-button"
+              type="button"
+              data-quantity-change="1"
+              data-quantity-id="${escapeHTML(item.id)}"
+              aria-label="Add one ${escapeHTML(item.name)}"
+            >
+              +
+            </button>
+
+          </div>
+
+          <p>
+            Subtotal: ${formatPrice(
+              Number(item.price || 0) *
+              Number(item.quantity || 0)
+            )}
+          </p>
+
+        </div>
 
       </div>
-
-      <p>
-        Subtotal: ${formatPrice(
-          Number(item.price || 0) *
-          Number(item.quantity || 0)
-        )}
-      </p>
 
       <button
         class="remove-cart-item"
         type="button"
-        data-remove="${item.id}"
+        data-remove="${escapeHTML(item.id)}"
       >
         REMOVE ENTIRE PRODUCT
       </button>
