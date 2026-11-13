@@ -1,1 +1,121 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Order Confirmation</title>
+</head>
+
+<body style="margin:0; padding:30px 12px; background-color:#f5f1e9; font-family:Arial,sans-serif; color:#756963;">
+
+  <div style="max-width:600px; margin:0 auto; background-color:#fffdfa;">
+
+    <div style="text-align:center; padding:38px 20px 25px;">
+
+      <p style="font-family:Georgia,serif; font-size:25px; letter-spacing:1px; color:#756963; margin:0;">
+        Curated with Care
+      </p>
+
+      <p style="font-size:10px; letter-spacing:3px; margin-top:8px;">
+        BY M.
+      </p>
+
+      <div style="width:45px; height:1px; background:#c8b8ad; margin:25px auto;"></div>
+
+      <h1 style="font-family:Georgia,serif; font-size:29px; font-weight:normal; color:#655650;">
+        Thank You, {{customerName}}!
+      </h1>
+
+      <p style="font-size:13px; line-height:1.8;">
+        Your order has been successfully placed.
+        Thank you for choosing us.
+      </p>
+
+    </div>
+
+    <div style="background:#f5f1e9; padding:24px; margin:0 25px; text-align:center;">
+
+      <p style="font-size:10px; letter-spacing:2px;">
+        YOUR ORDER REFERENCE
+      </p>
+
+      <p style="font-family:Georgia,serif; font-size:21px; color:#986b72;">
+        {{orderNumber}}
+      </p>
+
+      <p style="font-size:11px;">
+        Order date: {{orderDate}}
+      </p>
+
+    </div>
+
+    <div style="padding:30px 25px;">
+
+      <h2 style="font-family:Georgia,serif; font-weight:normal; font-size:21px;">
+        Your Curated Selection
+      </h2>
+
+      {{productList}}
+
+      <div style="border-top:1px solid #e8dad4; margin-top:20px; padding-top:20px;">
+
+        <p style="font-size:13px;">
+          <span>Subtotal</span>
+          <span style="float:right;">{{subtotal}}</span>
+        </p>
+
+        <p style="font-size:13px;">
+          <span>Delivery</span>
+          <span style="float:right;">{{delivery}}</span>
+        </p>
+
+        <p style="font-family:Georgia,serif; font-size:19px; color:#655650; border-top:1px solid #e8dad4; padding-top:18px; margin-top:20px;">
+          <span>Total</span>
+          <span style="float:right;">{{total}}</span>
+        </p>
+
+      </div>
+
+    </div>
+
+    <div style="background:#fbf7f4; padding:27px; text-align:center;">
+
+      <h2 style="font-family:Georgia,serif; font-weight:normal; font-size:20px;">
+        A little care, thoughtfully curated.
+      </h2>
+
+      <p style="font-size:12px; line-height:1.9;">
+        We appreciate your order and hope you enjoy
+        discovering your carefully selected products.
+      </p>
+
+      <p style="font-size:11px; margin-top:25px;">
+        With care,<br>
+        Curated with Care by M.
+      </p>
+
+      <div style="border-top:1px solid #e8dad4; margin-top:25px; padding-top:20px;">
+
+        <p style="font-size:10px; letter-spacing:1px;">
+          CURATED WITH CARE BY M.
+        </p>
+
+        <p style="font-size:10px;">
+          Follow our journey on Instagram
+        </p>
+
+        <a href="https://www.instagram.com/curatedwithcarebym/"
+           style="font-size:11px; color:#986b72; text-decoration:none;">
+          @curatedwithcarebym
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
