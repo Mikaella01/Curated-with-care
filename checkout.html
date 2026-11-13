@@ -460,19 +460,48 @@
 
     checkoutForm.addEventListener("submit", function(event) {
 
-      event.preventDefault();
+  event.preventDefault();
 
-      if (!checkoutForm.reportValidity()) {
-        return;
-      }
+  if (!checkoutForm.reportValidity()) {
+    return;
+  }
 
-      if (cart.length === 0) {
-        return;
-      }
+  if (cart.length === 0) {
+    return;
+  }
 
-      window.location.href = "order-confirmation.html";
+  const orderNumber = "CCM-" + Date.now().toString().slice(-8);
 
-    });
+  const order = {
+    orderNumber: orderNumber,
+
+    customerName: document.getElementById("firstName").value.trim(),
+
+    items: cart.map(product => ({
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      price: Number(product.price),
+      quantity: Number(product.quantity)
+    })),
+
+    subtotal: cart.reduce((sum, product) => {
+      return sum + (
+        Number(product.price) * Number(product.quantity)
+      );
+    }, 0),
+
+    date: new Date().toLocaleDateString()
+  };
+
+  localStorage.setItem(
+    "curatedDemoOrder",
+    JSON.stringify(order)
+  );
+
+  window.location.href = "order-confirmation.html";
+
+});
 
   </script>
 
