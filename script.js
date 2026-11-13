@@ -1,5 +1,4 @@
 
-
 /* =========================================
    CURATED WITH CARE BY M.
    PRODUCT CATALOGUE & WEBSITE FUNCTIONALITY
@@ -12,51 +11,31 @@ const products = [
 
   {
     id: 1,
-
     name: "PDRN Pink Collagen Bubble Serum",
-
     brand: "medicube",
-
     brandName: "Medicube",
-
     collection: ["pdrn", "pink-pdrn-line"],
-
     concerns: [],
-
     category: "skincare",
-
     description: "",
-
     benefits: [],
-
     size: "95ml",
-
     price: 25.00,
 
     image: "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9212.webp",
 
     gallery: [
-
       "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9212.webp",
-
       "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9242.webp",
-
       "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9243.webp",
-
       "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9244.webp",
-
       "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9245.webp",
-
       "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9246.webp",
-
       "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9247.webp"
-
     ],
 
     tag: "THE BEAUTY EDIT",
-
     featured: true
-
   }
 
 ];
@@ -88,7 +67,23 @@ let activeView = "all";
 let searchTerm = "";
 let sortOrder = "featured";
 
-let cart = JSON.parse(localStorage.getItem("curatedCart")) || [];
+let cart = [];
+
+try {
+
+  cart = JSON.parse(
+    localStorage.getItem("curatedCart") || "[]"
+  );
+
+  if (!Array.isArray(cart)) {
+    cart = [];
+  }
+
+} catch (error) {
+
+  cart = [];
+
+}
 
 let currentProduct = null;
 
@@ -97,7 +92,7 @@ let currentProduct = null;
 
 function formatPrice(price) {
 
-  return "€" + Number(price).toFixed(2);
+  return "€" + Number(price || 0).toFixed(2);
 
 }
 
@@ -381,6 +376,7 @@ function displayProducts() {
           <button
             class="add-button"
             data-add="${escapeHTML(product.id)}"
+            type="button"
           >
 
             ADD +
@@ -393,6 +389,7 @@ function displayProducts() {
         <button
           class="text-link"
           data-view-product="${escapeHTML(product.id)}"
+          type="button"
           style="margin-top:15px;background:none;border:none;cursor:pointer"
         >
 
@@ -712,7 +709,8 @@ function addToCart(productId) {
 
   if (existingItem) {
 
-    existingItem.quantity++;
+    existingItem.quantity =
+      Number(existingItem.quantity || 0) + 1;
 
   }
 
@@ -731,6 +729,37 @@ function addToCart(productId) {
 }
 
 
+/* CHANGE QUANTITY */
+
+function changeQuantity(productId, change) {
+
+  const item = cart.find(item =>
+    String(item.id) === String(productId)
+  );
+
+  if (!item) return;
+
+
+  item.quantity =
+    Number(item.quantity || 0) + Number(change);
+
+
+  if (item.quantity <= 0) {
+
+    cart = cart.filter(item =>
+      String(item.id) !== String(productId)
+    );
+
+  }
+
+
+  updateCart();
+
+}
+
+
+/* REMOVE ENTIRE PRODUCT */
+
 function removeFromCart(productId) {
 
   cart = cart.filter(item =>
@@ -742,9 +771,15 @@ function removeFromCart(productId) {
 }
 
 
+/* UPDATE SHOPPING BAG DISPLAY */
+
 function updateCart() {
 
-  localStorage.setItem("curatedCart", JSON.stringify(cart));
+  localStorage.setItem(
+    "curatedCart",
+    JSON.stringify(cart)
+  );
+
 
   const cartItems = document.getElementById("cartItems");
 
@@ -754,13 +789,17 @@ function updateCart() {
 
 
   const totalItems = cart.reduce(
-    (total, item) => total + item.quantity,
+    (total, item) =>
+      total + Math.max(0, Number(item.quantity) || 0),
     0
   );
 
 
   const totalPrice = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) =>
+      total +
+      Number(item.price || 0) *
+      Math.max(0, Number(item.quantity) || 0),
     0
   );
 
@@ -802,15 +841,51 @@ function updateCart() {
       </p>
 
       <p>
-        ${formatPrice(item.price)} × ${item.quantity}
+        ${formatPrice(item.price)} each
+      </p>
+
+      <div class="cart-item-quantity">
+
+        <button
+          class="quantity-button"
+          type="button"
+          data-quantity-change="-1"
+          data-quantity-id="${escapeHTML(item.id)}"
+          aria-label="Remove one ${escapeHTML(item.name)}"
+        >
+          −
+        </button>
+
+        <span class="quantity-number">
+          ${Number(item.quantity) || 0}
+        </span>
+
+        <button
+          class="quantity-button"
+          type="button"
+          data-quantity-change="1"
+          data-quantity-id="${escapeHTML(item.id)}"
+          aria-label="Add one ${escapeHTML(item.name)}"
+        >
+          +
+        </button>
+
+      </div>
+
+      <p>
+        Subtotal: ${formatPrice(
+          Number(item.price || 0) *
+          Number(item.quantity || 0)
+        )}
       </p>
 
       <button
         class="remove-cart-item"
+        type="button"
         data-remove="${escapeHTML(item.id)}"
       >
 
-        REMOVE
+        REMOVE ENTIRE PRODUCT
 
       </button>
 
@@ -821,6 +896,8 @@ function updateCart() {
 }
 
 
+/* CONNECT SHOPPING BAG BUTTONS */
+
 document.addEventListener("click", event => {
 
   const addButton = event.target.closest("[data-add]");
@@ -829,6 +906,25 @@ document.addEventListener("click", event => {
   if (addButton) {
 
     addToCart(addButton.dataset.add);
+
+    return;
+
+  }
+
+
+  const quantityButton = event.target.closest(
+    "[data-quantity-change]"
+  );
+
+
+  if (quantityButton) {
+
+    changeQuantity(
+      quantityButton.dataset.quantityId,
+      Number(quantityButton.dataset.quantityChange)
+    );
+
+    return;
 
   }
 
@@ -858,6 +954,8 @@ function openCart() {
 
   if (!cartOverlay) return;
 
+  updateCart();
+
   cartOverlay.classList.add("open");
 
   cartOverlay.setAttribute("aria-hidden", "false");
@@ -878,7 +976,13 @@ function closeCartPanel() {
 
 if (bagButton) {
 
-  bagButton.addEventListener("click", openCart);
+  bagButton.addEventListener("click", event => {
+
+    event.preventDefault();
+
+    openCart();
+
+  });
 
 }
 
@@ -1050,6 +1154,31 @@ updateShopView("all");
 displayProducts();
 
 updateCart();
+
+
+/* REFRESH BAG WHEN RETURNING TO HOMEPAGE */
+
+window.addEventListener("pageshow", () => {
+
+  try {
+
+    cart = JSON.parse(
+      localStorage.getItem("curatedCart") || "[]"
+    );
+
+    if (!Array.isArray(cart)) {
+      cart = [];
+    }
+
+  } catch (error) {
+
+    cart = [];
+
+  }
+
+  updateCart();
+
+});
 
 
 console.log(
