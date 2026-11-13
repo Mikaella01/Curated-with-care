@@ -1501,3 +1501,42 @@ select:focus-visible {
     font-size: 8px;
   }
 }
+
+
+/* SHOPPING BAG PRODUCT PHOTOGRAPHS */
+
+.cart-item-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.cart-item-image {
+  width: 95px;
+  height: 115px;
+  object-fit: contain;
+  background: #fbf7f4;
+  flex-shrink: 0;
+}
+
+.cart-item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-item-details p {
+  margin: 5px 0 10px;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .cart-item-image {
+    width: 78px;
+    height: 100px;
+  }
+
+  .cart-item-layout {
+    gap: 12px;
+  }
+}
