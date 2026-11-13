@@ -458,7 +458,8 @@
 
     displayCheckout();
 
-    checkoutForm.addEventListener("submit", function(event) {
+    
+checkoutForm.addEventListener("submit", function(event) {
 
   event.preventDefault();
 
@@ -470,12 +471,34 @@
     return;
   }
 
-  const orderNumber = "CCM-" + Date.now().toString().slice(-8);
+  // Generate a sequential demonstration order reference
+  const year = new Date().getFullYear();
 
+  const sequenceKey = "curatedOrderSequence-" + year;
+
+  const previousNumber = Number(
+    localStorage.getItem(sequenceKey) || 0
+  );
+
+  const nextNumber = previousNumber + 1;
+
+  localStorage.setItem(
+    sequenceKey,
+    String(nextNumber)
+  );
+
+  const orderNumber =
+    "CCM-" + year + "-" +
+    String(nextNumber).padStart(5, "0");
+
+  // Prepare the demonstration order
   const order = {
+
     orderNumber: orderNumber,
 
-    customerName: document.getElementById("firstName").value.trim(),
+    customerName: document
+      .getElementById("firstName")
+      .value.trim(),
 
     items: cart.map(product => ({
       id: product.id,
@@ -487,11 +510,13 @@
 
     subtotal: cart.reduce((sum, product) => {
       return sum + (
-        Number(product.price) * Number(product.quantity)
+        Number(product.price) *
+        Number(product.quantity)
       );
     }, 0),
 
     date: new Date().toLocaleDateString()
+
   };
 
   localStorage.setItem(
@@ -502,8 +527,3 @@
   window.location.href = "order-confirmation.html";
 
 });
-
-  </script>
-
-</body>
-</html>
