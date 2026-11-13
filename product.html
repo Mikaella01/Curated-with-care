@@ -13,7 +13,10 @@
 
 <body>
 
+  <!-- HEADER -->
+
   <header class="product-page-header">
+
     <a href="index.html" class="product-back-link">
       ← BACK TO SHOP
     </a>
@@ -21,7 +24,16 @@
     <a href="index.html" class="product-brand-name">
       Curated with Care by M.
     </a>
+
+    <button class="bag-button" id="bagButton" type="button">
+      <icon name="shopping-bag" />
+      BAG (<span id="bagCount">0</span>)
+    </button>
+
   </header>
+
+
+  <!-- PRODUCT PAGE -->
 
   <main class="standalone-product-page">
 
@@ -29,13 +41,13 @@
 
       <div class="gallery-main">
 
-        <button id="previousPhoto" class="gallery-arrow">
+        <button id="previousPhoto" class="gallery-arrow" type="button">
           ‹
         </button>
 
         <img id="mainProductPhoto" src="" alt="Product photo">
 
-        <button id="nextPhoto" class="gallery-arrow">
+        <button id="nextPhoto" class="gallery-arrow" type="button">
           ›
         </button>
 
@@ -48,6 +60,7 @@
       </p>
 
     </div>
+
 
     <section class="standalone-product-info">
 
@@ -69,15 +82,18 @@
 
       <p id="addToCartMessage" aria-live="polite"></p>
 
+
       <div class="product-description-block">
         <h3>THE PRODUCT</h3>
         <p id="productDescription"></p>
       </div>
 
+
       <div class="product-description-block">
         <h3>WHY WE LOVE IT</h3>
         <ul id="productBenefits"></ul>
       </div>
+
 
       <a href="index.html#shop" class="primary-button">
         CONTINUE SHOPPING
@@ -114,6 +130,7 @@
 
     </div>
 
+
     <div class="bag-toast-product">
 
       <img
@@ -133,19 +150,72 @@
 
     </div>
 
+
     <p class="bag-toast-confirmation">
       ✓ ADDED TO YOUR BAG
     </p>
 
-    <a
-      href="index.html?openBag=1#shop"
-      class="bag-toast-link"
-    >
+    <a href="#shoppingBag" id="bagToastView" class="bag-toast-link">
       VIEW MY BAG
     </a>
 
   </div>
 
+
+  <!-- SHOPPING BAG PANEL -->
+
+  <div
+    class="cart-overlay"
+    id="cartOverlay"
+    aria-hidden="true"
+  >
+
+    <div class="cart-panel">
+
+      <button
+        class="close-cart"
+        id="closeCart"
+        type="button"
+        aria-label="Close shopping bag"
+      >
+        ×
+      </button>
+
+      <span class="eyebrow">
+        YOUR SELECTION
+      </span>
+
+      <h2>
+        Your shopping bag.
+      </h2>
+
+      <div id="cartItems">
+        <p>Your bag is currently empty.</p>
+      </div>
+
+      <div class="cart-total">
+        Total:
+        <span id="cartTotal">€0.00</span>
+      </div>
+
+      <button
+        class="primary-button checkout-button"
+        id="checkoutButton"
+        type="button"
+      >
+        CONTINUE TO ORDER
+      </button>
+
+      <p class="cart-note">
+        Ordering and payment will be arranged with us.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- JAVASCRIPT -->
 
   <script src="product-page.js"></script>
 
