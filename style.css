@@ -1636,15 +1636,14 @@ select:focus-visible {
   }
 }
 
-
 /* =========================================
-   RELATED PRODUCTS — YOU MAY ALSO LOVE
+   YOU MAY ALSO LOVE — COMPACT DESIGN
 ========================================= */
 
 .related-products-section {
-  max-width: 1250px;
-  margin: 90px auto;
-  padding: 50px 30px;
+  max-width: 1050px;
+  margin: 55px auto;
+  padding: 30px 25px;
 }
 
 .related-products-section[hidden] {
@@ -1653,30 +1652,35 @@ select:focus-visible {
 
 .related-products-heading {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
 }
 
 .related-products-heading h2 {
   font-family: Georgia, serif;
-  font-size: 34px;
+  font-size: 27px;
   font-weight: normal;
   color: #76575b;
-  margin: 12px 0;
+  margin: 8px 0;
 }
 
 .related-products-heading > p:last-child {
   color: #817575;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .related-products-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 25px;
+  gap: 20px;
+  max-width: 850px;
+  margin: 0 auto;
 }
 
 .related-product-card {
   min-width: 0;
+  max-width: 200px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .related-product-image {
@@ -1687,7 +1691,7 @@ select:focus-visible {
 .related-product-image img {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1.15;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
@@ -1697,21 +1701,23 @@ select:focus-visible {
 }
 
 .related-product-info {
-  padding-top: 15px;
+  padding-top: 10px;
 }
 
 .related-product-brand {
-  font-size: 10px;
-  letter-spacing: 1.5px;
+  font-size: 9px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   color: #987b7e;
+  margin-bottom: 5px;
 }
 
 .related-product-info h3 {
   font-family: Georgia, serif;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: normal;
-  line-height: 1.5;
+  line-height: 1.4;
+  margin: 5px 0;
 }
 
 .related-product-info h3 a {
@@ -1720,38 +1726,48 @@ select:focus-visible {
 }
 
 .related-product-price {
-  font-size: 14px;
+  font-size: 12px;
   color: #514346;
-  margin: 12px 0;
+  margin: 8px 0;
 }
 
 .related-add-button {
   display: block;
   width: 100%;
-  padding: 12px;
+  padding: 9px 5px;
   background: #986b72;
   color: white;
   border: none;
   cursor: pointer;
   letter-spacing: 1px;
-  font-size: 11px;
+  font-size: 9px;
 }
 
 .related-view-link {
   display: block;
-  margin-top: 13px;
+  margin-top: 9px;
   text-align: center;
   color: #76575b;
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 1px;
   text-decoration: none;
 }
 
-@media (max-width: 700px) {
+/* TABLETS */
 
+@media (max-width: 900px) {
+  .related-products-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 13px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
   .related-products-section {
-    padding: 35px 18px;
-    margin: 55px auto;
+    padding: 25px 15px;
+    margin: 40px auto;
   }
 
   .related-products-grid {
@@ -1759,8 +1775,11 @@ select:focus-visible {
     gap: 22px 14px;
   }
 
-  .related-products-heading h2 {
-    font-size: 28px;
+  .related-product-card {
+    max-width: 180px;
   }
 
+  .related-products-heading h2 {
+    font-size: 24px;
+  }
 }
