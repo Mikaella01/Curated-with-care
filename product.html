@@ -13,7 +13,9 @@
 
 <body>
 
-  <!-- HEADER -->
+  <!-- =================================
+       HEADER
+  ================================== -->
 
   <header class="product-page-header">
 
@@ -25,7 +27,12 @@
       Curated with Care by M.
     </a>
 
-    <button class="bag-button" id="bagButton" type="button">
+    <button
+      class="bag-button"
+      id="bagButton"
+      type="button"
+      aria-label="Open shopping bag"
+    >
 
       <svg
         viewBox="0 0 24 24"
@@ -49,9 +56,13 @@
   </header>
 
 
-  <!-- PRODUCT PAGE -->
+  <!-- =================================
+       PRODUCT PAGE
+  ================================== -->
 
   <main class="standalone-product-page">
+
+    <!-- PRODUCT GALLERY -->
 
     <div class="product-page-gallery">
 
@@ -61,6 +72,7 @@
           id="previousPhoto"
           class="gallery-arrow"
           type="button"
+          aria-label="Previous product photo"
         >
           ‹
         </button>
@@ -75,6 +87,7 @@
           id="nextPhoto"
           class="gallery-arrow"
           type="button"
+          aria-label="Next product photo"
         >
           ›
         </button>
@@ -97,7 +110,10 @@
 
     <section class="standalone-product-info">
 
-      <p id="productBrand" class="eyebrow"></p>
+      <p
+        id="productBrand"
+        class="eyebrow"
+      ></p>
 
       <h1 id="productName"></h1>
 
@@ -122,6 +138,8 @@
       ></p>
 
 
+      <!-- PRODUCT DESCRIPTION -->
+
       <div class="product-description-block">
 
         <h3>THE PRODUCT</h3>
@@ -130,6 +148,8 @@
 
       </div>
 
+
+      <!-- PRODUCT BENEFITS -->
 
       <div class="product-description-block">
 
@@ -151,10 +171,16 @@
 
   </main>
 
-  
-  <!-- YOU MAY ALSO LOVE -->
 
-  <section class="related-products-section" id="relatedProductsSection">
+  <!-- =================================
+       RELATED PRODUCTS
+       YOU MAY ALSO LOVE
+  ================================== -->
+
+  <section
+    class="related-products-section"
+    id="relatedProductsSection"
+  >
 
     <div class="related-products-heading">
 
@@ -176,7 +202,9 @@
   </section>
 
 
-  <!-- SHOPPING BAG NOTIFICATION -->
+  <!-- =================================
+       SHOPPING BAG NOTIFICATION
+  ================================== -->
 
   <div
     id="bagToast"
@@ -244,7 +272,9 @@
   </div>
 
 
-  <!-- SHOPPING BAG PANEL -->
+  <!-- =================================
+       SHOPPING BAG PANEL
+  ================================== -->
 
   <div
     class="cart-overlay"
@@ -285,10 +315,12 @@
 
       </div>
 
-      <a href="checkout.html"
-   class="primary-button checkout-button">
-  CONTINUE TO ORDER
-</a>
+      <a
+        href="checkout.html"
+        class="primary-button checkout-button"
+      >
+        CONTINUE TO ORDER
+      </a>
 
       <p class="cart-note">
         Ordering and payment will be arranged with us.
@@ -299,7 +331,9 @@
   </div>
 
 
-  <!-- JAVASCRIPT -->
+  <!-- =================================
+       JAVASCRIPT
+  ================================== -->
 
   <script src="product-page.js"></script>
 
