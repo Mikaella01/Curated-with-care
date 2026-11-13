@@ -1,5 +1,4 @@
 
-
 /* =========================================
    CURATED WITH CARE BY M.
    INDIVIDUAL PRODUCT PAGE
@@ -28,7 +27,65 @@ const thumbnails = document.getElementById("productThumbnails");
 let currentPhoto = 0;
 
 
-/* 3. DISPLAY PRODUCT PHOTOS */
+/* 3. SHOPPING BAG NOTIFICATION */
+
+let toastTimer;
+
+function showBagToast() {
+
+  const toast = document.getElementById("bagToast");
+  const toastImage = document.getElementById("bagToastImage");
+  const toastName = document.getElementById("bagToastName");
+  const toastPrice = document.getElementById("bagToastPrice");
+
+  if (!toast) return;
+
+  toastImage.src = product.image;
+  toastImage.alt = product.name;
+
+  toastName.textContent = product.name;
+
+  toastPrice.textContent =
+    "€" + Number(product.price).toFixed(2);
+
+  toast.classList.add("show");
+  toast.setAttribute("aria-hidden", "false");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(() => {
+    closeBagToast();
+  }, 4500);
+
+}
+
+
+function closeBagToast() {
+
+  const toast = document.getElementById("bagToast");
+
+  if (!toast) return;
+
+  toast.classList.remove("show");
+  toast.setAttribute("aria-hidden", "true");
+
+  clearTimeout(toastTimer);
+
+}
+
+
+/* CONNECT NOTIFICATION CLOSE BUTTON */
+
+const toastCloseButton = document.getElementById("bagToastClose");
+
+if (toastCloseButton) {
+
+  toastCloseButton.addEventListener("click", closeBagToast);
+
+}
+
+
+/* 4. DISPLAY PRODUCT PHOTOS */
 
 function showPhoto(index) {
 
@@ -48,7 +105,7 @@ function showPhoto(index) {
 }
 
 
-/* 4. SHOPPING BAG */
+/* 5. SHOPPING BAG */
 
 function addProductToBag() {
 
@@ -84,17 +141,20 @@ function addProductToBag() {
   const button = document.getElementById("productAddToCart");
 
   if (message) {
-    message.textContent = "Beautiful choice! This item has been added to your bag.";
+    message.textContent =
+      "Beautiful choice! This item has been added to your bag.";
   }
 
   if (button) {
     button.textContent = "ADDED TO BAG ✓";
   }
 
+  showBagToast();
+
 }
 
 
-/* 5. INITIALISE PRODUCT PAGE */
+/* 6. INITIALISE PRODUCT PAGE */
 
 function initialiseProductPage() {
 
@@ -186,7 +246,7 @@ function initialiseProductPage() {
 }
 
 
-/* 6. PREVIOUS AND NEXT PHOTOS */
+/* 7. PREVIOUS AND NEXT PHOTOS */
 
 document.getElementById("previousPhoto").addEventListener("click", () => {
   showPhoto(currentPhoto - 1);
@@ -197,7 +257,7 @@ document.getElementById("nextPhoto").addEventListener("click", () => {
 });
 
 
-/* 7. MOBILE PHOTO SWIPING */
+/* 8. MOBILE PHOTO SWIPING */
 
 let touchStartX = 0;
 
@@ -231,6 +291,6 @@ mainPhoto.addEventListener("touchend", event => {
 }, { passive: true });
 
 
-/* 8. START THE PAGE */
+/* 9. START THE PAGE */
 
 initialiseProductPage();
