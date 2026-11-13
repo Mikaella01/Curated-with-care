@@ -38,6 +38,52 @@ const products = [
     featured: true
   }
 
+   
+{
+  id: 11,
+  name: "PDRN Pink Collagen Volume Multi Balm",
+  brand: "medicube",
+  brandName: "Medicube",
+
+  collection: ["pdrn", "pink-pdrn-line"],
+
+  concerns: [
+    "dryness",
+    "dullness",
+    "fine-lines",
+    "skin-elasticity"
+  ],
+
+  category: "skincare",
+
+  description: "A convenient multi-purpose balm from Medicube's Pink PDRN collection, designed to nourish the skin and add a moisturised, radiant finish.",
+
+  benefits: [
+    "Helps moisturise dry areas",
+    "Leaves skin feeling nourished",
+    "Convenient balm format",
+    "Easy to carry and reapply"
+  ],
+
+  size: "10g",
+
+  price: 20.00,
+
+  image: "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9209.webp",
+
+  gallery: [
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9209.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9249.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9250.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9251.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9252.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-Pink-Collagen-Volume-Multi-Balm/IMG_9253.webp"
+  ],
+
+  tag: "THE BEAUTY EDIT",
+  featured: true
+},
+
 ];
 
 
