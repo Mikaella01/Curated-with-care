@@ -2017,3 +2017,154 @@ body {
   background-color: #f4eee8;
 }
 
+
+/* =========================================
+   24. THE BRANDS WE LOVE
+   LUXURY EDITORIAL BRAND GALLERY
+========================================= */
+
+.brand-edit {
+  background:
+    radial-gradient(
+      ellipse at 10% 20%,
+      rgba(220, 201, 193, 0.13),
+      transparent 45%
+    ),
+    #f5eee8;
+
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-edit .section-heading {
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.brand-edit .section-heading > div {
+  max-width: 600px;
+}
+
+.brand-edit .section-heading h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 4vw, 52px);
+  font-weight: 400;
+  color: var(--dark);
+}
+
+.brand-edit .section-heading p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.brand-edit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  max-width: 1050px;
+  margin: 0 auto;
+  border-top: 1px solid #ded1c9;
+  border-left: 1px solid #ded1c9;
+}
+
+.brand-edit-item {
+  min-height: 135px;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  background: rgba(255,255,255,0.35);
+  border-right: 1px solid #ded1c9;
+  border-bottom: 1px solid #ded1c9;
+
+  color: #554946;
+  transition: background 0.35s ease,
+              color 0.35s ease;
+}
+
+.brand-edit-item span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.brand-edit-item small {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #a18a80;
+}
+
+.brand-edit-item:hover {
+  background: #eee2da;
+  color: var(--deep-rose);
+}
+
+.brand-edit-item:hover span {
+  transform: translateY(-2px);
+}
+
+.brand-edit-item span {
+  transition: transform 0.35s ease;
+}
+
+.brand-edit-all {
+  display: inline-block;
+  margin-top: 35px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--dusty-rose);
+
+  color: var(--deep-rose);
+  font-size: 9px;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+
+.brand-edit-all:hover {
+  color: var(--dark);
+}
+
+/* TABLET */
+
+@media (max-width: 850px) {
+
+  .brand-edit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+  .brand-edit {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .brand-edit .section-heading {
+    margin-bottom: 30px;
+  }
+
+  .brand-edit-item {
+    min-height: 110px;
+    padding: 18px 8px;
+  }
+
+  .brand-edit-item span {
+    font-size: 21px;
+  }
+
+  .brand-edit-item small {
+    font-size: 7px;
+  }
+
+}
+
