@@ -4,7 +4,6 @@
    LUXURY BEAUTY BOUTIQUE
 ========================================= */
 
-
 /* 1. COLOURS AND GENERAL SETTINGS */
 
 :root {
@@ -78,7 +77,6 @@ em {
   margin-bottom: 18px;
 }
 
-
 /* 2. ANNOUNCEMENT BAR */
 
 .announcement {
@@ -89,7 +87,6 @@ em {
   font-size: 9px;
   letter-spacing: 2.5px;
 }
-
 
 /* 3. HEADER AND NAVIGATION */
 
@@ -160,12 +157,14 @@ em {
   font-size: 10px;
   letter-spacing: 1px;
   white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  z-index: 101;
 }
 
 .bag-button:hover {
   background: var(--soft-rose);
 }
-
 
 /* 4. BUTTONS */
 
@@ -192,7 +191,6 @@ em {
   border-bottom: 1px solid var(--dusty-rose);
   padding-bottom: 5px;
 }
-
 
 /* 5. HERO SECTION */
 
@@ -234,7 +232,6 @@ em {
   background-position: center;
 }
 
-
 /* 6. INTRODUCTION */
 
 .intro {
@@ -256,7 +253,6 @@ em {
   margin: auto;
   color: var(--muted);
 }
-
 
 /* 7. SECTION HEADINGS */
 
@@ -281,7 +277,6 @@ em {
   color: var(--muted);
   margin-top: 12px;
 }
-
 
 /* 8. COLLECTION CARDS */
 
@@ -347,7 +342,6 @@ em {
   margin-top: 8px;
 }
 
-
 /* 9. BRAND SECTION */
 
 .brands-section {
@@ -384,7 +378,6 @@ em {
   font-size: 20px;
   letter-spacing: 1px;
 }
-
 
 /* 10. BEAUTY EDIT / SHOP */
 
@@ -451,7 +444,6 @@ em {
   color: var(--white);
 }
 
-
 /* SEARCH AND SORT */
 
 .shop-tools {
@@ -484,7 +476,6 @@ em {
   outline: 1px solid var(--dusty-rose);
 }
 
-
 /* PRODUCT RESULTS */
 
 .shop-results-heading {
@@ -503,7 +494,6 @@ em {
   color: var(--muted);
   font-size: 10px;
 }
-
 
 /* PRODUCT GRID */
 
@@ -599,7 +589,6 @@ em {
   background: var(--cream);
 }
 
-
 /* 11. INDIVIDUAL PRODUCT DETAILS */
 
 .product-details-section {
@@ -660,7 +649,6 @@ em {
   margin-top: 20px;
 }
 
-
 /* 12. GIFT SECTION */
 
 .gift-section {
@@ -689,7 +677,6 @@ em {
   margin: 20px 0 28px;
   max-width: 400px;
 }
-
 
 /* 13. GIFT FINDER */
 
@@ -737,7 +724,6 @@ em {
   margin-top: 20px;
 }
 
-
 /* 14. NEWSLETTER */
 
 .newsletter {
@@ -782,7 +768,6 @@ em {
   letter-spacing: 1px;
 }
 
-
 /* 15. FOOTER */
 
 footer {
@@ -824,7 +809,6 @@ footer p {
   letter-spacing: 2px;
   color: var(--muted);
 }
-
 
 /* 16. SHOPPING BAG */
 
@@ -891,6 +875,51 @@ footer p {
   text-align: center;
 }
 
+/* CART PRODUCT AND QUANTITY CONTROLS */
+
+.cart-item {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.quantity-button {
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--dark);
+  font-size: 17px;
+}
+
+.quantity-button:hover {
+  background: var(--soft-rose);
+}
+
+.quantity-number {
+  min-width: 18px;
+  text-align: center;
+}
+
+.remove-cart-item {
+  background: none;
+  border: none;
+  color: var(--deep-rose);
+  font-size: 9px;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  text-decoration: underline;
+}
 
 /* 17. RESPONSIVE TABLET DESIGN */
 
@@ -924,9 +953,7 @@ footer p {
   .collection-photo {
     height: 300px;
   }
-
 }
-
 
 /* 18. RESPONSIVE MOBILE DESIGN */
 
@@ -1134,10 +1161,12 @@ footer p {
     font-size: 37px;
   }
 
+  .cart-panel {
+    padding: 50px 22px;
+  }
 }
 
-
-/* 19. ACCESSIBILITY AND SMALL FINISHING DETAILS */
+/* 19. ACCESSIBILITY AND FINISHING DETAILS */
 
 button:focus-visible,
 a:focus-visible,
@@ -1151,26 +1180,27 @@ select:focus-visible {
   display: none !important;
 }
 
+/* 20. INSTAGRAM ICON */
+
 .instagram-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: #a66f7d;
-    text-decoration: none;
-    transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #a66f7d;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .instagram-link:hover {
-    color: #d19aa7;
-    transform: translateY(-2px);
+  color: #d19aa7;
+  transform: translateY(-2px);
 }
 
 .instagram-link svg {
-    display: block;
-    width: 21px;
-    height: 21px;
+  display: block;
+  width: 21px;
+  height: 21px;
 }
-
 
 /* =================================
    INDIVIDUAL PRODUCT PAGE
@@ -1182,6 +1212,9 @@ select:focus-visible {
   align-items: center;
   padding: 25px 6%;
   border-bottom: 1px solid #eee5e2;
+  position: relative;
+  z-index: 110;
+  background: var(--ivory);
 }
 
 .product-back-link {
@@ -1196,6 +1229,11 @@ select:focus-visible {
   color: #806b67;
   font-family: Georgia, serif;
   font-size: 20px;
+}
+
+.product-page-header .bag-button {
+  position: relative;
+  z-index: 111;
 }
 
 .standalone-product-page {
@@ -1315,27 +1353,7 @@ select:focus-visible {
   font-size: 14px;
 }
 
-@media (max-width: 750px) {
-
-  .standalone-product-page {
-    grid-template-columns: 1fr;
-    gap: 25px;
-    margin: 25px auto;
-  }
-
-  .standalone-product-info h1 {
-    font-size: 28px;
-  }
-
-  .product-brand-name {
-    font-size: 16px;
-  }
-
-
-/* =========================================
-   SHOPPING BAG NOTIFICATION
-   CURATED WITH CARE BY M.
-========================================= */
+/* 21. SHOPPING BAG NOTIFICATION */
 
 .bag-toast {
   position: fixed;
@@ -1440,10 +1458,46 @@ select:focus-visible {
   background: #D9C9B9;
 }
 
+@media (max-width: 750px) {
+
+  .standalone-product-page {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin: 25px auto;
+  }
+
+  .standalone-product-info h1 {
+    font-size: 28px;
+  }
+
+  .product-brand-name {
+    font-size: 16px;
+  }
+
+  .product-page-header {
+    padding: 18px 4%;
+    gap: 10px;
+  }
+
+  .product-back-link {
+    font-size: 9px;
+  }
+}
+
 @media (max-width: 480px) {
+
   .bag-toast {
     right: 16px;
     bottom: 16px;
     width: calc(100% - 32px);
+  }
+
+  .product-brand-name {
+    font-size: 14px;
+  }
+
+  .product-page-header .bag-button {
+    padding: 8px;
+    font-size: 8px;
   }
 }
