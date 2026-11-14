@@ -2,21 +2,30 @@
 /* =========================================
    CURATED WITH CARE BY M.
    LUXURY BEAUTY BOUTIQUE
+   REORGANISED STYLESHEET
 ========================================= */
 
-/* 1. COLOURS AND GENERAL SETTINGS */
+
+/* =========================================
+   1. BRAND COLOURS
+========================================= */
 
 :root {
-  --ivory: #fbf7f4;
-  --cream: #f5eeea;
-  --dusty-rose: #c58f98;
-  --soft-rose: #ead5d5;
-  --deep-rose: #986b72;
-  --dark: #37302f;
-  --muted: #887d78;
+  --ivory: #f8f5ef;
+  --cream: #f1eae3;
+  --dusty-rose: #c5a09b;
+  --soft-rose: #eadbd5;
+  --deep-rose: #906b69;
+  --dark: #403633;
+  --muted: #887d76;
   --white: #ffffff;
-  --border: #e9ded9;
+  --border: #e7dcd3;
 }
+
+
+/* =========================================
+   2. GLOBAL SETTINGS
+========================================= */
 
 * {
   margin: 0;
@@ -29,7 +38,19 @@ html {
 }
 
 body {
-  background: var(--ivory);
+  background-color: var(--ivory);
+  background-image:
+    radial-gradient(
+      ellipse at 10% 15%,
+      rgba(220, 201, 193, 0.12),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 90% 80%,
+      rgba(198, 184, 164, 0.09),
+      transparent 45%
+    );
+  background-attachment: fixed;
   color: var(--dark);
   font-family: 'Montserrat', sans-serif;
   font-size: 13px;
@@ -58,10 +79,29 @@ img {
   object-fit: cover;
 }
 
+h1,
+h2,
+h3,
+.product-brand-name {
+  font-family: 'Cormorant Garamond', serif;
+}
+
 em {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 400;
   color: var(--deep-rose);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--deep-rose);
+  outline-offset: 3px;
 }
 
 .section-padding {
@@ -77,7 +117,10 @@ em {
   margin-bottom: 18px;
 }
 
-/* 2. ANNOUNCEMENT BAR */
+
+/* =========================================
+   3. ANNOUNCEMENT BAR
+========================================= */
 
 .announcement {
   background: var(--deep-rose);
@@ -88,17 +131,21 @@ em {
   letter-spacing: 2.5px;
 }
 
-/* 3. HEADER AND NAVIGATION */
+
+/* =========================================
+   4. HEADER AND NAVIGATION
+========================================= */
 
 .header {
-  min-height: 95px;
+  min-height: 90px;
   padding: 18px 7%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 25px;
-  background: rgba(251,247,244,0.97);
+  background: rgba(248, 245, 239, 0.98);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 3px 18px rgba(80, 60, 50, 0.025);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -113,7 +160,7 @@ em {
 
 .brand-script {
   font-family: 'Great Vibes', cursive;
-  font-size: 36px;
+  font-size: 38px;
   color: var(--deep-rose);
   line-height: 1.2;
 }
@@ -122,6 +169,7 @@ em {
   font-size: 9px;
   letter-spacing: 5px;
   margin-top: 3px;
+  color: #82736c;
 }
 
 .header nav {
@@ -134,11 +182,11 @@ em {
 .header nav a {
   font-size: 10px;
   letter-spacing: 1px;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
 
 .header nav a:hover {
-  color: var(--dusty-rose);
+  color: var(--deep-rose);
 }
 
 .menu-toggle {
@@ -160,13 +208,18 @@ em {
   cursor: pointer;
   position: relative;
   z-index: 101;
+  transition: all 0.3s ease;
 }
 
 .bag-button:hover {
   background: var(--soft-rose);
+  border-color: var(--deep-rose);
 }
 
-/* 4. BUTTONS */
+
+/* =========================================
+   5. SHARED BUTTONS AND LINKS
+========================================= */
 
 .primary-button {
   display: inline-block;
@@ -175,7 +228,7 @@ em {
   padding: 15px 28px;
   border: 1px solid var(--deep-rose);
   font-size: 9px;
-  letter-spacing: 2px;
+  letter-spacing: 1.6px;
   text-align: center;
   transition: all 0.3s ease;
 }
@@ -192,13 +245,16 @@ em {
   padding-bottom: 5px;
 }
 
-/* 5. HERO SECTION */
+
+/* =========================================
+   6. HOMEPAGE — HERO SECTION
+========================================= */
 
 .hero {
   min-height: 610px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: var(--cream);
+  background: #f1eae3;
 }
 
 .hero-content {
@@ -207,10 +263,16 @@ em {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  background:
+    radial-gradient(
+      circle at 5% 10%,
+      rgba(255, 255, 255, 0.55),
+      transparent 55%
+    ),
+    #f1eae3;
 }
 
 .hero h1 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: clamp(50px, 6vw, 78px);
   font-weight: 400;
   line-height: 1.05;
@@ -226,22 +288,40 @@ em {
 
 .hero-image {
   background:
-    linear-gradient(rgba(70,40,40,0.04), rgba(70,40,40,0.04)),
+    linear-gradient(rgba(70, 40, 40, 0.04), rgba(70, 40, 40, 0.04)),
     url("https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1200&q=85");
   background-size: cover;
   background-position: center;
 }
 
-/* 6. INTRODUCTION */
+
+/* =========================================
+   7. HOMEPAGE — INTRODUCTION
+========================================= */
 
 .intro {
+  position: relative;
+  isolation: isolate;
   text-align: center;
   max-width: 950px;
   margin: auto;
+  padding: 30px 20px;
+}
+
+.intro::before {
+  content: "❀";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: -15px;
+  font-family: Georgia, serif;
+  font-size: 145px;
+  color: #b99b91;
+  opacity: 0.055;
+  pointer-events: none;
 }
 
 .intro h2 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: clamp(35px, 4vw, 52px);
   font-weight: 400;
   line-height: 1.2;
@@ -254,7 +334,10 @@ em {
   color: var(--muted);
 }
 
-/* 7. SECTION HEADINGS */
+
+/* =========================================
+   8. SHARED SECTION HEADINGS
+========================================= */
 
 .section-heading {
   display: flex;
@@ -267,7 +350,6 @@ em {
 .section-heading h2,
 .gift-content h2,
 .gift-finder h2 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: clamp(38px, 4vw, 53px);
   font-weight: 400;
   line-height: 1.15;
@@ -278,10 +360,19 @@ em {
   margin-top: 12px;
 }
 
-/* 8. COLLECTION CARDS */
+
+/* =========================================
+   9. HOMEPAGE — COLLECTIONS
+========================================= */
 
 .collections {
-  background: var(--white);
+  background:
+    radial-gradient(
+      ellipse at 95% 10%,
+      rgba(220, 201, 193, 0.15),
+      transparent 40%
+    ),
+    #f8f5ef;
 }
 
 .collection-grid {
@@ -328,10 +419,10 @@ em {
 }
 
 .collection-caption h3 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 29px;
   font-weight: 400;
   margin: 5px 0;
+  color: var(--dark);
 }
 
 .discover {
@@ -342,10 +433,19 @@ em {
   margin-top: 8px;
 }
 
-/* 9. BRAND SECTION */
+
+/* =========================================
+   10. HOMEPAGE — BRAND CARDS
+========================================= */
 
 .brands-section {
-  background: var(--ivory);
+  background:
+    linear-gradient(
+      135deg,
+      #f5eee8,
+      #faf7f2,
+      #f2ebe5
+    );
 }
 
 .brand-grid {
@@ -356,8 +456,8 @@ em {
 
 .brand-card {
   min-height: 155px;
-  background: var(--white);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid #e8ddd4;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -374,16 +474,57 @@ em {
 }
 
 .brand-card-name {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 20px;
   letter-spacing: 1px;
 }
 
-/* 10. BEAUTY EDIT / SHOP */
+
+/* =========================================
+   11. HOMEPAGE — DECORATIVE BACKGROUNDS
+========================================= */
 
 .featured {
-  background: var(--white);
+  background-color: #fbf9f5;
 }
+
+.gift-section {
+  background:
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(255, 255, 255, 0.45),
+      transparent 40%
+    ),
+    #eee4dc;
+}
+
+.gift-content {
+  background: transparent;
+}
+
+.gift-finder {
+  background:
+    radial-gradient(
+      ellipse at 10% 90%,
+      rgba(220, 201, 193, 0.16),
+      transparent 40%
+    ),
+    #faf7f2;
+}
+
+.newsletter {
+  background:
+    linear-gradient(
+      120deg,
+      #eadbd7,
+      #f1e5e0,
+      #e8d8d3
+    );
+}
+
+
+/* =========================================
+   12. SHOP — NAVIGATION AND FILTERS
+========================================= */
 
 .shop-navigation {
   display: flex;
@@ -444,7 +585,10 @@ em {
   color: var(--white);
 }
 
-/* SEARCH AND SORT */
+
+/* =========================================
+   13. SHOP — SEARCH AND SORT
+========================================= */
 
 .shop-tools {
   display: flex;
@@ -476,7 +620,10 @@ em {
   outline: 1px solid var(--dusty-rose);
 }
 
-/* PRODUCT RESULTS */
+
+/* =========================================
+   14. SHOP — RESULTS HEADING
+========================================= */
 
 .shop-results-heading {
   display: flex;
@@ -486,7 +633,6 @@ em {
 }
 
 .shop-results-heading p {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 25px;
 }
 
@@ -495,7 +641,10 @@ em {
   font-size: 10px;
 }
 
-/* PRODUCT GRID */
+
+/* =========================================
+   15. SHOP — PRODUCT GRID AND CARDS
+========================================= */
 
 .product-grid {
   display: grid;
@@ -504,14 +653,23 @@ em {
 }
 
 .product-card {
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(231, 220, 211, 0.65);
   min-width: 0;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 25px rgba(80, 60, 50, 0.06);
 }
 
 .product-image {
   position: relative;
   height: 290px;
-  background: var(--cream);
+  background: #f4eee8;
   overflow: hidden;
 }
 
@@ -536,7 +694,7 @@ em {
 }
 
 .product-info {
-  padding: 15px 3px;
+  padding: 17px 12px;
 }
 
 .product-type {
@@ -546,11 +704,11 @@ em {
 }
 
 .product-info h3 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 23px;
   font-weight: 500;
   line-height: 1.3;
   margin: 5px 0;
+  color: var(--dark);
 }
 
 .product-description {
@@ -589,7 +747,10 @@ em {
   background: var(--cream);
 }
 
-/* 11. INDIVIDUAL PRODUCT DETAILS */
+
+/* =========================================
+   16. HOMEPAGE — PRODUCT DETAILS SECTION
+========================================= */
 
 .product-details-section {
   padding: 80px 8%;
@@ -628,7 +789,6 @@ em {
 }
 
 .product-detail-info h2 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 45px;
   font-weight: 400;
   line-height: 1.15;
@@ -649,569 +809,17 @@ em {
   margin-top: 20px;
 }
 
-/* 12. GIFT SECTION */
 
-.gift-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: var(--cream);
-}
-
-.gift-image {
-  min-height: 510px;
-  background-image: url("https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1200&q=85");
-  background-position: center;
-  background-size: cover;
-}
-
-.gift-content {
-  padding: 80px 12%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.gift-content p {
-  color: var(--muted);
-  margin: 20px 0 28px;
-  max-width: 400px;
-}
-
-/* 13. GIFT FINDER */
-
-.gift-finder {
-  text-align: center;
-  background: var(--white);
-}
-
-.gift-finder > p {
-  color: var(--muted);
-  margin: 15px 0 35px;
-}
-
-.finder-box {
-  max-width: 520px;
-  margin: auto;
-  padding: 40px;
-  background: var(--ivory);
-  border: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.finder-box label {
-  font-size: 10px;
-  letter-spacing: 1px;
-  margin: 15px 0 8px;
-}
-
-.finder-box select {
-  padding: 14px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  color: var(--dark);
-}
-
-.finder-box .primary-button {
-  margin-top: 25px;
-}
-
-.gift-result {
-  text-align: center;
-  color: var(--deep-rose);
-  margin-top: 20px;
-}
-
-/* 14. NEWSLETTER */
-
-.newsletter {
-  padding: 90px 20px;
-  text-align: center;
-  background: var(--soft-rose);
-}
-
-.newsletter h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 43px;
-  font-weight: 400;
-}
-
-.newsletter p {
-  color: var(--muted);
-  margin: 12px auto 25px;
-  max-width: 450px;
-}
-
-.newsletter form {
-  max-width: 500px;
-  margin: auto;
-  display: flex;
-}
-
-.newsletter input {
-  flex: 1;
-  min-width: 0;
-  padding: 15px;
-  background: var(--white);
-  border: 1px solid var(--white);
-  font-size: 11px;
-}
-
-.newsletter button {
-  background: var(--deep-rose);
-  color: var(--white);
-  border: 1px solid var(--deep-rose);
-  padding: 0 20px;
-  font-size: 9px;
-  letter-spacing: 1px;
-}
-
-/* 15. FOOTER */
-
-footer {
-  background: #eee3df;
-  padding: 65px 20px 25px;
-  text-align: center;
-}
-
-.footer-brand {
-  margin: 0 auto 25px;
-}
-
-footer p {
-  color: var(--muted);
-  margin-bottom: 25px;
-}
-
-.footer-links {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 25px;
-  margin-bottom: 45px;
-}
-
-.footer-links a {
-  font-size: 10px;
-}
-
-.footer-links a:hover {
-  color: var(--deep-rose);
-}
-
-.copyright {
-  display: block;
-  border-top: 1px solid var(--border);
-  padding-top: 22px;
-  font-size: 8px;
-  letter-spacing: 2px;
-  color: var(--muted);
-}
-
-/* 16. SHOPPING BAG */
-
-.cart-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(30,20,20,0.45);
-  z-index: 200;
-  display: none;
-  justify-content: flex-end;
-}
-
-.cart-overlay.open {
-  display: flex;
-}
-
-.cart-panel {
-  background: var(--ivory);
-  width: min(440px, 100%);
-  height: 100%;
-  overflow-y: auto;
-  padding: 55px 35px;
-  position: relative;
-}
-
-.cart-panel h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 35px;
-  font-weight: 400;
-  margin-bottom: 25px;
-}
-
-.close-cart {
-  position: absolute;
-  right: 25px;
-  top: 15px;
-  background: none;
-  border: none;
-  font-size: 30px;
-  color: var(--dark);
-}
-
-#cartItems {
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 20px 0;
-}
-
-.cart-total {
-  display: flex;
-  justify-content: space-between;
-  font-size: 15px;
-  margin: 25px 0;
-}
-
-.checkout-button {
-  width: 100%;
-}
-
-.cart-note {
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 15px;
-  text-align: center;
-}
-
-/* CART PRODUCT AND QUANTITY CONTROLS */
-
-.cart-item {
-  padding: 15px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.cart-item:last-child {
-  border-bottom: none;
-}
-
-.cart-item-quantity {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.quantity-button {
-  width: 30px;
-  height: 30px;
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--dark);
-  font-size: 17px;
-}
-
-.quantity-button:hover {
-  background: var(--soft-rose);
-}
-
-.quantity-number {
-  min-width: 18px;
-  text-align: center;
-}
-
-.remove-cart-item {
-  background: none;
-  border: none;
-  color: var(--deep-rose);
-  font-size: 9px;
-  letter-spacing: 1px;
-  margin-top: 10px;
-  text-decoration: underline;
-}
-
-/* 17. RESPONSIVE TABLET DESIGN */
-
-@media (max-width: 1000px) {
-
-  .header {
-    padding: 15px 4%;
-    gap: 12px;
-  }
-
-  .header nav {
-    gap: 13px;
-  }
-
-  .brand {
-    min-width: 150px;
-  }
-
-  .brand-script {
-    font-size: 30px;
-  }
-
-  .product-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .brand-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .collection-photo {
-    height: 300px;
-  }
-}
-
-/* 18. RESPONSIVE MOBILE DESIGN */
-
-@media (max-width: 650px) {
-
-  .section-padding {
-    padding: 65px 6%;
-  }
-
-  .announcement {
-    font-size: 8px;
-    letter-spacing: 1.5px;
-  }
-
-  .header {
-    min-height: 75px;
-    padding: 12px 5%;
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  .brand {
-    min-width: 0;
-  }
-
-  .brand-script {
-    font-size: 27px;
-  }
-
-  .brand-by {
-    font-size: 8px;
-  }
-
-  .menu-toggle {
-    display: block;
-    order: 3;
-  }
-
-  .header nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    padding: 20px;
-    background: var(--ivory);
-    border-top: 1px solid var(--border);
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-  }
-
-  .header nav.open {
-    display: flex;
-  }
-
-  .bag-button {
-    padding: 8px 10px;
-    font-size: 9px;
-  }
-
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-content {
-    padding: 75px 8%;
-  }
-
-  .hero h1 {
-    font-size: 58px;
-  }
-
-  .hero-image {
-    min-height: 350px;
-  }
-
-  .intro h2 {
-    font-size: 36px;
-  }
-
-  .section-heading {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .collection-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .collection-photo {
-    height: 350px;
-  }
-
-  .brand-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .brand-card {
-    min-height: 125px;
-  }
-
-  .brand-card-name {
-    font-size: 17px;
-  }
-
-  .shop-navigation {
-    gap: 5px;
-  }
-
-  .shop-tab {
-    padding: 10px 9px;
-    font-size: 9px;
-  }
-
-  .filters {
-    gap: 7px;
-  }
-
-  .filter {
-    padding: 8px 11px;
-    font-size: 9px;
-  }
-
-  .shop-tools {
-    flex-direction: column;
-  }
-
-  .shop-tools select {
-    width: 100%;
-  }
-
-  .product-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px 12px;
-  }
-
-  .product-image {
-    height: 220px;
-  }
-
-  .product-info h3 {
-    font-size: 20px;
-  }
-
-  .product-bottom {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .gift-section {
-    grid-template-columns: 1fr;
-  }
-
-  .gift-image {
-    min-height: 350px;
-  }
-
-  .gift-content {
-    padding: 60px 8%;
-  }
-
-  .finder-box {
-    padding: 25px;
-  }
-
-  .newsletter {
-    padding: 65px 6%;
-  }
-
-  .newsletter h2 {
-    font-size: 35px;
-  }
-
-  .newsletter form {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .newsletter input {
-    padding: 14px;
-  }
-
-  .newsletter button {
-    padding: 15px;
-  }
-
-  .footer-links {
-    gap: 15px;
-  }
-
-  .product-details-section {
-    padding: 55px 6%;
-  }
-
-  .product-detail-layout {
-    grid-template-columns: 1fr;
-    gap: 25px;
-  }
-
-  .product-detail-info h2 {
-    font-size: 37px;
-  }
-
-  .cart-panel {
-    padding: 50px 22px;
-  }
-}
-
-/* 19. ACCESSIBILITY AND FINISHING DETAILS */
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible {
-  outline: 2px solid var(--deep-rose);
-  outline-offset: 3px;
-}
-
-[hidden] {
-  display: none !important;
-}
-
-/* 20. INSTAGRAM ICON */
-
-.instagram-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #a66f7d;
-  text-decoration: none;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.instagram-link:hover {
-  color: #d19aa7;
-  transform: translateY(-2px);
-}
-
-.instagram-link svg {
-  display: block;
-  width: 21px;
-  height: 21px;
-}
-
-/* =================================
-   INDIVIDUAL PRODUCT PAGE
-================================= */
+/* =========================================
+   17. STANDALONE PRODUCT PAGE
+========================================= */
 
 .product-page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 25px 6%;
-  border-bottom: 1px solid #eee5e2;
+  border-bottom: 1px solid var(--border);
   position: relative;
   z-index: 110;
   background: var(--ivory);
@@ -1226,8 +834,7 @@ select:focus-visible {
 
 .product-brand-name {
   text-decoration: none;
-  color: #806b67;
-  font-family: Georgia, serif;
+  color: var(--deep-rose);
   font-size: 20px;
 }
 
@@ -1244,11 +851,15 @@ select:focus-visible {
   grid-template-columns: 1.1fr 0.9fr;
   gap: 65px;
   align-items: start;
+  background: transparent;
 }
+
+
+/* PRODUCT GALLERY */
 
 .gallery-main {
   position: relative;
-  background: #f8f3f1;
+  background-color: #f4eee8;
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
@@ -1268,7 +879,7 @@ select:focus-visible {
   transform: translateY(-50%);
   z-index: 2;
   border: none;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
   color: #806b67;
   width: 38px;
   height: 38px;
@@ -1297,7 +908,7 @@ select:focus-visible {
   flex: 0 0 76px;
   height: 76px;
   border: 1px solid #e8dcd8;
-  background: #f8f3f1;
+  background: #f4eee8;
   padding: 3px;
   cursor: pointer;
 }
@@ -1318,16 +929,18 @@ select:focus-visible {
   text-align: center;
 }
 
+
+/* PRODUCT INFORMATION */
+
 .standalone-product-info {
   padding-top: 15px;
 }
 
 .standalone-product-info h1 {
-  font-family: Georgia, serif;
-  font-weight: normal;
   font-size: 34px;
+  font-weight: 400;
   line-height: 1.25;
-  color: #705b57;
+  color: var(--dark);
 }
 
 .standalone-product-info > p {
@@ -1336,7 +949,7 @@ select:focus-visible {
 
 .product-description-block {
   margin: 35px 0;
-  border-top: 1px solid #eee5e2;
+  border-top: 1px solid var(--border);
   padding-top: 20px;
 }
 
@@ -1353,7 +966,10 @@ select:focus-visible {
   font-size: 14px;
 }
 
-/* 21. SHOPPING BAG NOTIFICATION */
+
+/* =========================================
+   18. PRODUCT PAGE — BAG NOTIFICATION
+========================================= */
 
 .bag-toast {
   position: fixed;
@@ -1362,8 +978,8 @@ select:focus-visible {
   z-index: 9999;
   width: min(370px, calc(100% - 32px));
   padding: 21px;
-  background: #F5F1E9;
-  border: 1px solid #D9C9B9;
+  background: #f5f1e9;
+  border: 1px solid #d9c9b9;
   box-shadow: 0 8px 35px rgba(117, 105, 99, 0.13);
   opacity: 0;
   visibility: hidden;
@@ -1411,7 +1027,7 @@ select:focus-visible {
   width: 75px;
   height: 85px;
   object-fit: cover;
-  background: #E8DAD4;
+  background: #e8dad4;
 }
 
 .bag-toast-details {
@@ -1435,17 +1051,17 @@ select:focus-visible {
 .bag-toast-confirmation {
   margin-top: 17px;
   padding-top: 14px;
-  border-top: 1px solid #D9C9B9;
+  border-top: 1px solid #d9c9b9;
   font-size: 11px;
   letter-spacing: 1.2px;
-  color: #9C817D;
+  color: #9c817d;
 }
 
 .bag-toast-link {
   display: block;
   margin-top: 15px;
   padding: 14px;
-  background: #E8DAD4;
+  background: #e8dad4;
   color: #756963;
   text-align: center;
   text-decoration: none;
@@ -1455,100 +1071,395 @@ select:focus-visible {
 }
 
 .bag-toast-link:hover {
-  background: #D9C9B9;
-}
-
-@media (max-width: 750px) {
-
-  .standalone-product-page {
-    grid-template-columns: 1fr;
-    gap: 25px;
-    margin: 25px auto;
-  }
-
-  .standalone-product-info h1 {
-    font-size: 28px;
-  }
-
-  .product-brand-name {
-    font-size: 16px;
-  }
-
-  .product-page-header {
-    padding: 18px 4%;
-    gap: 10px;
-  }
-
-  .product-back-link {
-    font-size: 9px;
-  }
-}
-
-@media (max-width: 480px) {
-
-  .bag-toast {
-    right: 16px;
-    bottom: 16px;
-    width: calc(100% - 32px);
-  }
-
-  .product-brand-name {
-    font-size: 14px;
-  }
-
-  .product-page-header .bag-button {
-    padding: 8px;
-    font-size: 8px;
-  }
-}
-
-
-/* SHOPPING BAG PRODUCT PHOTOGRAPHS */
-
-.cart-item-layout {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-.cart-item-image {
-  width: 95px;
-  height: 115px;
-  object-fit: contain;
-  background: #fbf7f4;
-  flex-shrink: 0;
-}
-
-.cart-item-details {
-  flex: 1;
-  min-width: 0;
-}
-
-.cart-item-details p {
-  margin: 5px 0 10px;
-  line-height: 1.5;
-}
-
-@media (max-width: 480px) {
-  .cart-item-image {
-    width: 78px;
-    height: 100px;
-  }
-
-  .cart-item-layout {
-    gap: 12px;
-  }
+  background: #d9c9b9;
 }
 
 
 /* =========================================
-   LUXURY SHOPPING BAG DESIGN
+   19. PRODUCT PAGE — RELATED PRODUCTS
+   YOU MAY ALSO LOVE
+========================================= */
+
+.related-products-section {
+  max-width: 900px;
+  margin: 35px auto;
+  padding: 20px 25px;
+}
+
+.related-products-section[hidden] {
+  display: none !important;
+}
+
+.related-products-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.related-products-heading h2 {
+  font-size: 21px;
+  font-weight: normal;
+  color: #76575b;
+  margin: 5px 0;
+}
+
+.related-products-heading > p:last-child {
+  font-size: 11px;
+  color: #817575;
+}
+
+.related-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 135px));
+  justify-content: center;
+  gap: 16px;
+}
+
+.related-product-card {
+  width: 100%;
+  min-width: 0;
+}
+
+.related-product-image {
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.related-product-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.related-product-info {
+  padding-top: 7px;
+}
+
+.related-product-brand {
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #987b7e;
+  margin: 3px 0;
+}
+
+.related-product-info h3 {
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 1.35;
+  margin: 4px 0;
+}
+
+.related-product-info h3 a {
+  color: #514346;
+  text-decoration: none;
+}
+
+.related-product-price {
+  font-size: 10px;
+  margin: 6px 0;
+  color: #514346;
+}
+
+.related-add-button {
+  width: 100%;
+  padding: 7px 3px;
+  background: var(--deep-rose);
+  color: white;
+  border: none;
+  font-size: 8px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.related-view-link {
+  display: block;
+  margin-top: 7px;
+  text-align: center;
+  color: #76575b;
+  font-size: 8px;
+  letter-spacing: 0.7px;
+  text-decoration: none;
+}
+
+
+/* =========================================
+   20. GIFT SECTION
+========================================= */
+
+.gift-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background:
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(255, 255, 255, 0.45),
+      transparent 40%
+    ),
+    #eee4dc;
+}
+
+.gift-image {
+  min-height: 510px;
+  background-image: url("https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1200&q=85");
+  background-position: center;
+  background-size: cover;
+}
+
+.gift-content {
+  padding: 80px 12%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background: transparent;
+}
+
+.gift-content p {
+  color: var(--muted);
+  margin: 20px 0 28px;
+  max-width: 400px;
+}
+
+
+/* =========================================
+   21. GIFT FINDER
+========================================= */
+
+.gift-finder {
+  text-align: center;
+  background:
+    radial-gradient(
+      ellipse at 10% 90%,
+      rgba(220, 201, 193, 0.16),
+      transparent 40%
+    ),
+    #faf7f2;
+}
+
+.gift-finder > p {
+  color: var(--muted);
+  margin: 15px 0 35px;
+}
+
+.finder-box {
+  max-width: 520px;
+  margin: auto;
+  padding: 40px;
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  box-shadow: 0 8px 25px rgba(80, 60, 50, 0.035);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.finder-box label {
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin: 15px 0 8px;
+}
+
+.finder-box select {
+  padding: 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--dark);
+}
+
+.finder-box .primary-button {
+  margin-top: 25px;
+}
+
+.gift-result {
+  text-align: center;
+  color: var(--deep-rose);
+  margin-top: 20px;
+}
+
+
+/* =========================================
+   22. NEWSLETTER
+========================================= */
+
+.newsletter {
+  padding: 90px 20px;
+  text-align: center;
+  background:
+    linear-gradient(
+      120deg,
+      #eadbd7,
+      #f1e5e0,
+      #e8d8d3
+    );
+  color: var(--dark);
+}
+
+.newsletter h2 {
+  font-size: 43px;
+  font-weight: 400;
+  color: var(--dark);
+}
+
+.newsletter p {
+  color: var(--muted);
+  margin: 12px auto 25px;
+  max-width: 450px;
+}
+
+.newsletter form {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+}
+
+.newsletter input {
+  flex: 1;
+  min-width: 0;
+  padding: 15px;
+  background: var(--white);
+  border: 1px solid #e6d9d1;
+  font-size: 11px;
+}
+
+.newsletter button {
+  background: var(--deep-rose);
+  color: var(--white);
+  border: 1px solid var(--deep-rose);
+  padding: 0 20px;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+
+/* =========================================
+   23. FOOTER
+========================================= */
+
+footer,
+.site-footer {
+  background: #eee6df;
+  color: var(--dark);
+  padding: 65px 20px 25px;
+  text-align: center;
+}
+
+.footer-brand {
+  margin: 0 auto 25px;
+}
+
+footer p,
+.site-footer p {
+  color: var(--muted);
+  margin-bottom: 25px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-bottom: 45px;
+}
+
+.footer-links a {
+  font-size: 10px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--deep-rose);
+}
+
+.copyright {
+  display: block;
+  border-top: 1px solid #dfd3ca;
+  padding-top: 22px;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+
+/* =========================================
+   24. OLD SHOPPING BAG OVERLAY
+   RETAINED FOR COMPATIBILITY
+========================================= */
+
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 20, 20, 0.45);
+  z-index: 200;
+  display: none;
+  justify-content: flex-end;
+}
+
+.cart-overlay.open {
+  display: flex;
+}
+
+.cart-panel {
+  background: var(--ivory);
+  width: min(440px, 100%);
+  height: 100%;
+  overflow-y: auto;
+  padding: 55px 35px;
+  position: relative;
+}
+
+.cart-panel h2 {
+  font-size: 35px;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.close-cart {
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: var(--dark);
+}
+
+#cartItems {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  margin: 25px 0;
+}
+
+.checkout-button {
+  width: 100%;
+}
+
+.cart-note {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 15px;
+  text-align: center;
+}
+
+
+/* =========================================
+   25. SHOPPING BAG — PRODUCT LAYOUT
 ========================================= */
 
 .cart-item {
   padding: 20px 0;
   border-bottom: 1px solid #e8dad4;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
 }
 
 .cart-item-layout {
@@ -1604,6 +1515,10 @@ select:focus-visible {
   min-width: 22px;
 }
 
+.quantity-button:hover {
+  background: var(--soft-rose);
+}
+
 .quantity-number {
   color: #5f514b;
   font-size: 13px;
@@ -1619,529 +1534,29 @@ select:focus-visible {
   letter-spacing: 1px;
   cursor: pointer;
   padding: 5px 0;
+  margin-top: 10px;
+  text-decoration: underline;
 }
 
 .remove-cart-item:hover {
   color: #684c47;
 }
 
-@media (max-width: 480px) {
-  .cart-item-layout {
-    gap: 12px;
-  }
-
-  .cart-item-image {
-    width: 85px;
-    height: 105px;
-  }
-}
-
 
 /* =========================================
-   YOU MAY ALSO LOVE — MINI PRODUCT CARDS
-========================================= */
-
-.related-products-section {
-  max-width: 900px;
-  margin: 35px auto;
-  padding: 20px 25px;
-}
-
-.related-products-section[hidden] {
-  display: none !important;
-}
-
-.related-products-heading {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.related-products-heading h2 {
-  font-family: Georgia, serif;
-  font-size: 21px;
-  font-weight: normal;
-  color: #76575b;
-  margin: 5px 0;
-}
-
-.related-products-heading > p:last-child {
-  font-size: 11px;
-  color: #817575;
-}
-
-.related-products-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 135px));
-  justify-content: center;
-  gap: 16px;
-}
-
-.related-product-card {
-  width: 100%;
-  min-width: 0;
-}
-
-.related-product-image {
-  overflow: hidden;
-  background: #f5eeea;
-}
-
-.related-product-image img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-}
-
-.related-product-info {
-  padding-top: 7px;
-}
-
-.related-product-brand {
-  font-size: 8px;
-  letter-spacing: 1px;
-  color: #987b7e;
-  margin: 3px 0;
-}
-
-.related-product-info h3 {
-  font-family: Georgia, serif;
-  font-size: 11px;
-  font-weight: normal;
-  line-height: 1.35;
-  margin: 4px 0;
-}
-
-.related-product-info h3 a {
-  color: #514346;
-  text-decoration: none;
-}
-
-.related-product-price {
-  font-size: 10px;
-  margin: 6px 0;
-  color: #514346;
-}
-
-.related-add-button {
-  width: 100%;
-  padding: 7px 3px;
-  background: #986b72;
-  color: white;
-  border: none;
-  font-size: 8px;
-  letter-spacing: 1px;
-  cursor: pointer;
-}
-
-.related-view-link {
-  display: block;
-  margin-top: 7px;
-  text-align: center;
-  color: #76575b;
-  font-size: 8px;
-  letter-spacing: 0.7px;
-  text-decoration: none;
-}
-
-@media (max-width: 600px) {
-  .related-products-section {
-    padding: 15px 12px;
-    margin: 30px auto;
-  }
-
-  .related-products-grid {
-    grid-template-columns: repeat(2, minmax(0, 125px));
-    gap: 18px;
-  }
-
-  .related-products-heading h2 {
-    font-size: 19px;
-  }
-}
-
-
-/* =========================================
-   22. BOTANICAL EDITORIAL BACKGROUND
-   CURATED WITH CARE BY M.
-========================================= */
-
-body {
-  background-color: #f8f5ef;
-
-  background-image:
-    radial-gradient(
-      ellipse at 12% 15%,
-      rgba(220, 201, 193, 0.13),
-      transparent 40%
-    ),
-    radial-gradient(
-      ellipse at 88% 65%,
-      rgba(198, 184, 164, 0.10),
-      transparent 45%
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(125, 105, 90, 0.012) 0px,
-      rgba(125, 105, 90, 0.012) 1px,
-      transparent 1px,
-      transparent 4px
-    );
-}
-
-.header {
-  background: rgba(248, 245, 239, 0.96);
-  border-bottom: 1px solid #e8ded5;
-}
-
-.hero {
-  background-color: #f1eae3;
-}
-
-.hero-content {
-  background:
-    radial-gradient(
-      circle at 5% 10%,
-      rgba(255,255,255,0.55),
-      transparent 55%
-    ),
-    #f1eae3;
-}
-
-.intro {
-  position: relative;
-  isolation: isolate;
-  padding: 30px 20px;
-}
-
-.intro::before {
-  content: "❀";
-  position: absolute;
-  z-index: -1;
-  left: 2%;
-  top: -45px;
-  font-family: Georgia, serif;
-  font-size: 180px;
-  color: #c9b2a8;
-  opacity: 0.10;
-  pointer-events: none;
-}
-
-.collections {
-  background:
-    radial-gradient(
-      ellipse at 95% 10%,
-      rgba(220, 201, 193, 0.15),
-      transparent 40%
-    ),
-    #f8f5ef;
-}
-
-.brands-section {
-  background:
-    linear-gradient(
-      135deg,
-      #f5eee8,
-      #faf7f2,
-      #f2ebe5
-    );
-}
-
-.featured {
-  background-color: #fbf9f5;
-}
-
-.gift-section {
-  background:
-    radial-gradient(
-      circle at 95% 15%,
-      rgba(255,255,255,0.55),
-      transparent 45%
-    ),
-    #f0e7df;
-}
-
-.gift-content {
-  background: transparent;
-}
-
-.gift-finder {
-  background:
-    radial-gradient(
-      ellipse at 10% 90%,
-      rgba(220, 201, 193, 0.16),
-      transparent 40%
-    ),
-    #faf7f2;
-}
-
-.newsletter {
-  background:
-    linear-gradient(
-      120deg,
-      #eadbd7,
-      #f1e5e0,
-      #e8d8d3
-    );
-}
-
-footer {
-  background: #eee5de;
-}
-
-.standalone-product-page {
-  background: transparent;
-}
-
-.gallery-main {
-  background-color: #f3ede7;
-}
-
-.brand-card {
-  background: rgba(255,255,255,0.75);
-  border-color: #e8ddd4;
-}
-
-.product-card {
-  background: rgba(255,255,255,0.88);
-}
-
-.collection-photo,
-.brand-card,
-.product-card,
-.primary-button {
-  transition: all 0.35s ease;
-}
-
-@media (max-width: 650px) {
-
-  .intro::before {
-    font-size: 110px;
-    left: -5px;
-    top: -20px;
-  }
-
-  .hero-content {
-    background-color: #f1eae3;
-  }
-
-}
-
-
-/* =========================================
-   23. BOTANICAL TEXTURE REFINEMENT
-========================================= */
-
-body {
-  background-color: #f8f5ef;
-
-  background-image:
-    radial-gradient(
-      ellipse at 10% 15%,
-      rgba(220, 201, 193, 0.12),
-      transparent 45%
-    ),
-    radial-gradient(
-      ellipse at 90% 80%,
-      rgba(198, 184, 164, 0.09),
-      transparent 45%
-    );
-  background-attachment: fixed;
-}
-
-.header {
-  background: #f8f5ef;
-}
-
-.intro::before {
-  font-size: 145px;
-  opacity: 0.055;
-  left: 0;
-  top: -15px;
-  color: #b99b91;
-}
-
-.gift-section {
-  background:
-    radial-gradient(
-      circle at 90% 15%,
-      rgba(255,255,255,0.45),
-      transparent 40%
-    ),
-    #eee4dc;
-}
-
-.product-image,
-.gallery-main {
-  background-color: #f4eee8;
-}
-
-
-/* =========================================
-   24. THE BRANDS WE LOVE
-   LUXURY EDITORIAL BRAND GALLERY
-========================================= */
-
-.brand-edit {
-  background:
-    radial-gradient(
-      ellipse at 10% 20%,
-      rgba(220, 201, 193, 0.13),
-      transparent 45%
-    ),
-    #f5eee8;
-
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.brand-edit .section-heading {
-  justify-content: center;
-  text-align: center;
-  margin-bottom: 45px;
-}
-
-.brand-edit .section-heading > div {
-  max-width: 600px;
-}
-
-.brand-edit .section-heading h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(38px, 4vw, 52px);
-  font-weight: 400;
-  color: var(--dark);
-}
-
-.brand-edit .section-heading p {
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 12px;
-}
-
-.brand-edit-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
-  max-width: 1050px;
-  margin: 0 auto;
-  border-top: 1px solid #ded1c9;
-  border-left: 1px solid #ded1c9;
-}
-
-.brand-edit-item {
-  min-height: 135px;
-  padding: 25px 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-
-  background: rgba(255,255,255,0.35);
-  border-right: 1px solid #ded1c9;
-  border-bottom: 1px solid #ded1c9;
-
-  color: #554946;
-  transition: background 0.35s ease,
-              color 0.35s ease;
-}
-
-.brand-edit-item span {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-}
-
-.brand-edit-item small {
-  font-size: 8px;
-  letter-spacing: 2px;
-  color: #a18a80;
-}
-
-.brand-edit-item:hover {
-  background: #eee2da;
-  color: var(--deep-rose);
-}
-
-.brand-edit-item:hover span {
-  transform: translateY(-2px);
-}
-
-.brand-edit-item span {
-  transition: transform 0.35s ease;
-}
-
-.brand-edit-all {
-  display: inline-block;
-  margin-top: 35px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid var(--dusty-rose);
-
-  color: var(--deep-rose);
-  font-size: 9px;
-  letter-spacing: 2px;
-  transition: color 0.3s ease;
-}
-
-.brand-edit-all:hover {
-  color: var(--dark);
-}
-
-/* TABLET */
-
-@media (max-width: 850px) {
-
-  .brand-edit-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-}
-
-/* MOBILE */
-
-@media (max-width: 480px) {
-
-  .brand-edit {
-    padding-left: 6%;
-    padding-right: 6%;
-  }
-
-  .brand-edit .section-heading {
-    margin-bottom: 30px;
-  }
-
-  .brand-edit-item {
-    min-height: 110px;
-    padding: 18px 8px;
-  }
-
-  .brand-edit-item span {
-    font-size: 21px;
-  }
-
-  .brand-edit-item small {
-    font-size: 7px;
-  }
-
-}
-
-
-/* =========================================
-   25. SEPARATE BASKET PAGE
-   CURATED WITH CARE BY M.
+   26. SEPARATE BASKET PAGE
 ========================================= */
 
 .site-header {
-  min-height: 95px;
+  min-height: 90px;
   padding: 18px 7%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 25px;
-  background: #f8f5ef;
+  background: rgba(248, 245, 239, 0.98);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 3px 18px rgba(80, 60, 50, 0.025);
 }
 
 .site-header .logo {
@@ -2163,11 +1578,12 @@ body {
 .site-header .main-nav a {
   font-size: 10px;
   letter-spacing: 1px;
+  color: var(--dark);
   transition: color 0.3s ease;
 }
 
 .site-header .main-nav a:hover {
-  color: var(--dusty-rose);
+  color: var(--deep-rose);
 }
 
 .site-header .header-actions {
@@ -2175,6 +1591,9 @@ body {
   align-items: center;
   gap: 15px;
 }
+
+
+/* BASKET PAGE LAYOUT */
 
 .basket-page {
   max-width: 1250px;
@@ -2188,7 +1607,6 @@ body {
 }
 
 .basket-heading h1 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: clamp(42px, 5vw, 58px);
   font-weight: 400;
   line-height: 1.15;
@@ -2221,7 +1639,6 @@ body {
 }
 
 .basket-section-heading h2 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 27px;
   font-weight: 400;
 }
@@ -2229,6 +1646,9 @@ body {
 .basket-items {
   width: 100%;
 }
+
+
+/* BASKET PRODUCT */
 
 .basket-item {
   display: flex;
@@ -2242,7 +1662,7 @@ body {
   width: 125px;
   height: 145px;
   object-fit: contain;
-  background: #f4eee8;
+  background: #f3ede7;
   flex-shrink: 0;
 }
 
@@ -2252,7 +1672,6 @@ body {
 }
 
 .basket-item-details h3 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 23px;
   font-weight: 500;
   line-height: 1.3;
@@ -2295,6 +1714,9 @@ body {
   margin-top: 17px;
 }
 
+
+/* BASKET QUANTITY CONTROLS */
+
 .basket-quantity {
   display: inline-flex;
   align-items: center;
@@ -2336,19 +1758,22 @@ body {
   color: var(--deep-rose);
 }
 
+
+/* BASKET SUMMARY */
+
 .basket-summary {
-  background: #f5eee8;
-  border: 1px solid #e8ddd4;
+  background: #f2ebe4;
+  border: 1px solid var(--border);
   padding: 30px 25px;
   position: sticky;
   top: 125px;
 }
 
 .basket-summary h2 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 29px;
   font-weight: 400;
   margin-bottom: 25px;
+  color: var(--dark);
 }
 
 .basket-summary-row {
@@ -2385,7 +1810,7 @@ body {
   color: var(--white);
   border: 1px solid var(--deep-rose);
   font-size: 9px;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.6px;
   transition: all 0.3s ease;
 }
 
@@ -2408,6 +1833,9 @@ body {
   line-height: 1.7;
 }
 
+
+/* EMPTY BASKET */
+
 .basket-empty {
   padding: 65px 20px;
   text-align: center;
@@ -2416,7 +1844,6 @@ body {
 }
 
 .basket-empty h2 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 31px;
   font-weight: 400;
   margin-bottom: 10px;
@@ -2433,10 +1860,214 @@ body {
 }
 
 .basket-page + .site-footer {
-  background: #eee5de;
+  background: #eee6df;
 }
 
+
+/* =========================================
+   27. BRAND GALLERY
+   THE BRANDS WE LOVE
+========================================= */
+
+.brand-edit {
+  background:
+    radial-gradient(
+      ellipse at 10% 20%,
+      rgba(220, 201, 193, 0.13),
+      transparent 45%
+    ),
+    #f5eee8;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-edit-heading {
+  max-width: 650px;
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+.brand-edit-heading h2 {
+  font-size: clamp(38px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--dark);
+}
+
+.brand-edit-heading p {
+  max-width: 530px;
+  margin: 15px auto 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.brand-edit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  max-width: 1050px;
+  margin: 0 auto;
+  border-top: 1px solid #ded1c9;
+  border-left: 1px solid #ded1c9;
+}
+
+.brand-edit-item {
+  min-height: 135px;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.35);
+  border-right: 1px solid #ded1c9;
+  border-bottom: 1px solid #ded1c9;
+  color: #554946;
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+.brand-edit-item span {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  transition: transform 0.35s ease;
+}
+
+.brand-edit-item small {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #a18a80;
+}
+
+.brand-edit-item:hover {
+  background: #eee2da;
+  color: var(--deep-rose);
+}
+
+.brand-edit-item:hover span {
+  transform: translateY(-2px);
+}
+
+.brand-edit-link {
+  display: inline-block;
+  margin-top: 35px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--dusty-rose);
+  color: var(--deep-rose);
+  font-size: 9px;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+
+.brand-edit-link:hover {
+  color: var(--dark);
+}
+
+
+/* =========================================
+   28. INSTAGRAM ICONS
+========================================= */
+
+/* Header Instagram icon */
+
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--deep-rose);
+  text-decoration: none;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.header nav .instagram-link {
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  margin-left: 2px;
+}
+
+.header nav .instagram-link svg {
+  display: block;
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.header nav .instagram-link svg circle:last-child {
+  fill: currentColor;
+  stroke: none;
+}
+
+.instagram-link:hover {
+  color: var(--dusty-rose);
+  transform: translateY(-2px);
+}
+
+.footer-links .instagram-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--deep-rose);
+}
+
+
+/* =========================================
+   29. RESPONSIVE — TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .header {
+    padding: 15px 4%;
+    gap: 12px;
+  }
+
+  .header nav {
+    gap: 13px;
+  }
+
+  .brand {
+    min-width: 150px;
+  }
+
+  .brand-script {
+    font-size: 30px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .brand-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .collection-photo {
+    height: 300px;
+  }
+
+}
+
+
+/* =========================================
+   30. RESPONSIVE — BASKET AND BRAND GALLERY
+========================================= */
+
 @media (max-width: 850px) {
+
+  .brand-edit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
   .basket-layout {
     grid-template-columns: 1fr;
@@ -2454,7 +2085,315 @@ body {
 
 }
 
+
+/* =========================================
+   31. RESPONSIVE — PRODUCT PAGE
+========================================= */
+
+@media (max-width: 750px) {
+
+  .standalone-product-page {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin: 25px auto;
+  }
+
+  .standalone-product-info h1 {
+    font-size: 28px;
+  }
+
+  .product-brand-name {
+    font-size: 16px;
+  }
+
+  .product-page-header {
+    padding: 18px 4%;
+    gap: 10px;
+  }
+
+  .product-back-link {
+    font-size: 9px;
+  }
+
+}
+
+
+/* =========================================
+   32. RESPONSIVE — MOBILE
+========================================= */
+
 @media (max-width: 650px) {
+
+  /* GENERAL */
+
+  .section-padding {
+    padding: 65px 6%;
+  }
+
+  .announcement {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+  }
+
+
+  /* MAIN HEADER */
+
+  .header {
+    min-height: 75px;
+    padding: 12px 5%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brand-script {
+    font-size: 29px;
+  }
+
+  .brand-by {
+    font-size: 8px;
+  }
+
+  .menu-toggle {
+    display: block;
+    order: 3;
+  }
+
+  .header nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: var(--ivory);
+    border-top: 1px solid var(--border);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .header nav.open {
+    display: flex;
+  }
+
+  .bag-button {
+    padding: 8px 10px;
+    font-size: 9px;
+  }
+
+  .header nav .instagram-link {
+    width: 28px;
+    height: 28px;
+    margin-top: 2px;
+  }
+
+  .header nav .instagram-link svg {
+    width: 23px;
+    height: 23px;
+  }
+
+
+  /* HERO */
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content {
+    padding: 75px 8%;
+    background-color: #f1eae3;
+  }
+
+  .hero h1 {
+    font-size: 58px;
+  }
+
+  .hero-image {
+    min-height: 350px;
+  }
+
+
+  /* INTRODUCTION */
+
+  .intro h2 {
+    font-size: 36px;
+  }
+
+  .intro::before {
+    font-size: 110px;
+    left: -5px;
+    top: -20px;
+  }
+
+
+  /* SECTION HEADINGS */
+
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+
+  /* COLLECTIONS */
+
+  .collection-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .collection-photo {
+    height: 350px;
+  }
+
+
+  /* BRAND CARDS */
+
+  .brand-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .brand-card {
+    min-height: 125px;
+  }
+
+  .brand-card-name {
+    font-size: 17px;
+  }
+
+
+  /* SHOP NAVIGATION AND FILTERS */
+
+  .shop-navigation {
+    gap: 5px;
+  }
+
+  .shop-tab {
+    padding: 10px 9px;
+    font-size: 9px;
+  }
+
+  .filters {
+    gap: 7px;
+  }
+
+  .filter {
+    padding: 8px 11px;
+    font-size: 9px;
+  }
+
+
+  /* SHOP SEARCH AND SORT */
+
+  .shop-tools {
+    flex-direction: column;
+  }
+
+  .shop-tools select {
+    width: 100%;
+  }
+
+
+  /* PRODUCT GRID */
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 12px;
+  }
+
+  .product-image {
+    height: 220px;
+  }
+
+  .product-info h3 {
+    font-size: 20px;
+  }
+
+  .product-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+
+  /* GIFT SECTION */
+
+  .gift-section {
+    grid-template-columns: 1fr;
+  }
+
+  .gift-image {
+    min-height: 350px;
+  }
+
+  .gift-content {
+    padding: 60px 8%;
+  }
+
+  .finder-box {
+    padding: 25px;
+  }
+
+
+  /* NEWSLETTER */
+
+  .newsletter {
+    padding: 65px 6%;
+  }
+
+  .newsletter h2 {
+    font-size: 35px;
+  }
+
+  .newsletter form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .newsletter input {
+    padding: 14px;
+  }
+
+  .newsletter button {
+    padding: 15px;
+  }
+
+
+  /* FOOTER */
+
+  .footer-links {
+    gap: 15px;
+  }
+
+
+  /* HOMEPAGE PRODUCT DETAILS */
+
+  .product-details-section {
+    padding: 55px 6%;
+  }
+
+  .product-detail-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .product-detail-info h2 {
+    font-size: 37px;
+  }
+
+
+  /* OLD BAG PANEL */
+
+  .cart-panel {
+    padding: 50px 22px;
+  }
+
+
+  /* BASKET HEADER */
 
   .site-header {
     min-height: 75px;
@@ -2474,6 +2413,9 @@ body {
   .site-header .header-actions {
     gap: 8px;
   }
+
+
+  /* BASKET PAGE */
 
   .basket-page {
     padding: 55px 6% 75px;
@@ -2515,290 +2457,8 @@ body {
     padding: 25px 20px;
   }
 
-}
 
-@media (max-width: 380px) {
-
-  .basket-item-image {
-    width: 78px;
-    height: 100px;
-  }
-
-  .basket-item-details h3 {
-    font-size: 18px;
-  }
-
-  .basket-item-brand {
-    font-size: 8px;
-  }
-
-}
-
-
-/* =========================================
-   26. SIGNATURE BRAND REFINEMENT
-   CURATED WITH CARE BY M.
-========================================= */
-
-:root {
-  --ivory: #f8f5ef;
-  --cream: #f1eae3;
-  --dusty-rose: #c5a09b;
-  --soft-rose: #eadbd5;
-  --deep-rose: #906b69;
-  --dark: #403633;
-  --muted: #887d76;
-  --border: #e7dcd3;
-}
-
-body {
-  font-family: 'Montserrat', sans-serif;
-  color: var(--dark);
-  background-color: var(--ivory);
-}
-
-h1,
-h2,
-h3,
-.product-brand-name {
-  font-family: 'Cormorant Garamond', serif;
-}
-
-.header {
-  min-height: 90px;
-  background: rgba(248, 245, 239, 0.98);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 3px 18px rgba(80, 60, 50, 0.025);
-}
-
-.brand-script {
-  font-size: 38px;
-  color: var(--deep-rose);
-}
-
-.brand-by {
-  color: #82736c;
-}
-
-.site-header {
-  min-height: 90px;
-  background: rgba(248, 245, 239, 0.98);
-  box-shadow: 0 3px 18px rgba(80, 60, 50, 0.025);
-}
-
-.site-header .logo {
-  color: var(--deep-rose);
-}
-
-.site-header .main-nav a {
-  color: var(--dark);
-}
-
-.site-header .main-nav a:hover {
-  color: var(--deep-rose);
-}
-
-.header nav a,
-.site-header .main-nav a {
-  transition: color 0.3s ease;
-}
-
-.header nav a:hover,
-.site-header .main-nav a:hover {
-  color: var(--deep-rose);
-}
-
-.primary-button,
-.basket-checkout-button {
-  background: var(--deep-rose);
-  border-color: var(--deep-rose);
-  letter-spacing: 1.6px;
-  transition: all 0.3s ease;
-}
-
-.primary-button:hover,
-.basket-checkout-button:hover {
-  background: transparent;
-  color: var(--deep-rose);
-}
-
-.bag-button {
-  border-color: #c5a09b;
-  transition: all 0.3s ease;
-}
-
-.bag-button:hover {
-  background: var(--soft-rose);
-  border-color: var(--deep-rose);
-}
-
-/* BRAND GALLERY */
-
-.brand-edit-heading {
-  max-width: 650px;
-  margin: 0 auto 45px;
-  text-align: center;
-}
-
-.brand-edit-heading h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(38px, 4vw, 52px);
-  font-weight: 400;
-  line-height: 1.2;
-  color: var(--dark);
-}
-
-.brand-edit-heading p {
-  max-width: 530px;
-  margin: 15px auto 0;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.brand-edit-link {
-  display: inline-block;
-  margin-top: 35px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--dusty-rose);
-  color: var(--deep-rose);
-  font-size: 9px;
-  letter-spacing: 2px;
-  transition: color 0.3s ease;
-}
-
-.brand-edit-link:hover {
-  color: var(--dark);
-}
-
-.product-card {
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(231, 220, 211, 0.65);
-  transition: transform 0.35s ease,
-              box-shadow 0.35s ease;
-}
-
-.product-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 9px 25px rgba(80, 60, 50, 0.06);
-}
-
-.product-info {
-  padding: 17px 12px;
-}
-
-.product-info h3 {
-  color: var(--dark);
-}
-
-.product-type {
-  color: var(--deep-rose);
-}
-
-.collection-caption h3 {
-  color: var(--dark);
-}
-
-.discover {
-  color: var(--deep-rose);
-}
-
-.collection-photo {
-  transition: transform 0.5s ease;
-}
-
-.gift-content {
-  background: transparent;
-}
-
-.gift-content h2 {
-  color: var(--dark);
-}
-
-.finder-box {
-  border-radius: 2px;
-  box-shadow: 0 8px 25px rgba(80, 60, 50, 0.035);
-}
-
-.newsletter {
-  color: var(--dark);
-}
-
-.newsletter h2 {
-  color: var(--dark);
-}
-
-.newsletter input {
-  border-color: #e6d9d1;
-}
-
-footer,
-.site-footer {
-  background: #eee6df;
-  color: var(--dark);
-}
-
-footer p,
-.site-footer p {
-  color: var(--muted);
-}
-
-.footer-links a {
-  transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: var(--deep-rose);
-}
-
-.copyright {
-  border-color: #dfd3ca;
-}
-
-.standalone-product-info h1 {
-  font-family: 'Cormorant Garamond', serif;
-  color: var(--dark);
-}
-
-.product-brand-name {
-  font-family: 'Cormorant Garamond', serif;
-  color: var(--deep-rose);
-}
-
-.related-products-heading h2,
-.related-product-info h3 {
-  font-family: 'Cormorant Garamond', serif;
-}
-
-.related-add-button {
-  background: var(--deep-rose);
-}
-
-.basket-summary {
-  background: #f2ebe4;
-  border-color: var(--border);
-}
-
-.basket-summary h2 {
-  color: var(--dark);
-}
-
-.basket-item-image {
-  background: #f3ede7;
-}
-
-.basket-quantity {
-  border-color: var(--border);
-}
-
-@media (max-width: 650px) {
-
-  .brand-script {
-    font-size: 29px;
-  }
-
-  .header {
-    min-height: 75px;
-  }
+  /* BRAND GALLERY */
 
   .brand-edit-heading {
     margin-bottom: 30px;
@@ -2816,84 +2476,110 @@ footer p,
 
 
 /* =========================================
-   27. INSTAGRAM HEADER LOGO
-   CURATED WITH CARE BY M.
+   33. RESPONSIVE — SMALL PRODUCT PAGE
 ========================================= */
 
-/* Keep the Instagram logo aligned with navigation */
+@media (max-width: 600px) {
 
-.header nav .instagram-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 25px;
-  height: 25px;
-  color: var(--deep-rose);
-  padding: 0;
-  margin-left: 2px;
-  transition:
-    color 0.3s ease,
-    transform 0.3s ease;
-}
-
-/* Instagram camera outline */
-
-.header nav .instagram-link svg {
-  display: block;
-  width: 21px;
-  height: 21px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* Small centre detail */
-
-.header nav .instagram-link svg circle:last-child {
-  fill: currentColor;
-  stroke: none;
-}
-
-/* Hover effect */
-
-.header nav .instagram-link:hover {
-  color: var(--dusty-rose);
-  transform: translateY(-2px);
-}
-
-/* Footer Instagram logo */
-
-.footer-links .instagram-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--deep-rose);
-  transition:
-    color 0.3s ease,
-    transform 0.3s ease;
-}
-
-.footer-links .instagram-link:hover {
-  color: var(--dusty-rose);
-  transform: translateY(-2px);
-}
-
-/* Mobile navigation logo */
-
-@media (max-width: 650px) {
-
-  .header nav .instagram-link {
-    width: 28px;
-    height: 28px;
-    margin-top: 2px;
+  .related-products-section {
+    padding: 15px 12px;
+    margin: 30px auto;
   }
 
-  .header nav .instagram-link svg {
-    width: 23px;
-    height: 23px;
+  .related-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 125px));
+    gap: 18px;
+  }
+
+  .related-products-heading h2 {
+    font-size: 19px;
+  }
+
+}
+
+
+/* =========================================
+   34. RESPONSIVE — SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  /* PRODUCT PAGE HEADER */
+
+  .product-brand-name {
+    font-size: 14px;
+  }
+
+  .product-page-header .bag-button {
+    padding: 8px;
+    font-size: 8px;
+  }
+
+
+  /* BAG NOTIFICATION */
+
+  .bag-toast {
+    right: 16px;
+    bottom: 16px;
+    width: calc(100% - 32px);
+  }
+
+
+  /* SHOPPING BAG PRODUCT IMAGE */
+
+  .cart-item-layout {
+    gap: 12px;
+  }
+
+  .cart-item-image {
+    width: 85px;
+    height: 105px;
+  }
+
+
+  /* BRAND GALLERY */
+
+  .brand-edit {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .brand-edit-heading {
+    margin-bottom: 30px;
+  }
+
+  .brand-edit-item {
+    min-height: 110px;
+    padding: 18px 8px;
+  }
+
+  .brand-edit-item span {
+    font-size: 21px;
+  }
+
+  .brand-edit-item small {
+    font-size: 7px;
+  }
+
+}
+
+/* =========================================
+   35. RESPONSIVE — VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+  .basket-item-image {
+    width: 78px;
+    height: 100px;
+  }
+
+  .basket-item-details h3 {
+    font-size: 18px;
+  }
+
+  .basket-item-brand {
+    font-size: 8px;
   }
 
 }
