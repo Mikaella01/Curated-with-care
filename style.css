@@ -247,48 +247,69 @@ select:focus-visible {
 
 
 /* =========================================
-   6. HOMEPAGE — HERO SECTION
+   6. HOMEPAGE — EDITORIAL HERO
 ========================================= */
 
 .hero {
-  min-height: 610px;
+  min-height: 650px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: #f1eae3;
+  background: var(--cream);
 }
 
 .hero-content {
-  padding: 100px 12%;
+  padding: 110px 12%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+
   background:
     radial-gradient(
-      circle at 5% 10%,
-      rgba(255, 255, 255, 0.55),
+      circle at 8% 12%,
+      rgba(255, 255, 255, 0.7),
       transparent 55%
     ),
-    #f1eae3;
+    var(--cream);
+}
+
+.hero .eyebrow {
+  letter-spacing: 3px;
+  font-size: 9px;
+  margin-bottom: 28px;
 }
 
 .hero h1 {
-  font-size: clamp(50px, 6vw, 78px);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(54px, 6vw, 82px);
   font-weight: 400;
-  line-height: 1.05;
-  margin-bottom: 25px;
+  line-height: 0.98;
+  letter-spacing: -1.5px;
+  color: var(--dark);
+  margin-bottom: 28px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--deep-rose);
 }
 
 .hero p {
-  max-width: 380px;
+  max-width: 360px;
   color: var(--muted);
   font-size: 12px;
-  margin-bottom: 30px;
+  line-height: 2;
+  font-weight: 300;
+  margin-bottom: 35px;
 }
 
 .hero-image {
+  min-height: 650px;
   background:
-    linear-gradient(rgba(70, 40, 40, 0.04), rgba(70, 40, 40, 0.04)),
+    linear-gradient(
+      rgba(70, 40, 40, 0.03),
+      rgba(70, 40, 40, 0.03)
+    ),
     url("https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1200&q=85");
   background-size: cover;
   background-position: center;
@@ -2198,23 +2219,43 @@ footer p,
   }
 
 
-  /* HERO */
+  /* HERO — MOBILE */
 
   .hero {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .hero-content {
     padding: 75px 8%;
-    background-color: #f1eae3;
+    background:
+      radial-gradient(
+        circle at 8% 12%,
+        rgba(255, 255, 255, 0.7),
+        transparent 55%
+      ),
+      var(--cream);
+  }
+
+  .hero .eyebrow {
+    font-size: 8px;
+    letter-spacing: 2.5px;
+    margin-bottom: 22px;
   }
 
   .hero h1 {
     font-size: 58px;
+    line-height: 1;
+  }
+
+  .hero p {
+    font-size: 11px;
+    max-width: 320px;
   }
 
   .hero-image {
     min-height: 350px;
+    background-position: center;
   }
 
 
@@ -2562,6 +2603,7 @@ footer p,
   }
 
 }
+
 
 /* =========================================
    35. RESPONSIVE — VERY SMALL MOBILE
