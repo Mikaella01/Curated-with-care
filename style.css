@@ -2625,3 +2625,747 @@ footer p,
   }
 
 }
+
+
+/* =========================================
+   CURATED WITH CARE BY M.
+   EDITORIAL PRODUCT PAGE REDESIGN
+========================================= */
+
+
+/* 1. PRODUCT PAGE GENERAL */
+
+.product-detail-body {
+  background: var(--ivory);
+}
+
+.product-detail-body main {
+  overflow: hidden;
+}
+
+.product-editorial-eyebrow {
+  margin: 0 0 15px;
+  color: var(--deep-rose);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+
+/* 2. PRODUCT HEADER */
+
+.product-page-header {
+  background: rgba(248, 245, 239, 0.96);
+  border-bottom: 1px solid var(--border);
+}
+
+.product-back-link {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.product-back-link:hover {
+  color: var(--deep-rose);
+}
+
+.product-brand-name {
+  color: var(--dark);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.product-brand-name span {
+  color: var(--deep-rose);
+  font-family: 'Great Vibes', cursive;
+  font-size: 23px;
+}
+
+.product-bag-link {
+  color: var(--dark);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+
+/* 3. MAIN PRODUCT PRESENTATION */
+
+.standalone-product-page {
+  max-width: 1250px;
+  margin: 75px auto 95px;
+  gap: 75px;
+  align-items: start;
+}
+
+.product-page-gallery {
+  position: relative;
+}
+
+.gallery-main {
+  overflow: hidden;
+  background: #f1ece5;
+  border: 1px solid rgba(231, 220, 211, 0.6);
+}
+
+.gallery-main img {
+  transition: transform 0.5s ease;
+}
+
+.gallery-main:hover img {
+  transform: scale(1.025);
+}
+
+.gallery-arrow {
+  background: rgba(248, 245, 239, 0.85);
+  color: var(--dark);
+  border: 1px solid rgba(231, 220, 211, 0.8);
+  transition: background 0.3s ease;
+}
+
+.gallery-arrow:hover {
+  background: var(--white);
+}
+
+.product-thumbnails {
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.product-thumbnail {
+  border: 1px solid transparent;
+  background: #f1ece5;
+  padding: 3px;
+  transition: border-color 0.3s ease;
+}
+
+.product-thumbnail.selected {
+  border-color: var(--deep-rose);
+}
+
+.gallery-hint {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+
+/* 4. MAIN PRODUCT INFORMATION */
+
+.standalone-product-info {
+  padding-top: 20px;
+}
+
+.standalone-product-info .eyebrow {
+  color: var(--deep-rose);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.standalone-product-info h1 {
+  max-width: 520px;
+  margin: 12px 0;
+  color: var(--dark);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 500;
+  line-height: 1.12;
+}
+
+.product-size {
+  margin: 15px 0;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.8px;
+}
+
+.product-detail-price {
+  margin: 22px 0;
+  color: var(--dark);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#productAddToCart {
+  width: 100%;
+  max-width: 420px;
+  min-height: 52px;
+  border: 1px solid var(--deep-rose);
+  background: var(--deep-rose);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+#productAddToCart:hover {
+  background: transparent;
+  color: var(--deep-rose);
+}
+
+.add-to-cart-message {
+  min-height: 18px;
+  margin-top: 12px;
+  color: var(--deep-rose);
+  font-size: 11px;
+}
+
+
+/* 5. PRODUCT DESCRIPTION */
+
+.product-description-block {
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 1px solid var(--border);
+}
+
+.product-description-block .product-section-label {
+  margin-bottom: 13px;
+  color: var(--deep-rose);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.product-description-block p:not(.product-section-label),
+.product-description-block li {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 2;
+}
+
+.product-description-block ul {
+  padding-left: 18px;
+}
+
+.product-description-block li {
+  padding-left: 4px;
+  margin-bottom: 5px;
+}
+
+
+/* 6. EDITORIAL SECTIONS — SHARED */
+
+.product-editorial-section,
+.product-glance-section,
+.product-choice-section,
+.product-skin-section,
+.product-ingredients-section,
+.product-how-to-section,
+.product-routine-section {
+  padding: 85px 7%;
+}
+
+.product-section-heading {
+  max-width: 650px;
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+.product-section-heading h2,
+.product-editorial-inner h2,
+.product-choice-inner h2,
+.product-how-to-inner h2,
+.related-products-heading h2 {
+  margin: 0 0 15px;
+  color: var(--dark);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 45px);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.product-section-heading > p:last-child {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+
+/* 7. THE BEAUTY EDIT */
+
+.product-editorial-section {
+  background: var(--cream);
+  text-align: center;
+}
+
+.product-editorial-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.product-editorial-inner h2 {
+  margin-bottom: 22px;
+  color: var(--dark);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 500;
+}
+
+.product-editorial-inner > p:last-child {
+  max-width: 620px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 2.1;
+}
+
+
+/* 8. AT A GLANCE */
+
+.product-glance-section {
+  background: var(--ivory);
+}
+
+.product-glance-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 1050px;
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.product-glance-item {
+  padding: 28px 20px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+
+.product-glance-item:last-child {
+  border-right: none;
+}
+
+.product-glance-label {
+  margin: 0 0 12px;
+  color: var(--deep-rose);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+}
+
+.product-glance-value {
+  margin: 0;
+  color: var(--dark);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+
+/* 9. WHY WE CHOSE IT */
+
+.product-choice-section {
+  background: #eee6df;
+  text-align: center;
+}
+
+.product-choice-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.product-choice-inner h2 {
+  margin-bottom: 22px;
+}
+
+.product-choice-inner > p:last-child {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 2.1;
+}
+
+
+/* 10. SKIN DETAILS */
+
+.product-skin-section {
+  background: var(--ivory);
+}
+
+#productSkinDetails {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 35px;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.product-detail-subheading {
+  margin-bottom: 18px;
+  color: var(--dark);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+#productSkinDetails ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#productSkinDetails li {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+
+/* 11. INGREDIENT EDIT */
+
+.product-ingredients-section {
+  background: var(--cream);
+}
+
+.product-ingredients-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+.product-ingredient-item {
+  padding: 28px 24px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.product-ingredient-item h3 {
+  margin: 0 0 12px;
+  color: var(--dark);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.product-ingredient-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+.product-full-ingredients {
+  max-width: 850px;
+  margin: 35px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.product-full-ingredients summary {
+  color: var(--deep-rose);
+  cursor: pointer;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.product-full-ingredients p {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 2;
+}
+
+
+/* 12. HOW TO USE */
+
+.product-how-to-section {
+  background: #eee6df;
+}
+
+.product-how-to-inner {
+  max-width: 750px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.product-how-to-inner h2 {
+  margin-bottom: 30px;
+}
+
+#productHowToContent {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 2;
+}
+
+#productHowToContent ol {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-left: 25px;
+  text-align: left;
+}
+
+#productHowToContent li {
+  padding: 10px 0 10px 8px;
+}
+
+
+/* 13. COMPLETE THE RITUAL */
+
+.product-routine-section {
+  background: var(--ivory);
+}
+
+.product-routine-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+.product-routine-card {
+  text-align: center;
+}
+
+.product-routine-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background: #f1ece5;
+  margin-bottom: 18px;
+}
+
+.product-routine-card > p {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.product-routine-card h3 {
+  margin: 8px 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.product-routine-card a {
+  color: var(--dark);
+  text-decoration: none;
+}
+
+.product-routine-card a:hover {
+  color: var(--deep-rose);
+}
+
+
+/* 14. YOU MAY ALSO LOVE */
+
+.related-products-section {
+  padding: 85px 7%;
+  background: var(--cream);
+}
+
+.related-products-heading {
+  margin-bottom: 45px;
+  text-align: center;
+}
+
+.related-products-heading > p:last-child {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.related-product-card {
+  background: rgba(255, 255, 255, 0.35);
+  padding-bottom: 20px;
+}
+
+.related-product-info {
+  padding: 15px 15px 0;
+}
+
+.related-product-brand {
+  color: var(--deep-rose);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.related-product-info h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.related-product-info h3 a {
+  color: var(--dark);
+  text-decoration: none;
+}
+
+.related-product-price {
+  color: var(--dark);
+  font-size: 12px;
+}
+
+.related-add-button {
+  margin-top: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--deep-rose);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  transition: all 0.3s ease;
+}
+
+.related-add-button:hover {
+  background: var(--deep-rose);
+  color: var(--white);
+}
+
+
+/* 15. HIDDEN SECTIONS */
+
+.product-editorial-section[hidden],
+.product-glance-section[hidden],
+.product-choice-section[hidden],
+.product-skin-section[hidden],
+.product-ingredients-section[hidden],
+.product-how-to-section[hidden],
+.product-routine-section[hidden],
+.related-products-section[hidden] {
+  display: none !important;
+}
+
+
+/* 16. TABLET RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
+
+  .standalone-product-page {
+    gap: 40px;
+    padding: 0 4%;
+  }
+
+  .product-glance-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-glance-item:nth-child(2) {
+    border-right: none;
+  }
+
+  .product-glance-item:nth-child(-n+2) {
+    border-bottom: 1px solid var(--border);
+  }
+
+}
+
+
+/* 17. MOBILE RESPONSIVE DESIGN */
+
+@media (max-width: 750px) {
+
+  .standalone-product-page {
+    margin: 35px auto 55px;
+    gap: 30px;
+    padding: 0 5%;
+  }
+
+  .standalone-product-info {
+    padding-top: 5px;
+  }
+
+  .standalone-product-info h1 {
+    font-size: 34px;
+  }
+
+  .product-editorial-section,
+  .product-glance-section,
+  .product-choice-section,
+  .product-skin-section,
+  .product-ingredients-section,
+  .product-how-to-section,
+  .product-routine-section,
+  .related-products-section {
+    padding: 60px 6%;
+  }
+
+  .product-ingredients-content {
+    grid-template-columns: 1fr;
+  }
+
+  .product-routine-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  #productSkinDetails {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .product-section-heading {
+    margin-bottom: 32px;
+  }
+
+}
+
+
+/* 18. SMALL MOBILE SCREENS */
+
+@media (max-width: 480px) {
+
+  .product-brand-name {
+    font-size: 19px;
+  }
+
+  .product-brand-name span {
+    font-size: 19px;
+  }
+
+  .product-page-header {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .product-back-link {
+    font-size: 9px;
+  }
+
+  .product-bag-link {
+    font-size: 9px;
+  }
+
+  .standalone-product-info h1 {
+    font-size: 31px;
+  }
+
+  .product-glance-item {
+    padding: 22px 10px;
+  }
+
+  .product-glance-value {
+    font-size: 17px;
+  }
+
+  .product-routine-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
