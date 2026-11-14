@@ -499,8 +499,24 @@ function displayRelatedProducts() {
         <a
           class="related-view-link"
           href="product.html?id=${encodeURIComponent(item.id)}"
+          style="
+            display: inline-block;
+            margin-top: 15px;
+            padding: 0 0 4px;
+            background: none;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            color: var(--deep-rose);
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: none;
+            text-decoration: none;
+            cursor: pointer;
+          "
         >
-          VIEW DETAILS ↗
+          View details
         </a>
       </div>
     `;
