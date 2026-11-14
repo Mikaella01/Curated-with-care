@@ -837,7 +837,7 @@ function removeFromCart(productId) {
 }
 
 
-/* UPDATE SHOPPING BAG DISPLAY */
+/* SAVE BASKET AND UPDATE HEADER COUNT */
 
 function updateCart() {
 
@@ -855,25 +855,12 @@ function updateCart() {
   }
 
 
-  const cartItems = document.getElementById("cartItems");
-
   const cartCount = document.getElementById("bagCount");
-
-  const cartTotal = document.getElementById("cartTotal");
 
 
   const totalItems = cart.reduce(
     (total, item) =>
       total + Math.max(0, Number(item.quantity) || 0),
-    0
-  );
-
-
-  const totalPrice = cart.reduce(
-    (total, item) =>
-      total +
-      Number(item.price || 0) *
-      Math.max(0, Number(item.quantity) || 0),
     0
   );
 
@@ -884,104 +871,10 @@ function updateCart() {
 
   }
 
-
-  if (cartTotal) {
-
-    cartTotal.textContent = formatPrice(totalPrice);
-
-  }
-
-
-  if (!cartItems) return;
-
-
-  if (cart.length === 0) {
-
-    cartItems.innerHTML = `
-
-      <p>Your bag is currently empty.</p>
-
-    `;
-
-    return;
-
-  }
-
-
-  cartItems.innerHTML = cart.map(item => `
-
-    <div class="cart-item">
-
-      <div class="cart-item-layout">
-
-        <img
-          class="cart-item-image"
-          src="${escapeHTML(item.image || "")}"
-          alt="${escapeHTML(item.name)}"
-          loading="lazy"
-        >
-
-        <div class="cart-item-details">
-
-          <p>
-            <strong>${escapeHTML(item.name)}</strong>
-          </p>
-
-          <p>
-            ${formatPrice(item.price)} each
-          </p>
-
-          <div class="cart-item-quantity">
-
-            <button
-              class="quantity-button"
-              type="button"
-              data-quantity-change="-1"
-              data-quantity-id="${escapeHTML(item.id)}"
-              aria-label="Remove one ${escapeHTML(item.name)}"
-            >−</button>
-
-            <span class="quantity-number">
-              ${Number(item.quantity) || 0}
-            </span>
-
-            <button
-              class="quantity-button"
-              type="button"
-              data-quantity-change="1"
-              data-quantity-id="${escapeHTML(item.id)}"
-              aria-label="Add one ${escapeHTML(item.name)}"
-            >+</button>
-
-          </div>
-
-          <p>
-            Subtotal: ${formatPrice(
-              Number(item.price || 0) *
-              Number(item.quantity || 0)
-            )}
-          </p>
-
-        </div>
-
-      </div>
-
-      <button
-        class="remove-cart-item"
-        type="button"
-        data-remove="${escapeHTML(item.id)}"
-      >
-        REMOVE ENTIRE PRODUCT
-      </button>
-
-    </div>
-
-  `).join("");
-
 }
 
 
-/* CONNECT SHOPPING BAG BUTTONS */
+/* CONNECT ADD TO BAG BUTTONS */
 
 document.addEventListener("click", event => {
 
@@ -992,72 +885,14 @@ document.addEventListener("click", event => {
 
     addToCart(addButton.dataset.add);
 
-    return;
-
-  }
-
-
-  const quantityButton = event.target.closest(
-    "[data-quantity-change]"
-  );
-
-
-  if (quantityButton) {
-
-    changeQuantity(
-      quantityButton.dataset.quantityId,
-      Number(quantityButton.dataset.quantityChange)
-    );
-
-    return;
-
-  }
-
-
-  const removeButton = event.target.closest("[data-remove]");
-
-
-  if (removeButton) {
-
-    removeFromCart(removeButton.dataset.remove);
-
   }
 
 });
 
 
-/* 17. OPEN AND CLOSE SHOPPING BAG */
+/* 17. OPEN DEDICATED BASKET PAGE */
 
 const bagButton = document.getElementById("bagButton");
-
-const cartOverlay = document.getElementById("cartOverlay");
-
-const closeCart = document.getElementById("closeCart");
-
-
-function openCart() {
-
-  if (!cartOverlay) return;
-
-  updateCart();
-
-  cartOverlay.classList.add("open");
-
-  cartOverlay.setAttribute("aria-hidden", "false");
-
-}
-
-
-function closeCartPanel() {
-
-  if (!cartOverlay) return;
-
-  cartOverlay.classList.remove("open");
-
-  cartOverlay.setAttribute("aria-hidden", "true");
-
-}
-
 
 if (bagButton) {
 
@@ -1065,64 +900,14 @@ if (bagButton) {
 
     event.preventDefault();
 
-    openCart();
+    window.location.href = "basket.html";
 
   });
 
 }
 
 
-if (closeCart) {
-
-  closeCart.addEventListener("click", closeCartPanel);
-
-}
-
-
-if (cartOverlay) {
-
-  cartOverlay.addEventListener("click", event => {
-
-    if (event.target === cartOverlay) {
-
-      closeCartPanel();
-
-    }
-
-  });
-
-}
-
-
-/* 18. CHECKOUT PLACEHOLDER */
-
-const checkoutButton = document.getElementById("checkoutButton");
-
-
-if (checkoutButton) {
-
-  checkoutButton.addEventListener("click", () => {
-
-    if (cart.length === 0) {
-
-      alert("Your shopping bag is empty.");
-
-      return;
-
-    }
-
-
-    alert(
-      "Thank you for your selection! " +
-      "Our ordering and payment process will be connected here."
-    );
-
-  });
-
-}
-
-
-/* 19. MOBILE NAVIGATION */
+/* 18. MOBILE NAVIGATION */
 
 const menuToggle = document.getElementById("menuToggle");
 
@@ -1155,7 +940,7 @@ if (menuToggle && navigation) {
 }
 
 
-/* 20. GIFT FINDER */
+/* 19. GIFT FINDER */
 
 const findGift = document.getElementById("findGift");
 
@@ -1200,7 +985,7 @@ if (findGift) {
 }
 
 
-/* 21. NEWSLETTER */
+/* 20. NEWSLETTER */
 
 const newsletterForm =
   document.getElementById("newsletterForm");
@@ -1232,29 +1017,18 @@ if (newsletterForm) {
 }
 
 
-/* 22. INITIALISE WEBSITE */
-
-// Read a brand selection from the homepage URL
+/* 21. INITIALISE WEBSITE */
 
 initialiseBrandFromURL();
 
-
-// Display the correct shop tab
-
 updateShopView(activeView);
 
-
-// Display products
-
 displayProducts();
-
-
-// Update shopping bag
 
 updateCart();
 
 
-/* REFRESH BAG WHEN RETURNING TO HOMEPAGE */
+/* REFRESH BAG WHEN RETURNING TO WEBSITE */
 
 window.addEventListener("pageshow", () => {
 
