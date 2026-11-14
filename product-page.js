@@ -10,6 +10,7 @@
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
 
+
 function getStoredProducts() {
   try {
     const stored = JSON.parse(
@@ -21,6 +22,7 @@ function getStoredProducts() {
     return [];
   }
 }
+
 
 const products = getStoredProducts();
 
@@ -51,6 +53,7 @@ function getStoredCart() {
   }
 }
 
+
 let cart = getStoredCart();
 
 
@@ -80,6 +83,45 @@ function getProductGallery(selectedProduct) {
   return selectedProduct.image
     ? [selectedProduct.image]
     : [];
+}
+
+
+function getProductCollections(selectedProduct) {
+  if (Array.isArray(selectedProduct.collections)) {
+    return selectedProduct.collections;
+  }
+
+  if (Array.isArray(selectedProduct.collection)) {
+    return selectedProduct.collection;
+  }
+
+  if (selectedProduct.collection) {
+    return [selectedProduct.collection];
+  }
+
+  return [];
+}
+
+
+function showSection(sectionId, shouldShow) {
+  const section = document.getElementById(sectionId);
+
+  if (section) {
+    section.hidden = !shouldShow;
+  }
+}
+
+
+function createTextElement(tag, text, className) {
+  const element = document.createElement(tag);
+
+  element.textContent = text;
+
+  if (className) {
+    element.className = className;
+  }
+
+  return element;
 }
 
 
@@ -228,7 +270,361 @@ function showPhoto(index) {
 }
 
 
-/* 9. INITIALISE PRODUCT PAGE */
+/* 9. PRODUCT EDITORIAL SECTION */
+
+function displayProductEditorial() {
+  const editorialText = document.getElementById(
+    "productEditorialText"
+  );
+
+  const text =
+    product.editorialText ||
+    product.editorial ||
+    "";
+
+  if (!text || !editorialText) {
+    showSection("productEditorialSection", false);
+    return;
+  }
+
+  editorialText.textContent = text;
+
+  showSection("productEditorialSection", true);
+}
+
+
+/* 10. AT A GLANCE */
+
+function displayProductGlance() {
+  const grid = document.getElementById("productGlanceGrid");
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  const collections = getProductCollections(product);
+
+  const details = [
+    {
+      label: "BRAND",
+      value: product.brandName || product.brand
+    },
+    {
+      label: "PRODUCT TYPE",
+      value: product.productType || product.category
+    },
+    {
+      label: "SIZE",
+      value: product.size
+    },
+    {
+      label: "COLLECTION",
+      value: collections.join(", ")
+    }
+  ];
+
+  const availableDetails = details.filter(detail =>
+    detail.value
+  );
+
+  if (!availableDetails.length) {
+    showSection("productGlanceSection", false);
+    return;
+  }
+
+  availableDetails.forEach(detail => {
+    const item = document.createElement("div");
+
+    item.className = "product-glance-item";
+
+    item.appendChild(
+      createTextElement(
+        "p",
+        detail.label,
+        "product-glance-label"
+      )
+    );
+
+    item.appendChild(
+      createTextElement(
+        "p",
+        detail.value,
+        "product-glance-value"
+      )
+    );
+
+    grid.appendChild(item);
+  });
+
+  showSection("productGlanceSection", true);
+}
+
+
+/* 11. WHY WE CHOSE IT */
+
+function displayProductChoice() {
+  const choiceText = document.getElementById(
+    "productChoiceText"
+  );
+
+  const text =
+    product.whyWeChoseIt ||
+    product.editorialReason ||
+    "";
+
+  if (!text || !choiceText) {
+    showSection("productChoiceSection", false);
+    return;
+  }
+
+  choiceText.textContent = text;
+
+  showSection("productChoiceSection", true);
+}
+
+
+/* 12. SKIN INFORMATION */
+
+function displayProductSkinDetails() {
+  const container = document.getElementById(
+    "productSkinDetails"
+  );
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  const concerns = Array.isArray(product.concerns)
+    ? product.concerns
+    : [];
+
+  const skinTypes = Array.isArray(product.skinTypes)
+    ? product.skinTypes
+    : [];
+
+  const hasInformation =
+    concerns.length > 0 || skinTypes.length > 0;
+
+  if (!hasInformation) {
+    showSection("productSkinSection", false);
+    return;
+  }
+
+  if (skinTypes.length) {
+    const heading = createTextElement(
+      "h3",
+      "Skin Types",
+      "product-detail-subheading"
+    );
+
+    container.appendChild(heading);
+
+    const list = document.createElement("ul");
+
+    skinTypes.forEach(type => {
+      list.appendChild(
+        createTextElement("li", type)
+      );
+    });
+
+    container.appendChild(list);
+  }
+
+  if (concerns.length) {
+    const heading = createTextElement(
+      "h3",
+      "Skin Concerns",
+      "product-detail-subheading"
+    );
+
+    container.appendChild(heading);
+
+    const list = document.createElement("ul");
+
+    concerns.forEach(concern => {
+      list.appendChild(
+        createTextElement("li", concern)
+      );
+    });
+
+    container.appendChild(list);
+  }
+
+  showSection("productSkinSection", true);
+}
+
+
+/* 13. INGREDIENT INFORMATION */
+
+function displayProductIngredients() {
+  const container = document.getElementById(
+    "productIngredientsContent"
+  );
+
+  const fullIngredientsText = document.getElementById(
+    "productFullIngredientsText"
+  );
+
+  const fullIngredients = document.getElementById(
+    "productFullIngredients"
+  );
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  const ingredients = Array.isArray(product.ingredients)
+    ? product.ingredients
+    : [];
+
+  const hasFullIngredients = Boolean(
+    product.fullIngredients
+  );
+
+  if (!ingredients.length && !hasFullIngredients) {
+    showSection("productIngredientsSection", false);
+    return;
+  }
+
+  ingredients.forEach(ingredient => {
+    const item = document.createElement("div");
+
+    item.className = "product-ingredient-item";
+
+    if (typeof ingredient === "string") {
+      item.appendChild(
+        createTextElement("h3", ingredient)
+      );
+    } else if (ingredient && typeof ingredient === "object") {
+      if (ingredient.name) {
+        item.appendChild(
+          createTextElement("h3", ingredient.name)
+        );
+      }
+
+      if (ingredient.description) {
+        item.appendChild(
+          createTextElement("p", ingredient.description)
+        );
+      }
+    }
+
+    container.appendChild(item);
+  });
+
+  if (hasFullIngredients && fullIngredientsText && fullIngredients) {
+    fullIngredientsText.textContent = product.fullIngredients;
+    fullIngredients.hidden = false;
+  } else if (fullIngredients) {
+    fullIngredients.hidden = true;
+  }
+
+  showSection("productIngredientsSection", true);
+}
+
+
+/* 14. HOW TO USE */
+
+function displayProductHowTo() {
+  const container = document.getElementById(
+    "productHowToContent"
+  );
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  const instructions =
+    product.howToUseSteps ||
+    product.howToUse ||
+    "";
+
+  if (!instructions || (
+    Array.isArray(instructions) && !instructions.length
+  )) {
+    showSection("productHowToSection", false);
+    return;
+  }
+
+  if (Array.isArray(instructions)) {
+    const list = document.createElement("ol");
+
+    instructions.forEach(instruction => {
+      list.appendChild(
+        createTextElement("li", instruction)
+      );
+    });
+
+    container.appendChild(list);
+  } else {
+    container.appendChild(
+      createTextElement("p", instructions)
+    );
+  }
+
+  showSection("productHowToSection", true);
+}
+
+
+/* 15. COMPLETE THE RITUAL */
+
+function displayProductRoutine() {
+  const grid = document.getElementById(
+    "productRoutineGrid"
+  );
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  const routineIds = Array.isArray(product.routineProductIds)
+    ? product.routineProductIds
+    : [];
+
+  const routineProducts = routineIds
+    .map(id =>
+      products.find(item => String(item.id) === String(id))
+    )
+    .filter(Boolean);
+
+  if (!routineProducts.length) {
+    showSection("productRoutineSection", false);
+    return;
+  }
+
+  routineProducts.forEach(item => {
+    const card = document.createElement("article");
+
+    card.className = "product-routine-card";
+
+    card.innerHTML = `
+      <a href="product.html?id=${encodeURIComponent(item.id)}">
+        <img
+          src="${escapeHTML(item.image || "")}"
+          alt="${escapeHTML(item.name)}"
+          loading="lazy"
+        >
+      </a>
+
+      <p>${escapeHTML(item.brandName || item.brand || "")}</p>
+
+      <h3>
+        <a href="product.html?id=${encodeURIComponent(item.id)}">
+          ${escapeHTML(item.name)}
+        </a>
+      </h3>
+
+      <p>${formatPrice(item.price)}</p>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  showSection("productRoutineSection", true);
+}
+
+
+/* 16. INITIALISE PRODUCT PAGE */
 
 function initialiseProductPage() {
   if (!product) {
@@ -279,12 +675,13 @@ function initialiseProductPage() {
     benefits.innerHTML = "";
 
     (product.benefits || []).forEach(benefit => {
-      const li = document.createElement("li");
-
-      li.textContent = benefit;
-
-      benefits.appendChild(li);
+      benefits.appendChild(
+        createTextElement("li", benefit)
+      );
     });
+
+    benefits.parentElement.hidden =
+      !product.benefits || product.benefits.length === 0;
   }
 
   /* CREATE PHOTO THUMBNAILS */
@@ -299,6 +696,7 @@ function initialiseProductPage() {
 
       button.className = "product-thumbnail";
       button.type = "button";
+
       button.setAttribute(
         "aria-label",
         "Show product photo " + (index + 1)
@@ -328,10 +726,20 @@ function initialiseProductPage() {
   if (addButton) {
     addButton.addEventListener("click", addProductToBag);
   }
+
+  /* DISPLAY NEW EDITORIAL SECTIONS */
+
+  displayProductEditorial();
+  displayProductGlance();
+  displayProductChoice();
+  displayProductSkinDetails();
+  displayProductIngredients();
+  displayProductHowTo();
+  displayProductRoutine();
 }
 
 
-/* 10. PREVIOUS AND NEXT PHOTOS */
+/* 17. PREVIOUS AND NEXT PHOTOS */
 
 const previousPhoto = document.getElementById("previousPhoto");
 const nextPhoto = document.getElementById("nextPhoto");
@@ -349,7 +757,7 @@ if (nextPhoto) {
 }
 
 
-/* 11. MOBILE PHOTO SWIPING */
+/* 18. MOBILE PHOTO SWIPING */
 
 let touchStartX = 0;
 
@@ -373,20 +781,21 @@ if (mainPhoto) {
 }
 
 
-/* 12. RELATED PRODUCTS — YOU MAY ALSO LOVE */
+/* 19. RELATED PRODUCTS — YOU MAY ALSO LOVE */
 
 function getRelatedProducts() {
   if (!product) return [];
+
+  const currentCollections = getProductCollections(product);
+
+  const currentConcerns = product.concerns || [];
 
   return products
     .filter(item => String(item.id) !== String(product.id))
     .map(item => {
       let score = 0;
 
-      const currentCollections = product.collection || [];
-      const otherCollections = item.collection || [];
-
-      const currentConcerns = product.concerns || [];
+      const otherCollections = getProductCollections(item);
       const otherConcerns = item.concerns || [];
 
       /* SAME COLLECTION */
@@ -434,7 +843,7 @@ function getRelatedProducts() {
 }
 
 
-/* 13. DISPLAY RELATED PRODUCTS */
+/* 20. DISPLAY RELATED PRODUCTS */
 
 function displayRelatedProducts() {
   const section = document.getElementById(
@@ -474,6 +883,7 @@ function displayRelatedProducts() {
       </div>
 
       <div class="related-product-info">
+
         <p class="related-product-brand">
           ${escapeHTML(item.brandName || item.brand || "")}
         </p>
@@ -518,6 +928,7 @@ function displayRelatedProducts() {
         >
           View details
         </a>
+
       </div>
     `;
 
@@ -526,7 +937,7 @@ function displayRelatedProducts() {
 }
 
 
-/* 14. ADD RECOMMENDED PRODUCT TO SHOPPING BAG */
+/* 21. ADD RECOMMENDED PRODUCT TO SHOPPING BAG */
 
 function addRelatedProductToBag(selectedProductId) {
   const selectedProduct = products.find(item =>
@@ -555,7 +966,7 @@ function addRelatedProductToBag(selectedProductId) {
 }
 
 
-/* 15. CONNECT RELATED PRODUCT BUTTONS */
+/* 22. CONNECT RELATED PRODUCT BUTTONS */
 
 document.addEventListener("click", event => {
   const button = event.target.closest("[data-related-add]");
@@ -566,7 +977,7 @@ document.addEventListener("click", event => {
 });
 
 
-/* 16. START THE PAGE */
+/* 23. START THE PAGE */
 
 refreshCartFromStorage();
 
