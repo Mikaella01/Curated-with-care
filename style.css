@@ -2599,3 +2599,317 @@ body {
 
 }
 
+
+/* =========================================
+   26. SIGNATURE BRAND REFINEMENT
+   CURATED WITH CARE BY M.
+========================================= */
+
+/* 1. CONSISTENT BRAND COLOURS */
+
+:root {
+  --ivory: #f8f5ef;
+  --cream: #f1eae3;
+  --dusty-rose: #c5a09b;
+  --soft-rose: #eadbd5;
+  --deep-rose: #906b69;
+  --dark: #403633;
+  --muted: #887d76;
+  --border: #e7dcd3;
+}
+
+/* 2. GLOBAL TYPOGRAPHY */
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--dark);
+  background-color: var(--ivory);
+}
+
+h1,
+h2,
+h3,
+.product-brand-name {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* 3. HOMEPAGE HEADER */
+
+.header {
+  min-height: 90px;
+  background: rgba(248, 245, 239, 0.98);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 3px 18px rgba(80, 60, 50, 0.025);
+}
+
+.brand-script {
+  font-size: 38px;
+  color: var(--deep-rose);
+}
+
+.brand-by {
+  color: #82736c;
+}
+
+/* 4. BASKET HEADER — MATCH HOMEPAGE */
+
+.site-header {
+  min-height: 90px;
+  background: rgba(248, 245, 239, 0.98);
+  box-shadow: 0 3px 18px rgba(80, 60, 50, 0.025);
+}
+
+.site-header .logo {
+  color: var(--deep-rose);
+}
+
+.site-header .main-nav a {
+  color: var(--dark);
+}
+
+.site-header .main-nav a:hover {
+  color: var(--deep-rose);
+}
+
+/* 5. NAVIGATION DETAILS */
+
+.header nav a,
+.site-header .main-nav a {
+  transition: color 0.3s ease;
+}
+
+.header nav a:hover,
+.site-header .main-nav a:hover {
+  color: var(--deep-rose);
+}
+
+/* 6. REFINED BUTTONS */
+
+.primary-button,
+.basket-checkout-button {
+  background: var(--deep-rose);
+  border-color: var(--deep-rose);
+  letter-spacing: 1.6px;
+  transition: all 0.3s ease;
+}
+
+.primary-button:hover,
+.basket-checkout-button:hover {
+  background: transparent;
+  color: var(--deep-rose);
+}
+
+.bag-button {
+  border-color: #c5a09b;
+  transition: all 0.3s ease;
+}
+
+.bag-button:hover {
+  background: var(--soft-rose);
+  border-color: var(--deep-rose);
+}
+
+/* 7. BRAND GALLERY
+   These selectors now match index.html */
+
+.brand-edit-heading {
+  max-width: 650px;
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+.brand-edit-heading h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--dark);
+}
+
+.brand-edit-heading p {
+  max-width: 530px;
+  margin: 15px auto 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.brand-edit-link {
+  display: inline-block;
+  margin-top: 35px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--dusty-rose);
+  color: var(--deep-rose);
+  font-size: 9px;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+
+.brand-edit-link:hover {
+  color: var(--dark);
+}
+
+/* 8. PRODUCT CARDS */
+
+.product-card {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(231, 220, 211, 0.65);
+  transition: transform 0.35s ease,
+              box-shadow 0.35s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 25px rgba(80, 60, 50, 0.06);
+}
+
+.product-info {
+  padding: 17px 12px;
+}
+
+.product-info h3 {
+  color: var(--dark);
+}
+
+.product-type {
+  color: var(--deep-rose);
+}
+
+/* 9. COLLECTION CARDS */
+
+.collection-caption h3 {
+  color: var(--dark);
+}
+
+.discover {
+  color: var(--deep-rose);
+}
+
+.collection-photo {
+  transition: transform 0.5s ease;
+}
+
+/* 10. GIFT EXPERIENCE */
+
+.gift-content {
+  background: transparent;
+}
+
+.gift-content h2 {
+  color: var(--dark);
+}
+
+.finder-box {
+  border-radius: 2px;
+  box-shadow: 0 8px 25px rgba(80, 60, 50, 0.035);
+}
+
+/* 11. NEWSLETTER */
+
+.newsletter {
+  color: var(--dark);
+}
+
+.newsletter h2 {
+  color: var(--dark);
+}
+
+.newsletter input {
+  border-color: #e6d9d1;
+}
+
+/* 12. FOOTER */
+
+footer,
+.site-footer {
+  background: #eee6df;
+  color: var(--dark);
+}
+
+footer p,
+.site-footer p {
+  color: var(--muted);
+}
+
+.footer-links a {
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--deep-rose);
+}
+
+.copyright {
+  border-color: #dfd3ca;
+}
+
+/* 13. INDIVIDUAL PRODUCT PAGE */
+
+.standalone-product-info h1 {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--dark);
+}
+
+.product-brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--deep-rose);
+}
+
+/* 14. RELATED PRODUCTS */
+
+.related-products-heading h2,
+.related-product-info h3 {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.related-add-button {
+  background: var(--deep-rose);
+}
+
+/* 15. BASKET PAGE */
+
+.basket-summary {
+  background: #f2ebe4;
+  border-color: var(--border);
+}
+
+.basket-summary h2 {
+  color: var(--dark);
+}
+
+.basket-item-image {
+  background: #f3ede7;
+}
+
+.basket-quantity {
+  border-color: var(--border);
+}
+
+/* 16. MOBILE REFINEMENTS */
+
+@media (max-width: 650px) {
+
+  .brand-script {
+    font-size: 29px;
+  }
+
+  .header {
+    min-height: 75px;
+  }
+
+  .brand-edit-heading {
+    margin-bottom: 30px;
+  }
+
+  .brand-edit-heading h2 {
+    font-size: 36px;
+  }
+
+  .brand-edit-heading p {
+    font-size: 11px;
+  }
+
+  .product-info {
+    padding: 12px 8px;
+  }
+
+}
