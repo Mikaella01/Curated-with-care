@@ -12,7 +12,7 @@
 
   <style>
     .checkout-page {
-      max-width: 1120px;
+      max-width: 1160px;
       margin: 55px auto;
       padding: 25px;
       color: #756963;
@@ -23,23 +23,30 @@
       margin-bottom: 55px;
     }
 
+    .checkout-heading .eyebrow {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: #987b75;
+    }
+
     .checkout-heading h1 {
       font-family: Georgia, serif;
       font-weight: normal;
-      font-size: 38px;
+      font-size: 40px;
       color: #655650;
-      margin: 18px 0;
+      margin: 17px 0;
     }
 
-    .checkout-heading p {
-      font-size: 11px;
-      letter-spacing: 2.5px;
+    .checkout-heading .subtitle {
+      font-family: Georgia, serif;
+      font-size: 16px;
+      font-style: italic;
       color: #987b75;
     }
 
     .checkout-layout {
       display: grid;
-      grid-template-columns: 1.25fr 0.85fr;
+      grid-template-columns: 1.2fr 0.85fr;
       gap: 65px;
       align-items: start;
     }
@@ -57,6 +64,14 @@
       margin-bottom: 22px;
     }
 
+    .checkout-section-intro {
+      font-size: 12px;
+      line-height: 1.8;
+      color: #98877f;
+      margin-top: -12px;
+      margin-bottom: 20px;
+    }
+
     .checkout-form label {
       display: block;
       font-size: 11px;
@@ -65,7 +80,8 @@
       color: #756963;
     }
 
-    .checkout-form input {
+    .checkout-form input,
+    .checkout-form textarea {
       width: 100%;
       padding: 15px;
       border: 1px solid #e1d5cc;
@@ -78,13 +94,20 @@
       transition: border-color 0.2s;
     }
 
-    .checkout-form input:focus {
+    .checkout-form input:focus,
+    .checkout-form textarea:focus {
       outline: none;
       border-color: #a98285;
     }
 
-    .checkout-form input::placeholder {
+    .checkout-form input::placeholder,
+    .checkout-form textarea::placeholder {
       color: #b9aaa1;
+    }
+
+    .checkout-form textarea {
+      min-height: 105px;
+      resize: vertical;
     }
 
     .checkout-row {
@@ -92,6 +115,76 @@
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
+
+    .checkout-note {
+      background: #fbf7f4;
+      border-left: 2px solid #c8b8ad;
+      padding: 17px 19px;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #897c74;
+    }
+
+    /* GIFT OPTION */
+
+    .gift-option {
+      background: #fbf7f4;
+      border: 1px solid #eaded7;
+      padding: 22px;
+    }
+
+    .gift-checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .gift-checkbox-row input {
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: #986b72;
+      flex-shrink: 0;
+    }
+
+    .gift-checkbox-row label {
+      margin: 0;
+      font-size: 13px;
+      letter-spacing: 0;
+      line-height: 1.6;
+      cursor: pointer;
+    }
+
+    .gift-description {
+      font-size: 12px;
+      color: #98877f;
+      line-height: 1.8;
+      margin: 10px 0 0 29px;
+    }
+
+    .gift-message-area {
+      display: none;
+      margin-top: 20px;
+      padding-top: 17px;
+      border-top: 1px solid #e8dcd5;
+    }
+
+    .gift-message-area.visible {
+      display: block;
+    }
+
+    .gift-message-area label {
+      margin-top: 0;
+    }
+
+    .gift-message-hint {
+      font-size: 11px;
+      color: #a18f86;
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    /* ORDER SUMMARY */
 
     .order-summary {
       background: #f5f1e9;
@@ -126,7 +219,7 @@
 
     .checkout-product-info {
       flex: 1;
-      font-size: 13px;
+      font-size: 12px;
       min-width: 0;
     }
 
@@ -135,10 +228,17 @@
       line-height: 1.5;
     }
 
-    .checkout-product-info p:first-child {
+    .checkout-product-info .product-name {
       font-family: Georgia, serif;
       font-size: 15px;
       color: #655650;
+    }
+
+    .checkout-product-info .product-brand {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: #987b75;
+      text-transform: uppercase;
     }
 
     .checkout-totals {
@@ -186,7 +286,7 @@
     .checkout-back {
       display: block;
       text-align: center;
-      margin-top: 28px;
+      margin-top: 25px;
       color: #756963;
       font-size: 10px;
       letter-spacing: 1.5px;
@@ -204,13 +304,23 @@
       margin-top: 12px;
     }
 
-    .checkout-note {
-      background: #fbf7f4;
-      border-left: 2px solid #c8b8ad;
-      padding: 15px 18px;
-      font-size: 12px;
+    .checkout-empty {
+      font-size: 13px;
       line-height: 1.8;
       color: #897c74;
+    }
+
+    .checkout-empty a {
+      color: #986b72;
+    }
+
+    .checkout-footer-note {
+      text-align: center;
+      margin-top: 35px;
+      font-family: Georgia, serif;
+      font-size: 14px;
+      font-style: italic;
+      color: #987b75;
     }
 
     @media (max-width: 750px) {
@@ -224,7 +334,7 @@
       }
 
       .checkout-heading h1 {
-        font-size: 30px;
+        font-size: 31px;
       }
 
       .checkout-layout {
@@ -251,6 +361,10 @@
         width: 75px;
         height: 95px;
       }
+
+      .gift-option {
+        padding: 17px;
+      }
     }
   </style>
 </head>
@@ -260,78 +374,199 @@
   <main class="checkout-page">
 
     <div class="checkout-heading">
-      <p>CURATED WITH CARE BY M.</p>
+      <p class="eyebrow">CURATED WITH CARE BY M.</p>
       <h1>Complete Your Order</h1>
-      <p>A little care, thoughtfully curated.</p>
+      <p class="subtitle">A little care, thoughtfully curated.</p>
     </div>
 
     <div class="checkout-layout">
 
       <form class="checkout-form" id="checkoutForm">
 
+        <!-- CONTACT INFORMATION -->
+
         <section class="checkout-section">
+
           <h2>Contact Information</h2>
 
+          <p class="checkout-section-intro">
+            Where we can reach you about your order.
+          </p>
+
           <label for="email">Email Address</label>
-          <input type="email" id="email" required placeholder="Your email address">
+          <input
+            type="email"
+            id="email"
+            autocomplete="email"
+            required
+            placeholder="Your email address"
+          >
+
         </section>
 
+        <!-- DELIVERY INFORMATION -->
+
         <section class="checkout-section">
+
           <h2>Delivery Information</h2>
 
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" required>
+          <div class="checkout-row">
 
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" required>
+            <div>
+              <label for="firstName">First Name</label>
+              <input
+                type="text"
+                id="firstName"
+                autocomplete="given-name"
+                required
+              >
+            </div>
+
+            <div>
+              <label for="lastName">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                autocomplete="family-name"
+                required
+              >
+            </div>
+
+          </div>
 
           <label for="address">Street Address</label>
-          <input type="text" id="address" required>
+          <input
+            type="text"
+            id="address"
+            autocomplete="street-address"
+            required
+          >
 
           <label for="apartment">Apartment / Suite (Optional)</label>
-          <input type="text" id="apartment">
+          <input
+            type="text"
+            id="apartment"
+            autocomplete="address-line2"
+          >
 
           <div class="checkout-row">
+
             <div>
               <label for="city">City</label>
-              <input type="text" id="city" required>
+              <input
+                type="text"
+                id="city"
+                autocomplete="address-level2"
+                required
+              >
             </div>
 
             <div>
               <label for="postcode">Postcode</label>
-              <input type="text" id="postcode" required>
+              <input
+                type="text"
+                id="postcode"
+                autocomplete="postal-code"
+                required
+              >
             </div>
+
           </div>
 
           <label for="country">Country</label>
-          <input type="text" id="country" required>
+          <input
+            type="text"
+            id="country"
+            autocomplete="country-name"
+            required
+          >
+
         </section>
 
+        <!-- GIFT OPTION -->
+
         <section class="checkout-section">
+
+          <h2>A Thoughtful Gift</h2>
+
+          <div class="gift-option">
+
+            <div class="gift-checkbox-row">
+
+              <input
+                type="checkbox"
+                id="isGift"
+              >
+
+              <label for="isGift">
+                This order is a gift
+              </label>
+
+            </div>
+
+            <p class="gift-description">
+              Make someone's day a little more special with
+              a personal message.
+            </p>
+
+            <div class="gift-message-area" id="giftMessageArea">
+
+              <label for="giftMessage">
+                Your Personal Message
+              </label>
+
+              <textarea
+                id="giftMessage"
+                maxlength="250"
+                placeholder="Write a little note for someone special..."
+              ></textarea>
+
+              <p class="gift-message-hint">
+                Your message can contain up to 250 characters.
+              </p>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- DELIVERY METHOD -->
+
+        <section class="checkout-section">
+
           <h2>Delivery Method</h2>
 
           <div class="checkout-note">
             Delivery options and costs will be confirmed
             when the ordering system is connected.
           </div>
+
         </section>
 
+        <!-- PAYMENT -->
+
         <section class="checkout-section">
+
           <h2>Payment</h2>
 
           <div class="checkout-note">
-            Secure payment options will be available once
-            a payment provider is connected.
+            Secure payment options will become available
+            once a payment provider is connected.
+            No payment is collected on this demonstration checkout.
           </div>
+
         </section>
 
         <button type="submit" class="checkout-button">
-          CONTINUE
+          CONTINUE TO ORDER CONFIRMATION
         </button>
 
         <p class="checkout-message" id="checkoutMessage"></p>
 
       </form>
+
+      <!-- ORDER SUMMARY -->
 
       <aside class="order-summary">
 
@@ -358,9 +593,13 @@
 
         </div>
 
-        <a href="index.html" class="checkout-back">
-          ← CONTINUE SHOPPING
+        <a href="basket.html" class="checkout-back">
+          ← RETURN TO YOUR BAG
         </a>
+
+        <p class="checkout-footer-note">
+          Thoughtfully chosen. Beautifully given.
+        </p>
 
       </aside>
 
@@ -375,9 +614,14 @@
     const checkoutTotal = document.getElementById("checkoutTotal");
     const checkoutForm = document.getElementById("checkoutForm");
 
+    const isGift = document.getElementById("isGift");
+    const giftMessageArea = document.getElementById("giftMessageArea");
+    const giftMessage = document.getElementById("giftMessage");
+
     let cart = [];
 
     try {
+
       cart = JSON.parse(
         localStorage.getItem("curatedCart") || "[]"
       );
@@ -390,6 +634,21 @@
       cart = [];
     }
 
+    // GIFT MESSAGE DISPLAY
+
+    isGift.addEventListener("change", function() {
+
+      if (isGift.checked) {
+        giftMessageArea.classList.add("visible");
+      } else {
+        giftMessageArea.classList.remove("visible");
+        giftMessage.value = "";
+      }
+
+    });
+
+    // DISPLAY ORDER
+
     function displayCheckout() {
 
       checkoutItems.innerHTML = "";
@@ -398,8 +657,12 @@
 
       if (cart.length === 0) {
 
-        checkoutItems.innerHTML =
-          "<p>Your shopping bag is currently empty.</p>";
+        checkoutItems.innerHTML = `
+          <p class="checkout-empty">
+            Your shopping bag is currently empty.
+            <a href="shop.html">Explore the collection</a>.
+          </p>
+        `;
 
         checkoutForm.style.display = "none";
 
@@ -429,13 +692,19 @@
         item.className = "checkout-product";
 
         const image = document.createElement("img");
+
         image.src = product.image || "";
         image.alt = product.name || "Beauty product";
 
         const info = document.createElement("div");
         info.className = "checkout-product-info";
 
+        const brand = document.createElement("p");
+        brand.className = "product-brand";
+        brand.textContent = product.brandName || product.brand || "";
+
         const name = document.createElement("p");
+        name.className = "product-name";
         name.textContent = product.name || "Beauty product";
 
         const quantityText = document.createElement("p");
@@ -444,7 +713,7 @@
         const priceText = document.createElement("p");
         priceText.textContent = "€" + itemTotal.toFixed(2);
 
-        info.append(name, quantityText, priceText);
+        info.append(brand, name, quantityText, priceText);
         item.append(image, info);
 
         checkoutItems.appendChild(item);
@@ -458,75 +727,111 @@
 
     displayCheckout();
 
-    
-checkoutForm.addEventListener("submit", function(event) {
+    // SUBMIT ORDER
 
-  event.preventDefault();
+    checkoutForm.addEventListener("submit", function(event) {
 
-  if (!checkoutForm.reportValidity()) {
-    return;
-  }
+      event.preventDefault();
 
-  if (cart.length === 0) {
-    return;
-  }
+      if (!checkoutForm.reportValidity()) {
+        return;
+      }
 
-  // Generate a sequential demonstration order reference
-  const year = new Date().getFullYear();
+      if (cart.length === 0) {
+        return;
+      }
 
-  const sequenceKey = "curatedOrderSequence-" + year;
+      // Generate demonstration order reference
 
-  const previousNumber = Number(
-    localStorage.getItem(sequenceKey) || 0
-  );
+      const year = new Date().getFullYear();
 
-  const nextNumber = previousNumber + 1;
+      const sequenceKey = "curatedOrderSequence-" + year;
 
-  localStorage.setItem(
-    sequenceKey,
-    String(nextNumber)
-  );
-
-  const orderNumber =
-    "CCM-" + year + "-" +
-    String(nextNumber).padStart(5, "0");
-
-  // Prepare the demonstration order
-  const order = {
-
-    orderNumber: orderNumber,
-
-    customerName: document
-      .getElementById("firstName")
-      .value.trim(),
-
-    items: cart.map(product => ({
-      id: product.id,
-      name: product.name,
-      image: product.image,
-      price: Number(product.price),
-      quantity: Number(product.quantity)
-    })),
-
-    subtotal: cart.reduce((sum, product) => {
-      return sum + (
-        Number(product.price) *
-        Number(product.quantity)
+      const previousNumber = Number(
+        localStorage.getItem(sequenceKey) || 0
       );
-    }, 0),
 
-    date: new Date().toLocaleDateString()
+      const nextNumber = previousNumber + 1;
 
-  };
+      localStorage.setItem(
+        sequenceKey,
+        String(nextNumber)
+      );
 
-  localStorage.setItem(
-    "curatedDemoOrder",
-    JSON.stringify(order)
-  );
+      const orderNumber =
+        "CCM-" + year + "-" +
+        String(nextNumber).padStart(5, "0");
 
-  window.location.href = "order-confirmation.html";
+      // Prepare customer details
 
-});
+      const customer = {
+
+        email: document.getElementById("email").value.trim(),
+
+        firstName: document.getElementById("firstName").value.trim(),
+
+        lastName: document.getElementById("lastName").value.trim(),
+
+        address: document.getElementById("address").value.trim(),
+
+        apartment: document.getElementById("apartment").value.trim(),
+
+        city: document.getElementById("city").value.trim(),
+
+        postcode: document.getElementById("postcode").value.trim(),
+
+        country: document.getElementById("country").value.trim()
+
+      };
+
+      // Prepare demonstration order
+
+      const order = {
+
+        orderNumber: orderNumber,
+
+        customerName: customer.firstName,
+
+        customer: customer,
+
+        items: cart.map(product => ({
+
+          id: product.id,
+          name: product.name,
+          brandName: product.brandName || product.brand || "",
+          image: product.image,
+          price: Number(product.price),
+          quantity: Number(product.quantity)
+
+        })),
+
+        subtotal: cart.reduce((sum, product) => {
+
+          return sum + (
+            Number(product.price) *
+            Number(product.quantity)
+          );
+
+        }, 0),
+
+        isGift: isGift.checked,
+
+        giftMessage: isGift.checked
+          ? giftMessage.value.trim()
+          : "",
+
+        date: new Date().toLocaleDateString()
+
+      };
+
+      localStorage.setItem(
+        "curatedDemoOrder",
+        JSON.stringify(order)
+      );
+
+      window.location.href = "order-confirmation.html";
+
+    });
 
   </script>
 
