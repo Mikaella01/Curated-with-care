@@ -11,9 +11,8 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-
     .confirmation-page {
-      max-width: 850px;
+      max-width: 900px;
       margin: 65px auto;
       padding: 25px;
       text-align: center;
@@ -34,59 +33,67 @@
     }
 
     .confirmation-brand {
-      letter-spacing: 2px;
-      font-size: 11px;
+      letter-spacing: 2.5px;
+      font-size: 10px;
       color: #987b75;
     }
 
     .confirmation-page h1 {
       font-family: Georgia, serif;
       font-weight: normal;
-      font-size: 36px;
+      font-size: 38px;
       margin: 20px 0;
       color: #655650;
     }
 
     .confirmation-message {
-      font-size: 14px;
+      font-family: Georgia, serif;
+      font-size: 15px;
       line-height: 1.9;
-      margin-bottom: 30px;
+      margin: 0 auto 30px;
+      max-width: 570px;
     }
 
     .order-reference {
       background: #f5f1e9;
-      padding: 20px;
+      padding: 25px;
       margin: 30px auto;
       max-width: 500px;
+      border: 1px solid #e8ded5;
     }
 
     .order-reference p {
       margin: 7px 0;
-      font-size: 12px;
+      font-size: 11px;
     }
 
     .order-reference strong {
       font-family: Georgia, serif;
-      font-size: 19px;
+      font-size: 20px;
       font-weight: normal;
       color: #986b72;
       letter-spacing: 1px;
     }
 
-    .confirmation-summary {
-      max-width: 600px;
+    .confirmation-content {
+      max-width: 650px;
       margin: 35px auto;
-      padding: 28px;
-      background: #fbf7f4;
       text-align: left;
     }
 
-    .confirmation-summary h2 {
+    .confirmation-card {
+      background: #fbf7f4;
+      padding: 28px;
+      margin-bottom: 22px;
+      border: 1px solid #eee4de;
+    }
+
+    .confirmation-card h2 {
       font-family: Georgia, serif;
       font-size: 23px;
       font-weight: normal;
       color: #655650;
-      margin-bottom: 22px;
+      margin: 0 0 22px;
     }
 
     .confirmation-product {
@@ -102,13 +109,15 @@
       height: 105px;
       object-fit: contain;
       background: white;
+      padding: 5px;
+      box-sizing: border-box;
       flex-shrink: 0;
     }
 
     .confirmation-product-info {
       flex: 1;
       line-height: 1.7;
-      font-size: 13px;
+      font-size: 12px;
       min-width: 0;
     }
 
@@ -123,9 +132,17 @@
       margin: 4px 0;
     }
 
+    .confirmation-product-brand {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: #987b75;
+      text-transform: uppercase;
+    }
+
     .confirmation-total {
       display: flex;
       justify-content: space-between;
+      gap: 12px;
       margin-top: 25px;
       padding-top: 20px;
       border-top: 1px solid #c8b8ad;
@@ -134,24 +151,91 @@
       color: #655650;
     }
 
+    /* CUSTOMER DETAILS */
+
+    .customer-details {
+      font-size: 13px;
+      line-height: 2;
+      color: #756963;
+    }
+
+    .customer-details p {
+      margin: 3px 0;
+    }
+
+    .customer-details .customer-name {
+      font-family: Georgia, serif;
+      font-size: 17px;
+      color: #655650;
+      margin-bottom: 8px;
+    }
+
+    /* GIFT MESSAGE */
+
+    .confirmation-gift {
+      background: #f5f1e9;
+      border: 1px solid #e5d8ce;
+      padding: 25px;
+      margin-bottom: 22px;
+    }
+
+    .confirmation-gift h2 {
+      font-family: Georgia, serif;
+      font-weight: normal;
+      font-size: 22px;
+      color: #655650;
+      margin: 0 0 12px;
+    }
+
+    .confirmation-gift p {
+      font-size: 13px;
+      line-height: 1.9;
+      color: #897c74;
+      margin: 8px 0;
+    }
+
+    .confirmation-gift .gift-message-text {
+      font-family: Georgia, serif;
+      font-size: 16px;
+      font-style: italic;
+      color: #986b72;
+      padding: 12px 0;
+    }
+
     .confirmation-email-note {
       max-width: 540px;
       margin: 30px auto;
-      padding: 18px;
+      padding: 20px;
       background: #f5f1e9;
       font-size: 12px;
       line-height: 1.9;
     }
 
+    .confirmation-email-note strong {
+      font-family: Georgia, serif;
+      font-size: 16px;
+      font-weight: normal;
+      color: #655650;
+    }
+
+    .confirmation-demo-note {
+      max-width: 570px;
+      margin: 25px auto;
+      font-size: 11px;
+      line-height: 1.9;
+      color: #98877f;
+    }
+
     .confirmation-button {
       display: inline-block;
       margin-top: 20px;
-      padding: 16px 30px;
+      padding: 17px 32px;
       background: #986b72;
       color: white;
       text-decoration: none;
-      font-size: 11px;
-      letter-spacing: 1.5px;
+      font-size: 10px;
+      letter-spacing: 1.7px;
+      transition: background 0.3s;
     }
 
     .confirmation-button:hover {
@@ -160,21 +244,33 @@
 
     .confirmation-empty {
       text-align: center;
-      line-height: 1.8;
+      line-height: 1.9;
+      font-size: 13px;
+    }
+
+    .confirmation-empty a {
+      color: #986b72;
+    }
+
+    .confirmation-closing {
+      margin-top: 35px;
+      font-family: Georgia, serif;
+      font-size: 15px;
+      font-style: italic;
+      color: #987b75;
     }
 
     @media (max-width: 600px) {
-
       .confirmation-page {
         margin: 35px auto;
         padding: 18px;
       }
 
       .confirmation-page h1 {
-        font-size: 29px;
+        font-size: 30px;
       }
 
-      .confirmation-summary {
+      .confirmation-card {
         padding: 20px;
       }
 
@@ -183,8 +279,10 @@
         height: 95px;
       }
 
+      .confirmation-total {
+        font-size: 17px;
+      }
     }
-
   </style>
 
 </head>
@@ -207,6 +305,8 @@
       Thank you for choosing our boutique.
     </p>
 
+    <!-- ORDER REFERENCE -->
+
     <section class="order-reference">
 
       <p>YOUR ORDER REFERENCE</p>
@@ -217,21 +317,51 @@
 
     </section>
 
-    <section class="confirmation-summary">
+    <div class="confirmation-content">
 
-      <h2>Your Order Details</h2>
+      <!-- ORDER DETAILS -->
 
-      <div id="confirmationItems"></div>
+      <section class="confirmation-card">
 
-      <div class="confirmation-total">
+        <h2>Your Order Details</h2>
 
-        <span>Order Subtotal</span>
+        <div id="confirmationItems"></div>
 
-        <span id="confirmationTotal">€0.00</span>
+        <div class="confirmation-total">
 
-      </div>
+          <span>Order Subtotal</span>
 
-    </section>
+          <span id="confirmationTotal">€0.00</span>
+
+        </div>
+
+      </section>
+
+      <!-- CUSTOMER DETAILS -->
+
+      <section class="confirmation-card" id="customerDetailsSection">
+
+        <h2>Delivery Information</h2>
+
+        <div class="customer-details" id="customerDetails"></div>
+
+      </section>
+
+      <!-- GIFT MESSAGE -->
+
+      <section class="confirmation-gift" id="giftConfirmation" hidden>
+
+        <h2>A Gift, Given with Care</h2>
+
+        <p>This order was marked as a gift.</p>
+
+        <p class="gift-message-text" id="confirmedGiftMessage"></p>
+
+      </section>
+
+    </div>
+
+    <!-- EMAIL INFORMATION -->
 
     <div class="confirmation-email-note">
 
@@ -245,7 +375,7 @@
 
     </div>
 
-    <p style="font-size: 11px; line-height: 1.8;">
+    <p class="confirmation-demo-note">
       This is currently a demonstration order confirmation.
       No payment has been processed and no real order has been placed.
     </p>
@@ -253,6 +383,10 @@
     <a href="index.html" class="confirmation-button">
       RETURN TO THE BOUTIQUE
     </a>
+
+    <p class="confirmation-closing">
+      With care, always.
+    </p>
 
   </main>
 
@@ -277,6 +411,20 @@
     const confirmationMessage =
       document.getElementById("confirmationMessage");
 
+    const customerDetails =
+      document.getElementById("customerDetails");
+
+    const customerDetailsSection =
+      document.getElementById("customerDetailsSection");
+
+    const giftConfirmation =
+      document.getElementById("giftConfirmation");
+
+    const confirmedGiftMessage =
+      document.getElementById("confirmedGiftMessage");
+
+
+    // LOAD THE SAVED ORDER
 
     let order = null;
 
@@ -293,29 +441,49 @@
     }
 
 
+    // CHECK WHETHER AN ORDER EXISTS
+
     if (!order || !Array.isArray(order.items) || order.items.length === 0) {
 
       confirmationItems.innerHTML =
-        '<p class="confirmation-empty">No demonstration order was found. Please return to the boutique to begin shopping.</p>';
+        '<p class="confirmation-empty">No demonstration order was found. <a href="shop.html">Return to the shop</a> to begin shopping.</p>';
 
       orderNumberElement.textContent = "No order";
 
       confirmationTotal.textContent = "€0.00";
 
-    } else {
+      customerDetailsSection.hidden = true;
 
-      thankYouHeading.textContent =
-        "Thank You, " + order.customerName + "!";
+      giftConfirmation.hidden = true;
+
+      thankYouHeading.textContent = "No Order Found";
 
       confirmationMessage.textContent =
-        "Your order summary is ready. Thank you for choosing Curated with Care by M. We hope you enjoy your selection.";
+        "There is no saved demonstration order to display.";
+
+    } else {
+
+      // PERSONAL THANK-YOU MESSAGE
+
+      const firstName = order.customerName || "there";
+
+      thankYouHeading.textContent =
+        "Thank You, " + firstName + "!";
+
+      confirmationMessage.textContent =
+        "Your order summary is ready. Thank you for choosing Curated with Care by M. We hope your selection brings a little joy to your day.";
+
+
+      // ORDER REFERENCE
 
       orderNumberElement.textContent =
-        order.orderNumber;
+        order.orderNumber || "—";
 
       orderDateElement.textContent =
-        "Order date: " + order.date;
+        "Order date: " + (order.date || "Not available");
 
+
+      // DISPLAY PRODUCTS
 
       order.items.forEach(product => {
 
@@ -336,6 +504,13 @@
         info.className = "confirmation-product-info";
 
 
+        const brand = document.createElement("p");
+
+        brand.className = "confirmation-product-brand";
+
+        brand.textContent = product.brandName || "";
+
+
         const name = document.createElement("strong");
 
         name.textContent =
@@ -345,19 +520,19 @@
         const quantity = document.createElement("p");
 
         quantity.textContent =
-          "Quantity: " + product.quantity;
+          "Quantity: " + Number(product.quantity || 0);
 
 
         const price = document.createElement("p");
 
         price.textContent =
           "€" + (
-            Number(product.price) *
-            Number(product.quantity)
+            Number(product.price || 0) *
+            Number(product.quantity || 0)
           ).toFixed(2);
 
 
-        info.append(name, quantity, price);
+        info.append(brand, name, quantity, price);
 
         item.append(image, info);
 
@@ -366,8 +541,101 @@
       });
 
 
+      // ORDER TOTAL
+
       confirmationTotal.textContent =
-        "€" + Number(order.subtotal).toFixed(2);
+        "€" + Number(order.subtotal || 0).toFixed(2);
+
+
+      // CUSTOMER DELIVERY INFORMATION
+
+      const customer = order.customer;
+
+      if (customer) {
+
+        const name = document.createElement("p");
+
+        name.className = "customer-name";
+
+        name.textContent =
+          [customer.firstName, customer.lastName]
+            .filter(Boolean)
+            .join(" ") || order.customerName || "";
+
+
+        const email = document.createElement("p");
+
+        email.textContent =
+          customer.email || "";
+
+
+        const address = document.createElement("p");
+
+        address.textContent =
+          customer.address || "";
+
+
+        const apartment = document.createElement("p");
+
+        apartment.textContent =
+          customer.apartment || "";
+
+
+        const city = document.createElement("p");
+
+        city.textContent =
+          [
+            customer.city,
+            customer.postcode
+          ].filter(Boolean).join(", ");
+
+
+        const country = document.createElement("p");
+
+        country.textContent =
+          customer.country || "";
+
+
+        customerDetails.append(
+          name,
+          email,
+          address,
+          apartment,
+          city,
+          country
+        );
+
+        // Hide optional empty lines
+
+        [email, address, apartment, city, country].forEach(element => {
+
+          if (!element.textContent.trim()) {
+            element.hidden = true;
+          }
+
+        });
+
+      } else {
+
+        customerDetailsSection.hidden = true;
+
+      }
+
+
+      // GIFT MESSAGE
+
+      if (order.isGift) {
+
+        giftConfirmation.hidden = false;
+
+        confirmedGiftMessage.textContent =
+          order.giftMessage || "A gift, thoughtfully chosen.";
+
+      } else {
+
+        giftConfirmation.hidden = true;
+
+      }
 
     }
 
