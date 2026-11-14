@@ -9,34 +9,123 @@
 
 const products = [
 
-  {
-    id: 1,
-    name: "PDRN Pink Collagen Bubble Serum",
-    brand: "medicube",
-    brandName: "Medicube",
-    collection: ["pdrn", "pink-pdrn-line"],
-    concerns: [],
-    category: "skincare",
-    description: "",
-    benefits: [],
-    size: "95ml",
-    price: 25.00,
+ 
+{
+  id: 1,
+  name: "PDRN Pink Collagen Bubble Serum",
+  brand: "medicube",
+  brandName: "Medicube",
 
-    image: "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9212.webp",
+  collection: ["pdrn", "pink-pdrn-line"],
 
-    gallery: [
-      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9212.webp",
-      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9242.webp",
-      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9243.webp",
-      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9244.webp",
-      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9245.webp",
-      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9246.webp",
-      "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9247.webp"
-    ],
+  category: "skincare",
+  productType: "Bubble Serum",
+  size: "95ml",
+  price: 25.00,
 
-    tag: "THE BEAUTY EDIT",
-    featured: true
-  },
+  concerns: [
+    "dryness",
+    "dullness",
+    "skin-elasticity",
+    "uneven-skin-tone"
+  ],
+
+  skinTypes: [
+    "Combination",
+    "Oily",
+    "Dry"
+  ],
+
+  description:
+    "A lightweight bubble-to-serum formula featuring PDRN, collagen and a blend of moisture-supporting ingredients. Its distinctive dual-layer texture transforms into a soft serum when applied, leaving skin feeling hydrated and looking radiant.",
+
+  benefits: [
+    "Helps maintain skin hydration",
+    "Supports a smooth, supple-looking complexion",
+    "Helps improve the appearance of dullness",
+    "Leaves skin with a fresh, radiant finish",
+    "Lightweight bubble-to-serum texture"
+  ],
+
+  editorialText:
+    "A little moment of luxury in your skincare ritual. Medicube's PDRN Pink Collagen Bubble Serum combines an innovative dual-layer formula with a delicate bubble texture that transforms into a lightweight serum. A considered choice for those who enjoy a hydrated, fresh-looking complexion and a little something different in their daily routine.",
+
+  whyWeChoseIt:
+    "We selected this serum for its distinctive bubble-to-serum texture and its combination of PDRN, niacinamide, collagen and moisture-supporting ingredients. It brings an interesting sensory experience to an everyday skincare routine while focusing on hydration and a radiant-looking finish.",
+
+  ingredients: [
+    {
+      name: "PDRN (Sodium DNA)",
+      description:
+        "A DNA-derived cosmetic ingredient featured in Medicube's PDRN formula."
+    },
+    {
+      name: "Niacinamide",
+      description:
+        "A form of vitamin B3 commonly used in skincare to help improve the appearance of uneven skin tone."
+    },
+    {
+      name: "Collagen",
+      description:
+        "A skin-conditioning ingredient used to support a smooth and supple feel."
+    },
+    {
+      name: "Glycerin",
+      description:
+        "A humectant that helps attract and retain moisture in the skin."
+    },
+    {
+      name: "Hyaluronic Acid",
+      description:
+        "A group of moisture-binding ingredients that help keep skin hydrated."
+    },
+    {
+      name: "Ceramide NP",
+      description:
+        "A skin-identical lipid that helps support the skin's moisture barrier."
+    },
+    {
+      name: "Panthenol",
+      description:
+        "Also known as provitamin B5, it is used in skincare for its moisturising and skin-conditioning properties."
+    },
+    {
+      name: "Vitamin E (Tocopherol)",
+      description:
+        "An antioxidant ingredient commonly used in cosmetic formulations."
+    },
+    {
+      name: "Retinol",
+      description:
+        "A vitamin A derivative included in the formula. Some people may find retinol-containing products irritating."
+    }
+  ],
+
+  fullIngredients:
+    "WATER(AQUA), NIACINAMIDE, HELIANTHUS ANNUUS (SUNFLOWER) SEED OIL, GLYCERIN, HYDROGENATED POLY(C6-14 OLEFIN), C12-14 ALKETH-12, 1,2-HEXANEDIOL, PROPANEDIOL, ISODODECANE, ETHYLHEXYL PALMITATE, CETYL ETHYLHEXANOATE, ETHYLHEXYLGLYCERIN, AMMONIUM ACRYLOYLDIMETHYLTAURATE/VP COPOLYMER, TRIETHYL CITRATE, ADENOSINE, TOCOPHEROL, DISODIUM EDTA, CYANOCOBALAMIN, COLLAGEN, BETULA ALBA BARK/LEAF EXTRACT, SODIUM DNA, RICINUS COMMUNIS (CASTOR) SEED OIL, ILLICIUM VERUM (ANISE) FRUIT/SEED OIL, CYMBOPOGON CITRATUS LEAF OIL, COLLAGEN EXTRACT, XANTHAN GUM, RETINOL, PANTHENOL, HYDROLYZED COLLAGEN, BUTYLENE GLYCOL, CAPRYLIC/CAPRIC TRIGLYCERIDE, CERAMIDE NP, HYDROGENATED LECITHIN, SODIUM HYALURONATE, HYALURONIC ACID, SODIUM HYALURONATE CROSSPOLYMER, SERINE, MILK PROTEIN EXTRACT, HYDROLYZED SODIUM HYALURONATE, HYDROLYZED HYALURONIC ACID, GLUTAMIC ACID, ASPARTIC ACID, SODIUM ACETYLATED HYALURONATE, HYDROXYPROPYLTRIMONIUM HYALURONATE",
+
+  howToUseSteps: [
+    "Shake the bottle well before use to blend the two layers.",
+    "Apply an appropriate amount evenly over the face.",
+    "Gently massage in circular motions until absorbed."
+  ],
+
+  image:
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9212.webp",
+
+  gallery: [
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9212.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9242.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9243.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9244.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9245.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9246.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-bubble-serum/IMG_9247.webp"
+  ],
+
+  tag: "THE BEAUTY EDIT",
+  featured: true
+},
 
   {
     id: 11,
