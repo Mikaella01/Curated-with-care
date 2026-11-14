@@ -1761,13 +1761,10 @@ select:focus-visible {
 }
 
 
-
 /* =========================================
    22. BOTANICAL EDITORIAL BACKGROUND
    CURATED WITH CARE BY M.
 ========================================= */
-
-/* Subtle textured paper background */
 
 body {
   background-color: #f8f5ef;
@@ -1792,14 +1789,10 @@ body {
     );
 }
 
-/* Softer, warmer header */
-
 .header {
   background: rgba(248, 245, 239, 0.96);
   border-bottom: 1px solid #e8ded5;
 }
-
-/* Elegant hero background */
 
 .hero {
   background-color: #f1eae3;
@@ -1814,8 +1807,6 @@ body {
     ),
     #f1eae3;
 }
-
-/* Introduction with botanical atmosphere */
 
 .intro {
   position: relative;
@@ -1836,8 +1827,6 @@ body {
   pointer-events: none;
 }
 
-/* Collection sections */
-
 .collections {
   background:
     radial-gradient(
@@ -1847,8 +1836,6 @@ body {
     ),
     #f8f5ef;
 }
-
-/* Brand section */
 
 .brands-section {
   background:
@@ -1860,13 +1847,9 @@ body {
     );
 }
 
-/* Beauty edit */
-
 .featured {
   background-color: #fbf9f5;
 }
-
-/* Gift section */
 
 .gift-section {
   background:
@@ -1882,8 +1865,6 @@ body {
   background: transparent;
 }
 
-/* Gift finder */
-
 .gift-finder {
   background:
     radial-gradient(
@@ -1893,8 +1874,6 @@ body {
     ),
     #faf7f2;
 }
-
-/* Newsletter */
 
 .newsletter {
   background:
@@ -1906,13 +1885,9 @@ body {
     );
 }
 
-/* Footer */
-
 footer {
   background: #eee5de;
 }
-
-/* Product page backgrounds */
 
 .standalone-product-page {
   background: transparent;
@@ -1921,8 +1896,6 @@ footer {
 .gallery-main {
   background-color: #f3ede7;
 }
-
-/* Subtle card finishing */
 
 .brand-card {
   background: rgba(255,255,255,0.75);
@@ -1933,16 +1906,12 @@ footer {
   background: rgba(255,255,255,0.88);
 }
 
-/* Delicate hover transitions */
-
 .collection-photo,
 .brand-card,
 .product-card,
 .primary-button {
   transition: all 0.35s ease;
 }
-
-/* Mobile adjustments */
 
 @media (max-width: 650px) {
 
@@ -1958,12 +1927,10 @@ footer {
 
 }
 
-   
+
 /* =========================================
    23. BOTANICAL TEXTURE REFINEMENT
 ========================================= */
-
-/* Remove the noticeable horizontal stripes */
 
 body {
   background-color: #f8f5ef;
@@ -1982,13 +1949,9 @@ body {
   background-attachment: fixed;
 }
 
-/* Make header completely opaque */
-
 .header {
   background: #f8f5ef;
 }
-
-/* Make the floral decoration more delicate */
 
 .intro::before {
   font-size: 145px;
@@ -1997,8 +1960,6 @@ body {
   top: -15px;
   color: #b99b91;
 }
-
-/* Add a little more depth to the gift section */
 
 .gift-section {
   background:
@@ -2009,8 +1970,6 @@ body {
     ),
     #eee4dc;
 }
-
-/* Softer product backgrounds */
 
 .product-image,
 .gallery-main {
@@ -2174,8 +2133,6 @@ body {
    CURATED WITH CARE BY M.
 ========================================= */
 
-/* BASKET HEADER */
-
 .site-header {
   min-height: 95px;
   padding: 18px 7%;
@@ -2219,8 +2176,6 @@ body {
   gap: 15px;
 }
 
-/* BASKET PAGE */
-
 .basket-page {
   max-width: 1250px;
   margin: 0 auto;
@@ -2244,8 +2199,6 @@ body {
   color: var(--muted);
   font-size: 12px;
 }
-
-/* BASKET LAYOUT */
 
 .basket-layout {
   display: grid;
@@ -2276,8 +2229,6 @@ body {
 .basket-items {
   width: 100%;
 }
-
-/* INDIVIDUAL BASKET PRODUCTS */
 
 .basket-item {
   display: flex;
@@ -2344,8 +2295,6 @@ body {
   margin-top: 17px;
 }
 
-/* QUANTITY CONTROLS */
-
 .basket-quantity {
   display: inline-flex;
   align-items: center;
@@ -2373,8 +2322,6 @@ body {
   font-size: 11px;
 }
 
-/* REMOVE PRODUCT */
-
 .basket-remove {
   border: none;
   background: transparent;
@@ -2388,8 +2335,6 @@ body {
 .basket-remove:hover {
   color: var(--deep-rose);
 }
-
-/* BASKET SUMMARY */
 
 .basket-summary {
   background: #f5eee8;
@@ -2463,8 +2408,6 @@ body {
   line-height: 1.7;
 }
 
-/* EMPTY BASKET */
-
 .basket-empty {
   padding: 65px 20px;
   text-align: center;
@@ -2489,13 +2432,9 @@ body {
   display: inline-block;
 }
 
-/* BASKET FOOTER */
-
 .basket-page + .site-footer {
   background: #eee5de;
 }
-
-/* TABLET */
 
 @media (max-width: 850px) {
 
@@ -2514,8 +2453,6 @@ body {
   }
 
 }
-
-/* MOBILE */
 
 @media (max-width: 650px) {
 
@@ -2580,8 +2517,6 @@ body {
 
 }
 
-/* SMALL MOBILE */
-
 @media (max-width: 380px) {
 
   .basket-item-image {
@@ -2605,8 +2540,6 @@ body {
    CURATED WITH CARE BY M.
 ========================================= */
 
-/* 1. CONSISTENT BRAND COLOURS */
-
 :root {
   --ivory: #f8f5ef;
   --cream: #f1eae3;
@@ -2617,8 +2550,6 @@ body {
   --muted: #887d76;
   --border: #e7dcd3;
 }
-
-/* 2. GLOBAL TYPOGRAPHY */
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -2632,8 +2563,6 @@ h3,
 .product-brand-name {
   font-family: 'Cormorant Garamond', serif;
 }
-
-/* 3. HOMEPAGE HEADER */
 
 .header {
   min-height: 90px;
@@ -2650,8 +2579,6 @@ h3,
 .brand-by {
   color: #82736c;
 }
-
-/* 4. BASKET HEADER — MATCH HOMEPAGE */
 
 .site-header {
   min-height: 90px;
@@ -2671,8 +2598,6 @@ h3,
   color: var(--deep-rose);
 }
 
-/* 5. NAVIGATION DETAILS */
-
 .header nav a,
 .site-header .main-nav a {
   transition: color 0.3s ease;
@@ -2682,8 +2607,6 @@ h3,
 .site-header .main-nav a:hover {
   color: var(--deep-rose);
 }
-
-/* 6. REFINED BUTTONS */
 
 .primary-button,
 .basket-checkout-button {
@@ -2709,8 +2632,7 @@ h3,
   border-color: var(--deep-rose);
 }
 
-/* 7. BRAND GALLERY
-   These selectors now match index.html */
+/* BRAND GALLERY */
 
 .brand-edit-heading {
   max-width: 650px;
@@ -2748,8 +2670,6 @@ h3,
   color: var(--dark);
 }
 
-/* 8. PRODUCT CARDS */
-
 .product-card {
   background: rgba(255, 255, 255, 0.78);
   border: 1px solid rgba(231, 220, 211, 0.65);
@@ -2774,8 +2694,6 @@ h3,
   color: var(--deep-rose);
 }
 
-/* 9. COLLECTION CARDS */
-
 .collection-caption h3 {
   color: var(--dark);
 }
@@ -2787,8 +2705,6 @@ h3,
 .collection-photo {
   transition: transform 0.5s ease;
 }
-
-/* 10. GIFT EXPERIENCE */
 
 .gift-content {
   background: transparent;
@@ -2803,8 +2719,6 @@ h3,
   box-shadow: 0 8px 25px rgba(80, 60, 50, 0.035);
 }
 
-/* 11. NEWSLETTER */
-
 .newsletter {
   color: var(--dark);
 }
@@ -2816,8 +2730,6 @@ h3,
 .newsletter input {
   border-color: #e6d9d1;
 }
-
-/* 12. FOOTER */
 
 footer,
 .site-footer {
@@ -2842,8 +2754,6 @@ footer p,
   border-color: #dfd3ca;
 }
 
-/* 13. INDIVIDUAL PRODUCT PAGE */
-
 .standalone-product-info h1 {
   font-family: 'Cormorant Garamond', serif;
   color: var(--dark);
@@ -2854,8 +2764,6 @@ footer p,
   color: var(--deep-rose);
 }
 
-/* 14. RELATED PRODUCTS */
-
 .related-products-heading h2,
 .related-product-info h3 {
   font-family: 'Cormorant Garamond', serif;
@@ -2864,8 +2772,6 @@ footer p,
 .related-add-button {
   background: var(--deep-rose);
 }
-
-/* 15. BASKET PAGE */
 
 .basket-summary {
   background: #f2ebe4;
@@ -2883,8 +2789,6 @@ footer p,
 .basket-quantity {
   border-color: var(--border);
 }
-
-/* 16. MOBILE REFINEMENTS */
 
 @media (max-width: 650px) {
 
@@ -2908,8 +2812,88 @@ footer p,
     font-size: 11px;
   }
 
-  .product-info {
-    padding: 12px 8px;
+}
+
+
+/* =========================================
+   27. INSTAGRAM HEADER LOGO
+   CURATED WITH CARE BY M.
+========================================= */
+
+/* Keep the Instagram logo aligned with navigation */
+
+.header nav .instagram-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+  color: var(--deep-rose);
+  padding: 0;
+  margin-left: 2px;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* Instagram camera outline */
+
+.header nav .instagram-link svg {
+  display: block;
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Small centre detail */
+
+.header nav .instagram-link svg circle:last-child {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Hover effect */
+
+.header nav .instagram-link:hover {
+  color: var(--dusty-rose);
+  transform: translateY(-2px);
+}
+
+/* Footer Instagram logo */
+
+.footer-links .instagram-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--deep-rose);
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.footer-links .instagram-link:hover {
+  color: var(--dusty-rose);
+  transform: translateY(-2px);
+}
+
+/* Mobile navigation logo */
+
+@media (max-width: 650px) {
+
+  .header nav .instagram-link {
+    width: 28px;
+    height: 28px;
+    margin-top: 2px;
+  }
+
+  .header nav .instagram-link svg {
+    width: 23px;
+    height: 23px;
   }
 
 }
