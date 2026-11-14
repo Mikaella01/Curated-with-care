@@ -1,1 +1,136 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Your Bag | Curated with Care by M.</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="site-header">
+
+    <div class="header-inner">
+
+      <a href="index.html" class="logo">
+        <span>Curated with Care</span>
+        <small>by M.</small>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="basket.html" class="bag-button">
+          Bag (<span id="bagCount">0</span>)
+        </a>
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- BASKET PAGE -->
+
+  <main class="basket-page">
+
+    <section class="basket-heading">
+
+      <p class="eyebrow">A LITTLE SOMETHING FOR YOU</p>
+
+      <h1>Your Shopping Bag</h1>
+
+      <p>
+        Take a moment to review your carefully selected pieces.
+      </p>
+
+    </section>
+
+
+    <div class="basket-layout">
+
+      <!-- BASKET PRODUCTS -->
+
+      <section class="basket-products-section">
+
+        <div class="basket-section-heading">
+          <h2>Your Selection</h2>
+          <a href="shop.html">Continue shopping</a>
+        </div>
+
+        <div id="basketItems" class="basket-items">
+
+          <p class="basket-empty-message">
+            Your bag is currently empty.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- ORDER SUMMARY -->
+
+      <aside class="basket-summary">
+
+        <h2>Order Summary</h2>
+
+        <div class="basket-summary-row">
+          <span>Subtotal</span>
+          <span id="basketSubtotal">€0.00</span>
+        </div>
+
+        <div class="basket-summary-row">
+          <span>Delivery</span>
+          <span>Calculated later</span>
+        </div>
+
+        <div class="basket-summary-divider"></div>
+
+        <div class="basket-summary-total">
+          <span>Total</span>
+          <strong id="basketTotal">€0.00</strong>
+        </div>
+
+        <a href="checkout.html" id="basketCheckoutButton"
+           class="primary-button basket-checkout-button">
+          CONTINUE TO CHECKOUT
+        </a>
+
+        <p class="basket-summary-note">
+          Your order details will be reviewed at checkout.
+        </p>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="site-footer">
+
+    <p>Curated with Care by M.</p>
+
+    <p>Thoughtfully selected. Beautifully curated.</p>
+
+  </footer>
+
+
+  <script src="basket.js"></script>
+
+</body>
+</html>
+
