@@ -8,267 +8,485 @@
 
   <title>Product | Curated with Care by M.</title>
 
-  <meta name="description"
-    content="Discover thoughtfully selected beauty favourites at Curated with Care by M.">
+  <meta
+    name="description"
+    content="Discover thoughtfully selected beauty favourites at Curated with Care by M."
+  >
 
   <meta name="theme-color" content="#f8f5ef">
+
+  <link rel="stylesheet" href="style.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
 </head>
 
-<body>
+<body class="product-detail-body">
 
-  <!-- =================================
-       HEADER
-  ================================== -->
+  <!-- =====================================
+       PRODUCT PAGE HEADER
+  ====================================== -->
 
   <header class="product-page-header">
 
     <a href="shop.html" class="product-back-link">
-      ← BACK TO SHOP
+      <span aria-hidden="true">←</span> Back to shop
     </a>
 
     <a href="index.html" class="product-brand-name">
-      Curated with Care by M.
+      Curated with Care <span>by M.</span>
     </a>
 
     <a
       href="basket.html"
-      class="bag-button"
+      class="product-bag-link"
       id="bagButton"
-      aria-label="Open shopping bag"
+      aria-label="Shopping bag"
     >
-      BAG (<span id="bagCount">0</span>)
+      BAG
+      <span id="bagCount">0</span>
     </a>
 
   </header>
 
 
-  <!-- =================================
-       PRODUCT PAGE
-  ================================== -->
+  <!-- =====================================
+       MAIN PRODUCT PRESENTATION
+  ====================================== -->
 
-  <main class="standalone-product-page">
+  <main>
 
-    <!-- PRODUCT GALLERY -->
+    <section class="standalone-product-page">
 
-    <div class="product-page-gallery">
+      <!-- PRODUCT IMAGE GALLERY -->
 
-      <div class="gallery-main">
+      <div class="product-page-gallery">
+
+        <div class="gallery-main">
+
+          <button
+            type="button"
+            class="gallery-arrow gallery-previous"
+            id="previousPhoto"
+            aria-label="Previous product photo"
+          >
+            ‹
+          </button>
+
+          <img
+            id="mainProductPhoto"
+            src=""
+            alt="Product photograph"
+          >
+
+          <button
+            type="button"
+            class="gallery-arrow gallery-next"
+            id="nextPhoto"
+            aria-label="Next product photo"
+          >
+            ›
+          </button>
+
+        </div>
+
+        <div
+          id="productThumbnails"
+          class="product-thumbnails"
+          aria-label="Product photographs"
+        ></div>
+
+        <p class="gallery-hint">
+          Explore the details
+        </p>
+
+      </div>
+
+
+      <!-- PRODUCT INFORMATION -->
+
+      <div class="standalone-product-info">
+
+        <p class="eyebrow" id="productBrand"></p>
+
+        <h1 id="productName">
+          Product name
+        </h1>
+
+        <p id="productSize" class="product-size"></p>
+
+        <p id="productPrice" class="product-detail-price"></p>
 
         <button
-          id="previousPhoto"
-          class="gallery-arrow"
           type="button"
-          aria-label="Previous product photo"
+          id="productAddToCart"
+          class="primary-button"
         >
-          ‹
+          ADD TO BAG
         </button>
 
-        <img
-          id="mainProductPhoto"
-          src=""
-          alt="Product photo"
-        >
+        <p
+          id="addToCartMessage"
+          class="add-to-cart-message"
+          aria-live="polite"
+        ></p>
 
-        <button
-          id="nextPhoto"
-          class="gallery-arrow"
-          type="button"
-          aria-label="Next product photo"
-        >
-          ›
-        </button>
+
+        <!-- THE PRODUCT -->
+
+        <div class="product-description-block">
+
+          <p class="product-section-label">
+            THE PRODUCT
+          </p>
+
+          <p id="productDescription">
+            Discover this beauty favourite, thoughtfully selected by Curated with Care by M.
+          </p>
+
+        </div>
+
+
+        <!-- WHY WE LOVE IT -->
+
+        <div class="product-description-block">
+
+          <p class="product-section-label">
+            WHY WE LOVE IT
+          </p>
+
+          <ul id="productBenefits"></ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================
+         THE BEAUTY EDIT
+    ====================================== -->
+
+    <section
+      class="product-editorial-section"
+      id="productEditorialSection"
+      hidden
+    >
+
+      <div class="product-editorial-inner">
+
+        <p class="product-editorial-eyebrow">
+          THE BEAUTY EDIT
+        </p>
+
+        <h2>
+          A little beauty discovery
+        </h2>
+
+        <p id="productEditorialText"></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================
+         AT A GLANCE
+    ====================================== -->
+
+    <section
+      class="product-glance-section"
+      id="productGlanceSection"
+      hidden
+    >
+
+      <div class="product-section-heading">
+
+        <p class="product-editorial-eyebrow">
+          GET TO KNOW IT
+        </p>
+
+        <h2>
+          At a Glance
+        </h2>
+
+        <p>
+          The little details worth knowing.
+        </p>
 
       </div>
 
       <div
-        id="productThumbnails"
-        class="product-thumbnails"
+        class="product-glance-grid"
+        id="productGlanceGrid"
       ></div>
 
-      <p class="gallery-hint">
-        Swipe or select a photo to explore the product.
-      </p>
-
-    </div>
+    </section>
 
 
-    <!-- PRODUCT INFORMATION -->
+    <!-- =====================================
+         WHY WE CHOSE IT
+    ====================================== -->
 
-    <section class="standalone-product-info">
+    <section
+      class="product-choice-section"
+      id="productChoiceSection"
+      hidden
+    >
 
-      <p
-        id="productBrand"
-        class="eyebrow"
-      ></p>
+      <div class="product-choice-inner">
 
-      <h1 id="productName"></h1>
+        <p class="product-editorial-eyebrow">
+          OUR EDITORIAL NOTE
+        </p>
 
-      <p id="productSize"></p>
+        <h2>
+          Why We Chose It
+        </h2>
 
-      <p
-        id="productPrice"
-        class="product-detail-price"
-      ></p>
-
-      <button
-        id="productAddToCart"
-        class="primary-button"
-        type="button"
-      >
-        ADD TO BAG
-      </button>
-
-      <p
-        id="addToCartMessage"
-        aria-live="polite"
-      ></p>
-
-
-      <!-- PRODUCT DESCRIPTION -->
-
-      <div class="product-description-block">
-
-        <h3>THE PRODUCT</h3>
-
-        <p id="productDescription"></p>
+        <p id="productChoiceText"></p>
 
       </div>
 
+    </section>
 
-      <!-- PRODUCT BENEFITS -->
 
-      <div class="product-description-block">
+    <!-- =====================================
+         SKIN CONCERNS AND SUITABILITY
+    ====================================== -->
 
-        <h3>WHY WE LOVE IT</h3>
+    <section
+      class="product-skin-section"
+      id="productSkinSection"
+      hidden
+    >
 
-        <ul id="productBenefits"></ul>
+      <div class="product-section-heading">
+
+        <p class="product-editorial-eyebrow">
+          YOUR SKIN, YOUR RITUAL
+        </p>
+
+        <h2>
+          Is It Right for Your Skin?
+        </h2>
+
+        <p>
+          Explore the skin concerns and suitability information provided for this product.
+        </p>
 
       </div>
 
+      <div id="productSkinDetails"></div>
 
-      <a
-        href="shop.html"
-        class="primary-button"
+    </section>
+
+
+    <!-- =====================================
+         INGREDIENTS
+    ====================================== -->
+
+    <section
+      class="product-ingredients-section"
+      id="productIngredientsSection"
+      hidden
+    >
+
+      <div class="product-section-heading">
+
+        <p class="product-editorial-eyebrow">
+          THE INGREDIENT EDIT
+        </p>
+
+        <h2>
+          Ingredients Worth Knowing
+        </h2>
+
+        <p>
+          A closer look at the ingredients featured in this formula.
+        </p>
+
+      </div>
+
+      <div
+        class="product-ingredients-content"
+        id="productIngredientsContent"
+      ></div>
+
+      <details
+        class="product-full-ingredients"
+        id="productFullIngredients"
+        hidden
       >
-        CONTINUE SHOPPING
-      </a>
+
+        <summary>
+          View Full Ingredients
+        </summary>
+
+        <p id="productFullIngredientsText"></p>
+
+      </details>
+
+    </section>
+
+
+    <!-- =====================================
+         HOW TO USE
+    ====================================== -->
+
+    <section
+      class="product-how-to-section"
+      id="productHowToSection"
+      hidden
+    >
+
+      <div class="product-how-to-inner">
+
+        <p class="product-editorial-eyebrow">
+          YOUR BEAUTY RITUAL
+        </p>
+
+        <h2>
+          How to Use
+        </h2>
+
+        <div id="productHowToContent"></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================
+         COMPLETE THE RITUAL
+    ====================================== -->
+
+    <section
+      class="product-routine-section"
+      id="productRoutineSection"
+      hidden
+    >
+
+      <div class="product-section-heading">
+
+        <p class="product-editorial-eyebrow">
+          THE ART OF LAYERING
+        </p>
+
+        <h2>
+          Complete the Ritual
+        </h2>
+
+        <p>
+          Discover complementary products for your beauty routine.
+        </p>
+
+      </div>
+
+      <div
+        class="product-routine-grid"
+        id="productRoutineGrid"
+      ></div>
+
+    </section>
+
+
+    <!-- =====================================
+         YOU MAY ALSO LOVE
+    ====================================== -->
+
+    <section
+      class="related-products-section"
+      id="relatedProductsSection"
+    >
+
+      <div class="related-products-heading">
+
+        <p class="product-editorial-eyebrow">
+          THE BEAUTY EDIT
+        </p>
+
+        <h2>
+          You May Also Love
+        </h2>
+
+        <p>
+          A few more discoveries, thoughtfully selected.
+        </p>
+
+      </div>
+
+      <div
+        class="related-products-grid"
+        id="relatedProductsGrid"
+      ></div>
 
     </section>
 
   </main>
 
 
-  <!-- =================================
-       RELATED PRODUCTS
-       YOU MAY ALSO LOVE
-  ================================== -->
-
-  <section
-    class="related-products-section"
-    id="relatedProductsSection"
-  >
-
-    <div class="related-products-heading">
-
-      <p class="eyebrow">THE BEAUTY EDIT</p>
-
-      <h2>You May Also Love</h2>
-
-      <p>
-        Discover more thoughtful additions to your beauty routine.
-      </p>
-
-    </div>
-
-    <div
-      class="related-products-grid"
-      id="relatedProductsGrid"
-    ></div>
-
-  </section>
-
-
-  <!-- =================================
-       SHOPPING BAG NOTIFICATION
-  ================================== -->
+  <!-- =====================================
+       SHOPPING BAG TOAST
+  ====================================== -->
 
   <div
-    id="bagToast"
     class="bag-toast"
-    aria-live="polite"
+    id="bagToast"
     aria-hidden="true"
+    role="status"
   >
 
-    <div class="bag-toast-top">
+    <button
+      type="button"
+      class="bag-toast-close"
+      id="bagToastClose"
+      aria-label="Close notification"
+    >
+      ×
+    </button>
 
-      <span class="bag-toast-heading">
-        Your shopping bag
-      </span>
-
-      <button
-        id="bagToastClose"
-        class="bag-toast-close"
-        type="button"
-        aria-label="Close notification"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div class="bag-toast-product">
+    <div class="bag-toast-content">
 
       <img
         id="bagToastImage"
-        class="bag-toast-image"
         src=""
         alt=""
       >
 
       <div class="bag-toast-details">
 
-        <p
-          id="bagToastName"
-          class="bag-toast-name"
-        ></p>
+        <p class="bag-toast-heading">
+          ADDED TO YOUR BAG
+        </p>
 
-        <p
-          id="bagToastPrice"
-          class="bag-toast-price"
-        ></p>
+        <p id="bagToastName"></p>
+
+        <p id="bagToastPrice"></p>
+
+        <a
+          href="basket.html"
+          id="bagToastView"
+        >
+          VIEW BAG
+        </a>
 
       </div>
 
     </div>
 
-
-    <p class="bag-toast-confirmation">
-      ✓ ADDED TO YOUR BAG
-    </p>
-
-    <a
-      href="basket.html"
-      id="bagToastView"
-      class="bag-toast-link"
-    >
-      VIEW MY BAG
-    </a>
-
   </div>
 
 
-  <!-- =================================
+  <!-- =====================================
        JAVASCRIPT
-  ================================== -->
+  ====================================== -->
 
   <script src="product-page.js"></script>
 
