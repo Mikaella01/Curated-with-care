@@ -432,13 +432,26 @@ function displayProducts() {
 
 
         <button
-          class="text-link"
+          class="product-details-link"
           data-view-product="${escapeHTML(product.id)}"
           type="button"
-          style="margin-top:15px;background:none;border:none;cursor:pointer"
+          style="
+            margin-top: 15px;
+            padding: 0 0 4px;
+            background: none;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            color: var(--deep-rose);
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: none;
+            cursor: pointer;
+          "
         >
 
-          VIEW DETAILS ↗
+          View details
 
         </button>
 
