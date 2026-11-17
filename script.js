@@ -127,7 +127,6 @@ const products = [
   featured: true
 },
 
-   
 {
   id: 2,
   name: "PDRN Pink Hyaluronic Moisturizing Cream",
@@ -190,6 +189,74 @@ const products = [
     "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-hyaluronic-moisturizing-cream/IMG_9265.jpeg",
     "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-hyaluronic-moisturizing-cream/IMG_9266.jpeg",
     "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-hyaluronic-moisturizing-cream/IMG_9267.jpeg"
+  ],
+
+  tag: "THE BEAUTY EDIT",
+  featured: true
+},
+
+{
+  id: 3,
+  name: "PDRN Pink Collagen Capsule Cream",
+  brand: "medicube",
+  brandName: "Medicube",
+
+  collection: ["pdrn", "pink-pdrn-line"],
+
+  category: "skincare",
+  productType: "Capsule Cream",
+  price: 25.00,
+
+  concerns: [
+    "dryness",
+    "dullness",
+    "skin-elasticity",
+    "uneven-skin-tone"
+  ],
+
+  skinTypes: [
+    "Combination",
+    "Dry",
+    "Normal"
+  ],
+
+  description:
+    "A distinctive moisturising cream from Medicube's Pink PDRN collection, featuring a capsule-inspired formula designed to leave skin feeling moisturised and looking radiant.",
+
+  benefits: [
+    "Helps maintain skin hydration",
+    "Helps improve the appearance of dullness",
+    "Leaves skin feeling soft and supple",
+    "Supports a comfortable, moisturised skin feel",
+    "Features a distinctive capsule cream texture"
+  ],
+
+  editorialText:
+    "A little innovation for your daily skincare ritual. Medicube's PDRN Pink Collagen Capsule Cream brings a distinctive capsule-inspired texture to the Pink PDRN collection. A beautiful addition for those who enjoy exploring new skincare textures and creating a considered moisturising routine.",
+
+  whyWeChoseIt:
+    "We selected this cream for its distinctive capsule-inspired concept and its place within Medicube's Pink PDRN collection. It complements the other products in our curated edit and offers another moisturising option for skincare enthusiasts.",
+
+  ingredients: [],
+
+  fullIngredients: "",
+
+  howToUseSteps: [
+    "Apply an appropriate amount to clean skin after your serum.",
+    "Gently spread over the face and neck.",
+    "Massage softly until the cream is absorbed.",
+    "Use as the moisturising step in your skincare routine."
+  ],
+
+  image:
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-collagen-capsule-cream/IMG_9201.webp",
+
+  gallery: [
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-collagen-capsule-cream/IMG_9201.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-collagen-capsule-cream/IMG_9254.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-collagen-capsule-cream/IMG_9255.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-collagen-capsule-cream/IMG_9256.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-collagen-capsule-cream/IMG_9257.webp"
   ],
 
   tag: "THE BEAUTY EDIT",
