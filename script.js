@@ -127,6 +127,75 @@ const products = [
   featured: true
 },
 
+   
+{
+  id: 2,
+  name: "PDRN Pink Hyaluronic Moisturizing Cream",
+  brand: "medicube",
+  brandName: "Medicube",
+
+  collection: ["pdrn", "pink-pdrn-line"],
+
+  category: "skincare",
+  productType: "Moisturizing Cream",
+  size: "50ml",
+  price: 25.00,
+
+  concerns: [
+    "dryness",
+    "dehydration",
+    "dullness",
+    "skin-elasticity"
+  ],
+
+  skinTypes: [
+    "Combination",
+    "Dry",
+    "Normal"
+  ],
+
+  description:
+    "A hydrating moisturising cream from Medicube's Pink PDRN collection, created to leave skin feeling soft, comfortable and beautifully moisturised.",
+
+  benefits: [
+    "Helps maintain skin hydration",
+    "Helps keep skin feeling soft and supple",
+    "Supports the skin's moisture barrier",
+    "Leaves skin with a moisturised finish",
+    "Complements a daily skincare routine"
+  ],
+
+  editorialText:
+    "A considered finishing touch to your skincare ritual. Medicube's PDRN Pink Hyaluronic Moisturizing Cream brings together a moisturising cream texture and the signature Pink PDRN collection aesthetic. A lovely addition for those looking to complete their routine with a comforting layer of hydration.",
+
+  whyWeChoseIt:
+    "We selected this cream as part of our Pink PDRN edit for its moisturising focus and its place within Medicube's popular collection. It offers a complementary step alongside the collection's serums and other skincare favourites.",
+
+  ingredients: [],
+
+  fullIngredients: "",
+
+  howToUseSteps: [
+    "Apply an appropriate amount to clean skin after your serum.",
+    "Gently spread over the face and neck.",
+    "Pat lightly until absorbed.",
+    "Use as the moisturising step in your skincare routine."
+  ],
+
+  image:
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-hyaluronic-moisturizing-cream/IMG_9213.webp",
+
+  gallery: [
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-hyaluronic-moisturizing-cream/IMG_9213.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-hyaluronic-moisturizing-cream/IMG_9265.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-hyaluronic-moisturizing-cream/IMG_9266.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-hyaluronic-moisturizing-cream/IMG_9267.jpeg"
+  ],
+
+  tag: "THE BEAUTY EDIT",
+  featured: true
+},
+
   {
     id: 11,
     name: "PDRN Pink Collagen Volume Multi Balm",
