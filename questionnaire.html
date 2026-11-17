@@ -1,1 +1,580 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Your Personal Edit | Curated with Care by M.</title>
+
+  <meta name="description"
+    content="Discover a considered skincare edit, thoughtfully curated around your preferences and skincare goals.">
+
+  <link rel="stylesheet" href="questionnaire.css">
+</head>
+
+<body>
+
+  <header class="questionnaire-header">
+    <a href="index.html" class="brand-name">
+      CURATED WITH CARE <span>BY M.</span>
+    </a>
+
+    <p class="header-caption">A MORE PERSONAL APPROACH TO BEAUTY</p>
+  </header>
+
+  <main class="questionnaire-main">
+
+    <!-- INTRODUCTION -->
+
+    <section class="intro-screen" id="introScreen">
+
+      <p class="eyebrow">A MOMENT FOR YOURSELF</p>
+
+      <h1>Your Personal Edit</h1>
+
+      <p class="intro-description">
+        Beautiful skincare begins with understanding what matters
+        to you.
+      </p>
+
+      <p class="intro-description">
+        Tell us a little about your skin, your preferences and the
+        experience you would like from your routine.
+      </p>
+
+      <p class="intro-note">
+        Thoughtfully considered. Personally curated. Always with care.
+      </p>
+
+      <button type="button" id="startQuestionnaire" class="primary-button">
+        BEGIN YOUR EDIT
+      </button>
+
+      <p class="privacy-note">
+        Your answers help us personalise your product selection.
+      </p>
+
+    </section>
+
+
+    <!-- QUESTIONNAIRE -->
+
+    <section class="questions-screen" id="questionsScreen" hidden>
+
+      <div class="progress-area">
+        <p id="stepLabel">STEP 1 OF 9</p>
+
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <form id="skincareQuestionnaire" novalidate>
+
+
+        <!-- STEP 1: SKIN TYPE -->
+
+        <fieldset class="question-step" data-step="0">
+
+          <p class="eyebrow">LET'S START WITH THE BASICS</p>
+
+          <h2>How would you describe your skin?</h2>
+
+          <p class="question-description">
+            Choose the description that feels closest to your skin.
+          </p>
+
+          <div class="option-grid">
+
+            <label class="option-card">
+              <input type="radio" name="skinType" value="Normal" required>
+              <span>Normal</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="skinType" value="Dry">
+              <span>Dry</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="skinType" value="Oily">
+              <span>Oily</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="skinType" value="Combination">
+              <span>Combination</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="skinType" value="Sensitive">
+              <span>Sensitive</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="skinType" value="Not sure">
+              <span>I'm not sure</span>
+            </label>
+
+          </div>
+
+        </fieldset>
+
+
+        <!-- STEP 2: SKIN CONCERNS -->
+
+        <fieldset class="question-step" data-step="1" hidden>
+
+          <p class="eyebrow">WHAT MATTERS TO YOU</p>
+
+          <h2>What would you like to focus on?</h2>
+
+          <p class="question-description">
+            Select as many as you like.
+          </p>
+
+          <div class="option-grid">
+
+            <label class="option-card">
+              <input type="checkbox" name="concerns" value="Dehydration">
+              <span>Dehydration</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="concerns" value="Dryness">
+              <span>Dryness</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="concerns" value="Blemishes">
+              <span>Blemishes</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="concerns" value="Uneven skin tone">
+              <span>Uneven skin tone</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="concerns" value="Dark spots">
+              <span>Dark spots</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="concerns" value="Visible pores">
+              <span>Visible pores</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="concerns" value="Fine lines">
+              <span>Fine lines</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="concerns" value="Redness">
+              <span>Redness</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="concerns" value="Skin texture">
+              <span>Skin texture</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="concerns" value="Dullness">
+              <span>Dull-looking skin</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="concerns" value="Healthy-looking skin">
+              <span>Maintaining healthy-looking skin</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="concerns" value="Other">
+              <span>Something else</span>
+            </label>
+
+          </div>
+
+        </fieldset>
+
+
+        <!-- STEP 3: SKIN BEHAVIOUR -->
+
+        <fieldset class="question-step" data-step="2" hidden>
+
+          <p class="eyebrow">GETTING TO KNOW YOUR SKIN</p>
+
+          <h2>How does your skin usually feel throughout the day?</h2>
+
+          <div class="option-list">
+
+            <label class="option-card">
+              <input type="radio" name="skinBehaviour" value="Tight or dry">
+              <span>Tight or dry</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="skinBehaviour" value="Shiny or oily">
+              <span>Shiny or oily</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="skinBehaviour" value="Oily and dry in different areas">
+              <span>Oily in some areas and dry in others</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="skinBehaviour" value="Comfortable">
+              <span>Comfortable throughout the day</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="skinBehaviour" value="Changes frequently">
+              <span>It changes frequently</span>
+            </label>
+
+          </div>
+
+        </fieldset>
+
+
+        <!-- STEP 4: SENSITIVITY -->
+
+        <fieldset class="question-step" data-step="3" hidden>
+
+          <p class="eyebrow">YOUR COMFORT COMES FIRST</p>
+
+          <h2>How does your skin respond to skincare products?</h2>
+
+          <div class="option-list">
+
+            <label class="option-card">
+              <input type="radio" name="sensitivity" value="Not particularly sensitive">
+              <span>Not particularly sensitive</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="sensitivity" value="Sometimes reacts">
+              <span>Sometimes reacts to certain products</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="sensitivity" value="Frequently experiences irritation">
+              <span>Frequently experiences irritation</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="sensitivity" value="Not sure">
+              <span>I'm not sure</span>
+            </label>
+
+          </div>
+
+        </fieldset>
+
+
+        <!-- STEP 5: CURRENT ROUTINE -->
+
+        <fieldset class="question-step" data-step="4" hidden>
+
+          <p class="eyebrow">YOUR EVERYDAY RITUAL</p>
+
+          <h2>What does your current skincare routine look like?</h2>
+
+          <div class="option-list">
+
+            <label class="option-card">
+              <input type="radio" name="routine" value="No regular routine">
+              <span>I don't have a regular routine</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="routine" value="Simple routine">
+              <span>A simple routine with a few essentials</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="routine" value="Several products">
+              <span>I use several skincare products</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="routine" value="Detailed routine">
+              <span>I enjoy a detailed morning and evening routine</span>
+            </label>
+
+          </div>
+
+        </fieldset>
+
+
+        <!-- STEP 6: PRODUCT PREFERENCES -->
+
+        <fieldset class="question-step" data-step="5" hidden>
+
+          <p class="eyebrow">THE PRODUCTS YOU LOVE</p>
+
+          <h2>Which types of products interest you?</h2>
+
+          <p class="question-description">
+            Select all the categories you would like us to consider.
+          </p>
+
+          <div class="option-grid">
+
+            <label class="option-card">
+              <input type="checkbox" name="productTypes" value="Cleansers">
+              <span>Cleansers</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="productTypes" value="Toners">
+              <span>Toners</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="productTypes" value="Serums">
+              <span>Serums</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="productTypes" value="Moisturisers">
+              <span>Moisturisers</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="productTypes" value="Toner pads">
+              <span>Toner pads</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="productTypes" value="Masks">
+              <span>Masks</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="productTypes" value="Eye care">
+              <span>Eye care</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="productTypes" value="Complete sets">
+              <span>Complete sets</span>
+            </label>
+
+            <label class="option-card">
+              <input type="checkbox" name="productTypes" value="Open to suggestions">
+              <span>I'm open to suggestions</span>
+            </label>
+
+          </div>
+
+        </fieldset>
+
+
+        <!-- STEP 7: BUDGET -->
+
+        <fieldset class="question-step" data-step="6" hidden>
+
+          <p class="eyebrow">A THOUGHTFUL SELECTION</p>
+
+          <h2>What budget would you feel comfortable with?</h2>
+
+          <p class="question-description">
+            This helps us create an edit that feels right for you.
+          </p>
+
+          <div class="option-list">
+
+            <label class="option-card">
+              <input type="radio" name="budget" value="Under €25">
+              <span>Under €25</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="budget" value="€25–€50">
+              <span>€25–€50</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="budget" value="€50–€75">
+              <span>€50–€75</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="budget" value="€75–€100">
+              <span>€75–€100</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="budget" value="€100+">
+              <span>€100+</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="budget" value="Flexible">
+              <span>I'm flexible</span>
+            </label>
+
+          </div>
+
+        </fieldset>
+
+
+        <!-- STEP 8: SKINCARE GOALS -->
+
+        <fieldset class="question-step" data-step="7" hidden>
+
+          <p class="eyebrow">YOUR PERSONAL BEAUTY GOALS</p>
+
+          <h2>What would you most like your Personal Edit to help you with?</h2>
+
+          <div class="option-list">
+
+            <label class="option-card">
+              <input type="radio" name="goal" value="Simple everyday routine">
+              <span>Create a simple everyday routine</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="goal" value="Complete skincare routine">
+              <span>Build a complete skincare routine</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="goal" value="Focus on selected concerns">
+              <span>Focus on one or two particular concerns</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="goal" value="Discover new products">
+              <span>Discover new products and favourites</span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="goal" value="Refresh existing routine">
+              <span>Refresh my existing routine</span>
+            </label>
+
+          </div>
+
+        </fieldset>
+
+
+        <!-- STEP 9: PERSONAL NOTES -->
+
+        <fieldset class="question-step" data-step="8" hidden>
+
+          <p class="eyebrow">A LITTLE MORE ABOUT YOU</p>
+
+          <h2>Is there anything else you would like us to know?</h2>
+
+          <p class="question-description">
+            This space is entirely optional. Share anything that could
+            help us make your selection more thoughtful.
+          </p>
+
+          <div class="form-field">
+
+            <label for="ingredientAvoidance">
+              Are there any ingredients you prefer to avoid or know
+              your skin does not tolerate?
+            </label>
+
+            <textarea
+              id="ingredientAvoidance"
+              name="ingredientAvoidance"
+              rows="3"
+              placeholder="You can leave this blank..."
+            ></textarea>
+
+          </div>
+
+          <div class="form-field">
+
+            <label for="fragrancePreference">
+              Do you have a fragrance preference?
+            </label>
+
+            <select id="fragrancePreference" name="fragrancePreference">
+              <option value="No preference">No preference</option>
+              <option value="Prefer fragrance-free">I prefer fragrance-free products</option>
+              <option value="Prefer lightly scented">I prefer lightly scented products</option>
+            </select>
+
+          </div>
+
+          <div class="form-field">
+
+            <label for="personalNote">
+              Your personal note to us
+            </label>
+
+            <textarea
+              id="personalNote"
+              name="personalNote"
+              rows="5"
+              placeholder="Tell us about textures you enjoy, products you love, or anything else you would like us to consider..."
+            ></textarea>
+
+          </div>
+
+        </fieldset>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="question-navigation">
+
+          <button
+            type="button"
+            id="backButton"
+            class="secondary-button"
+            hidden
+          >
+            BACK
+          </button>
+
+          <button
+            type="button"
+            id="nextButton"
+            class="primary-button"
+          >
+            CONTINUE
+          </button>
+
+          <button
+            type="submit"
+            id="finishButton"
+            class="primary-button"
+            hidden
+          >
+            CREATE MY PERSONAL EDIT
+          </button>
+
+        </div>
+
+        <p class="form-message" id="formMessage" role="alert"></p>
+
+      </form>
+
+    </section>
+
+  </main>
+
+
+  <footer class="questionnaire-footer">
+    <p>CURATED WITH CARE BY M.</p>
+    <p>Thoughtfully selected. Personally considered.</p>
+  </footer>
+
+
+  <script src="questionnaire.js"></script>
+
+</body>
+</html>
