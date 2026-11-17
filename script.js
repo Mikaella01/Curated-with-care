@@ -330,6 +330,75 @@ const products = [
   featured: true
 },
 
+{
+  id: 5,
+  name: "PDRN Pink Collagen Toner Pad",
+  brand: "medicube",
+  brandName: "Medicube",
+
+  collection: ["pdrn", "pink-pdrn-line"],
+
+  category: "skincare",
+  productType: "Toner Pad",
+  price: 25.00,
+
+  concerns: [
+    "dryness",
+    "dullness",
+    "uneven-skin-tone"
+  ],
+
+  skinTypes: [
+    "Combination",
+    "Oily",
+    "Dry",
+    "Normal"
+  ],
+
+  description:
+    "A toner pad product from Medicube's Pink PDRN collection, designed as a convenient skincare step to complement a daily cleansing and hydration routine.",
+
+  benefits: [
+    "Convenient toner pad format",
+    "Helps refresh the skin",
+    "Complements a hydrating skincare routine",
+    "Easy to incorporate into daily skincare"
+  ],
+
+  editorialText:
+    "A practical addition to your skincare ritual. Medicube's PDRN Pink Collagen Toner Pads bring convenience to the Pink PDRN collection, offering an easy-to-use format for those who enjoy a considered Korean skincare routine.",
+
+  whyWeChoseIt:
+    "We selected these toner pads as another addition to our Medicube Pink PDRN edit. Their convenient format makes them an interesting option for customers exploring different steps in their skincare routines.",
+
+  ingredients: [],
+
+  fullIngredients: "",
+
+  howToUseSteps: [
+    "After cleansing, gently take one toner pad from the container.",
+    "Sweep gently over the face, avoiding the eye area.",
+    "Pat the remaining essence into the skin.",
+    "Continue with your serum and moisturiser."
+  ],
+
+  image:
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-tonerpad/IMG_9208.webp",
+
+  gallery: [
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-tonerpad/IMG_9208.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-tonerpad/IMG_9276.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-tonerpad/IMG_9277.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-tonerpad/IMG_9278.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-tonerpad/IMG_9279.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-tonerpad/IMG_9280.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/PDRN-pink-collagen-tonerpad/IMG_9281.jpeg"
+  ],
+
+  tag: "THE BEAUTY EDIT",
+  featured: true
+},
+
   {
     id: 11,
     name: "PDRN Pink Collagen Volume Multi Balm",
