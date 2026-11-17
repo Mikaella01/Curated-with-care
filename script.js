@@ -263,6 +263,73 @@ const products = [
   featured: true
 },
 
+{
+  id: 4,
+  name: "PDRN Pink Peptide Serum",
+  brand: "medicube",
+  brandName: "Medicube",
+
+  collection: ["pdrn", "pink-pdrn-line"],
+
+  category: "skincare",
+  productType: "Peptide Serum",
+  price: 25.00,
+
+  concerns: [
+    "dryness",
+    "dullness",
+    "skin-elasticity",
+    "fine-lines"
+  ],
+
+  skinTypes: [
+    "Combination",
+    "Dry",
+    "Normal"
+  ],
+
+  description:
+    "A peptide serum from Medicube's Pink PDRN collection, bringing together a carefully formulated serum texture and the collection's signature skincare aesthetic.",
+
+  benefits: [
+    "Designed as a hydrating skincare step",
+    "Helps maintain skin moisture",
+    "Complements a daily skincare routine",
+    "A convenient serum step before moisturiser"
+  ],
+
+  editorialText:
+    "A considered addition to your daily skincare ritual. Medicube's PDRN Pink Peptide Serum joins our Pink PDRN edit, offering another interesting serum option for those who enjoy exploring contemporary Korean skincare.",
+
+  whyWeChoseIt:
+    "We selected this serum for our Medicube Pink PDRN edit to offer another option for customers exploring the collection and building a considered skincare routine.",
+
+  ingredients: [],
+
+  fullIngredients: "",
+
+  howToUseSteps: [
+    "Apply an appropriate amount to clean skin.",
+    "Gently spread over the face and neck.",
+    "Allow the serum to absorb.",
+    "Follow with your moisturiser."
+  ],
+
+  image:
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-serum/IMG_9200.webp",
+
+  gallery: [
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-serum/IMG_9200.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-serum/IMG_9238.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-serum/IMG_9239.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-serum/IMG_9240.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-serum/IMG_9241.webp"
+  ],
+
+  tag: "THE BEAUTY EDIT",
+  featured: true
+},
+
   {
     id: 11,
     name: "PDRN Pink Collagen Volume Multi Balm",
