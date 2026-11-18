@@ -36,7 +36,6 @@ function getIngredients() {
 
   try {
     const parsed = JSON.parse(value);
-
     if (Array.isArray(parsed)) return parsed;
   } catch (error) {}
 
@@ -52,9 +51,7 @@ function getIngredients() {
 ========================================= */
 
 async function verifyAdmin() {
-
-  const { data, error } =
-    await supabaseClient.auth.getUser();
+  const { data, error } = await supabaseClient.auth.getUser();
 
   if (
     error ||
@@ -128,15 +125,20 @@ let currentProduct = null;
 let selectedMainImage = null;
 let selectedGalleryImages = [];
 
-let previewUrls = [];
-let viewerUrls = [];
+// Separate preview URLs prevent one preview
+// from accidentally breaking another preview.
+let mainPreviewUrls = [];
+let galleryPreviewUrls = [];
 
+let viewerUrls = [];
 let viewerPhotos = [];
 let currentViewerIndex = 0;
 
 let dirty = false;
+let hasUnsavedImageChanges = false;
 let saving = false;
 let restoringDraft = false;
+
 let pendingDestination = null;
 let saveTimer = null;
 
@@ -150,8 +152,8 @@ let initialFormSnapshot = "";
 const DRAFT_DB_NAME = "CuratedWithCareDrafts";
 const DRAFT_STORE_NAME = "images";
 
-function openDraftDatabase() {
 
+function openDraftDatabase() {
   return new Promise(function(resolve, reject) {
 
     if (!window.indexedDB) {
@@ -162,13 +164,11 @@ function openDraftDatabase() {
     const request = indexedDB.open(DRAFT_DB_NAME, 1);
 
     request.onupgradeneeded = function() {
-
       const db = request.result;
 
       if (!db.objectStoreNames.contains(DRAFT_STORE_NAME)) {
         db.createObjectStore(DRAFT_STORE_NAME);
       }
-
     };
 
     request.onsuccess = function() {
@@ -184,7 +184,6 @@ function openDraftDatabase() {
 
 
 async function storeDraftImages() {
-
   const db = await openDraftDatabase();
 
   return new Promise(function(resolve, reject) {
@@ -211,12 +210,16 @@ async function storeDraftImages() {
       reject(transaction.error);
     };
 
+    transaction.onabort = function() {
+      db.close();
+      reject(transaction.error || new Error("Draft image storage failed."));
+    };
+
   });
 }
 
 
 async function loadDraftImages() {
-
   const db = await openDraftDatabase();
 
   return new Promise(function(resolve, reject) {
@@ -231,20 +234,14 @@ async function loadDraftImages() {
       .get(draftKey);
 
     request.onsuccess = function() {
-
       const result = request.result || {};
-
       db.close();
-
       resolve(result);
-
     };
 
     request.onerror = function() {
-
       db.close();
       reject(request.error);
-
     };
 
   });
@@ -252,9 +249,7 @@ async function loadDraftImages() {
 
 
 async function deleteDraftImages() {
-
   try {
-
     const db = await openDraftDatabase();
 
     await new Promise(function(resolve, reject) {
@@ -267,7 +262,12 @@ async function deleteDraftImages() {
       transaction.objectStore(DRAFT_STORE_NAME).delete(draftKey);
 
       transaction.oncomplete = resolve;
+
       transaction.onerror = function() {
+        reject(transaction.error);
+      };
+
+      transaction.onabort = function() {
         reject(transaction.error);
       };
 
@@ -276,9 +276,7 @@ async function deleteDraftImages() {
     db.close();
 
   } catch (error) {
-
     console.warn("Could not remove stored draft images.", error);
-
   }
 }
 
@@ -288,13 +286,10 @@ async function deleteDraftImages() {
 ========================================= */
 
 function collectFormFields() {
-
   const fields = {};
 
   fieldIds.forEach(function(id) {
-
     fields[id] = document.getElementById(id).value;
-
   });
 
   fields.featured =
@@ -305,91 +300,82 @@ function collectFormFields() {
 
 
 function applyFormFields(fields) {
-
   fieldIds.forEach(function(id) {
-
     if (fields[id] !== undefined) {
       document.getElementById(id).value = fields[id];
     }
-
   });
 
   if (fields.featured !== undefined) {
-
     document.getElementById("featured").checked =
       Boolean(fields.featured);
-
   }
-
 }
 
 
 function getFormSnapshot() {
-
   return JSON.stringify(collectFormFields());
-
 }
 
 
 function markAsChanged() {
-
   if (restoringDraft || saving) return;
 
-  dirty = getFormSnapshot() !== initialFormSnapshot;
+  dirty =
+    getFormSnapshot() !== initialFormSnapshot ||
+    hasUnsavedImageChanges;
 
   scheduleDraftSave();
-
 }
 
 
 function scheduleDraftSave() {
-
   clearTimeout(saveTimer);
 
   saveTimer = setTimeout(function() {
-
     saveDraftAutomatically();
-
   }, 700);
-
 }
 
 
 async function saveDraftAutomatically() {
-
   if (!dirty || saving) return;
 
+  const draft = {
+    fields: collectFormFields(),
+    updatedAt: new Date().toISOString()
+  };
+
+  // Save the form fields first.
   try {
-
-    const draft = {
-      fields: collectFormFields(),
-      updatedAt: new Date().toISOString()
-    };
-
-    localStorage.setItem(
-      draftKey,
-      JSON.stringify(draft)
-    );
-
-    await storeDraftImages();
+    localStorage.setItem(draftKey, JSON.stringify(draft));
 
     draftStatus.textContent =
       "Draft saved automatically on this device.";
 
   } catch (error) {
-
-    console.error("Draft saving error:", error);
+    console.error("Draft field saving error:", error);
 
     draftStatus.textContent =
-      "Automatic draft saving is unavailable. Please save your product regularly.";
+      "Draft storage is unavailable. Please save your product regularly.";
 
+    return;
   }
 
+  // Save selected image files separately.
+  try {
+    await storeDraftImages();
+
+  } catch (error) {
+    console.error("Draft image saving error:", error);
+
+    draftStatus.textContent =
+      "Your text changes are saved, but selected photos could not be saved. Please save your product regularly.";
+  }
 }
 
 
 async function clearDraft() {
-
   clearTimeout(saveTimer);
 
   localStorage.removeItem(draftKey);
@@ -400,7 +386,6 @@ async function clearDraft() {
 
   draftStatus.textContent =
     "Your changes will be saved automatically as you work.";
-
 }
 
 
@@ -409,13 +394,11 @@ async function clearDraft() {
 ========================================= */
 
 async function checkForExistingDraft() {
-
   const savedDraft = localStorage.getItem(draftKey);
 
   if (!savedDraft) return;
 
   try {
-
     const draft = JSON.parse(savedDraft);
 
     if (!draft.fields) return;
@@ -431,37 +414,44 @@ async function checkForExistingDraft() {
       " is available. Would you like to restore it?";
 
   } catch (error) {
-
     console.error("Could not read saved draft.", error);
-
   }
-
 }
 
 
 async function restoreDraft() {
-
   const savedDraft = localStorage.getItem(draftKey);
 
   if (!savedDraft) return;
 
   try {
-
     restoringDraft = true;
 
     const draft = JSON.parse(savedDraft);
 
     applyFormFields(draft.fields);
 
-    const images = await loadDraftImages();
+    selectedMainImage = null;
+    selectedGalleryImages = [];
 
-    selectedMainImage = images.main || null;
+    try {
+      const images = await loadDraftImages();
 
-    selectedGalleryImages =
-      Array.isArray(images.gallery) ? images.gallery : [];
+      selectedMainImage = images.main || null;
+
+      selectedGalleryImages =
+        Array.isArray(images.gallery) ? images.gallery : [];
+
+    } catch (imageError) {
+      console.warn("Draft images could not be restored.", imageError);
+    }
 
     mainImageInput.value = "";
     galleryInput.value = "";
+
+    hasUnsavedImageChanges =
+      Boolean(selectedMainImage) ||
+      selectedGalleryImages.length > 0;
 
     renderMainImagePreview();
     renderGalleryPreview();
@@ -478,16 +468,13 @@ async function restoreDraft() {
     scheduleDraftSave();
 
   } catch (error) {
-
     restoringDraft = false;
 
     console.error("Draft recovery error:", error);
 
     formMessage.textContent =
       "We could not restore the draft. Please try again.";
-
   }
-
 }
 
 
@@ -500,35 +487,44 @@ document.getElementById("discard-draft")
 
     await clearDraft();
 
-    formMessage.textContent =
-      "Saved draft discarded.";
+    dirty = false;
+    hasUnsavedImageChanges = false;
+
+    formMessage.textContent = "Saved draft discarded.";
 
   });
 
 
 /* =========================================
-   7. PHOTO PREVIEW HELPERS
+   7. PREVIEW URL HELPERS
 ========================================= */
 
-function clearPreviewUrls() {
-
-  previewUrls.forEach(function(url) {
+function clearMainPreviewUrls() {
+  mainPreviewUrls.forEach(function(url) {
     URL.revokeObjectURL(url);
   });
 
-  previewUrls = [];
+  mainPreviewUrls = [];
+}
 
+
+function clearGalleryPreviewUrls() {
+  galleryPreviewUrls.forEach(function(url) {
+    URL.revokeObjectURL(url);
+  });
+
+  galleryPreviewUrls = [];
 }
 
 
 function makePreviewItem(src, alt, onRemove, onOpen) {
-
   const item = document.createElement("div");
   item.className = "image-preview-item";
 
   const image = document.createElement("img");
   image.src = src;
   image.alt = alt;
+
   image.addEventListener("click", onOpen);
 
   const removeButton = document.createElement("button");
@@ -537,10 +533,8 @@ function makePreviewItem(src, alt, onRemove, onOpen) {
   removeButton.setAttribute("aria-label", "Remove image");
 
   removeButton.addEventListener("click", function(event) {
-
     event.stopPropagation();
     onRemove();
-
   });
 
   item.appendChild(image);
@@ -555,7 +549,6 @@ function makePreviewItem(src, alt, onRemove, onOpen) {
 ========================================= */
 
 function buildViewerPhotos() {
-
   viewerUrls.forEach(function(url) {
     URL.revokeObjectURL(url);
   });
@@ -566,7 +559,6 @@ function buildViewerPhotos() {
   // Main image.
 
   if (selectedMainImage) {
-
     const url = URL.createObjectURL(selectedMainImage);
 
     viewerUrls.push(url);
@@ -587,24 +579,20 @@ function buildViewerPhotos() {
 
   }
 
-
   // Existing gallery images.
 
   getLines("gallery").forEach(function(url, index) {
-
     viewerPhotos.push({
       type: "gallery-url",
       src: url,
-      name: "Gallery image " + (index + 1)
+      name: "Gallery image " + (index + 1),
+      galleryIndex: index
     });
-
   });
-
 
   // Newly selected gallery files.
 
   selectedGalleryImages.forEach(function(file, index) {
-
     const url = URL.createObjectURL(file);
 
     viewerUrls.push(url);
@@ -612,11 +600,10 @@ function buildViewerPhotos() {
     viewerPhotos.push({
       type: "gallery-file",
       src: url,
-      name: file.name
+      name: file.name,
+      fileIndex: index
     });
-
   });
-
 }
 
 
@@ -625,7 +612,6 @@ function buildViewerPhotos() {
 ========================================= */
 
 function openPhotoViewer(index) {
-
   buildViewerPhotos();
 
   if (!viewerPhotos.length) return;
@@ -635,14 +621,11 @@ function openPhotoViewer(index) {
   updatePhotoViewer();
 
   photoViewer.classList.add("active");
-
   document.body.style.overflow = "hidden";
-
 }
 
 
 function closePhotoViewer() {
-
   photoViewer.classList.remove("active");
 
   document.body.style.overflow = "";
@@ -652,17 +635,13 @@ function closePhotoViewer() {
   });
 
   viewerUrls = [];
-
 }
 
 
 function updatePhotoViewer() {
-
   if (!viewerPhotos.length) {
-
     closePhotoViewer();
     return;
-
   }
 
   if (currentViewerIndex < 0) {
@@ -687,7 +666,6 @@ function updatePhotoViewer() {
 
   document.getElementById("next-photo").disabled =
     viewerPhotos.length < 2;
-
 }
 
 
@@ -697,33 +675,26 @@ document.getElementById("close-photo-viewer")
 
 document.getElementById("previous-photo")
   .addEventListener("click", function() {
-
     currentViewerIndex--;
     updatePhotoViewer();
-
   });
 
 
 document.getElementById("next-photo")
   .addEventListener("click", function() {
-
     currentViewerIndex++;
     updatePhotoViewer();
-
   });
 
 
 photoViewer.addEventListener("click", function(event) {
-
   if (event.target === photoViewer) {
     closePhotoViewer();
   }
-
 });
 
 
 document.addEventListener("keydown", function(event) {
-
   if (!photoViewer.classList.contains("active")) return;
 
   if (event.key === "Escape") {
@@ -739,7 +710,6 @@ document.addEventListener("keydown", function(event) {
     currentViewerIndex++;
     updatePhotoViewer();
   }
-
 });
 
 
@@ -748,54 +718,32 @@ document.addEventListener("keydown", function(event) {
 ========================================= */
 
 function deleteCurrentPhoto() {
-
   if (!viewerPhotos.length) return;
 
   const photo = viewerPhotos[currentViewerIndex];
 
   if (photo.type === "main-file") {
-
     selectedMainImage = null;
     mainImageInput.value = "";
-
   }
 
   else if (photo.type === "main-url") {
-
     mainImageField.value = "";
-
   }
 
   else if (photo.type === "gallery-url") {
-
     const urls = getLines("gallery");
 
-    const galleryIndex = urls.indexOf(photo.src);
-
-    if (galleryIndex !== -1) {
-      urls.splice(galleryIndex, 1);
-    }
+    urls.splice(photo.galleryIndex, 1);
 
     galleryField.value = urls.join("\n");
-
   }
 
   else if (photo.type === "gallery-file") {
-
-    const file = selectedGalleryImages.find(function(item) {
-      return item.name === photo.name;
-    });
-
-    const index = selectedGalleryImages.indexOf(file);
-
-    if (index !== -1) {
-      selectedGalleryImages.splice(index, 1);
-    }
-
+    selectedGalleryImages.splice(photo.fileIndex, 1);
   }
 
-
-  // Rebuild the viewer after removal.
+  hasUnsavedImageChanges = true;
 
   buildViewerPhotos();
 
@@ -813,7 +761,6 @@ function deleteCurrentPhoto() {
   renderGalleryPreview();
 
   markAsChanged();
-
 }
 
 
@@ -826,16 +773,14 @@ document.getElementById("delete-current-photo")
 ========================================= */
 
 function renderMainImagePreview() {
-
-  clearPreviewUrls();
+  clearMainPreviewUrls();
 
   mainPreview.innerHTML = "";
 
   if (selectedMainImage) {
-
     const url = URL.createObjectURL(selectedMainImage);
 
-    previewUrls.push(url);
+    mainPreviewUrls.push(url);
 
     mainPreview.appendChild(
       makePreviewItem(
@@ -843,13 +788,13 @@ function renderMainImagePreview() {
         selectedMainImage.name,
 
         function() {
-
           selectedMainImage = null;
           mainImageInput.value = "";
 
+          hasUnsavedImageChanges = true;
+
           renderMainImagePreview();
           markAsChanged();
-
         },
 
         function() {
@@ -859,25 +804,23 @@ function renderMainImagePreview() {
     );
 
     return;
-
   }
 
   const existingImage = mainImageField.value.trim();
 
   if (existingImage) {
-
     mainPreview.appendChild(
       makePreviewItem(
         existingImage,
         "Main product image",
 
         function() {
-
           mainImageField.value = "";
+
+          hasUnsavedImageChanges = true;
 
           renderMainImagePreview();
           markAsChanged();
-
         },
 
         function() {
@@ -887,12 +830,9 @@ function renderMainImagePreview() {
     );
 
   } else {
-
     mainPreview.innerHTML =
       '<p class="image-preview-empty">No main image selected.</p>';
-
   }
-
 }
 
 
@@ -901,52 +841,46 @@ function renderMainImagePreview() {
 ========================================= */
 
 function renderGalleryPreview() {
-
-  clearPreviewUrls();
+  clearGalleryPreviewUrls();
 
   galleryPreview.innerHTML = "";
 
   const existingImages = getLines("gallery");
 
   existingImages.forEach(function(url, index) {
-
     galleryPreview.appendChild(
       makePreviewItem(
         url,
         "Gallery image " + (index + 1),
 
         function() {
-
           const images = getLines("gallery");
 
           images.splice(index, 1);
 
           galleryField.value = images.join("\n");
 
+          hasUnsavedImageChanges = true;
+
           renderGalleryPreview();
           markAsChanged();
-
         },
 
         function() {
-
           const mainExists =
             Boolean(selectedMainImage || mainImageField.value.trim());
 
           openPhotoViewer(index + (mainExists ? 1 : 0));
-
         }
       )
     );
-
   });
 
 
   selectedGalleryImages.forEach(function(file, index) {
-
     const url = URL.createObjectURL(file);
 
-    previewUrls.push(url);
+    galleryPreviewUrls.push(url);
 
     galleryPreview.appendChild(
       makePreviewItem(
@@ -954,16 +888,15 @@ function renderGalleryPreview() {
         file.name,
 
         function() {
-
           selectedGalleryImages.splice(index, 1);
+
+          hasUnsavedImageChanges = true;
 
           renderGalleryPreview();
           markAsChanged();
-
         },
 
         function() {
-
           const mainExists =
             Boolean(selectedMainImage || mainImageField.value.trim());
 
@@ -972,11 +905,9 @@ function renderGalleryPreview() {
             (mainExists ? 1 : 0) +
             index
           );
-
         }
       )
     );
-
   });
 
 
@@ -984,12 +915,9 @@ function renderGalleryPreview() {
     existingImages.length === 0 &&
     selectedGalleryImages.length === 0
   ) {
-
     galleryPreview.innerHTML =
       '<p class="image-preview-empty">No gallery images selected.</p>';
-
   }
-
 }
 
 
@@ -998,66 +926,56 @@ function renderGalleryPreview() {
 ========================================= */
 
 mainImageInput.addEventListener("change", function() {
-
   const file = mainImageInput.files[0];
 
   if (!file) return;
 
   if (!file.type.startsWith("image/")) {
-
     mainImageInput.value = "";
 
     formMessage.textContent =
       "Please select a valid main image.";
 
     return;
-
   }
 
   selectedMainImage = file;
+  hasUnsavedImageChanges = true;
 
   renderMainImagePreview();
   markAsChanged();
-
 });
 
 
 galleryInput.addEventListener("change", function() {
-
   const files = Array.from(galleryInput.files);
 
   files.forEach(function(file) {
-
     if (file.type.startsWith("image/")) {
       selectedGalleryImages.push(file);
+      hasUnsavedImageChanges = true;
     }
-
   });
 
   galleryInput.value = "";
 
   renderGalleryPreview();
   markAsChanged();
-
 });
 
 
 mainImageField.addEventListener("input", function() {
-
   if (!selectedMainImage) {
     renderMainImagePreview();
   }
 
   markAsChanged();
-
 });
 
 
 galleryField.addEventListener("input", function() {
-
   renderGalleryPreview();
   markAsChanged();
-
 });
 
 
@@ -1066,7 +984,6 @@ galleryField.addEventListener("input", function() {
 ========================================= */
 
 async function loadProductForEditing() {
-
   if (!editId) return;
 
   formMessage.textContent = "Loading product...";
@@ -1091,9 +1008,7 @@ async function loadProductForEditing() {
 
   saveButton.textContent = "Update Product";
 
-
   const fields = {
-
     name: data.name || "",
     brand: data.brand || "",
     brandName: data.brandName || "",
@@ -1119,7 +1034,6 @@ async function loadProductForEditing() {
     gallery: (data.gallery || []).join("\n"),
 
     tag: data.tag || ""
-
   };
 
   fields.featured = Boolean(data.featured);
@@ -1129,12 +1043,13 @@ async function loadProductForEditing() {
   selectedMainImage = null;
   selectedGalleryImages = [];
 
+  hasUnsavedImageChanges = false;
+
   mainImageInput.value = "";
   galleryInput.value = "";
 
   renderMainImagePreview();
   renderGalleryPreview();
-
 }
 
 
@@ -1143,7 +1058,6 @@ async function loadProductForEditing() {
 ========================================= */
 
 async function uploadMainProductImage() {
-
   if (!selectedMainImage) return null;
 
   const file = selectedMainImage;
@@ -1181,7 +1095,6 @@ async function uploadMainProductImage() {
   renderMainImagePreview();
 
   return publicData.publicUrl;
-
 }
 
 
@@ -1190,14 +1103,12 @@ async function uploadMainProductImage() {
 ========================================= */
 
 async function uploadGalleryImages() {
-
   if (selectedGalleryImages.length === 0) return [];
 
   const files = [...selectedGalleryImages];
   const uploadedUrls = [];
 
   for (let i = 0; i < files.length; i++) {
-
     const file = files[i];
 
     const safeFileName = file.name
@@ -1230,7 +1141,6 @@ async function uploadGalleryImages() {
       .getPublicUrl(data.path);
 
     uploadedUrls.push(publicData.publicUrl);
-
   }
 
   const existingUrls = getLines("gallery");
@@ -1245,7 +1155,6 @@ async function uploadGalleryImages() {
   renderGalleryPreview();
 
   return uploadedUrls;
-
 }
 
 
@@ -1254,7 +1163,6 @@ async function uploadGalleryImages() {
 ========================================= */
 
 function prepareProduct() {
-
   const price = Number(getValue("price"));
 
   if (!Number.isFinite(price) || price < 0) {
@@ -1262,7 +1170,6 @@ function prepareProduct() {
   }
 
   return {
-
     name: getValue("name"),
 
     brand: getValue("brand"),
@@ -1306,9 +1213,7 @@ function prepareProduct() {
 
     featured:
       document.getElementById("featured").checked
-
   };
-
 }
 
 
@@ -1317,7 +1222,6 @@ function prepareProduct() {
 ========================================= */
 
 async function saveProduct() {
-
   if (saving) return;
 
   saving = true;
@@ -1326,7 +1230,6 @@ async function saveProduct() {
   formMessage.textContent = "Saving product...";
 
   try {
-
     const authorised = await verifyAdmin();
 
     if (!authorised) {
@@ -1335,17 +1238,12 @@ async function saveProduct() {
     }
 
     if (selectedMainImage) {
-
       formMessage.textContent = "Uploading main image...";
-
       await uploadMainProductImage();
-
     }
 
     if (selectedGalleryImages.length > 0) {
-
       await uploadGalleryImages();
-
     }
 
     const productData = prepareProduct();
@@ -1353,7 +1251,6 @@ async function saveProduct() {
     let result;
 
     if (currentProduct) {
-
       const { data, error } = await supabaseClient
         .from("products")
         .update(productData)
@@ -1366,7 +1263,6 @@ async function saveProduct() {
       result = data;
 
     } else {
-
       const { data, error } = await supabaseClient
         .from("products")
         .insert([{
@@ -1379,11 +1275,11 @@ async function saveProduct() {
       if (error) throw error;
 
       result = data;
-
     }
 
-
     dirty = false;
+    hasUnsavedImageChanges = false;
+
     initialFormSnapshot = getFormSnapshot();
 
     await clearDraft();
@@ -1394,19 +1290,14 @@ async function saveProduct() {
         : "Product created successfully! Product ID: " + result.id;
 
     if (pendingDestination) {
-
       window.location.href = pendingDestination;
-
     } else {
-
       setTimeout(function() {
         window.location.href = "admin-dashboard.html";
       }, 1200);
-
     }
 
   } catch (error) {
-
     console.error("Product saving error:", error);
 
     formMessage.textContent =
@@ -1415,19 +1306,19 @@ async function saveProduct() {
     saving = false;
     saveButton.disabled = false;
 
+    // Recalculate whether anything remains unsaved.
+    dirty =
+      getFormSnapshot() !== initialFormSnapshot ||
+      hasUnsavedImageChanges;
+
     scheduleDraftSave();
-
   }
-
 }
 
 
 productForm.addEventListener("submit", function(event) {
-
   event.preventDefault();
-
   saveProduct();
-
 });
 
 
@@ -1436,57 +1327,50 @@ productForm.addEventListener("submit", function(event) {
 ========================================= */
 
 function openConfirmation() {
-
   confirmOverlay.classList.add("active");
-
 }
 
 
 function closeConfirmation() {
-
   confirmOverlay.classList.remove("active");
-
 }
 
 
 document.getElementById("continue-editing")
-  .addEventListener("click", closeConfirmation);
+  .addEventListener("click", function() {
+    pendingDestination = null;
+    closeConfirmation();
+  });
 
 
 document.getElementById("discard-before-leaving")
   .addEventListener("click", async function() {
-
     const destination = pendingDestination;
 
     closeConfirmation();
 
     dirty = false;
+    hasUnsavedImageChanges = false;
 
     await clearDraft();
 
     if (destination) {
       window.location.href = destination;
     }
-
   });
 
 
 document.getElementById("save-before-leaving")
   .addEventListener("click", function() {
-
     closeConfirmation();
-
     productForm.requestSubmit();
-
   });
 
 
 // Protect links inside the editor.
 
-document.querySelectorAll('a[href]').forEach(function(link) {
-
+document.querySelectorAll("a[href]").forEach(function(link) {
   link.addEventListener("click", function(event) {
-
     if (!dirty || saving) return;
 
     const destination = link.href;
@@ -1498,22 +1382,18 @@ document.querySelectorAll('a[href]').forEach(function(link) {
     pendingDestination = destination;
 
     openConfirmation();
-
   });
-
 });
 
 
-// Browser-controlled warning for refresh, closing or browser navigation.
+// Browser-controlled warning for refresh, closing
+// or browser navigation.
 
 window.addEventListener("beforeunload", function(event) {
-
   if (!dirty || saving) return;
 
   event.preventDefault();
-
   event.returnValue = "";
-
 });
 
 
@@ -1522,22 +1402,35 @@ window.addEventListener("beforeunload", function(event) {
 ========================================= */
 
 productForm.addEventListener("input", markAsChanged);
-
 productForm.addEventListener("change", markAsChanged);
 
 
 /* =========================================
-   21. START PAGE
+   21. CLEAN UP IMAGE PREVIEWS
+========================================= */
+
+window.addEventListener("pagehide", function() {
+  clearMainPreviewUrls();
+  clearGalleryPreviewUrls();
+
+  viewerUrls.forEach(function(url) {
+    URL.revokeObjectURL(url);
+  });
+
+  viewerUrls = [];
+});
+
+
+/* =========================================
+   22. START PAGE
 ========================================= */
 
 async function startProductPage() {
-
   const authorised = await verifyAdmin();
 
   if (!authorised) return;
 
   try {
-
     if (editId) {
       await loadProductForEditing();
     }
@@ -1552,15 +1445,12 @@ async function startProductPage() {
     formMessage.textContent = "";
 
   } catch (error) {
-
     console.error(error);
 
     formMessage.textContent = error.message;
 
     saveButton.disabled = true;
-
   }
-
 }
 
 
