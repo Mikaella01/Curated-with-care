@@ -156,6 +156,60 @@
       margin-top: 15px;
     }
 
+    /* IMAGE PREVIEWS */
+
+    .image-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .image-preview-item {
+      position: relative;
+      width: 110px;
+      height: 125px;
+      background: #f8f5ef;
+      border: 1px solid #e8dfd5;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .image-preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 5px;
+    }
+
+    .image-preview-item button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 27px;
+      height: 27px;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #8b5555;
+      font-size: 18px;
+      line-height: 27px;
+      letter-spacing: 0;
+      cursor: pointer;
+    }
+
+    .image-preview-item button:hover {
+      background: #eadbd5;
+    }
+
+    .image-preview-empty {
+      color: #958980;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      margin: 5px 0;
+    }
+
     @media (max-width: 550px) {
       .two-columns {
         grid-template-columns: 1fr;
@@ -164,6 +218,11 @@
 
       .form-section {
         padding: 19px;
+      }
+
+      .image-preview-item {
+        width: 95px;
+        height: 110px;
       }
     }
   </style>
@@ -175,6 +234,7 @@
 
     <header>
       <div class="brand">Curated with Care by M.</div>
+
       <a href="admin-dashboard.html" class="back-button">
         Back to Dashboard
       </a>
@@ -187,6 +247,8 @@
     </p>
 
     <form id="product-form">
+
+      <!-- 01. BASIC INFORMATION -->
 
       <section class="form-section">
 
@@ -242,11 +304,15 @@
         <div class="field">
           <label for="collection">Collections</label>
           <input id="collection">
-          <small class="help">Separate multiple collection names with commas.</small>
+          <small class="help">
+            Separate multiple collection names with commas.
+          </small>
         </div>
 
       </section>
 
+
+      <!-- 02. PRODUCT DETAILS -->
 
       <section class="form-section">
 
@@ -260,7 +326,9 @@
         <div class="field">
           <label for="benefits">Benefits</label>
           <textarea id="benefits"></textarea>
-          <small class="help">Separate individual benefits with commas.</small>
+          <small class="help">
+            Separate individual benefits with commas.
+          </small>
         </div>
 
         <div class="field">
@@ -276,6 +344,8 @@
       </section>
 
 
+      <!-- 03. SKIN INFORMATION -->
+
       <section class="form-section">
 
         <h2>03. Skin Information</h2>
@@ -283,17 +353,23 @@
         <div class="field">
           <label for="concerns">Skin Concerns</label>
           <input id="concerns">
-          <small class="help">Separate multiple concerns with commas.</small>
+          <small class="help">
+            Separate multiple concerns with commas.
+          </small>
         </div>
 
         <div class="field">
           <label for="skinTypes">Skin Types</label>
           <input id="skinTypes">
-          <small class="help">Separate multiple skin types with commas.</small>
+          <small class="help">
+            Separate multiple skin types with commas.
+          </small>
         </div>
 
       </section>
 
+
+      <!-- 04. INGREDIENTS & USAGE -->
 
       <section class="form-section">
 
@@ -302,7 +378,9 @@
         <div class="field">
           <label for="ingredients">Key Ingredients</label>
           <textarea id="ingredients"></textarea>
-          <small class="help">Separate ingredient names with commas.</small>
+          <small class="help">
+            Separate ingredient names with commas.
+          </small>
         </div>
 
         <div class="field">
@@ -313,75 +391,100 @@
         <div class="field">
           <label for="howToUseSteps">How to Use</label>
           <textarea id="howToUseSteps"></textarea>
-          <small class="help">Enter each instruction on a separate line.</small>
+          <small class="help">
+            Enter each instruction on a separate line.
+          </small>
         </div>
 
       </section>
 
 
-      
+      <!-- 05. PRODUCT IMAGES -->
 
-<section class="form-section">
+      <section class="form-section">
 
-  <h2>05. Product Images</h2>
+        <h2>05. Product Images</h2>
 
-  <!-- MAIN IMAGE -->
-  <div class="field">
-    <label for="image-file">Upload Main Product Image</label>
+        <!-- MAIN IMAGE -->
 
-    <input
-      type="file"
-      id="image-file"
-      accept="image/*"
-    >
+        <div class="field">
 
-    <small class="help">
-      Select the main product photo from your iPad.
-    </small>
+          <label for="image-file">
+            Upload Main Product Image
+          </label>
 
-    <div id="main-image-preview" class="image-preview"></div>
-  </div>
+          <input
+            type="file"
+            id="image-file"
+            accept="image/*"
+          >
 
-  <div class="field">
-    <label for="image">Main Image Path or URL</label>
-    <input id="image">
+          <small class="help">
+            Select the main product photo from your iPad.
+          </small>
 
-    <small class="help">
-      Your uploaded image URL will appear here automatically.
-    </small>
-  </div>
+          <div id="main-image-preview" class="image-preview"></div>
+
+        </div>
 
 
-  <!-- GALLERY IMAGES -->
-  <div class="field">
-    <label for="gallery-files">Upload Additional Product Images</label>
+        <div class="field">
 
-    <input
-      type="file"
-      id="gallery-files"
-      accept="image/*"
-      multiple
-    >
+          <label for="image">
+            Main Image Path or URL
+          </label>
 
-    <small class="help">
-      Select multiple product photos from your iPad.
-    </small>
+          <input id="image">
 
-    <div id="gallery-image-preview" class="image-preview"></div>
-  </div>
+          <small class="help">
+            Your uploaded image URL will appear here automatically.
+          </small>
 
-  <div class="field">
-    <label for="gallery">Additional Gallery Images</label>
+        </div>
 
-    <textarea id="gallery"></textarea>
 
-    <small class="help">
-      Existing image paths or uploaded URLs are preserved.
-    </small>
-  </div>
+        <!-- GALLERY IMAGES -->
 
-</section>
+        <div class="field">
 
+          <label for="gallery-files">
+            Upload Additional Product Images
+          </label>
+
+          <input
+            type="file"
+            id="gallery-files"
+            accept="image/*"
+            multiple
+          >
+
+          <small class="help">
+            Select multiple product photos from your iPad.
+          </small>
+
+          <div id="gallery-image-preview" class="image-preview"></div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="gallery">
+            Additional Gallery Images
+          </label>
+
+          <textarea id="gallery"></textarea>
+
+          <small class="help">
+            Existing image paths or uploaded URLs are preserved.
+          </small>
+
+        </div>
+
+      </section>
+
+
+      <!-- 06. PRODUCT DISPLAY -->
 
       <section class="form-section">
 
@@ -400,6 +503,8 @@
       </section>
 
 
+      <!-- FORM ACTIONS -->
+
       <div class="form-actions">
 
         <button type="submit" id="save-product">
@@ -417,6 +522,9 @@
     </form>
 
   </main>
+
+
+  <!-- SCRIPTS -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
