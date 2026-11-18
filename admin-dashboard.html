@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Dashboard | Curated with Care by M.</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f8f5ef;
+      color: #514943;
+      font-family: Georgia, serif;
+    }
+
+    header {
+      padding: 24px 6%;
+      background: #fffefa;
+      border-bottom: 1px solid #e9e1d8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand {
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      background: #b99b91;
+      color: white;
+      cursor: pointer;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      background: #a8897f;
+    }
+
+    .logout-button {
+      background: transparent;
+      color: #82756d;
+      border: 1px solid #ded5cc;
+    }
+
+    main {
+      max-width: 1150px;
+      margin: 50px auto;
+      padding: 0 22px;
+    }
+
+    .welcome {
+      margin-bottom: 35px;
+    }
+
+    h1 {
+      font-size: 34px;
+      font-weight: normal;
+      margin-bottom: 8px;
+    }
+
+    .welcome p {
+      color: #8d8178;
+      font-size: 14px;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-bottom: 35px;
+    }
+
+    .stat-card {
+      padding: 25px;
+      background: #fffefa;
+      border: 1px solid #e9e1d8;
+    }
+
+    .stat-card span {
+      color: #8d8178;
+      font-size: 13px;
+    }
+
+    .stat-card h2 {
+      font-size: 32px;
+      font-weight: normal;
+      margin: 10px 0 0;
+    }
+
+    .section {
+      background: #fffefa;
+      border: 1px solid #e9e1d8;
+      padding: 28px;
+      margin-bottom: 25px;
+    }
+
+    .section h2 {
+      font-size: 22px;
+      font-weight: normal;
+      margin-top: 0;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .secondary-button {
+      background: #eee6df;
+      color: #514943;
+    }
+
+    .product-list {
+      margin-top: 20px;
+    }
+
+    .product-row {
+      padding: 15px 0;
+      border-bottom: 1px solid #eee7e0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .product-row strong {
+      font-size: 14px;
+      font-weight: normal;
+    }
+
+    .product-row small {
+      display: block;
+      color: #8d8178;
+      margin-top: 5px;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    #dashboard-message {
+      font-size: 13px;
+      color: #82756d;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 18px;
+      }
+
+      .brand {
+        font-size: 10px;
+        letter-spacing: 2px;
+      }
+
+      main {
+        margin-top: 30px;
+      }
+
+      .section {
+        padding: 20px;
+      }
+
+      .product-row {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="brand">Curated with Care by M.</div>
+
+    <button class="logout-button" id="logout-button">
+      Sign Out
+    </button>
+  </header>
+
+  <main>
+
+    <div class="welcome">
+      <h1>Admin Dashboard</h1>
+      <p>Manage your beauty boutique and product collection.</p>
+    </div>
+
+    <div class="overview">
+
+      <div class="stat-card">
+        <span>Total Products</span>
+        <h2 id="total-products">—</h2>
+      </div>
+
+      <div class="stat-card">
+        <span>Active Products</span>
+        <h2 id="active-products">—</h2>
+      </div>
+
+    </div>
+
+    <section class="section">
+
+      <h2>Product Management</h2>
+
+      <p>
+        Add new products or import several products together.
+      </p>
+
+      <div class="actions">
+
+        <button id="add-product-button">
+          + Add New Product
+        </button>
+
+        <button
+          class="secondary-button"
+          id="bulk-upload-button"
+        >
+          Bulk Upload
+        </button>
+
+      </div>
+
+      <input
+        type="file"
+        id="bulk-file"
+        accept=".csv"
+        hidden
+      >
+
+      <p id="dashboard-message" role="status"></p>
+
+    </section>
+
+    <section class="section">
+
+      <h2>Your Products</h2>
+
+      <p>View and manage your current product catalogue.</p>
+
+      <div class="product-list" id="product-list">
+        Loading products...
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="admin-dashboard.js"></script>
+
+</body>
+</html>
