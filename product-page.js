@@ -1040,5 +1040,3 @@ refreshCartFromStorage();
 updateCart();
 
 loadProductFromSupabase();
-
-displayRelatedProducts();
