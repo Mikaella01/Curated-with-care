@@ -210,6 +210,158 @@
       margin: 5px 0;
     }
 
+/* =========================================
+   PHOTO VIEWER
+========================================= */
+
+.image-preview-item {
+  cursor: pointer;
+}
+
+.photo-viewer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(35, 30, 27, 0.96);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.photo-viewer.active {
+  display: flex;
+}
+
+.photo-viewer-content {
+  width: 100%;
+  max-width: 850px;
+  text-align: center;
+  color: white;
+}
+
+.photo-viewer-image {
+  max-width: 100%;
+  max-height: 65vh;
+  object-fit: contain;
+  margin: 15px auto;
+}
+
+.photo-viewer-counter {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  color: #e5dcd5;
+}
+
+.photo-viewer-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.photo-viewer-controls button {
+  background: #b99b91;
+  min-width: 48px;
+}
+
+.photo-viewer-controls .delete-photo {
+  background: #8b5555;
+}
+
+.photo-viewer-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background: transparent;
+  font-size: 28px;
+  padding: 8px 14px;
+}
+
+
+/* =========================================
+   DRAFT NOTICE
+========================================= */
+
+.draft-notice {
+  display: none;
+  background: #eee6df;
+  border: 1px solid #ded0c5;
+  padding: 16px;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.draft-notice.active {
+  display: block;
+}
+
+.draft-notice button {
+  margin: 10px 8px 0 0;
+}
+
+
+/* =========================================
+   CONFIRMATION DIALOG
+========================================= */
+
+.confirm-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgba(35, 30, 27, 0.65);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.confirm-overlay.active {
+  display: flex;
+}
+
+.confirm-dialog {
+  width: 100%;
+  max-width: 420px;
+  background: #fffefa;
+  padding: 28px;
+  text-align: center;
+  border: 1px solid #e9e1d8;
+}
+
+.confirm-dialog h2 {
+  font-weight: normal;
+  font-size: 22px;
+}
+
+.confirm-dialog p {
+  color: #8d8178;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.confirm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.confirm-actions .discard-button {
+  background: #8b5555;
+}
+
+.confirm-actions .continue-button {
+  background: #eee6df;
+  color: #514943;
+}
+
     @media (max-width: 550px) {
       .two-columns {
         grid-template-columns: 1fr;
