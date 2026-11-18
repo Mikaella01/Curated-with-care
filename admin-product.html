@@ -348,12 +348,25 @@
 
   <!-- ADDITIONAL GALLERY IMAGES -->
   <div class="field">
-    <label for="gallery">Additional Gallery Images</label>
-    <textarea id="gallery"></textarea>
-    <small class="help">
-      Enter one image path or URL per line.
-    </small>
-  </div>
+  <label for="gallery-files">Upload Additional Product Images</label>
+  <input
+    type="file"
+    id="gallery-files"
+    accept="image/*"
+    multiple
+  >
+  <small class="help">
+    Select multiple product photos from your iPad.
+  </small>
+</div>
+
+<div class="field">
+  <label for="gallery">Additional Gallery Images</label>
+  <textarea id="gallery"></textarea>
+  <small class="help">
+    Existing image paths or URLs are preserved.
+  </small>
+</div>
 
 </section>
 
