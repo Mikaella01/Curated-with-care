@@ -399,6 +399,109 @@ const products = [
   featured: true
 },
 
+{
+  id: 6,
+  name: "PDRN Pink Peptide Eye Cream",
+  brand: "medicube",
+  brandName: "Medicube",
+
+  collection: ["pdrn", "pink-pdrn-line"],
+
+  category: "skincare",
+  productType: "Eye Cream",
+  size: "30ml",
+  price: 25.00,
+
+  concerns: [
+    "dryness",
+    "dullness",
+    "fine-lines",
+    "dark-circles",
+    "puffiness",
+    "skin-elasticity"
+  ],
+
+  skinTypes: [
+    "Combination",
+    "Dry",
+    "Normal",
+    "Oily"
+  ],
+
+  description:
+    "A lightweight eye cream from Medicube's Pink PDRN collection, formulated with salmon DNA PDRN, peptides and retinol. Its non-sticky texture helps moisturise and nourish the delicate eye area.",
+
+  benefits: [
+    "Helps maintain moisture around the eye area",
+    "Helps improve the appearance of fine lines",
+    "Helps brighten the appearance of dull-looking skin",
+    "Supports a smooth and hydrated-looking eye area",
+    "Lightweight, non-sticky texture"
+  ],
+
+  editorialText:
+    "A considered finishing touch to your skincare ritual. Medicube's PDRN Pink Peptide Eye Cream combines the signature Pink PDRN concept with peptides and a lightweight moisturising texture. An interesting addition to our curated Korean skincare edit.",
+
+  whyWeChoseIt:
+    "We selected this eye cream for its combination of PDRN, peptides and moisturising ingredients. It adds a dedicated eye-care product to our Medicube Pink PDRN collection.",
+
+  ingredients: [
+    {
+      name: "PDRN (Sodium DNA)",
+      description:
+        "A DNA-derived cosmetic ingredient featured in Medicube's Pink PDRN formula."
+    },
+    {
+      name: "Peptide Complex",
+      description:
+        "A group of skin-conditioning ingredients used in formulations designed to support a smoother-looking complexion."
+    },
+    {
+      name: "Retinol",
+      description:
+        "A vitamin A derivative used in skincare formulations targeting the appearance of fine lines. It may cause irritation and requires careful use."
+    },
+    {
+      name: "Niacinamide",
+      description:
+        "A form of vitamin B3 commonly used to improve the appearance of uneven skin tone."
+    },
+    {
+      name: "Hyaluronic Acid",
+      description:
+        "A moisture-binding ingredient that helps maintain skin hydration."
+    },
+    {
+      name: "Caffeine",
+      description:
+        "A cosmetic ingredient commonly used in eye-care formulations."
+    }
+  ],
+
+  fullIngredients: "",
+
+  howToUseSteps: [
+    "Follow the product packaging instructions.",
+    "Apply an appropriate amount to the intended area.",
+    "Pat gently to help distribute the cream."
+  ],
+
+  image:
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-eyecream/IMG_9202.webp",
+
+  gallery: [
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-eyecream/IMG_9202.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-eyecream/IMG_9285.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-eyecream/IMG_9286.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-eyecream/IMG_9287.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-eyecream/IMG_9288.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-peptide-eyecream/IMG_9289.jpeg"
+  ],
+
+  tag: "THE BEAUTY EDIT",
+  featured: true
+},
+
   {
     id: 11,
     name: "PDRN Pink Collagen Volume Multi Balm",
