@@ -5,7 +5,9 @@
 ========================================= */
 
 
-// 1. HELPERS
+/* =========================================
+   1. HELPERS
+========================================= */
 
 function getValue(id) {
   return document.getElementById(id).value.trim();
@@ -27,8 +29,6 @@ function getLines(id) {
 
 
 // Preserve structured ingredient information.
-// If valid JSON is entered, save it as JSON.
-// Otherwise, treat the text as comma-separated names.
 
 function getIngredients() {
   const value = getValue("ingredients");
@@ -52,7 +52,9 @@ function getIngredients() {
 }
 
 
-// 2. ADMIN ACCESS
+/* =========================================
+   2. ADMIN ACCESS
+========================================= */
 
 async function verifyAdmin() {
   const { data, error } =
@@ -71,7 +73,9 @@ async function verifyAdmin() {
 }
 
 
-// 3. PAGE ELEMENTS
+/* =========================================
+   3. PAGE ELEMENTS
+========================================= */
 
 const productForm = document.getElementById("product-form");
 const saveButton = document.getElementById("save-product");
@@ -83,7 +87,9 @@ const editId = params.get("id");
 let currentProduct = null;
 
 
-// 4. LOAD EXISTING PRODUCT WHEN EDITING
+/* =========================================
+   4. LOAD EXISTING PRODUCT WHEN EDITING
+========================================= */
 
 async function loadProductForEditing() {
 
@@ -110,6 +116,7 @@ async function loadProductForEditing() {
     "Update the information for this product.";
 
   saveButton.textContent = "Update Product";
+
 
   // Basic information
 
@@ -196,7 +203,57 @@ async function loadProductForEditing() {
 }
 
 
-// 5. PREPARE PRODUCT DATA
+/* =========================================
+   5. MAIN PRODUCT IMAGE UPLOAD
+========================================= */
+
+async function uploadMainProductImage() {
+
+  const fileInput = document.getElementById("image-file");
+  const imageField = document.getElementById("image");
+
+  if (!fileInput || !fileInput.files.length) {
+    return null;
+  }
+
+  const file = fileInput.files[0];
+
+  if (!file.type.startsWith("image/")) {
+    throw new Error("Please select a valid image file.");
+  }
+
+  const safeFileName = file.name
+    .replace(/[^a-zA-Z0-9.-]/g, "-");
+
+  const filePath =
+    "products/" + Date.now() + "-" + safeFileName;
+
+  const { data, error } = await supabaseClient
+    .storage
+    .from("product-images")
+    .upload(filePath, file, {
+      contentType: file.type,
+      upsert: false
+    });
+
+  if (error) {
+    throw new Error("Image upload failed: " + error.message);
+  }
+
+  const { data: publicData } = supabaseClient
+    .storage
+    .from("product-images")
+    .getPublicUrl(data.path);
+
+  imageField.value = publicData.publicUrl;
+
+  return publicData.publicUrl;
+}
+
+
+/* =========================================
+   6. PREPARE PRODUCT DATA
+========================================= */
 
 function prepareProduct() {
 
@@ -256,7 +313,9 @@ function prepareProduct() {
 }
 
 
-// 6. SAVE OR UPDATE PRODUCT
+/* =========================================
+   7. SAVE OR UPDATE PRODUCT
+========================================= */
 
 productForm.addEventListener("submit", async function(event) {
 
@@ -271,9 +330,26 @@ productForm.addEventListener("submit", async function(event) {
 
     if (!authorised) return;
 
+
+    // Upload selected main image first
+
+    if (
+      document.getElementById("image-file")?.files.length
+    ) {
+
+      formMessage.textContent = "Uploading product image...";
+
+      await uploadMainProductImage();
+
+    }
+
+
+    // Prepare product data after image upload
+
     const productData = prepareProduct();
 
     let result;
+
 
     if (currentProduct) {
 
@@ -312,11 +388,18 @@ productForm.addEventListener("submit", async function(event) {
 
       formMessage.textContent =
         "Product created successfully! Product ID: " + result.id;
+
     }
 
+
+    // Return to dashboard
+
     setTimeout(function() {
+
       window.location.href = "admin-dashboard.html";
+
     }, 1500);
+
 
   } catch (error) {
 
@@ -326,12 +409,15 @@ productForm.addEventListener("submit", async function(event) {
       error.message || "Something went wrong.";
 
     saveButton.disabled = false;
+
   }
 
 });
 
 
-// 7. START PAGE
+/* =========================================
+   8. START PAGE
+========================================= */
 
 async function startProductPage() {
 
@@ -351,50 +437,7 @@ async function startProductPage() {
     saveButton.disabled = true;
 
   }
+
 }
 
 startProductPage();
-
-
-
-/* =========================================
-   MAIN PRODUCT IMAGE UPLOAD
-========================================= */
-
-async function uploadMainProductImage() {
-  const fileInput = document.getElementById("image-file");
-  const imageField = document.getElementById("image");
-
-  if (!fileInput || !fileInput.files.length) {
-    return null;
-  }
-
-  const file = fileInput.files[0];
-
-  const safeFileName = file.name
-    .replace(/[^a-zA-Z0-9.-]/g, "-");
-
-  const filePath =
-    "products/" + Date.now() + "-" + safeFileName;
-
-  const { data, error } = await supabaseClient
-    .storage
-    .from("product-images")
-    .upload(filePath, file, {
-      contentType: file.type,
-      upsert: false
-    });
-
-  if (error) {
-    throw new Error("Image upload failed: " + error.message);
-  }
-
-  const { data: publicData } = supabaseClient
-    .storage
-    .from("product-images")
-    .getPublicUrl(data.path);
-
-  imageField.value = publicData.publicUrl;
-
-  return publicData.publicUrl;
-}
