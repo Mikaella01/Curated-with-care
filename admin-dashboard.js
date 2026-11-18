@@ -43,13 +43,33 @@ async function checkAdminAccess() {
   return true;
 }
 
-
-// 2. CREATE PRODUCT ROW
+// 2. CREATE PRODUCT ROW WITH IMAGE
 
 function createProductRow(product) {
 
   const row = document.createElement("div");
   row.className = "product-row";
+
+  // PRODUCT IMAGE
+
+  const image = document.createElement("img");
+
+  image.className = "product-image";
+  image.alt = product.name || "Product image";
+  image.loading = "lazy";
+
+  if (product.image) {
+    image.src = product.image;
+
+    image.addEventListener("error", function() {
+      image.style.display = "none";
+    });
+  } else {
+    image.style.display = "none";
+  }
+
+
+  // PRODUCT DETAILS
 
   const details = document.createElement("div");
   details.className = "product-details";
@@ -77,20 +97,19 @@ function createProductRow(product) {
   actions.className = "product-actions";
 
 
-  // EDIT BUTTON
+  // EDIT
 
   const editButton = document.createElement("button");
   editButton.textContent = "Edit";
   editButton.type = "button";
-  editButton.addEventListener("click", function() {
 
+  editButton.addEventListener("click", function() {
     window.location.href =
       "admin-product.html?id=" + encodeURIComponent(product.id);
-
   });
 
 
-  // ACTIVATE / DEACTIVATE BUTTON
+  // ACTIVATE / DEACTIVATE
 
   const toggleButton = document.createElement("button");
 
@@ -105,20 +124,15 @@ function createProductRow(product) {
     toggleButton.disabled = true;
     dashboardMessage.textContent = "Updating product status...";
 
-    const newStatus = !product.is_active;
-
     const { error } = await supabaseClient
       .from("products")
-      .update({ is_active: newStatus })
+      .update({ is_active: !product.is_active })
       .eq("id", product.id);
 
     if (error) {
-
       console.error(error);
-
       dashboardMessage.textContent =
         "Could not update product status.";
-
       toggleButton.disabled = false;
       return;
     }
@@ -127,11 +141,10 @@ function createProductRow(product) {
       "Product status updated successfully.";
 
     await loadProducts();
-
   });
 
 
-  // DELETE BUTTON
+  // DELETE
 
   const deleteButton = document.createElement("button");
 
@@ -157,12 +170,9 @@ function createProductRow(product) {
       .eq("id", product.id);
 
     if (error) {
-
       console.error(error);
-
       dashboardMessage.textContent =
         "Could not delete product.";
-
       deleteButton.disabled = false;
       return;
     }
@@ -171,7 +181,6 @@ function createProductRow(product) {
       "Product deleted successfully.";
 
     await loadProducts();
-
   });
 
 
@@ -181,10 +190,15 @@ function createProductRow(product) {
     deleteButton
   );
 
-  row.append(details, actions);
+  row.append(
+    image,
+    details,
+    actions
+  );
 
   return row;
 }
+
 
 
 // 3. LOAD PRODUCTS
