@@ -2,6 +2,7 @@
 /* =========================================
    CURATED WITH CARE BY M.
    ADD AND EDIT PRODUCTS
+   IMAGE PREVIEWS AND INDIVIDUAL REMOVAL
 ========================================= */
 
 
@@ -26,7 +27,6 @@ function getLines(id) {
     .map(item => item.trim())
     .filter(Boolean);
 }
-
 
 function getIngredients() {
   const value = getValue("ingredients");
@@ -80,11 +80,265 @@ const formMessage = document.getElementById("form-message");
 const params = new URLSearchParams(window.location.search);
 const editId = params.get("id");
 
+const mainImageInput = document.getElementById("image-file");
+const mainImageField = document.getElementById("image");
+
+const galleryInput = document.getElementById("gallery-files");
+const galleryField = document.getElementById("gallery");
+
+const mainPreview = document.getElementById("main-image-preview");
+const galleryPreview = document.getElementById("gallery-image-preview");
+
 let currentProduct = null;
+
+let selectedMainImage = null;
+let selectedGalleryImages = [];
+
+let mainPreviewUrl = null;
+let galleryPreviewUrls = new Map();
 
 
 /* =========================================
-   4. LOAD EXISTING PRODUCT
+   4. IMAGE PREVIEW HELPERS
+========================================= */
+
+function createPreviewItem(src, alt, onRemove) {
+
+  const item = document.createElement("div");
+  item.className = "image-preview-item";
+
+  const image = document.createElement("img");
+  image.src = src;
+  image.alt = alt;
+
+  const removeButton = document.createElement("button");
+  removeButton.type = "button";
+  removeButton.textContent = "×";
+  removeButton.setAttribute("aria-label", "Remove image");
+
+  removeButton.addEventListener("click", onRemove);
+
+  item.appendChild(image);
+  item.appendChild(removeButton);
+
+  return item;
+}
+
+
+/* =========================================
+   5. MAIN IMAGE PREVIEW
+========================================= */
+
+function renderMainImagePreview() {
+
+  mainPreview.innerHTML = "";
+
+  if (mainPreviewUrl) {
+    URL.revokeObjectURL(mainPreviewUrl);
+    mainPreviewUrl = null;
+  }
+
+  if (selectedMainImage) {
+
+    mainPreviewUrl = URL.createObjectURL(selectedMainImage);
+
+    mainPreview.appendChild(
+      createPreviewItem(
+        mainPreviewUrl,
+        selectedMainImage.name,
+        function() {
+
+          selectedMainImage = null;
+          mainImageInput.value = "";
+
+          renderMainImagePreview();
+
+        }
+      )
+    );
+
+    return;
+  }
+
+  const existingImage = mainImageField.value.trim();
+
+  if (existingImage) {
+
+    mainPreview.appendChild(
+      createPreviewItem(
+        existingImage,
+        "Main product image",
+        function() {
+
+          mainImageField.value = "";
+          selectedMainImage = null;
+
+          renderMainImagePreview();
+
+        }
+      )
+    );
+
+  } else {
+
+    mainPreview.innerHTML =
+      '<p class="image-preview-empty">No main image selected.</p>';
+
+  }
+}
+
+
+/* =========================================
+   6. GALLERY IMAGE PREVIEW
+========================================= */
+
+function renderGalleryPreview() {
+
+  galleryPreview.innerHTML = "";
+
+  // Remove previous temporary preview URLs.
+
+  galleryPreviewUrls.forEach(function(url) {
+    URL.revokeObjectURL(url);
+  });
+
+  galleryPreviewUrls.clear();
+
+
+  // Existing gallery images.
+
+  const existingImages = getLines("gallery");
+
+  existingImages.forEach(function(url, index) {
+
+    galleryPreview.appendChild(
+      createPreviewItem(
+        url,
+        "Gallery image " + (index + 1),
+        function() {
+
+          const remainingImages = getLines("gallery");
+
+          remainingImages.splice(index, 1);
+
+          galleryField.value = remainingImages.join("\n");
+
+          renderGalleryPreview();
+
+        }
+      )
+    );
+
+  });
+
+
+  // Newly selected gallery images.
+
+  selectedGalleryImages.forEach(function(file, index) {
+
+    const previewUrl = URL.createObjectURL(file);
+
+    galleryPreviewUrls.set(index, previewUrl);
+
+    galleryPreview.appendChild(
+      createPreviewItem(
+        previewUrl,
+        file.name,
+        function() {
+
+          selectedGalleryImages.splice(index, 1);
+
+          renderGalleryPreview();
+
+        }
+      )
+    );
+
+  });
+
+
+  if (
+    existingImages.length === 0 &&
+    selectedGalleryImages.length === 0
+  ) {
+
+    galleryPreview.innerHTML =
+      '<p class="image-preview-empty">No gallery images selected.</p>';
+
+  }
+}
+
+
+/* =========================================
+   7. IMAGE INPUT EVENTS
+========================================= */
+
+// Main image selection.
+
+mainImageInput.addEventListener("change", function() {
+
+  const file = mainImageInput.files[0];
+
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+
+    mainImageInput.value = "";
+
+    formMessage.textContent =
+      "Please select a valid image.";
+
+    return;
+  }
+
+  selectedMainImage = file;
+
+  renderMainImagePreview();
+
+});
+
+
+// Gallery image selection.
+// New selections are added without removing earlier selections.
+
+galleryInput.addEventListener("change", function() {
+
+  const files = Array.from(galleryInput.files);
+
+  files.forEach(function(file) {
+
+    if (file.type.startsWith("image/")) {
+      selectedGalleryImages.push(file);
+    }
+
+  });
+
+  galleryInput.value = "";
+
+  renderGalleryPreview();
+
+});
+
+
+// Update previews if image paths are manually changed.
+
+mainImageField.addEventListener("input", function() {
+
+  if (!selectedMainImage) {
+    renderMainImagePreview();
+  }
+
+});
+
+galleryField.addEventListener("input", function() {
+
+  renderGalleryPreview();
+
+});
+
+
+/* =========================================
+   8. LOAD EXISTING PRODUCT WHEN EDITING
 ========================================= */
 
 async function loadProductForEditing() {
@@ -114,7 +368,7 @@ async function loadProductForEditing() {
   saveButton.textContent = "Update Product";
 
 
-  // Basic information
+  // Basic information.
 
   document.getElementById("name").value =
     data.name || "";
@@ -141,7 +395,7 @@ async function loadProductForEditing() {
     (data.collection || []).join(", ");
 
 
-  // Product details
+  // Product details.
 
   document.getElementById("description").value =
     data.description || "";
@@ -156,7 +410,7 @@ async function loadProductForEditing() {
     data.whyWeChoseIt || "";
 
 
-  // Skin information
+  // Skin information.
 
   document.getElementById("concerns").value =
     (data.concerns || []).join(", ");
@@ -165,7 +419,7 @@ async function loadProductForEditing() {
     (data.skinTypes || []).join(", ");
 
 
-  // Ingredients
+  // Ingredients.
 
   document.getElementById("ingredients").value =
     JSON.stringify(data.ingredients || [], null, 2);
@@ -177,16 +431,24 @@ async function loadProductForEditing() {
     (data.howToUseSteps || []).join("\n");
 
 
-  // Images
+  // Images.
 
-  document.getElementById("image").value =
-    data.image || "";
+  mainImageField.value = data.image || "";
 
-  document.getElementById("gallery").value =
+  galleryField.value =
     (data.gallery || []).join("\n");
 
+  selectedMainImage = null;
+  selectedGalleryImages = [];
 
-  // Display settings
+  mainImageInput.value = "";
+  galleryInput.value = "";
+
+  renderMainImagePreview();
+  renderGalleryPreview();
+
+
+  // Display settings.
 
   document.getElementById("tag").value =
     data.tag || "";
@@ -200,23 +462,16 @@ async function loadProductForEditing() {
 
 
 /* =========================================
-   5. UPLOAD MAIN PRODUCT IMAGE
+   9. UPLOAD MAIN IMAGE
 ========================================= */
 
 async function uploadMainProductImage() {
 
-  const fileInput = document.getElementById("image-file");
-  const imageField = document.getElementById("image");
-
-  if (!fileInput || !fileInput.files.length) {
+  if (!selectedMainImage) {
     return null;
   }
 
-  const file = fileInput.files[0];
-
-  if (!file.type.startsWith("image/")) {
-    throw new Error("Please select a valid main image.");
-  }
+  const file = selectedMainImage;
 
   const safeFileName = file.name
     .replace(/[^a-zA-Z0-9.-]/g, "-");
@@ -233,7 +488,9 @@ async function uploadMainProductImage() {
     });
 
   if (error) {
-    throw new Error("Main image upload failed: " + error.message);
+    throw new Error(
+      "Main image upload failed: " + error.message
+    );
   }
 
   const { data: publicData } = supabaseClient
@@ -241,38 +498,34 @@ async function uploadMainProductImage() {
     .from("product-images")
     .getPublicUrl(data.path);
 
-  imageField.value = publicData.publicUrl;
+  mainImageField.value = publicData.publicUrl;
 
-  fileInput.value = "";
+  selectedMainImage = null;
+  mainImageInput.value = "";
+
+  renderMainImagePreview();
 
   return publicData.publicUrl;
 }
 
 
 /* =========================================
-   6. UPLOAD GALLERY IMAGES
+   10. UPLOAD GALLERY IMAGES
 ========================================= */
 
 async function uploadGalleryImages() {
 
-  const fileInput = document.getElementById("gallery-files");
-  const galleryField = document.getElementById("gallery");
-
-  if (!fileInput || !fileInput.files.length) {
+  if (selectedGalleryImages.length === 0) {
     return [];
   }
 
-  const files = Array.from(fileInput.files);
-
   const uploadedUrls = [];
 
-  for (let i = 0; i < files.length; i++) {
+  const filesToUpload = [...selectedGalleryImages];
 
-    const file = files[i];
+  for (let i = 0; i < filesToUpload.length; i++) {
 
-    if (!file.type.startsWith("image/")) {
-      throw new Error("One of the gallery files is not an image.");
-    }
+    const file = filesToUpload[i];
 
     const safeFileName = file.name
       .replace(/[^a-zA-Z0-9.-]/g, "-");
@@ -281,7 +534,8 @@ async function uploadGalleryImages() {
       "gallery/" + Date.now() + "-" + i + "-" + safeFileName;
 
     formMessage.textContent =
-      "Uploading gallery image " + (i + 1) + " of " + files.length + "...";
+      "Uploading gallery image " +
+      (i + 1) + " of " + filesToUpload.length + "...";
 
     const { data, error } = await supabaseClient
       .storage
@@ -292,7 +546,9 @@ async function uploadGalleryImages() {
       });
 
     if (error) {
-      throw new Error("Gallery image upload failed: " + error.message);
+      throw new Error(
+        "Gallery image upload failed: " + error.message
+      );
     }
 
     const { data: publicData } = supabaseClient
@@ -301,9 +557,11 @@ async function uploadGalleryImages() {
       .getPublicUrl(data.path);
 
     uploadedUrls.push(publicData.publicUrl);
+
   }
 
-  // Preserve existing gallery URLs and add new ones.
+
+  // Preserve remaining existing gallery images.
 
   const existingUrls = getLines("gallery");
 
@@ -314,14 +572,17 @@ async function uploadGalleryImages() {
 
   galleryField.value = [...new Set(allUrls)].join("\n");
 
-  fileInput.value = "";
+  selectedGalleryImages = [];
+  galleryInput.value = "";
+
+  renderGalleryPreview();
 
   return uploadedUrls;
 }
 
 
 /* =========================================
-   7. PREPARE PRODUCT DATA
+   11. PREPARE PRODUCT DATA
 ========================================= */
 
 function prepareProduct() {
@@ -383,7 +644,7 @@ function prepareProduct() {
 
 
 /* =========================================
-   8. SAVE OR UPDATE PRODUCT
+   12. SAVE OR UPDATE PRODUCT
 ========================================= */
 
 productForm.addEventListener("submit", async function(event) {
@@ -400,17 +661,27 @@ productForm.addEventListener("submit", async function(event) {
     if (!authorised) return;
 
 
-    // Upload main image if selected
+    // Upload main image if selected.
 
-    await uploadMainProductImage();
+    if (selectedMainImage) {
+
+      formMessage.textContent = "Uploading main image...";
+
+      await uploadMainProductImage();
+
+    }
 
 
-    // Upload additional gallery images if selected
+    // Upload selected gallery images.
 
-    await uploadGalleryImages();
+    if (selectedGalleryImages.length > 0) {
+
+      await uploadGalleryImages();
+
+    }
 
 
-    // Prepare product information after uploads
+    // Prepare product data after uploads.
 
     const productData = prepareProduct();
 
@@ -419,7 +690,7 @@ productForm.addEventListener("submit", async function(event) {
 
     if (currentProduct) {
 
-      // UPDATE EXISTING PRODUCT
+      // UPDATE EXISTING PRODUCT.
 
       const { data, error } = await supabaseClient
         .from("products")
@@ -437,7 +708,7 @@ productForm.addEventListener("submit", async function(event) {
 
     } else {
 
-      // CREATE NEW PRODUCT
+      // CREATE NEW PRODUCT.
 
       const { data, error } = await supabaseClient
         .from("products")
@@ -457,8 +728,6 @@ productForm.addEventListener("submit", async function(event) {
 
     }
 
-
-    // Return to dashboard
 
     setTimeout(function() {
 
@@ -482,7 +751,7 @@ productForm.addEventListener("submit", async function(event) {
 
 
 /* =========================================
-   9. START PAGE
+   13. START PAGE
 ========================================= */
 
 async function startProductPage() {
@@ -495,6 +764,9 @@ async function startProductPage() {
 
     if (editId) {
       await loadProductForEditing();
+    } else {
+      renderMainImagePreview();
+      renderGalleryPreview();
     }
 
   } catch (error) {
