@@ -1,8 +1,9 @@
 
 /* =========================================
    CURATED WITH CARE BY M.
-   ADD AND EDIT PRODUCTS
-   IMAGE PREVIEWS AND INDIVIDUAL REMOVAL
+   PRODUCT EDITOR
+   PHOTO VIEWER + AUTO DRAFTS
+   UNSAVED CHANGES PROTECTION
 ========================================= */
 
 
@@ -36,9 +37,7 @@ function getIngredients() {
   try {
     const parsed = JSON.parse(value);
 
-    if (Array.isArray(parsed)) {
-      return parsed;
-    }
+    if (Array.isArray(parsed)) return parsed;
   } catch (error) {}
 
   return value
@@ -53,6 +52,7 @@ function getIngredients() {
 ========================================= */
 
 async function verifyAdmin() {
+
   const { data, error } =
     await supabaseClient.auth.getUser();
 
@@ -70,15 +70,12 @@ async function verifyAdmin() {
 
 
 /* =========================================
-   3. PAGE ELEMENTS
+   3. PAGE ELEMENTS AND STATE
 ========================================= */
 
 const productForm = document.getElementById("product-form");
 const saveButton = document.getElementById("save-product");
 const formMessage = document.getElementById("form-message");
-
-const params = new URLSearchParams(window.location.search);
-const editId = params.get("id");
 
 const mainImageInput = document.getElementById("image-file");
 const mainImageField = document.getElementById("image");
@@ -89,20 +86,442 @@ const galleryField = document.getElementById("gallery");
 const mainPreview = document.getElementById("main-image-preview");
 const galleryPreview = document.getElementById("gallery-image-preview");
 
+const draftNotice = document.getElementById("draft-notice");
+const draftStatus = document.getElementById("draft-status");
+
+const photoViewer = document.getElementById("photo-viewer");
+const viewerImage = document.getElementById("photo-viewer-image");
+const viewerCounter = document.getElementById("photo-viewer-counter");
+
+const confirmOverlay = document.getElementById("confirm-overlay");
+
+const params = new URLSearchParams(window.location.search);
+const editId = params.get("id");
+
+const draftKey = "curatedProductDraft_" + (editId || "new");
+
+const fieldIds = [
+  "name",
+  "brand",
+  "brandName",
+  "category",
+  "productType",
+  "price",
+  "size",
+  "collection",
+  "description",
+  "benefits",
+  "editorialText",
+  "whyWeChoseIt",
+  "concerns",
+  "skinTypes",
+  "ingredients",
+  "fullIngredients",
+  "howToUseSteps",
+  "image",
+  "gallery",
+  "tag"
+];
+
 let currentProduct = null;
 
 let selectedMainImage = null;
 let selectedGalleryImages = [];
 
-let mainPreviewUrl = null;
-let galleryPreviewUrls = new Map();
+let previewUrls = [];
+let viewerUrls = [];
+
+let viewerPhotos = [];
+let currentViewerIndex = 0;
+
+let dirty = false;
+let saving = false;
+let restoringDraft = false;
+let pendingDestination = null;
+let saveTimer = null;
+
+let initialFormSnapshot = "";
 
 
 /* =========================================
-   4. IMAGE PREVIEW HELPERS
+   4. INDEXEDDB FOR IMAGE DRAFTS
 ========================================= */
 
-function createPreviewItem(src, alt, onRemove) {
+const DRAFT_DB_NAME = "CuratedWithCareDrafts";
+const DRAFT_STORE_NAME = "images";
+
+function openDraftDatabase() {
+
+  return new Promise(function(resolve, reject) {
+
+    if (!window.indexedDB) {
+      reject(new Error("Browser draft storage is unavailable."));
+      return;
+    }
+
+    const request = indexedDB.open(DRAFT_DB_NAME, 1);
+
+    request.onupgradeneeded = function() {
+
+      const db = request.result;
+
+      if (!db.objectStoreNames.contains(DRAFT_STORE_NAME)) {
+        db.createObjectStore(DRAFT_STORE_NAME);
+      }
+
+    };
+
+    request.onsuccess = function() {
+      resolve(request.result);
+    };
+
+    request.onerror = function() {
+      reject(request.error);
+    };
+
+  });
+}
+
+
+async function storeDraftImages() {
+
+  const db = await openDraftDatabase();
+
+  return new Promise(function(resolve, reject) {
+
+    const transaction = db.transaction(
+      DRAFT_STORE_NAME,
+      "readwrite"
+    );
+
+    const store = transaction.objectStore(DRAFT_STORE_NAME);
+
+    store.put({
+      main: selectedMainImage,
+      gallery: selectedGalleryImages
+    }, draftKey);
+
+    transaction.oncomplete = function() {
+      db.close();
+      resolve();
+    };
+
+    transaction.onerror = function() {
+      db.close();
+      reject(transaction.error);
+    };
+
+  });
+}
+
+
+async function loadDraftImages() {
+
+  const db = await openDraftDatabase();
+
+  return new Promise(function(resolve, reject) {
+
+    const transaction = db.transaction(
+      DRAFT_STORE_NAME,
+      "readonly"
+    );
+
+    const request = transaction
+      .objectStore(DRAFT_STORE_NAME)
+      .get(draftKey);
+
+    request.onsuccess = function() {
+
+      const result = request.result || {};
+
+      db.close();
+
+      resolve(result);
+
+    };
+
+    request.onerror = function() {
+
+      db.close();
+      reject(request.error);
+
+    };
+
+  });
+}
+
+
+async function deleteDraftImages() {
+
+  try {
+
+    const db = await openDraftDatabase();
+
+    await new Promise(function(resolve, reject) {
+
+      const transaction = db.transaction(
+        DRAFT_STORE_NAME,
+        "readwrite"
+      );
+
+      transaction.objectStore(DRAFT_STORE_NAME).delete(draftKey);
+
+      transaction.oncomplete = resolve;
+      transaction.onerror = function() {
+        reject(transaction.error);
+      };
+
+    });
+
+    db.close();
+
+  } catch (error) {
+
+    console.warn("Could not remove stored draft images.", error);
+
+  }
+}
+
+
+/* =========================================
+   5. FORM DATA AND DRAFT STORAGE
+========================================= */
+
+function collectFormFields() {
+
+  const fields = {};
+
+  fieldIds.forEach(function(id) {
+
+    fields[id] = document.getElementById(id).value;
+
+  });
+
+  fields.featured =
+    document.getElementById("featured").checked;
+
+  return fields;
+}
+
+
+function applyFormFields(fields) {
+
+  fieldIds.forEach(function(id) {
+
+    if (fields[id] !== undefined) {
+      document.getElementById(id).value = fields[id];
+    }
+
+  });
+
+  if (fields.featured !== undefined) {
+
+    document.getElementById("featured").checked =
+      Boolean(fields.featured);
+
+  }
+
+}
+
+
+function getFormSnapshot() {
+
+  return JSON.stringify(collectFormFields());
+
+}
+
+
+function markAsChanged() {
+
+  if (restoringDraft || saving) return;
+
+  dirty = getFormSnapshot() !== initialFormSnapshot;
+
+  scheduleDraftSave();
+
+}
+
+
+function scheduleDraftSave() {
+
+  clearTimeout(saveTimer);
+
+  saveTimer = setTimeout(function() {
+
+    saveDraftAutomatically();
+
+  }, 700);
+
+}
+
+
+async function saveDraftAutomatically() {
+
+  if (!dirty || saving) return;
+
+  try {
+
+    const draft = {
+      fields: collectFormFields(),
+      updatedAt: new Date().toISOString()
+    };
+
+    localStorage.setItem(
+      draftKey,
+      JSON.stringify(draft)
+    );
+
+    await storeDraftImages();
+
+    draftStatus.textContent =
+      "Draft saved automatically on this device.";
+
+  } catch (error) {
+
+    console.error("Draft saving error:", error);
+
+    draftStatus.textContent =
+      "Automatic draft saving is unavailable. Please save your product regularly.";
+
+  }
+
+}
+
+
+async function clearDraft() {
+
+  clearTimeout(saveTimer);
+
+  localStorage.removeItem(draftKey);
+
+  await deleteDraftImages();
+
+  draftNotice.classList.remove("active");
+
+  draftStatus.textContent =
+    "Your changes will be saved automatically as you work.";
+
+}
+
+
+/* =========================================
+   6. DRAFT RECOVERY
+========================================= */
+
+async function checkForExistingDraft() {
+
+  const savedDraft = localStorage.getItem(draftKey);
+
+  if (!savedDraft) return;
+
+  try {
+
+    const draft = JSON.parse(savedDraft);
+
+    if (!draft.fields) return;
+
+    draftNotice.classList.add("active");
+
+    draftStatus.textContent =
+      "A saved draft is available for recovery.";
+
+    document.getElementById("draft-message").textContent =
+      "A draft saved on " +
+      new Date(draft.updatedAt).toLocaleString() +
+      " is available. Would you like to restore it?";
+
+  } catch (error) {
+
+    console.error("Could not read saved draft.", error);
+
+  }
+
+}
+
+
+async function restoreDraft() {
+
+  const savedDraft = localStorage.getItem(draftKey);
+
+  if (!savedDraft) return;
+
+  try {
+
+    restoringDraft = true;
+
+    const draft = JSON.parse(savedDraft);
+
+    applyFormFields(draft.fields);
+
+    const images = await loadDraftImages();
+
+    selectedMainImage = images.main || null;
+
+    selectedGalleryImages =
+      Array.isArray(images.gallery) ? images.gallery : [];
+
+    mainImageInput.value = "";
+    galleryInput.value = "";
+
+    renderMainImagePreview();
+    renderGalleryPreview();
+
+    restoringDraft = false;
+
+    dirty = true;
+
+    draftNotice.classList.remove("active");
+
+    draftStatus.textContent =
+      "Recovered draft. Your changes will continue saving automatically.";
+
+    scheduleDraftSave();
+
+  } catch (error) {
+
+    restoringDraft = false;
+
+    console.error("Draft recovery error:", error);
+
+    formMessage.textContent =
+      "We could not restore the draft. Please try again.";
+
+  }
+
+}
+
+
+document.getElementById("restore-draft")
+  .addEventListener("click", restoreDraft);
+
+
+document.getElementById("discard-draft")
+  .addEventListener("click", async function() {
+
+    await clearDraft();
+
+    formMessage.textContent =
+      "Saved draft discarded.";
+
+  });
+
+
+/* =========================================
+   7. PHOTO PREVIEW HELPERS
+========================================= */
+
+function clearPreviewUrls() {
+
+  previewUrls.forEach(function(url) {
+    URL.revokeObjectURL(url);
+  });
+
+  previewUrls = [];
+
+}
+
+
+function makePreviewItem(src, alt, onRemove, onOpen) {
 
   const item = document.createElement("div");
   item.className = "image-preview-item";
@@ -110,13 +529,19 @@ function createPreviewItem(src, alt, onRemove) {
   const image = document.createElement("img");
   image.src = src;
   image.alt = alt;
+  image.addEventListener("click", onOpen);
 
   const removeButton = document.createElement("button");
   removeButton.type = "button";
   removeButton.textContent = "×";
   removeButton.setAttribute("aria-label", "Remove image");
 
-  removeButton.addEventListener("click", onRemove);
+  removeButton.addEventListener("click", function(event) {
+
+    event.stopPropagation();
+    onRemove();
+
+  });
 
   item.appendChild(image);
   item.appendChild(removeButton);
@@ -126,38 +551,315 @@ function createPreviewItem(src, alt, onRemove) {
 
 
 /* =========================================
-   5. MAIN IMAGE PREVIEW
+   8. BUILD PHOTO VIEWER LIST
+========================================= */
+
+function buildViewerPhotos() {
+
+  viewerUrls.forEach(function(url) {
+    URL.revokeObjectURL(url);
+  });
+
+  viewerUrls = [];
+  viewerPhotos = [];
+
+  // Main image.
+
+  if (selectedMainImage) {
+
+    const url = URL.createObjectURL(selectedMainImage);
+
+    viewerUrls.push(url);
+
+    viewerPhotos.push({
+      type: "main-file",
+      src: url,
+      name: selectedMainImage.name
+    });
+
+  } else if (mainImageField.value.trim()) {
+
+    viewerPhotos.push({
+      type: "main-url",
+      src: mainImageField.value.trim(),
+      name: "Main product image"
+    });
+
+  }
+
+
+  // Existing gallery images.
+
+  getLines("gallery").forEach(function(url, index) {
+
+    viewerPhotos.push({
+      type: "gallery-url",
+      src: url,
+      name: "Gallery image " + (index + 1)
+    });
+
+  });
+
+
+  // Newly selected gallery files.
+
+  selectedGalleryImages.forEach(function(file, index) {
+
+    const url = URL.createObjectURL(file);
+
+    viewerUrls.push(url);
+
+    viewerPhotos.push({
+      type: "gallery-file",
+      src: url,
+      name: file.name
+    });
+
+  });
+
+}
+
+
+/* =========================================
+   9. OPEN AND CLOSE PHOTO VIEWER
+========================================= */
+
+function openPhotoViewer(index) {
+
+  buildViewerPhotos();
+
+  if (!viewerPhotos.length) return;
+
+  currentViewerIndex = index;
+
+  updatePhotoViewer();
+
+  photoViewer.classList.add("active");
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+function closePhotoViewer() {
+
+  photoViewer.classList.remove("active");
+
+  document.body.style.overflow = "";
+
+  viewerUrls.forEach(function(url) {
+    URL.revokeObjectURL(url);
+  });
+
+  viewerUrls = [];
+
+}
+
+
+function updatePhotoViewer() {
+
+  if (!viewerPhotos.length) {
+
+    closePhotoViewer();
+    return;
+
+  }
+
+  if (currentViewerIndex < 0) {
+    currentViewerIndex = viewerPhotos.length - 1;
+  }
+
+  if (currentViewerIndex >= viewerPhotos.length) {
+    currentViewerIndex = 0;
+  }
+
+  const photo = viewerPhotos[currentViewerIndex];
+
+  viewerImage.src = photo.src;
+  viewerImage.alt = photo.name;
+
+  viewerCounter.textContent =
+    "Photo " + (currentViewerIndex + 1) +
+    " of " + viewerPhotos.length;
+
+  document.getElementById("previous-photo").disabled =
+    viewerPhotos.length < 2;
+
+  document.getElementById("next-photo").disabled =
+    viewerPhotos.length < 2;
+
+}
+
+
+document.getElementById("close-photo-viewer")
+  .addEventListener("click", closePhotoViewer);
+
+
+document.getElementById("previous-photo")
+  .addEventListener("click", function() {
+
+    currentViewerIndex--;
+    updatePhotoViewer();
+
+  });
+
+
+document.getElementById("next-photo")
+  .addEventListener("click", function() {
+
+    currentViewerIndex++;
+    updatePhotoViewer();
+
+  });
+
+
+photoViewer.addEventListener("click", function(event) {
+
+  if (event.target === photoViewer) {
+    closePhotoViewer();
+  }
+
+});
+
+
+document.addEventListener("keydown", function(event) {
+
+  if (!photoViewer.classList.contains("active")) return;
+
+  if (event.key === "Escape") {
+    closePhotoViewer();
+  }
+
+  if (event.key === "ArrowLeft") {
+    currentViewerIndex--;
+    updatePhotoViewer();
+  }
+
+  if (event.key === "ArrowRight") {
+    currentViewerIndex++;
+    updatePhotoViewer();
+  }
+
+});
+
+
+/* =========================================
+   10. DELETE PHOTO FROM VIEWER
+========================================= */
+
+function deleteCurrentPhoto() {
+
+  if (!viewerPhotos.length) return;
+
+  const photo = viewerPhotos[currentViewerIndex];
+
+  if (photo.type === "main-file") {
+
+    selectedMainImage = null;
+    mainImageInput.value = "";
+
+  }
+
+  else if (photo.type === "main-url") {
+
+    mainImageField.value = "";
+
+  }
+
+  else if (photo.type === "gallery-url") {
+
+    const urls = getLines("gallery");
+
+    const galleryIndex = urls.indexOf(photo.src);
+
+    if (galleryIndex !== -1) {
+      urls.splice(galleryIndex, 1);
+    }
+
+    galleryField.value = urls.join("\n");
+
+  }
+
+  else if (photo.type === "gallery-file") {
+
+    const file = selectedGalleryImages.find(function(item) {
+      return item.name === photo.name;
+    });
+
+    const index = selectedGalleryImages.indexOf(file);
+
+    if (index !== -1) {
+      selectedGalleryImages.splice(index, 1);
+    }
+
+  }
+
+
+  // Rebuild the viewer after removal.
+
+  buildViewerPhotos();
+
+  if (currentViewerIndex >= viewerPhotos.length) {
+    currentViewerIndex = viewerPhotos.length - 1;
+  }
+
+  if (viewerPhotos.length === 0) {
+    closePhotoViewer();
+  } else {
+    updatePhotoViewer();
+  }
+
+  renderMainImagePreview();
+  renderGalleryPreview();
+
+  markAsChanged();
+
+}
+
+
+document.getElementById("delete-current-photo")
+  .addEventListener("click", deleteCurrentPhoto);
+
+
+/* =========================================
+   11. RENDER MAIN IMAGE PREVIEW
 ========================================= */
 
 function renderMainImagePreview() {
 
-  mainPreview.innerHTML = "";
+  clearPreviewUrls();
 
-  if (mainPreviewUrl) {
-    URL.revokeObjectURL(mainPreviewUrl);
-    mainPreviewUrl = null;
-  }
+  mainPreview.innerHTML = "";
 
   if (selectedMainImage) {
 
-    mainPreviewUrl = URL.createObjectURL(selectedMainImage);
+    const url = URL.createObjectURL(selectedMainImage);
+
+    previewUrls.push(url);
 
     mainPreview.appendChild(
-      createPreviewItem(
-        mainPreviewUrl,
+      makePreviewItem(
+        url,
         selectedMainImage.name,
+
         function() {
 
           selectedMainImage = null;
           mainImageInput.value = "";
 
           renderMainImagePreview();
+          markAsChanged();
 
+        },
+
+        function() {
+          openPhotoViewer(0);
         }
       )
     );
 
     return;
+
   }
 
   const existingImage = mainImageField.value.trim();
@@ -165,16 +867,21 @@ function renderMainImagePreview() {
   if (existingImage) {
 
     mainPreview.appendChild(
-      createPreviewItem(
+      makePreviewItem(
         existingImage,
         "Main product image",
+
         function() {
 
           mainImageField.value = "";
-          selectedMainImage = null;
 
           renderMainImagePreview();
+          markAsChanged();
 
+        },
+
+        function() {
+          openPhotoViewer(0);
         }
       )
     );
@@ -185,45 +892,48 @@ function renderMainImagePreview() {
       '<p class="image-preview-empty">No main image selected.</p>';
 
   }
+
 }
 
 
 /* =========================================
-   6. GALLERY IMAGE PREVIEW
+   12. RENDER GALLERY PREVIEWS
 ========================================= */
 
 function renderGalleryPreview() {
 
+  clearPreviewUrls();
+
   galleryPreview.innerHTML = "";
-
-  // Remove previous temporary preview URLs.
-
-  galleryPreviewUrls.forEach(function(url) {
-    URL.revokeObjectURL(url);
-  });
-
-  galleryPreviewUrls.clear();
-
-
-  // Existing gallery images.
 
   const existingImages = getLines("gallery");
 
   existingImages.forEach(function(url, index) {
 
     galleryPreview.appendChild(
-      createPreviewItem(
+      makePreviewItem(
         url,
         "Gallery image " + (index + 1),
+
         function() {
 
-          const remainingImages = getLines("gallery");
+          const images = getLines("gallery");
 
-          remainingImages.splice(index, 1);
+          images.splice(index, 1);
 
-          galleryField.value = remainingImages.join("\n");
+          galleryField.value = images.join("\n");
 
           renderGalleryPreview();
+          markAsChanged();
+
+        },
+
+        function() {
+
+          const mainExists =
+            Boolean(selectedMainImage || mainImageField.value.trim());
+
+          openPhotoViewer(index + (mainExists ? 1 : 0));
 
         }
       )
@@ -232,23 +942,36 @@ function renderGalleryPreview() {
   });
 
 
-  // Newly selected gallery images.
-
   selectedGalleryImages.forEach(function(file, index) {
 
-    const previewUrl = URL.createObjectURL(file);
+    const url = URL.createObjectURL(file);
 
-    galleryPreviewUrls.set(index, previewUrl);
+    previewUrls.push(url);
 
     galleryPreview.appendChild(
-      createPreviewItem(
-        previewUrl,
+      makePreviewItem(
+        url,
         file.name,
+
         function() {
 
           selectedGalleryImages.splice(index, 1);
 
           renderGalleryPreview();
+          markAsChanged();
+
+        },
+
+        function() {
+
+          const mainExists =
+            Boolean(selectedMainImage || mainImageField.value.trim());
+
+          openPhotoViewer(
+            existingImages.length +
+            (mainExists ? 1 : 0) +
+            index
+          );
 
         }
       )
@@ -266,14 +989,13 @@ function renderGalleryPreview() {
       '<p class="image-preview-empty">No gallery images selected.</p>';
 
   }
+
 }
 
 
 /* =========================================
-   7. IMAGE INPUT EVENTS
+   13. IMAGE INPUT EVENTS
 ========================================= */
-
-// Main image selection.
 
 mainImageInput.addEventListener("change", function() {
 
@@ -286,20 +1008,19 @@ mainImageInput.addEventListener("change", function() {
     mainImageInput.value = "";
 
     formMessage.textContent =
-      "Please select a valid image.";
+      "Please select a valid main image.";
 
     return;
+
   }
 
   selectedMainImage = file;
 
   renderMainImagePreview();
+  markAsChanged();
 
 });
 
-
-// Gallery image selection.
-// New selections are added without removing earlier selections.
 
 galleryInput.addEventListener("change", function() {
 
@@ -316,11 +1037,10 @@ galleryInput.addEventListener("change", function() {
   galleryInput.value = "";
 
   renderGalleryPreview();
+  markAsChanged();
 
 });
 
-
-// Update previews if image paths are manually changed.
 
 mainImageField.addEventListener("input", function() {
 
@@ -328,17 +1048,21 @@ mainImageField.addEventListener("input", function() {
     renderMainImagePreview();
   }
 
+  markAsChanged();
+
 });
+
 
 galleryField.addEventListener("input", function() {
 
   renderGalleryPreview();
+  markAsChanged();
 
 });
 
 
 /* =========================================
-   8. LOAD EXISTING PRODUCT WHEN EDITING
+   14. LOAD EXISTING PRODUCT
 ========================================= */
 
 async function loadProductForEditing() {
@@ -368,75 +1092,39 @@ async function loadProductForEditing() {
   saveButton.textContent = "Update Product";
 
 
-  // Basic information.
+  const fields = {
 
-  document.getElementById("name").value =
-    data.name || "";
+    name: data.name || "",
+    brand: data.brand || "",
+    brandName: data.brandName || "",
+    category: data.category || "",
+    productType: data.productType || "",
+    price: data.price ?? "",
+    size: data.size || "",
+    collection: (data.collection || []).join(", "),
 
-  document.getElementById("brand").value =
-    data.brand || "";
+    description: data.description || "",
+    benefits: (data.benefits || []).join(", "),
+    editorialText: data.editorialText || "",
+    whyWeChoseIt: data.whyWeChoseIt || "",
 
-  document.getElementById("brandName").value =
-    data.brandName || "";
+    concerns: (data.concerns || []).join(", "),
+    skinTypes: (data.skinTypes || []).join(", "),
 
-  document.getElementById("category").value =
-    data.category || "";
+    ingredients: JSON.stringify(data.ingredients || [], null, 2),
+    fullIngredients: data.fullIngredients || "",
+    howToUseSteps: (data.howToUseSteps || []).join("\n"),
 
-  document.getElementById("productType").value =
-    data.productType || "";
+    image: data.image || "",
+    gallery: (data.gallery || []).join("\n"),
 
-  document.getElementById("price").value =
-    data.price ?? "";
+    tag: data.tag || ""
 
-  document.getElementById("size").value =
-    data.size || "";
+  };
 
-  document.getElementById("collection").value =
-    (data.collection || []).join(", ");
+  fields.featured = Boolean(data.featured);
 
-
-  // Product details.
-
-  document.getElementById("description").value =
-    data.description || "";
-
-  document.getElementById("benefits").value =
-    (data.benefits || []).join(", ");
-
-  document.getElementById("editorialText").value =
-    data.editorialText || "";
-
-  document.getElementById("whyWeChoseIt").value =
-    data.whyWeChoseIt || "";
-
-
-  // Skin information.
-
-  document.getElementById("concerns").value =
-    (data.concerns || []).join(", ");
-
-  document.getElementById("skinTypes").value =
-    (data.skinTypes || []).join(", ");
-
-
-  // Ingredients.
-
-  document.getElementById("ingredients").value =
-    JSON.stringify(data.ingredients || [], null, 2);
-
-  document.getElementById("fullIngredients").value =
-    data.fullIngredients || "";
-
-  document.getElementById("howToUseSteps").value =
-    (data.howToUseSteps || []).join("\n");
-
-
-  // Images.
-
-  mainImageField.value = data.image || "";
-
-  galleryField.value =
-    (data.gallery || []).join("\n");
+  applyFormFields(fields);
 
   selectedMainImage = null;
   selectedGalleryImages = [];
@@ -447,29 +1135,16 @@ async function loadProductForEditing() {
   renderMainImagePreview();
   renderGalleryPreview();
 
-
-  // Display settings.
-
-  document.getElementById("tag").value =
-    data.tag || "";
-
-  document.getElementById("featured").checked =
-    Boolean(data.featured);
-
-  formMessage.textContent =
-    "Product loaded. You can now make changes.";
 }
 
 
 /* =========================================
-   9. UPLOAD MAIN IMAGE
+   15. UPLOAD MAIN PRODUCT IMAGE
 ========================================= */
 
 async function uploadMainProductImage() {
 
-  if (!selectedMainImage) {
-    return null;
-  }
+  if (!selectedMainImage) return null;
 
   const file = selectedMainImage;
 
@@ -506,26 +1181,24 @@ async function uploadMainProductImage() {
   renderMainImagePreview();
 
   return publicData.publicUrl;
+
 }
 
 
 /* =========================================
-   10. UPLOAD GALLERY IMAGES
+   16. UPLOAD GALLERY IMAGES
 ========================================= */
 
 async function uploadGalleryImages() {
 
-  if (selectedGalleryImages.length === 0) {
-    return [];
-  }
+  if (selectedGalleryImages.length === 0) return [];
 
+  const files = [...selectedGalleryImages];
   const uploadedUrls = [];
 
-  const filesToUpload = [...selectedGalleryImages];
+  for (let i = 0; i < files.length; i++) {
 
-  for (let i = 0; i < filesToUpload.length; i++) {
-
-    const file = filesToUpload[i];
+    const file = files[i];
 
     const safeFileName = file.name
       .replace(/[^a-zA-Z0-9.-]/g, "-");
@@ -535,7 +1208,7 @@ async function uploadGalleryImages() {
 
     formMessage.textContent =
       "Uploading gallery image " +
-      (i + 1) + " of " + filesToUpload.length + "...";
+      (i + 1) + " of " + files.length + "...";
 
     const { data, error } = await supabaseClient
       .storage
@@ -560,17 +1233,11 @@ async function uploadGalleryImages() {
 
   }
 
-
-  // Preserve remaining existing gallery images.
-
   const existingUrls = getLines("gallery");
 
-  const allUrls = [
-    ...existingUrls,
-    ...uploadedUrls
-  ];
-
-  galleryField.value = [...new Set(allUrls)].join("\n");
+  galleryField.value = [
+    ...new Set([...existingUrls, ...uploadedUrls])
+  ].join("\n");
 
   selectedGalleryImages = [];
   galleryInput.value = "";
@@ -578,11 +1245,12 @@ async function uploadGalleryImages() {
   renderGalleryPreview();
 
   return uploadedUrls;
+
 }
 
 
 /* =========================================
-   11. PREPARE PRODUCT DATA
+   17. PREPARE PRODUCT DATA
 ========================================= */
 
 function prepareProduct() {
@@ -640,28 +1308,31 @@ function prepareProduct() {
       document.getElementById("featured").checked
 
   };
+
 }
 
 
 /* =========================================
-   12. SAVE OR UPDATE PRODUCT
+   18. SAVE PRODUCT
 ========================================= */
 
-productForm.addEventListener("submit", async function(event) {
+async function saveProduct() {
 
-  event.preventDefault();
+  if (saving) return;
 
+  saving = true;
   saveButton.disabled = true;
+
   formMessage.textContent = "Saving product...";
 
   try {
 
     const authorised = await verifyAdmin();
 
-    if (!authorised) return;
-
-
-    // Upload main image if selected.
+    if (!authorised) {
+      saving = false;
+      return;
+    }
 
     if (selectedMainImage) {
 
@@ -671,26 +1342,17 @@ productForm.addEventListener("submit", async function(event) {
 
     }
 
-
-    // Upload selected gallery images.
-
     if (selectedGalleryImages.length > 0) {
 
       await uploadGalleryImages();
 
     }
 
-
-    // Prepare product data after uploads.
-
     const productData = prepareProduct();
 
     let result;
 
-
     if (currentProduct) {
-
-      // UPDATE EXISTING PRODUCT.
 
       const { data, error } = await supabaseClient
         .from("products")
@@ -703,12 +1365,7 @@ productForm.addEventListener("submit", async function(event) {
 
       result = data;
 
-      formMessage.textContent =
-        "Product updated successfully!";
-
     } else {
-
-      // CREATE NEW PRODUCT.
 
       const { data, error } = await supabaseClient
         .from("products")
@@ -723,18 +1380,30 @@ productForm.addEventListener("submit", async function(event) {
 
       result = data;
 
-      formMessage.textContent =
-        "Product created successfully! Product ID: " + result.id;
-
     }
 
 
-    setTimeout(function() {
+    dirty = false;
+    initialFormSnapshot = getFormSnapshot();
 
-      window.location.href = "admin-dashboard.html";
+    await clearDraft();
 
-    }, 1500);
+    formMessage.textContent =
+      currentProduct
+        ? "Product updated successfully!"
+        : "Product created successfully! Product ID: " + result.id;
 
+    if (pendingDestination) {
+
+      window.location.href = pendingDestination;
+
+    } else {
+
+      setTimeout(function() {
+        window.location.href = "admin-dashboard.html";
+      }, 1200);
+
+    }
 
   } catch (error) {
 
@@ -743,15 +1412,122 @@ productForm.addEventListener("submit", async function(event) {
     formMessage.textContent =
       error.message || "Something went wrong.";
 
+    saving = false;
     saveButton.disabled = false;
 
+    scheduleDraftSave();
+
   }
+
+}
+
+
+productForm.addEventListener("submit", function(event) {
+
+  event.preventDefault();
+
+  saveProduct();
 
 });
 
 
 /* =========================================
-   13. START PAGE
+   19. UNSAVED CHANGES PROTECTION
+========================================= */
+
+function openConfirmation() {
+
+  confirmOverlay.classList.add("active");
+
+}
+
+
+function closeConfirmation() {
+
+  confirmOverlay.classList.remove("active");
+
+}
+
+
+document.getElementById("continue-editing")
+  .addEventListener("click", closeConfirmation);
+
+
+document.getElementById("discard-before-leaving")
+  .addEventListener("click", async function() {
+
+    const destination = pendingDestination;
+
+    closeConfirmation();
+
+    dirty = false;
+
+    await clearDraft();
+
+    if (destination) {
+      window.location.href = destination;
+    }
+
+  });
+
+
+document.getElementById("save-before-leaving")
+  .addEventListener("click", function() {
+
+    closeConfirmation();
+
+    productForm.requestSubmit();
+
+  });
+
+
+// Protect links inside the editor.
+
+document.querySelectorAll('a[href]').forEach(function(link) {
+
+  link.addEventListener("click", function(event) {
+
+    if (!dirty || saving) return;
+
+    const destination = link.href;
+
+    if (destination === window.location.href) return;
+
+    event.preventDefault();
+
+    pendingDestination = destination;
+
+    openConfirmation();
+
+  });
+
+});
+
+
+// Browser-controlled warning for refresh, closing or browser navigation.
+
+window.addEventListener("beforeunload", function(event) {
+
+  if (!dirty || saving) return;
+
+  event.preventDefault();
+
+  event.returnValue = "";
+
+});
+
+
+/* =========================================
+   20. FORM CHANGE TRACKING
+========================================= */
+
+productForm.addEventListener("input", markAsChanged);
+
+productForm.addEventListener("change", markAsChanged);
+
+
+/* =========================================
+   21. START PAGE
 ========================================= */
 
 async function startProductPage() {
@@ -764,18 +1540,28 @@ async function startProductPage() {
 
     if (editId) {
       await loadProductForEditing();
-    } else {
-      renderMainImagePreview();
-      renderGalleryPreview();
     }
+
+    renderMainImagePreview();
+    renderGalleryPreview();
+
+    initialFormSnapshot = getFormSnapshot();
+
+    await checkForExistingDraft();
+
+    formMessage.textContent = "";
 
   } catch (error) {
 
+    console.error(error);
+
     formMessage.textContent = error.message;
+
     saveButton.disabled = true;
 
   }
 
 }
+
 
 startProductPage();
