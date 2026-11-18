@@ -1950,3 +1950,7 @@ if (organiseProductButton) {
   renderMainImagePreview();
   renderGalleryPreview();
 }
+
+  });
+
+}
