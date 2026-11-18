@@ -1928,28 +1928,14 @@ if (organiseProductButton) {
   });
 
 }
-: data.image || "",
-    gallery: (data.gallery || []).join("\n"),
 
-    tag: data.tag || ""
-  };
 
-  fields.featured = Boolean(data.featured);
+    } else {
 
-  applyFormFields(fields);
+      assistantMessage.textContent =
+        "No recognised sections found. Please use headings such as Description:, Benefits:, Key Ingredients:, Full Ingredients: and How to Use:.";
 
-  selectedMainImage = null;
-
-  initialiseGalleryFromField();
-
-  hasUnsavedImageChanges = false;
-
-  mainImageInput.value = "";
-  galleryInput.value = "";
-
-  renderMainImagePreview();
-  renderGalleryPreview();
-}
+    }
 
   });
 
