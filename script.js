@@ -558,6 +558,84 @@ const products = [
   featured: true
 },
 
+{
+  id: 8,
+  name: "PDRN Pink Niacinamide Milky Toner",
+  brand: "medicube",
+  brandName: "Medicube",
+
+  collection: ["pdrn", "pink-pdrn-line"],
+
+  category: "skincare",
+  productType: "Milky Toner",
+  price: 25.00,
+
+  concerns: [
+    "dryness",
+    "dullness",
+    "uneven-skin-tone",
+    "skin-elasticity"
+  ],
+
+  skinTypes: [
+    "Combination",
+    "Dry",
+    "Normal"
+  ],
+
+  description:
+    "A milky toner from Medicube's Pink PDRN collection, featuring niacinamide and a moisturising formulation designed to complement your daily skincare routine.",
+
+  benefits: [
+    "Helps maintain skin hydration",
+    "Helps improve the appearance of dullness",
+    "Supports a smoother-looking complexion",
+    "Helps improve the appearance of uneven skin tone",
+    "Milky toner texture"
+  ],
+
+  editorialText:
+    "A soft, milky addition to your daily skincare ritual. Medicube's PDRN Pink Niacinamide Milky Toner brings together the Pink PDRN collection and a niacinamide-focused formulation for a fresh, hydrated-looking complexion.",
+
+  whyWeChoseIt:
+    "We selected this toner to complement our Medicube Pink PDRN edit, offering another step for customers who enjoy milky-textured skincare.",
+
+  ingredients: [
+    {
+      name: "Niacinamide",
+      description:
+        "A form of vitamin B3 commonly used to improve the appearance of uneven skin tone."
+    },
+    {
+      name: "PDRN (Sodium DNA)",
+      description:
+        "A DNA-derived cosmetic ingredient featured in the Pink PDRN collection."
+    }
+  ],
+
+  fullIngredients: "",
+
+  howToUseSteps: [
+    "Follow the product packaging instructions.",
+    "Apply an appropriate amount to clean skin.",
+    "Gently pat until absorbed."
+  ],
+
+  image:
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-niacinamide-milky-toner/IMG_9207.webp",
+
+  gallery: [
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-niacinamide-milky-toner/IMG_9207.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-niacinamide-milky-toner/IMG_9297.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-niacinamide-milky-toner/IMG_9298.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-niacinamide-milky-toner/IMG_9299.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-niacinamide-milky-toner/IMG_9300.jpeg"
+  ],
+
+  tag: "THE BEAUTY EDIT",
+  featured: true
+},
+
   {
     id: 11,
     name: "PDRN Pink Collagen Volume Multi Balm",
