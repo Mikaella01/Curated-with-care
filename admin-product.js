@@ -1,3 +1,4 @@
+
 alert("ADMIN PRODUCT JAVASCRIPT IS LOADING");
 
 /* =========================================
@@ -5,6 +6,7 @@ alert("ADMIN PRODUCT JAVASCRIPT IS LOADING");
    PRODUCT EDITOR
    DRAGGABLE GALLERY
    PHOTO VIEWER + AUTO DRAFTS
+   PRODUCT VARIATIONS
    UNSAVED CHANGES PROTECTION
 ========================================= */
 
@@ -150,6 +152,456 @@ let suppressGalleryClick = false;
 
 
 /* =========================================
+   3A. PRODUCT VARIATIONS STATE
+========================================= */
+
+let productVariants = [];
+let variantCounter = 0;
+let variantPreviewUrls = [];
+
+
+function createVariant(data = {}) {
+  variantCounter++;
+
+  return {
+    id: data.id || "variant-" + variantCounter,
+    name: data.name || "",
+    size: data.size || "",
+    price: data.price ?? "",
+    image: data.image || "",
+    file: data.file || null
+  };
+}
+
+
+function getVariantDraftData() {
+  return productVariants.map(function(variant) {
+    return {
+      id: variant.id,
+      name: variant.name,
+      size: variant.size,
+      price: variant.price,
+      image: variant.image,
+      file: variant.file || null
+    };
+  });
+}
+
+
+function getVariantDatabaseData() {
+  return productVariants.map(function(variant) {
+    return {
+      name: variant.name.trim(),
+      size: variant.size.trim(),
+      price: Number(variant.price),
+      image: variant.image
+    };
+  });
+}
+
+
+/* =========================================
+   3B. CREATE VARIATION EDITOR
+========================================= */
+
+function createVariantEditor() {
+
+  if (document.getElementById("variant-editor")) return;
+
+  const firstSection = productForm.querySelector(".form-section");
+
+  if (!firstSection) {
+    throw new Error(
+      "Could not find the product form section for the variant editor."
+    );
+  }
+
+  const section = document.createElement("section");
+
+  section.className = "form-section";
+  section.id = "variant-editor";
+
+  section.style.marginTop = "25px";
+
+  section.innerHTML = `
+    <h2>Product Variations</h2>
+
+    <p style="color:#777; line-height:1.6;">
+      Add different sizes or versions of this product.
+      Each variation can have its own price and photograph.
+    </p>
+
+    <div id="variant-list"></div>
+
+    <button
+      type="button"
+      id="add-variant-button"
+      style="
+        margin-top:18px;
+        padding:12px 20px;
+        border:1px solid #c9b9ae;
+        background:#f7f2ed;
+        color:#51443d;
+        cursor:pointer;
+        border-radius:5px;
+      "
+    >
+      + Add Product Variation
+    </button>
+  `;
+
+  firstSection.after(section);
+
+  document
+    .getElementById("add-variant-button")
+    .addEventListener("click", function() {
+
+      productVariants.push(createVariant());
+
+      renderVariantEditor();
+
+      markAsChanged();
+
+    });
+
+  renderVariantEditor();
+}
+
+
+/* =========================================
+   3C. RENDER VARIATION EDITOR
+========================================= */
+
+function clearVariantPreviewUrls() {
+
+  variantPreviewUrls.forEach(function(url) {
+    URL.revokeObjectURL(url);
+  });
+
+  variantPreviewUrls = [];
+}
+
+
+function renderVariantEditor() {
+
+  const list = document.getElementById("variant-list");
+
+  if (!list) return;
+
+  clearVariantPreviewUrls();
+
+  list.innerHTML = "";
+
+  if (productVariants.length === 0) {
+
+    const empty = document.createElement("p");
+
+    empty.textContent =
+      "No variations added. You can add variations such as 30ml, 50ml or 100ml.";
+
+    empty.style.color = "#888";
+    empty.style.padding = "15px 0";
+
+    list.appendChild(empty);
+
+    return;
+  }
+
+
+  productVariants.forEach(function(variant, index) {
+
+    const card = document.createElement("div");
+
+    card.style.cssText = `
+      border:1px solid #e5ddd6;
+      padding:18px;
+      margin-top:16px;
+      border-radius:8px;
+      background:#fffdfa;
+    `;
+
+
+    const heading = document.createElement("h3");
+
+    heading.textContent = "Variation " + (index + 1);
+
+    heading.style.cssText = `
+      margin:0 0 15px;
+      font-size:16px;
+      color:#51443d;
+    `;
+
+    card.appendChild(heading);
+
+
+    function createField(labelText, value, placeholder, type) {
+
+      const wrapper = document.createElement("div");
+
+      wrapper.style.marginBottom = "14px";
+
+      const label = document.createElement("label");
+
+      label.textContent = labelText;
+
+      label.style.cssText = `
+        display:block;
+        margin-bottom:6px;
+        font-weight:500;
+      `;
+
+      const input = document.createElement("input");
+
+      input.type = type || "text";
+      input.value = value ?? "";
+      input.placeholder = placeholder || "";
+
+      input.style.cssText = `
+        width:100%;
+        padding:11px;
+        border:1px solid #ded5ce;
+        border-radius:5px;
+        box-sizing:border-box;
+      `;
+
+      if (input.type === "number") {
+        input.min = "0";
+        input.step = "0.01";
+      }
+
+      input.addEventListener("input", function() {
+
+        if (type === "number") {
+          variant.price = input.value;
+        } else if (labelText === "Variation name") {
+          variant.name = input.value;
+        } else {
+          variant.size = input.value;
+        }
+
+        markAsChanged();
+
+      });
+
+      wrapper.appendChild(label);
+      wrapper.appendChild(input);
+
+      card.appendChild(wrapper);
+
+      return input;
+    }
+
+
+    createField(
+      "Variation name",
+      variant.name,
+      "Example: Standard, Refill, Gift Set",
+      "text"
+    );
+
+
+    createField(
+      "Size",
+      variant.size,
+      "Example: 30ml, 50ml, 100ml",
+      "text"
+    );
+
+
+    createField(
+      "Price",
+      variant.price,
+      "Enter variation price",
+      "number"
+    );
+
+
+    /* VARIATION IMAGE URL */
+
+    const imageUrlWrapper = document.createElement("div");
+
+    imageUrlWrapper.style.marginBottom = "14px";
+
+    const imageUrlLabel = document.createElement("label");
+
+    imageUrlLabel.textContent = "Variation photograph URL";
+
+    imageUrlLabel.style.cssText = `
+      display:block;
+      margin-bottom:6px;
+      font-weight:500;
+    `;
+
+    const imageUrlInput = document.createElement("input");
+
+    imageUrlInput.type = "url";
+    imageUrlInput.value = variant.image || "";
+    imageUrlInput.placeholder = "Paste an image URL (optional)";
+
+    imageUrlInput.style.cssText = `
+      width:100%;
+      padding:11px;
+      border:1px solid #ded5ce;
+      border-radius:5px;
+      box-sizing:border-box;
+    `;
+
+    imageUrlInput.addEventListener("input", function() {
+
+      variant.image = imageUrlInput.value.trim();
+
+      if (variant.file) {
+        variant.file = null;
+      }
+
+      renderVariantEditor();
+
+      markAsChanged();
+
+    });
+
+    imageUrlWrapper.appendChild(imageUrlLabel);
+    imageUrlWrapper.appendChild(imageUrlInput);
+
+    card.appendChild(imageUrlWrapper);
+
+
+    /* VARIATION IMAGE FILE */
+
+    const uploadLabel = document.createElement("label");
+
+    uploadLabel.textContent = "Upload a separate photograph";
+
+    uploadLabel.style.cssText = `
+      display:block;
+      margin-bottom:6px;
+      font-weight:500;
+    `;
+
+    card.appendChild(uploadLabel);
+
+
+    const fileInput = document.createElement("input");
+
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+
+    fileInput.style.cssText = `
+      display:block;
+      margin-bottom:12px;
+      max-width:100%;
+    `;
+
+    fileInput.addEventListener("change", function() {
+
+      const file = fileInput.files[0];
+
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+
+        formMessage.textContent =
+          "Please select a valid variation photograph.";
+
+        fileInput.value = "";
+
+        return;
+      }
+
+      variant.file = file;
+      variant.image = "";
+
+      hasUnsavedImageChanges = true;
+
+      renderVariantEditor();
+
+      markAsChanged();
+
+    });
+
+    card.appendChild(fileInput);
+
+
+    /* VARIATION IMAGE PREVIEW */
+
+    let previewSource = "";
+
+    if (variant.file) {
+
+      previewSource = URL.createObjectURL(variant.file);
+
+      variantPreviewUrls.push(previewSource);
+
+    } else if (variant.image) {
+
+      previewSource = variant.image;
+
+    }
+
+
+    if (previewSource) {
+
+      const preview = document.createElement("img");
+
+      preview.src = previewSource;
+      preview.alt = "Variation photograph";
+
+      preview.style.cssText = `
+        display:block;
+        width:120px;
+        height:120px;
+        object-fit:cover;
+        border-radius:6px;
+        margin:10px 0;
+        border:1px solid #e5ddd6;
+      `;
+
+      preview.onerror = function() {
+        preview.style.display = "none";
+      };
+
+      card.appendChild(preview);
+
+    }
+
+
+    /* REMOVE VARIATION */
+
+    const removeButton = document.createElement("button");
+
+    removeButton.type = "button";
+    removeButton.textContent = "Remove Variation";
+
+    removeButton.style.cssText = `
+      margin-top:12px;
+      padding:9px 14px;
+      border:1px solid #d7b9b2;
+      background:#fff8f6;
+      color:#8a5149;
+      cursor:pointer;
+      border-radius:5px;
+    `;
+
+    removeButton.addEventListener("click", function() {
+
+      productVariants.splice(index, 1);
+
+      renderVariantEditor();
+
+      markAsChanged();
+
+    });
+
+    card.appendChild(removeButton);
+
+    list.appendChild(card);
+
+  });
+
+}
+
+
+/* =========================================
    4. GALLERY ITEM HELPERS
 ========================================= */
 
@@ -263,7 +715,8 @@ async function storeDraftImages() {
 
     store.put({
       main: selectedMainImage,
-      gallery: galleryItems
+      gallery: galleryItems,
+      variants: getVariantDraftData()
     }, draftKey);
 
     transaction.oncomplete = function() {
@@ -361,6 +814,8 @@ function collectFormFields() {
   fields.featured =
     document.getElementById("featured").checked;
 
+  fields.variants = getVariantDraftData();
+
   return fields;
 }
 
@@ -375,6 +830,16 @@ function applyFormFields(fields) {
   if (fields.featured !== undefined) {
     document.getElementById("featured").checked =
       Boolean(fields.featured);
+  }
+
+  if (Array.isArray(fields.variants)) {
+
+    productVariants = fields.variants.map(function(variant) {
+      return createVariant(variant);
+    });
+
+    renderVariantEditor();
+
   }
 }
 
@@ -531,6 +996,17 @@ async function restoreDraft() {
         }
       }
 
+
+      /* RESTORE VARIANT PHOTOS */
+
+      if (Array.isArray(images.variants)) {
+
+        productVariants = images.variants.map(function(variant) {
+          return createVariant(variant);
+        });
+
+      }
+
     } catch (imageError) {
       console.warn("Draft images could not be restored.", imageError);
     }
@@ -546,10 +1022,12 @@ async function restoreDraft() {
 
     hasUnsavedImageChanges =
       Boolean(selectedMainImage) ||
-      galleryItems.some(item => item.type === "file");
+      galleryItems.some(item => item.type === "file") ||
+      productVariants.some(item => item.file);
 
     renderMainImagePreview();
     renderGalleryPreview();
+    renderVariantEditor();
 
     restoringDraft = false;
 
@@ -1207,6 +1685,14 @@ async function loadProductForEditing() {
 
   currentProduct = data;
 
+  /* LOAD EXISTING VARIATIONS */
+
+  productVariants = Array.isArray(data.variants)
+    ? data.variants.map(function(variant) {
+        return createVariant(variant);
+      })
+    : [];
+
   document.querySelector("h1").textContent = "Edit Product";
 
   document.querySelector(".intro").textContent =
@@ -1264,6 +1750,7 @@ async function loadProductForEditing() {
 
   renderMainImagePreview();
   renderGalleryPreview();
+  renderVariantEditor();
 }
 
 
@@ -1391,6 +1878,100 @@ async function uploadGalleryImages() {
 
 
 /* =========================================
+   18A. UPLOAD VARIATION PHOTOGRAPHS
+========================================= */
+
+async function uploadVariantImages() {
+
+  for (let i = 0; i < productVariants.length; i++) {
+
+    const variant = productVariants[i];
+
+    if (!variant.file) continue;
+
+    const file = variant.file;
+
+    const safeFileName = file.name
+      .replace(/[^a-zA-Z0-9.-]/g, "-");
+
+    const filePath =
+      "variants/" +
+      Date.now() +
+      "-" +
+      i +
+      "-" +
+      safeFileName;
+
+    formMessage.textContent =
+      "Uploading photograph for " +
+      (variant.name || "variation " + (i + 1)) +
+      "...";
+
+    const { data, error } = await supabaseClient
+      .storage
+      .from("product-images")
+      .upload(filePath, file, {
+        contentType: file.type,
+        upsert: false
+      });
+
+    if (error) {
+      throw new Error(
+        "Variation image upload failed: " + error.message
+      );
+    }
+
+    const { data: publicData } = supabaseClient
+      .storage
+      .from("product-images")
+      .getPublicUrl(data.path);
+
+    variant.image = publicData.publicUrl;
+
+    variant.file = null;
+  }
+
+  renderVariantEditor();
+}
+
+
+/* =========================================
+   18B. VALIDATE VARIATIONS
+========================================= */
+
+function validateVariants() {
+
+  for (let i = 0; i < productVariants.length; i++) {
+
+    const variant = productVariants[i];
+
+    if (!variant.name.trim()) {
+
+      throw new Error(
+        "Please enter a name for variation " + (i + 1) + "."
+      );
+
+    }
+
+    if (
+      variant.price === "" ||
+      !Number.isFinite(Number(variant.price)) ||
+      Number(variant.price) < 0
+    ) {
+
+      throw new Error(
+        "Please enter a valid price for variation: " +
+        variant.name
+      );
+
+    }
+
+  }
+
+}
+
+
+/* =========================================
    19. PREPARE PRODUCT DATA
 ========================================= */
 
@@ -1445,6 +2026,10 @@ function prepareProduct() {
       return item.url;
     }),
 
+    /* SAVE PRODUCT VARIATIONS */
+
+    variants: getVariantDatabaseData(),
+
     tag: getValue("tag"),
 
     featured:
@@ -1473,20 +2058,40 @@ async function saveProduct() {
       return;
     }
 
+
+    /* VALIDATE VARIATIONS */
+
+    validateVariants();
+
+
+    /* UPLOAD MAIN IMAGE */
+
     if (selectedMainImage) {
       formMessage.textContent = "Uploading main image...";
       await uploadMainProductImage();
     }
 
+
+    /* UPLOAD GALLERY IMAGES */
+
     if (galleryItems.some(item => item.type === "file")) {
       await uploadGalleryImages();
     }
+
+
+    /* UPLOAD VARIATION IMAGES */
+
+    await uploadVariantImages();
+
+
+    /* PREPARE PRODUCT DATA */
 
     const productData = prepareProduct();
 
     let result;
 
     if (currentProduct) {
+
       const { data, error } = await supabaseClient
         .from("products")
         .update(productData)
@@ -1499,6 +2104,7 @@ async function saveProduct() {
       result = data;
 
     } else {
+
       const { data, error } = await supabaseClient
         .from("products")
         .insert([{
@@ -1513,6 +2119,7 @@ async function saveProduct() {
       result = data;
     }
 
+
     dirty = false;
     hasUnsavedImageChanges = false;
 
@@ -1526,14 +2133,19 @@ async function saveProduct() {
         : "Product created successfully! Product ID: " + result.id;
 
     if (pendingDestination) {
+
       window.location.href = pendingDestination;
+
     } else {
+
       setTimeout(function() {
         window.location.href = "admin-dashboard.html";
       }, 1200);
+
     }
 
   } catch (error) {
+
     console.error("Product saving error:", error);
 
     formMessage.textContent =
@@ -1648,6 +2260,7 @@ productForm.addEventListener("change", markAsChanged);
 window.addEventListener("pagehide", function() {
   clearMainPreviewUrls();
   clearGalleryPreviewUrls();
+  clearVariantPreviewUrls();
 
   viewerUrls.forEach(function(url) {
     URL.revokeObjectURL(url);
@@ -1655,6 +2268,15 @@ window.addEventListener("pagehide", function() {
 
   viewerUrls = [];
 });
+
+
+function clearVariantPreviewUrls() {
+  variantPreviewUrls.forEach(function(url) {
+    URL.revokeObjectURL(url);
+  });
+
+  variantPreviewUrls = [];
+}
 
 
 /* =========================================
@@ -1667,10 +2289,24 @@ async function startProductPage() {
   if (!authorised) return;
 
   try {
+
+    /* CREATE VARIATION EDITOR */
+
+    createVariantEditor();
+
+
     if (editId) {
+
       await loadProductForEditing();
+
     } else {
+
       initialiseGalleryFromField();
+
+      productVariants = [];
+
+      renderVariantEditor();
+
     }
 
     renderMainImagePreview();
@@ -1683,11 +2319,13 @@ async function startProductPage() {
     formMessage.textContent = "";
 
   } catch (error) {
+
     console.error(error);
 
     formMessage.textContent = error.message;
 
     saveButton.disabled = true;
+
   }
 }
 
