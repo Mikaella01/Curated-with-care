@@ -212,7 +212,6 @@
       margin: 5px 0;
     }
 
-
     /* =========================================
        GALLERY DRAG AND DROP
     ========================================= */
@@ -241,10 +240,80 @@
     }
 
     #gallery-image-preview .image-preview-item img {
-  -webkit-user-drag: none;
-  user-select: none;
-  -webkit-user-select: none;
-}
+      -webkit-user-drag: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* =========================================
+       PRODUCT VARIANTS
+    ========================================= */
+
+    .variants-intro {
+      color: #8d8178;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .variant-card {
+      background: #f8f5ef;
+      border: 1px solid #e8dfd5;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    .variant-card h3 {
+      font-size: 17px;
+      font-weight: normal;
+      margin: 0 0 20px;
+    }
+
+    .variant-card label {
+      margin-top: 15px;
+    }
+
+    .variant-card input {
+      background: #fffefa;
+    }
+
+    .variant-image-status {
+      color: #8d8178;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .variant-image-preview {
+      display: block;
+      width: 115px;
+      height: 125px;
+      object-fit: contain;
+      background: #fffefa;
+      border: 1px solid #e8dfd5;
+      border-radius: 7px;
+      padding: 5px;
+      margin-top: 12px;
+    }
+
+    .variant-card .remove-variant {
+      background: #8b5555;
+      margin-top: 18px;
+    }
+
+    #add-variant {
+      background: #b99b91;
+      margin-top: 5px;
+    }
+
+    .variants-empty {
+      color: #958980;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 15px 0;
+    }
 
     /* =========================================
        PHOTO VIEWER
@@ -316,7 +385,6 @@
       padding: 8px 14px;
     }
 
-
     /* =========================================
        DRAFT NOTICE
     ========================================= */
@@ -339,7 +407,6 @@
     .draft-notice button {
       margin: 10px 8px 0 0;
     }
-
 
     /* =========================================
        CONFIRMATION DIALOG
@@ -398,7 +465,6 @@
       color: #514943;
     }
 
-
     /* =========================================
        MOBILE
     ========================================= */
@@ -417,6 +483,10 @@
       .image-preview-item {
         width: 95px;
         height: 110px;
+      }
+
+      .variant-card {
+        padding: 15px;
       }
 
     }
@@ -443,61 +513,63 @@
     </p>
 
     <!-- =========================================
-     PRODUCT INFORMATION ASSISTANT
-========================================= -->
+         PRODUCT INFORMATION ASSISTANT
+    ========================================= -->
 
-<section class="form-section" id="product-assistant">
+    <section class="form-section" id="product-assistant">
 
-  <h2>Product Information Assistant</h2>
+      <h2>Product Information Assistant</h2>
 
-  <p class="help">
-    Find product information and organise it into your product form.
-  </p>
+      <p class="help">
+        Find product information and organise it into your product form.
+      </p>
 
-  <div class="field">
-    <label for="product-source-link">
-      Manufacturer or Product Website Link (Optional)
-    </label>
+      <div class="field">
+        <label for="product-source-link">
+          Manufacturer or Product Website Link (Optional)
+        </label>
 
-    <input
-      type="url"
-      id="product-source-link"
-      placeholder="https://..."
-    >
-  </div>
+        <input
+          type="url"
+          id="product-source-link"
+          placeholder="https://..."
+        >
+      </div>
 
-  <div class="field">
-    <label for="product-source-text">
-      Product Information
-    </label>
+      <div class="field">
+        <label for="product-source-text">
+          Product Information
+        </label>
 
-    <textarea
-      id="product-source-text"
-      rows="9"
-      placeholder="Paste the manufacturer's product description, benefits, ingredients and directions here..."
-    ></textarea>
+        <textarea
+          id="product-source-text"
+          rows="9"
+          placeholder="Paste the manufacturer's product description, benefits, ingredients and directions here..."
+        ></textarea>
 
-    <small class="help">
-      You can paste information copied from the manufacturer's website.
-    </small>
-  </div>
+        <small class="help">
+          You can paste information copied from the manufacturer's website.
+        </small>
+      </div>
 
-  <div class="form-actions">
+      <div class="form-actions">
 
-    <button type="button" id="find-product-information">
-      Find Product Information
-    </button>
+        <button type="button" id="find-product-information">
+          Find Product Information
+        </button>
 
-    <button type="button" id="organise-product-information">
-      Organise Information
-    </button>
+        <button type="button" id="organise-product-information">
+          Organise Information
+        </button>
 
-  </div>
+      </div>
 
-  <p id="assistant-message" role="status"></p>
+      <p id="assistant-message" role="status"></p>
 
-</section>
+    </section>
+
     <div id="draft-notice" class="draft-notice">
+
       <strong>Unsaved draft found</strong>
 
       <p id="draft-message">
@@ -511,6 +583,7 @@
       <button type="button" id="discard-draft">
         Discard Draft
       </button>
+
     </div>
 
     <p id="draft-status" class="help">
@@ -575,6 +648,7 @@
         <div class="field">
           <label for="collection">Collections</label>
           <input id="collection">
+
           <small class="help">
             Separate multiple collection names with commas.
           </small>
@@ -597,6 +671,7 @@
         <div class="field">
           <label for="benefits">Benefits</label>
           <textarea id="benefits"></textarea>
+
           <small class="help">
             Separate individual benefits with commas.
           </small>
@@ -624,6 +699,7 @@
         <div class="field">
           <label for="concerns">Skin Concerns</label>
           <input id="concerns">
+
           <small class="help">
             Separate multiple concerns with commas.
           </small>
@@ -632,6 +708,7 @@
         <div class="field">
           <label for="skinTypes">Skin Types</label>
           <input id="skinTypes">
+
           <small class="help">
             Separate multiple skin types with commas.
           </small>
@@ -649,6 +726,7 @@
         <div class="field">
           <label for="ingredients">Key Ingredients</label>
           <textarea id="ingredients"></textarea>
+
           <small class="help">
             Separate ingredient names with commas.
           </small>
@@ -662,6 +740,7 @@
         <div class="field">
           <label for="howToUseSteps">How to Use</label>
           <textarea id="howToUseSteps"></textarea>
+
           <small class="help">
             Enter each instruction on a separate line.
           </small>
@@ -670,11 +749,37 @@
       </section>
 
 
-      <!-- 05. PRODUCT IMAGES -->
+      <!-- 05. PRODUCT VARIANTS -->
+
+      <section class="form-section" id="variants-section">
+
+        <h2>05. Product Variants</h2>
+
+        <p class="variants-intro">
+          Add different options for this product. Each variant can have
+          its own name, size, price, stock quantity and photograph.
+        </p>
+
+        <div id="variant-list">
+
+          <p class="variants-empty">
+            No variants added yet. Select the button below to add your first option.
+          </p>
+
+        </div>
+
+        <button type="button" id="add-variant">
+          + Add Product Variant
+        </button>
+
+      </section>
+
+
+      <!-- 06. PRODUCT IMAGES -->
 
       <section class="form-section">
 
-        <h2>05. Product Images</h2>
+        <h2>06. Product Images</h2>
 
         <!-- MAIN IMAGE -->
 
@@ -698,7 +803,6 @@
 
         </div>
 
-
         <div class="field">
 
           <label for="image">
@@ -712,7 +816,6 @@
           </small>
 
         </div>
-
 
         <!-- GALLERY IMAGES -->
 
@@ -742,7 +845,6 @@
 
         </div>
 
-
         <div class="field">
 
           <label for="gallery">
@@ -760,20 +862,29 @@
       </section>
 
 
-      <!-- 06. PRODUCT DISPLAY -->
+      <!-- 07. PRODUCT DISPLAY -->
 
       <section class="form-section">
 
-        <h2>06. Product Display</h2>
+        <h2>07. Product Display</h2>
 
         <div class="field">
           <label for="tag">Product Tag</label>
-          <input id="tag" placeholder="e.g. Bestseller, New Arrival">
+
+          <input
+            id="tag"
+            placeholder="e.g. Bestseller, New Arrival"
+          >
         </div>
 
         <div class="checkbox-field">
+
           <input type="checkbox" id="featured">
-          <label for="featured">Feature this product on the shop</label>
+
+          <label for="featured">
+            Feature this product on the shop
+          </label>
+
         </div>
 
       </section>
