@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Migration | Curated with Care</title>
+</head>
+
+<body style="font-family: Arial; padding: 25px; background: #f8f5f1;">
+
+  <h1>Product Migration</h1>
+
+  <p>Transfer your existing products into Supabase.</p>
+
+  <p id="status">Preparing migration...</p>
+
+  <button id="migrateButton" disabled>
+    Transfer Products
+  </button>
+
+  <pre id="results"></pre>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    const status = document.getElementById("status");
+    const button = document.getElementById("migrateButton");
+    const results = document.getElementById("results");
+
+    const existingProducts = JSON.parse(
+      localStorage.getItem("curatedProducts") || "[]"
+    );
+
+    if (existingProducts.length === 0) {
+      status.textContent =
+        "No products found. Open your shop first and try again.";
+    } else {
+      status.textContent =
+        existingProducts.length + " products found. Ready to transfer.";
+
+      button.disabled = false;
+    }
+
+    button.addEventListener("click", async () => {
+      button.disabled = true;
+      status.textContent = "Checking Supabase...";
+
+      try {
+        const { data: userData, error: userError } =
+          await supabaseClient.auth.getUser();
+
+        if (userError || !userData.user) {
+          throw new Error("Please log in to your admin account first.");
+        }
+
+        if (userData.user.app_metadata.role !== "admin") {
+          throw new Error("Admin access is required.");
+        }
+
+        const { data: existingRows, error: checkError } =
+          await supabaseClient
+            .from("products")
+            .select("id");
+
+        if (checkError) throw checkError;
+
+        if (existingRows.length > 0) {
+          throw new Error(
+            "Your Supabase products table is not empty. Migration stopped to prevent duplicates."
+          );
+        }
+
+        status.textContent = "Transferring products...";
+
+        const productsToTransfer = existingProducts.map(product => ({
+          ...product,
+          is_active: true
+        }));
+
+        const { data, error } = await supabaseClient
+          .from("products")
+          .insert(productsToTransfer)
+          .select("id, name");
+
+        if (error) throw error;
+
+        results.textContent = JSON.stringify(data, null, 2);
+
+        status.textContent =
+          "Success! " + data.length + " products transferred.";
+
+      } catch (error) {
+        status.textContent = "Migration stopped.";
+        results.textContent = error.message;
+        button.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>
