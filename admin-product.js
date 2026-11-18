@@ -28,8 +28,6 @@ function getLines(id) {
 }
 
 
-// Preserve structured ingredient information.
-
 function getIngredients() {
   const value = getValue("ingredients");
 
@@ -41,9 +39,7 @@ function getIngredients() {
     if (Array.isArray(parsed)) {
       return parsed;
     }
-  } catch (error) {
-    // Ordinary text is allowed too.
-  }
+  } catch (error) {}
 
   return value
     .split(",")
@@ -88,7 +84,7 @@ let currentProduct = null;
 
 
 /* =========================================
-   4. LOAD EXISTING PRODUCT WHEN EDITING
+   4. LOAD EXISTING PRODUCT
 ========================================= */
 
 async function loadProductForEditing() {
@@ -204,7 +200,7 @@ async function loadProductForEditing() {
 
 
 /* =========================================
-   5. MAIN PRODUCT IMAGE UPLOAD
+   5. UPLOAD MAIN PRODUCT IMAGE
 ========================================= */
 
 async function uploadMainProductImage() {
@@ -219,7 +215,7 @@ async function uploadMainProductImage() {
   const file = fileInput.files[0];
 
   if (!file.type.startsWith("image/")) {
-    throw new Error("Please select a valid image file.");
+    throw new Error("Please select a valid main image.");
   }
 
   const safeFileName = file.name
@@ -237,7 +233,7 @@ async function uploadMainProductImage() {
     });
 
   if (error) {
-    throw new Error("Image upload failed: " + error.message);
+    throw new Error("Main image upload failed: " + error.message);
   }
 
   const { data: publicData } = supabaseClient
@@ -247,12 +243,85 @@ async function uploadMainProductImage() {
 
   imageField.value = publicData.publicUrl;
 
+  fileInput.value = "";
+
   return publicData.publicUrl;
 }
 
 
 /* =========================================
-   6. PREPARE PRODUCT DATA
+   6. UPLOAD GALLERY IMAGES
+========================================= */
+
+async function uploadGalleryImages() {
+
+  const fileInput = document.getElementById("gallery-files");
+  const galleryField = document.getElementById("gallery");
+
+  if (!fileInput || !fileInput.files.length) {
+    return [];
+  }
+
+  const files = Array.from(fileInput.files);
+
+  const uploadedUrls = [];
+
+  for (let i = 0; i < files.length; i++) {
+
+    const file = files[i];
+
+    if (!file.type.startsWith("image/")) {
+      throw new Error("One of the gallery files is not an image.");
+    }
+
+    const safeFileName = file.name
+      .replace(/[^a-zA-Z0-9.-]/g, "-");
+
+    const filePath =
+      "gallery/" + Date.now() + "-" + i + "-" + safeFileName;
+
+    formMessage.textContent =
+      "Uploading gallery image " + (i + 1) + " of " + files.length + "...";
+
+    const { data, error } = await supabaseClient
+      .storage
+      .from("product-images")
+      .upload(filePath, file, {
+        contentType: file.type,
+        upsert: false
+      });
+
+    if (error) {
+      throw new Error("Gallery image upload failed: " + error.message);
+    }
+
+    const { data: publicData } = supabaseClient
+      .storage
+      .from("product-images")
+      .getPublicUrl(data.path);
+
+    uploadedUrls.push(publicData.publicUrl);
+  }
+
+  // Preserve existing gallery URLs and add new ones.
+
+  const existingUrls = getLines("gallery");
+
+  const allUrls = [
+    ...existingUrls,
+    ...uploadedUrls
+  ];
+
+  galleryField.value = [...new Set(allUrls)].join("\n");
+
+  fileInput.value = "";
+
+  return uploadedUrls;
+}
+
+
+/* =========================================
+   7. PREPARE PRODUCT DATA
 ========================================= */
 
 function prepareProduct() {
@@ -314,7 +383,7 @@ function prepareProduct() {
 
 
 /* =========================================
-   7. SAVE OR UPDATE PRODUCT
+   8. SAVE OR UPDATE PRODUCT
 ========================================= */
 
 productForm.addEventListener("submit", async function(event) {
@@ -331,20 +400,17 @@ productForm.addEventListener("submit", async function(event) {
     if (!authorised) return;
 
 
-    // Upload selected main image first
+    // Upload main image if selected
 
-    if (
-      document.getElementById("image-file")?.files.length
-    ) {
-
-      formMessage.textContent = "Uploading product image...";
-
-      await uploadMainProductImage();
-
-    }
+    await uploadMainProductImage();
 
 
-    // Prepare product data after image upload
+    // Upload additional gallery images if selected
+
+    await uploadGalleryImages();
+
+
+    // Prepare product information after uploads
 
     const productData = prepareProduct();
 
@@ -416,7 +482,7 @@ productForm.addEventListener("submit", async function(event) {
 
 
 /* =========================================
-   8. START PAGE
+   9. START PAGE
 ========================================= */
 
 async function startProductPage() {
