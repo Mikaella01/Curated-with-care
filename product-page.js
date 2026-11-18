@@ -5,31 +5,87 @@
 ========================================= */
 
 
-/* 1. GET PRODUCT INFORMATION */
+
+/* =========================================
+   1. LOAD PRODUCT FROM SUPABASE
+========================================= */
 
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
 
+let products = [];
+let product = null;
 
-function getStoredProducts() {
-  try {
-    const stored = JSON.parse(
-      localStorage.getItem("curatedProducts") || "[]"
-    );
+function normaliseProductArray(value) {
+  if (Array.isArray(value)) return value;
 
-    return Array.isArray(stored) ? stored : [];
-  } catch (error) {
-    return [];
+  if (typeof value === "string") {
+    try {
+      const parsed = JSON.parse(value);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return value ? [value] : [];
+    }
   }
+
+  return [];
 }
 
+async function loadProductFromSupabase() {
+  try {
+    if (!productId) {
+      throw new Error("No product ID was found in the page URL.");
+    }
 
-const products = getStoredProducts();
+    if (typeof supabaseClient === "undefined") {
+      throw new Error("Supabase is not connected.");
+    }
 
-const product = products.find(item =>
-  String(item.id) === String(productId)
-);
+    const { data, error } = await supabaseClient
+      .from("products")
+      .select("*")
+      .eq("is_active", true);
 
+    if (error) throw error;
+
+    products = (data || []).map(item => ({
+      ...item,
+      collection: normaliseProductArray(item.collection),
+      collections: normaliseProductArray(item.collection),
+      concerns: normaliseProductArray(item.concerns),
+      skinTypes: normaliseProductArray(item.skinTypes),
+      benefits: normaliseProductArray(item.benefits),
+      ingredients: normaliseProductArray(item.ingredients),
+      howToUseSteps: normaliseProductArray(item.howToUseSteps),
+      gallery: normaliseProductArray(item.gallery)
+    }));
+
+    product = products.find(
+      item => String(item.id) === String(productId)
+    );
+
+    if (!product) {
+      throw new Error(
+        "This product could not be found among the active products."
+      );
+    }
+
+    console.log("Product loaded from Supabase:", product);
+
+    initialiseProductPage();
+
+  } catch (error) {
+    console.error("Product loading error:", error);
+
+    const message = document.getElementById("productMessage");
+
+    if (message) {
+      message.textContent = error.message;
+    } else {
+      alert("PRODUCT ERROR: " + error.message);
+    }
+  }
+}
 
 /* 2. GALLERY ELEMENTS */
 
