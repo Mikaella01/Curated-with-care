@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Login | Curated with Care by M.</title>
+
+  <meta name="robots" content="noindex, nofollow">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: #f8f5ef;
+      font-family: Georgia, serif;
+      color: #514943;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 430px;
+      padding: 45px 35px;
+      background: #fffefa;
+      border: 1px solid #e9e1d8;
+      text-align: center;
+    }
+
+    .brand {
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: normal;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #8d8178;
+      margin-bottom: 35px;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ded5cc;
+      background: #fff;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #b99b91;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      background: #b99b91;
+      color: white;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #a8897f;
+    }
+
+    #login-message {
+      margin-top: 18px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 28px;
+      color: #82756d;
+      font-size: 13px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="login-container">
+
+    <div class="brand">Curated with Care by M.</div>
+
+    <h1>Welcome Back</h1>
+
+    <p class="subtitle">
+      Your private administration space
+    </p>
+
+    <form id="admin-login-form">
+
+      <div class="form-group">
+        <label for="admin-email">Email Address</label>
+        <input
+          type="email"
+          id="admin-email"
+          placeholder="Your email address"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="admin-password">Password</label>
+        <input
+          type="password"
+          id="admin-password"
+          placeholder="Your password"
+          required
+        >
+      </div>
+
+      <button type="submit" id="login-button">
+        Sign In
+      </button>
+
+      <p id="login-message" role="status"></p>
+
+    </form>
+
+    <a href="index.html" class="back-link">
+      Return to the boutique
+    </a>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="admin.js"></script>
+
+</body>
+</html>
