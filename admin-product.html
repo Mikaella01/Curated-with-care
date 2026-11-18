@@ -320,55 +320,68 @@
 
 
       
+
 <section class="form-section">
 
   <h2>05. Product Images</h2>
 
-  <!-- MAIN IMAGE UPLOAD -->
+  <!-- MAIN IMAGE -->
   <div class="field">
     <label for="image-file">Upload Main Product Image</label>
+
     <input
       type="file"
       id="image-file"
       accept="image/*"
     >
+
     <small class="help">
       Select the main product photo from your iPad.
     </small>
+
+    <div id="main-image-preview" class="image-preview"></div>
   </div>
 
-  <!-- MAIN IMAGE PATH -->
   <div class="field">
     <label for="image">Main Image Path or URL</label>
     <input id="image">
+
     <small class="help">
-      Example: images/Brands/Medicube/product-image.jpg
+      Your uploaded image URL will appear here automatically.
     </small>
   </div>
 
-  <!-- ADDITIONAL GALLERY IMAGES -->
-  <div class="field">
-  <label for="gallery-files">Upload Additional Product Images</label>
-  <input
-    type="file"
-    id="gallery-files"
-    accept="image/*"
-    multiple
-  >
-  <small class="help">
-    Select multiple product photos from your iPad.
-  </small>
-</div>
 
-<div class="field">
-  <label for="gallery">Additional Gallery Images</label>
-  <textarea id="gallery"></textarea>
-  <small class="help">
-    Existing image paths or URLs are preserved.
-  </small>
-</div>
+  <!-- GALLERY IMAGES -->
+  <div class="field">
+    <label for="gallery-files">Upload Additional Product Images</label>
+
+    <input
+      type="file"
+      id="gallery-files"
+      accept="image/*"
+      multiple
+    >
+
+    <small class="help">
+      Select multiple product photos from your iPad.
+    </small>
+
+    <div id="gallery-image-preview" class="image-preview"></div>
+  </div>
+
+  <div class="field">
+    <label for="gallery">Additional Gallery Images</label>
+
+    <textarea id="gallery"></textarea>
+
+    <small class="help">
+      Existing image paths or uploaded URLs are preserved.
+    </small>
+  </div>
 
 </section>
+
 
       <section class="form-section">
 
