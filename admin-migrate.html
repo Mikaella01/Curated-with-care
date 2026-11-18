@@ -11,9 +11,9 @@
 
   <h1>Product Migration</h1>
 
-  <p>Transfer your existing products into Supabase.</p>
+  <p>Checking your existing product catalogue...</p>
 
-  <p id="status">Preparing migration...</p>
+  <p id="status">Please wait.</p>
 
   <button id="migrateButton" disabled>
     Transfer Products
@@ -23,31 +23,15 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
-  <script src="script.js"></script>
 
   <script>
     const status = document.getElementById("status");
     const button = document.getElementById("migrateButton");
     const results = document.getElementById("results");
 
-    const existingProducts = JSON.parse(
-      localStorage.getItem("curatedProducts") || "[]"
-    );
+    let existingProducts = [];
 
-    if (existingProducts.length === 0) {
-      status.textContent =
-        "No products found. Open your shop first and try again.";
-    } else {
-      status.textContent =
-        existingProducts.length + " products found. Ready to transfer.";
-
-      button.disabled = false;
-    }
-
-    button.addEventListener("click", async () => {
-      button.disabled = true;
-      status.textContent = "Checking Supabase...";
-
+    async function prepareMigration() {
       try {
         const { data: userData, error: userError } =
           await supabaseClient.auth.getUser();
@@ -57,9 +41,49 @@
         }
 
         if (userData.user.app_metadata.role !== "admin") {
-          throw new Error("Admin access is required.");
+          throw new Error("Administrator access is required.");
         }
 
+        const response = await fetch("script.js");
+
+        if (!response.ok) {
+          throw new Error("Could not load script.js.");
+        }
+
+        const source = await response.text();
+
+        const match = source.match(
+          /const products = (\[[\s\S]*?\n\]);/
+        );
+
+        if (!match) {
+          throw new Error("Could not find the product catalogue.");
+        }
+
+        existingProducts = Function(
+          '"use strict"; return (' + match[1] + ');'
+        )();
+
+        status.textContent =
+          existingProducts.length +
+          " products found. Ready for your review.";
+
+        results.textContent = existingProducts.map(
+          product => product.id + " — " + product.name
+        ).join("\n");
+
+        button.disabled = existingProducts.length !== 9;
+
+      } catch (error) {
+        status.textContent = "Could not prepare migration.";
+        results.textContent = error.message;
+      }
+    }
+
+    button.addEventListener("click", async () => {
+      button.disabled = true;
+
+      try {
         const { data: existingRows, error: checkError } =
           await supabaseClient
             .from("products")
@@ -69,11 +93,9 @@
 
         if (existingRows.length > 0) {
           throw new Error(
-            "Your Supabase products table is not empty. Migration stopped to prevent duplicates."
+            "Supabase already contains products. No transfer was made."
           );
         }
-
-        status.textContent = "Transferring products...";
 
         const productsToTransfer = existingProducts.map(product => ({
           ...product,
@@ -87,17 +109,19 @@
 
         if (error) throw error;
 
+        status.textContent =
+          "Successfully transferred " + data.length + " products.";
+
         results.textContent = JSON.stringify(data, null, 2);
 
-        status.textContent =
-          "Success! " + data.length + " products transferred.";
-
       } catch (error) {
-        status.textContent = "Migration stopped.";
+        status.textContent = "Transfer stopped.";
         results.textContent = error.message;
         button.disabled = false;
       }
     });
+
+    prepareMigration();
   </script>
 
 </body>
