@@ -2,8 +2,8 @@
 /* =========================================
    CURATED WITH CARE BY M.
    INDIVIDUAL PRODUCT PAGE
+   PRODUCT VARIATIONS
 ========================================= */
-
 
 
 /* =========================================
@@ -15,6 +15,7 @@ const productId = params.get("id");
 
 let products = [];
 let product = null;
+let selectedVariant = null;
 
 function normaliseProductArray(value) {
   if (Array.isArray(value)) return value;
@@ -30,6 +31,7 @@ function normaliseProductArray(value) {
 
   return [];
 }
+
 
 async function loadProductFromSupabase() {
   try {
@@ -57,7 +59,8 @@ async function loadProductFromSupabase() {
       benefits: normaliseProductArray(item.benefits),
       ingredients: normaliseProductArray(item.ingredients),
       howToUseSteps: normaliseProductArray(item.howToUseSteps),
-      gallery: normaliseProductArray(item.gallery)
+      gallery: normaliseProductArray(item.gallery),
+      variants: normaliseProductArray(item.variants)
     }));
 
     product = products.find(
@@ -87,7 +90,10 @@ async function loadProductFromSupabase() {
   }
 }
 
-/* 2. GALLERY ELEMENTS */
+
+/* =========================================
+   2. GALLERY ELEMENTS
+========================================= */
 
 const mainPhoto = document.getElementById("mainProductPhoto");
 const thumbnails = document.getElementById("productThumbnails");
@@ -95,7 +101,9 @@ const thumbnails = document.getElementById("productThumbnails");
 let currentPhoto = 0;
 
 
-/* 3. SHOPPING BAG DATA */
+/* =========================================
+   3. SHOPPING BAG DATA
+========================================= */
 
 function getStoredCart() {
   try {
@@ -104,16 +112,18 @@ function getStoredCart() {
     );
 
     return Array.isArray(stored) ? stored : [];
+
   } catch (error) {
     return [];
   }
 }
 
-
 let cart = getStoredCart();
 
 
-/* 4. GENERAL HELPERS */
+/* =========================================
+   4. GENERAL HELPERS
+========================================= */
 
 function formatPrice(price) {
   return "€" + Number(price || 0).toFixed(2);
@@ -132,8 +142,23 @@ function escapeHTML(value) {
 
 
 function getProductGallery(selectedProduct) {
-  if (selectedProduct.gallery?.length) {
-    return selectedProduct.gallery;
+  const gallery = Array.isArray(selectedProduct.gallery)
+    ? selectedProduct.gallery
+    : [];
+
+  if (
+    selectedProduct === product &&
+    selectedVariant &&
+    selectedVariant.image
+  ) {
+    return [
+      selectedVariant.image,
+      ...gallery.filter(photo => photo !== selectedVariant.image)
+    ];
+  }
+
+  if (gallery.length) {
+    return gallery;
   }
 
   return selectedProduct.image
@@ -181,7 +206,9 @@ function createTextElement(tag, text, className) {
 }
 
 
-/* 5. SAVE AND UPDATE SHOPPING BAG */
+/* =========================================
+   5. SAVE AND UPDATE SHOPPING BAG
+========================================= */
 
 function saveCart() {
   localStorage.setItem(
@@ -213,21 +240,196 @@ function updateCart() {
 }
 
 
-/* 6. ADD PRODUCT TO BAG */
+/* =========================================
+   6. PRODUCT VARIATIONS
+========================================= */
+
+function getProductVariants() {
+  if (!product || !Array.isArray(product.variants)) {
+    return [];
+  }
+
+  return product.variants.filter(variant =>
+    variant &&
+    variant.name &&
+    Number.isFinite(Number(variant.price))
+  );
+}
+
+
+function getSelectedProductDetails() {
+  if (!product) return null;
+
+  if (!selectedVariant) {
+    return {
+      ...product,
+      variantName: "",
+      size: product.size || "",
+      price: product.price,
+      image: product.image
+    };
+  }
+
+  return {
+    ...product,
+    variantName: selectedVariant.name,
+    size: selectedVariant.size || product.size || "",
+    price: selectedVariant.price,
+    image: selectedVariant.image || product.image
+  };
+}
+
+
+function getVariantIdentity(item) {
+  return [
+    String(item.id),
+    String(item.variantName || ""),
+    String(item.size || "")
+  ].join("::");
+}
+
+
+function createVariantSelector() {
+  const variants = getProductVariants();
+
+  if (!variants.length) return;
+
+  const sizeElement = document.getElementById("productSize");
+
+  if (!sizeElement) {
+    console.warn(
+      "Product variation selector could not find #productSize."
+    );
+    return;
+  }
+
+  const wrapper = document.createElement("div");
+
+  wrapper.id = "productVariantSelector";
+  wrapper.className = "product-variant-selector";
+
+  wrapper.innerHTML = `
+    <p class="product-variant-heading">
+      CHOOSE YOUR VERSION
+    </p>
+
+    <div class="product-variant-options"></div>
+  `;
+
+  sizeElement.insertAdjacentElement("afterend", wrapper);
+
+  const optionsContainer = wrapper.querySelector(
+    ".product-variant-options"
+  );
+
+  variants.forEach((variant, index) => {
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "product-variant-option";
+
+    button.textContent = variant.name;
+
+    button.setAttribute(
+      "aria-pressed",
+      index === 0 ? "true" : "false"
+    );
+
+    button.addEventListener("click", () => {
+      selectProductVariant(index);
+    });
+
+    optionsContainer.appendChild(button);
+  });
+
+  /* Select the first variation automatically */
+
+  selectProductVariant(0);
+}
+
+
+function selectProductVariant(index) {
+  const variants = getProductVariants();
+
+  if (!variants[index]) return;
+
+  selectedVariant = variants[index];
+
+  const buttons = document.querySelectorAll(
+    ".product-variant-option"
+  );
+
+  buttons.forEach((button, buttonIndex) => {
+    const isSelected = buttonIndex === index;
+
+    button.classList.toggle("selected", isSelected);
+
+    button.setAttribute(
+      "aria-pressed",
+      String(isSelected)
+    );
+  });
+
+  updateSelectedVariantDisplay();
+}
+
+
+function updateSelectedVariantDisplay() {
+  if (!product) return;
+
+  const details = getSelectedProductDetails();
+
+  if (!details) return;
+
+  const priceElement = document.getElementById("productPrice");
+  const sizeElement = document.getElementById("productSize");
+
+  if (priceElement) {
+    priceElement.textContent = formatPrice(details.price);
+  }
+
+  if (sizeElement) {
+    sizeElement.textContent = details.size;
+  }
+
+  /* Refresh product photos */
+
+  renderProductGallery();
+
+  /* Refresh the product information */
+
+  displayProductGlance();
+}
+
+
+/* =========================================
+   7. ADD PRODUCT TO BAG
+========================================= */
 
 function addProductToBag() {
   if (!product) return;
 
+  const selectedProduct = getSelectedProductDetails();
+
+  if (!selectedProduct) return;
+
+  const selectedIdentity = getVariantIdentity(selectedProduct);
+
   const existingItem = cart.find(item =>
-    String(item.id) === String(product.id)
+    getVariantIdentity(item) === selectedIdentity
   );
 
   if (existingItem) {
     existingItem.quantity =
       Number(existingItem.quantity || 0) + 1;
+
   } else {
     cart.push({
       ...product,
+      variantName: selectedProduct.variantName,
+      size: selectedProduct.size,
+      price: selectedProduct.price,
+      image: selectedProduct.image,
       quantity: 1
     });
   }
@@ -246,16 +448,18 @@ function addProductToBag() {
     button.textContent = "ADDED TO BAG ✓";
   }
 
-  showBagToast();
+  showBagToast(selectedProduct);
 }
 
 
-/* 7. SHOPPING BAG NOTIFICATION */
+/* =========================================
+   8. SHOPPING BAG NOTIFICATION
+========================================= */
 
 let toastTimer;
 
 
-function showBagToast(selectedProduct = product) {
+function showBagToast(selectedProduct = getSelectedProductDetails()) {
   const toast = document.getElementById("bagToast");
   const toastImage = document.getElementById("bagToastImage");
   const toastName = document.getElementById("bagToastName");
@@ -269,7 +473,13 @@ function showBagToast(selectedProduct = product) {
   }
 
   if (toastName) {
-    toastName.textContent = selectedProduct.name || "";
+    toastName.textContent =
+      selectedProduct.name +
+      (
+        selectedProduct.variantName
+          ? " — " + selectedProduct.variantName
+          : ""
+      );
   }
 
   if (toastPrice) {
@@ -306,7 +516,9 @@ if (toastCloseButton) {
 }
 
 
-/* 8. DISPLAY PRODUCT PHOTOS */
+/* =========================================
+   9. DISPLAY PRODUCT PHOTOS
+========================================= */
 
 function showPhoto(index) {
   if (!product || !mainPhoto) return;
@@ -326,7 +538,48 @@ function showPhoto(index) {
 }
 
 
-/* 9. PRODUCT EDITORIAL SECTION */
+function renderProductGallery() {
+  if (!product) return;
+
+  const gallery = getProductGallery(product);
+
+  if (thumbnails) {
+    thumbnails.innerHTML = "";
+
+    gallery.forEach((photo, index) => {
+      const button = document.createElement("button");
+
+      button.className = "product-thumbnail";
+      button.type = "button";
+
+      button.setAttribute(
+        "aria-label",
+        "Show product photo " + (index + 1)
+      );
+
+      const image = document.createElement("img");
+
+      image.src = photo;
+      image.alt = product.name + " photo " + (index + 1);
+
+      button.appendChild(image);
+
+      button.addEventListener("click", () => {
+        showPhoto(index);
+      });
+
+      thumbnails.appendChild(button);
+    });
+  }
+
+  currentPhoto = 0;
+  showPhoto(0);
+}
+
+
+/* =========================================
+   10. PRODUCT EDITORIAL SECTION
+========================================= */
 
 function displayProductEditorial() {
   const editorialText = document.getElementById(
@@ -349,7 +602,9 @@ function displayProductEditorial() {
 }
 
 
-/* 10. AT A GLANCE */
+/* =========================================
+   11. AT A GLANCE
+========================================= */
 
 function displayProductGlance() {
   const grid = document.getElementById("productGlanceGrid");
@@ -359,8 +614,9 @@ function displayProductGlance() {
   grid.innerHTML = "";
 
   const collections = getProductCollections(product);
+  const details = getSelectedProductDetails();
 
-  const details = [
+  const detailsToDisplay = [
     {
       label: "BRAND",
       value: product.brandName || product.brand
@@ -371,7 +627,7 @@ function displayProductGlance() {
     },
     {
       label: "SIZE",
-      value: product.size
+      value: details.size
     },
     {
       label: "COLLECTION",
@@ -379,7 +635,7 @@ function displayProductGlance() {
     }
   ];
 
-  const availableDetails = details.filter(detail =>
+  const availableDetails = detailsToDisplay.filter(detail =>
     detail.value
   );
 
@@ -416,7 +672,9 @@ function displayProductGlance() {
 }
 
 
-/* 11. WHY WE CHOSE IT */
+/* =========================================
+   12. WHY WE CHOSE IT
+========================================= */
 
 function displayProductChoice() {
   const choiceText = document.getElementById(
@@ -439,7 +697,9 @@ function displayProductChoice() {
 }
 
 
-/* 12. SKIN INFORMATION */
+/* =========================================
+   13. SKIN INFORMATION
+========================================= */
 
 function displayProductSkinDetails() {
   const container = document.getElementById(
@@ -510,7 +770,9 @@ function displayProductSkinDetails() {
 }
 
 
-/* 13. INGREDIENT INFORMATION */
+/* =========================================
+   14. INGREDIENT INFORMATION
+========================================= */
 
 function displayProductIngredients() {
   const container = document.getElementById(
@@ -551,6 +813,7 @@ function displayProductIngredients() {
       item.appendChild(
         createTextElement("h3", ingredient)
       );
+
     } else if (ingredient && typeof ingredient === "object") {
       if (ingredient.name) {
         item.appendChild(
@@ -571,6 +834,7 @@ function displayProductIngredients() {
   if (hasFullIngredients && fullIngredientsText && fullIngredients) {
     fullIngredientsText.textContent = product.fullIngredients;
     fullIngredients.hidden = false;
+
   } else if (fullIngredients) {
     fullIngredients.hidden = true;
   }
@@ -579,7 +843,9 @@ function displayProductIngredients() {
 }
 
 
-/* 14. HOW TO USE */
+/* =========================================
+   15. HOW TO USE
+========================================= */
 
 function displayProductHowTo() {
   const container = document.getElementById(
@@ -612,6 +878,7 @@ function displayProductHowTo() {
     });
 
     container.appendChild(list);
+
   } else {
     container.appendChild(
       createTextElement("p", instructions)
@@ -622,7 +889,9 @@ function displayProductHowTo() {
 }
 
 
-/* 15. COMPLETE THE RITUAL */
+/* =========================================
+   16. COMPLETE THE RITUAL
+========================================= */
 
 function displayProductRoutine() {
   const grid = document.getElementById(
@@ -680,7 +949,9 @@ function displayProductRoutine() {
 }
 
 
-/* 16. INITIALISE PRODUCT PAGE */
+/* =========================================
+   17. INITIALISE PRODUCT PAGE
+========================================= */
 
 function initialiseProductPage() {
   if (!product) {
@@ -707,21 +978,37 @@ function initialiseProductPage() {
   document.title =
     product.name + " | Curated with Care by M.";
 
-  document.getElementById("productBrand").textContent =
-    product.brandName || product.brand || "";
+  const brandElement = document.getElementById("productBrand");
+  const nameElement = document.getElementById("productName");
+  const descriptionElement = document.getElementById("productDescription");
 
-  document.getElementById("productName").textContent =
-    product.name;
+  if (brandElement) {
+    brandElement.textContent =
+      product.brandName || product.brand || "";
+  }
 
-  document.getElementById("productSize").textContent =
-    product.size || "";
+  if (nameElement) {
+    nameElement.textContent = product.name;
+  }
 
-  document.getElementById("productPrice").textContent =
-    formatPrice(product.price);
+  if (descriptionElement) {
+    descriptionElement.textContent =
+      product.description ||
+      "Discover this beauty favourite, thoughtfully selected by Curated with Care by M.";
+  }
 
-  document.getElementById("productDescription").textContent =
-    product.description ||
-    "Discover this beauty favourite, thoughtfully selected by Curated with Care by M.";
+  /* INITIAL PRODUCT PRICE AND SIZE */
+
+  const priceElement = document.getElementById("productPrice");
+  const sizeElement = document.getElementById("productSize");
+
+  if (priceElement) {
+    priceElement.textContent = formatPrice(product.price);
+  }
+
+  if (sizeElement) {
+    sizeElement.textContent = product.size || "";
+  }
 
   /* PRODUCT BENEFITS */
 
@@ -736,44 +1023,19 @@ function initialiseProductPage() {
       );
     });
 
-    benefits.parentElement.hidden =
-      !product.benefits || product.benefits.length === 0;
+    if (benefits.parentElement) {
+      benefits.parentElement.hidden =
+        !product.benefits || product.benefits.length === 0;
+    }
   }
 
-  /* CREATE PHOTO THUMBNAILS */
+  /* CREATE VARIATION SELECTOR */
 
-  const gallery = getProductGallery(product);
+  createVariantSelector();
 
-  if (thumbnails) {
-    thumbnails.innerHTML = "";
+  /* CREATE PRODUCT PHOTO GALLERY */
 
-    gallery.forEach((photo, index) => {
-      const button = document.createElement("button");
-
-      button.className = "product-thumbnail";
-      button.type = "button";
-
-      button.setAttribute(
-        "aria-label",
-        "Show product photo " + (index + 1)
-      );
-
-      const image = document.createElement("img");
-
-      image.src = photo;
-      image.alt = product.name + " photo " + (index + 1);
-
-      button.appendChild(image);
-
-      button.addEventListener("click", () => {
-        showPhoto(index);
-      });
-
-      thumbnails.appendChild(button);
-    });
-  }
-
-  showPhoto(0);
+  renderProductGallery();
 
   /* CONNECT ADD TO BAG BUTTON */
 
@@ -783,7 +1045,7 @@ function initialiseProductPage() {
     addButton.addEventListener("click", addProductToBag);
   }
 
-  /* DISPLAY NEW EDITORIAL SECTIONS */
+  /* DISPLAY EDITORIAL SECTIONS */
 
   displayProductEditorial();
   displayProductGlance();
@@ -792,10 +1054,16 @@ function initialiseProductPage() {
   displayProductIngredients();
   displayProductHowTo();
   displayProductRoutine();
+
+  /* DISPLAY RELATED PRODUCTS */
+
+  displayRelatedProducts();
 }
 
 
-/* 17. PREVIOUS AND NEXT PHOTOS */
+/* =========================================
+   18. PREVIOUS AND NEXT PHOTOS
+========================================= */
 
 const previousPhoto = document.getElementById("previousPhoto");
 const nextPhoto = document.getElementById("nextPhoto");
@@ -813,7 +1081,9 @@ if (nextPhoto) {
 }
 
 
-/* 18. MOBILE PHOTO SWIPING */
+/* =========================================
+   19. MOBILE PHOTO SWIPING
+========================================= */
 
 let touchStartX = 0;
 
@@ -837,13 +1107,14 @@ if (mainPhoto) {
 }
 
 
-/* 19. RELATED PRODUCTS — YOU MAY ALSO LOVE */
+/* =========================================
+   20. RELATED PRODUCTS — YOU MAY ALSO LOVE
+========================================= */
 
 function getRelatedProducts() {
   if (!product) return [];
 
   const currentCollections = getProductCollections(product);
-
   const currentConcerns = product.concerns || [];
 
   return products
@@ -899,7 +1170,9 @@ function getRelatedProducts() {
 }
 
 
-/* 20. DISPLAY RELATED PRODUCTS */
+/* =========================================
+   21. DISPLAY RELATED PRODUCTS
+========================================= */
 
 function displayRelatedProducts() {
   const section = document.getElementById(
@@ -993,7 +1266,9 @@ function displayRelatedProducts() {
 }
 
 
-/* 21. ADD RECOMMENDED PRODUCT TO SHOPPING BAG */
+/* =========================================
+   22. ADD RECOMMENDED PRODUCT TO BAG
+========================================= */
 
 function addRelatedProductToBag(selectedProductId) {
   const selectedProduct = products.find(item =>
@@ -1002,27 +1277,35 @@ function addRelatedProductToBag(selectedProductId) {
 
   if (!selectedProduct) return;
 
+  const selectedItem = {
+    ...selectedProduct,
+    variantName: "",
+    quantity: 1
+  };
+
+  const selectedIdentity = getVariantIdentity(selectedItem);
+
   const existingItem = cart.find(item =>
-    String(item.id) === String(selectedProductId)
+    getVariantIdentity(item) === selectedIdentity
   );
 
   if (existingItem) {
     existingItem.quantity =
       Number(existingItem.quantity || 0) + 1;
+
   } else {
-    cart.push({
-      ...selectedProduct,
-      quantity: 1
-    });
+    cart.push(selectedItem);
   }
 
   updateCart();
 
-  showBagToast(selectedProduct);
+  showBagToast(selectedItem);
 }
 
 
-/* 22. CONNECT RELATED PRODUCT BUTTONS */
+/* =========================================
+   23. CONNECT RELATED PRODUCT BUTTONS
+========================================= */
 
 document.addEventListener("click", event => {
   const button = event.target.closest("[data-related-add]");
@@ -1033,7 +1316,9 @@ document.addEventListener("click", event => {
 });
 
 
-/* 23. START THE PAGE */
+/* =========================================
+   24. START THE PAGE
+========================================= */
 
 refreshCartFromStorage();
 
