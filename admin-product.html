@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Add Product | Curated with Care by M.</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 25px 16px 60px;
+      background: #f8f5ef;
+      color: #514943;
+      font-family: Georgia, serif;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+
+    .brand {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: normal;
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      color: #8d8178;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .form-section {
+      background: #fffefa;
+      border: 1px solid #e9e1d8;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .form-section h2 {
+      font-size: 20px;
+      font-weight: normal;
+      margin-top: 0;
+      margin-bottom: 22px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ded5cc;
+      background: white;
+      color: #514943;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      border-radius: 0;
+    }
+
+    textarea {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    .help {
+      display: block;
+      color: #958980;
+      font-size: 11px;
+      margin-top: 7px;
+      line-height: 1.5;
+    }
+
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .checkbox-field {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .checkbox-field input {
+      width: auto;
+    }
+
+    button,
+    .back-button {
+      display: inline-block;
+      padding: 14px 20px;
+      border: none;
+      background: #b99b91;
+      color: white;
+      font-size: 12px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .back-button {
+      background: #eee6df;
+      color: #514943;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    #form-message {
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 550px) {
+      .two-columns {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .form-section {
+        padding: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <header>
+      <div class="brand">Curated with Care by M.</div>
+      <a href="admin-dashboard.html" class="back-button">
+        Back to Dashboard
+      </a>
+    </header>
+
+    <h1>Add New Product</h1>
+
+    <p class="intro">
+      Add a new beauty favourite to your curated collection.
+    </p>
+
+    <form id="product-form">
+
+      <section class="form-section">
+
+        <h2>01. Basic Information</h2>
+
+        <div class="field">
+          <label for="name">Product Name *</label>
+          <input id="name" required>
+        </div>
+
+        <div class="two-columns">
+
+          <div class="field">
+            <label for="brand">Brand *</label>
+            <input id="brand" required>
+          </div>
+
+          <div class="field">
+            <label for="brandName">Brand Display Name</label>
+            <input id="brandName">
+          </div>
+
+        </div>
+
+        <div class="two-columns">
+
+          <div class="field">
+            <label for="category">Category</label>
+            <input id="category">
+          </div>
+
+          <div class="field">
+            <label for="productType">Product Type</label>
+            <input id="productType">
+          </div>
+
+        </div>
+
+        <div class="two-columns">
+
+          <div class="field">
+            <label for="price">Price (€) *</label>
+            <input id="price" type="number" min="0" step="0.01" required>
+          </div>
+
+          <div class="field">
+            <label for="size">Size</label>
+            <input id="size">
+          </div>
+
+        </div>
+
+        <div class="field">
+          <label for="collection">Collections</label>
+          <input id="collection">
+          <small class="help">Separate multiple collection names with commas.</small>
+        </div>
+
+      </section>
+
+
+      <section class="form-section">
+
+        <h2>02. Product Details</h2>
+
+        <div class="field">
+          <label for="description">Product Description</label>
+          <textarea id="description"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="benefits">Benefits</label>
+          <textarea id="benefits"></textarea>
+          <small class="help">Separate individual benefits with commas.</small>
+        </div>
+
+        <div class="field">
+          <label for="editorialText">Editorial Text</label>
+          <textarea id="editorialText"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="whyWeChoseIt">Why We Chose It</label>
+          <textarea id="whyWeChoseIt"></textarea>
+        </div>
+
+      </section>
+
+
+      <section class="form-section">
+
+        <h2>03. Skin Information</h2>
+
+        <div class="field">
+          <label for="concerns">Skin Concerns</label>
+          <input id="concerns">
+          <small class="help">Separate multiple concerns with commas.</small>
+        </div>
+
+        <div class="field">
+          <label for="skinTypes">Skin Types</label>
+          <input id="skinTypes">
+          <small class="help">Separate multiple skin types with commas.</small>
+        </div>
+
+      </section>
+
+
+      <section class="form-section">
+
+        <h2>04. Ingredients & Usage</h2>
+
+        <div class="field">
+          <label for="ingredients">Key Ingredients</label>
+          <textarea id="ingredients"></textarea>
+          <small class="help">Separate ingredient names with commas.</small>
+        </div>
+
+        <div class="field">
+          <label for="fullIngredients">Full Ingredients</label>
+          <textarea id="fullIngredients"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="howToUseSteps">How to Use</label>
+          <textarea id="howToUseSteps"></textarea>
+          <small class="help">Enter each instruction on a separate line.</small>
+        </div>
+
+      </section>
+
+
+      <section class="form-section">
+
+        <h2>05. Product Images</h2>
+
+        <div class="field">
+          <label for="image">Main Image Path or URL</label>
+          <input id="image">
+          <small class="help">
+            Example: images/Brands/Medicube/product-image.jpg
+          </small>
+        </div>
+
+        <div class="field">
+          <label for="gallery">Additional Gallery Images</label>
+          <textarea id="gallery"></textarea>
+          <small class="help">
+            Enter one image path or URL per line.
+          </small>
+        </div>
+
+      </section>
+
+
+      <section class="form-section">
+
+        <h2>06. Product Display</h2>
+
+        <div class="field">
+          <label for="tag">Product Tag</label>
+          <input id="tag" placeholder="e.g. Bestseller, New Arrival">
+        </div>
+
+        <div class="checkbox-field">
+          <input type="checkbox" id="featured">
+          <label for="featured">Feature this product on the shop</label>
+        </div>
+
+      </section>
+
+
+      <div class="form-actions">
+
+        <button type="submit" id="save-product">
+          Save Product
+        </button>
+
+        <a href="admin-dashboard.html" class="back-button">
+          Cancel
+        </a>
+
+      </div>
+
+      <p id="form-message" role="status"></p>
+
+    </form>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="admin-product.js"></script>
+
+</body>
+</html>
