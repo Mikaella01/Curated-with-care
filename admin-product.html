@@ -319,28 +319,43 @@
       </section>
 
 
-      <section class="form-section">
+      
+<section class="form-section">
 
-        <h2>05. Product Images</h2>
+  <h2>05. Product Images</h2>
 
-        <div class="field">
-          <label for="image">Main Image Path or URL</label>
-          <input id="image">
-          <small class="help">
-            Example: images/Brands/Medicube/product-image.jpg
-          </small>
-        </div>
+  <!-- MAIN IMAGE UPLOAD -->
+  <div class="field">
+    <label for="image-file">Upload Main Product Image</label>
+    <input
+      type="file"
+      id="image-file"
+      accept="image/*"
+    >
+    <small class="help">
+      Select the main product photo from your iPad.
+    </small>
+  </div>
 
-        <div class="field">
-          <label for="gallery">Additional Gallery Images</label>
-          <textarea id="gallery"></textarea>
-          <small class="help">
-            Enter one image path or URL per line.
-          </small>
-        </div>
+  <!-- MAIN IMAGE PATH -->
+  <div class="field">
+    <label for="image">Main Image Path or URL</label>
+    <input id="image">
+    <small class="help">
+      Example: images/Brands/Medicube/product-image.jpg
+    </small>
+  </div>
 
-      </section>
+  <!-- ADDITIONAL GALLERY IMAGES -->
+  <div class="field">
+    <label for="gallery">Additional Gallery Images</label>
+    <textarea id="gallery"></textarea>
+    <small class="help">
+      Enter one image path or URL per line.
+    </small>
+  </div>
 
+</section>
 
       <section class="form-section">
 
