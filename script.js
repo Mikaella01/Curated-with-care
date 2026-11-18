@@ -923,3 +923,93 @@ window.addEventListener("pageshow", () => {
 console.log(
   "Curated with Care by M. — Website loaded successfully."
 );
+
+/* =========================================
+   LOAD PUBLIC PRODUCTS FROM SUPABASE
+========================================= */
+
+async function loadSupabaseProducts() {
+
+  const productGrid = document.getElementById("productGrid");
+
+  if (productGrid) {
+    productGrid.innerHTML = `
+      <div class="catalogue-empty">
+        <p>Preparing your beauty edit...</p>
+      </div>
+    `;
+  }
+
+  try {
+
+    const { data, error } = await supabaseClient
+      .from("products")
+      .select("*")
+      .eq("is_active", true);
+
+    if (error) {
+      throw error;
+    }
+
+    products = (data || []).map(product => ({
+      ...product,
+
+      collection: Array.isArray(product.collection)
+        ? product.collection
+        : product.collection
+          ? [product.collection]
+          : [],
+
+      concerns: Array.isArray(product.concerns)
+        ? product.concerns
+        : [],
+
+      skinTypes: Array.isArray(product.skinTypes)
+        ? product.skinTypes
+        : [],
+
+      benefits: Array.isArray(product.benefits)
+        ? product.benefits
+        : [],
+
+      ingredients: Array.isArray(product.ingredients)
+        ? product.ingredients
+        : [],
+
+      howToUseSteps: Array.isArray(product.howToUseSteps)
+        ? product.howToUseSteps
+        : [],
+
+      gallery: Array.isArray(product.gallery)
+        ? product.gallery
+        : []
+    }));
+
+    console.log(
+      "Supabase products loaded:",
+      products.length,
+      products
+    );
+
+    displayProducts();
+
+  } catch (error) {
+
+    console.error("Could not load products from Supabase:", error);
+
+    if (productGrid) {
+      productGrid.innerHTML = `
+        <div class="catalogue-empty">
+          <p>We're having trouble loading our beauty edit.</p>
+          <p>Please try again shortly.</p>
+        </div>
+      `;
+    }
+
+  }
+
+}
+
+/* START PUBLIC PRODUCT CATALOGUE */
+
+loadSupabaseProducts();
