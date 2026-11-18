@@ -354,3 +354,47 @@ async function startProductPage() {
 }
 
 startProductPage();
+
+
+
+/* =========================================
+   MAIN PRODUCT IMAGE UPLOAD
+========================================= */
+
+async function uploadMainProductImage() {
+  const fileInput = document.getElementById("image-file");
+  const imageField = document.getElementById("image");
+
+  if (!fileInput || !fileInput.files.length) {
+    return null;
+  }
+
+  const file = fileInput.files[0];
+
+  const safeFileName = file.name
+    .replace(/[^a-zA-Z0-9.-]/g, "-");
+
+  const filePath =
+    "products/" + Date.now() + "-" + safeFileName;
+
+  const { data, error } = await supabaseClient
+    .storage
+    .from("product-images")
+    .upload(filePath, file, {
+      contentType: file.type,
+      upsert: false
+    });
+
+  if (error) {
+    throw new Error("Image upload failed: " + error.message);
+  }
+
+  const { data: publicData } = supabaseClient
+    .storage
+    .from("product-images")
+    .getPublicUrl(data.path);
+
+  imageField.value = publicData.publicUrl;
+
+  return publicData.publicUrl;
+}
