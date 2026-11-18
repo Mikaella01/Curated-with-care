@@ -1231,11 +1231,40 @@ async function loadProductForEditing() {
     concerns: (data.concerns || []).join(", "),
     skinTypes: (data.skinTypes || []).join(", "),
 
-    ingredients: JSON.stringify(data.ingredients || [], null, 2),
+    ingredients: JSON.stringify(
+      data.ingredients || [],
+      null,
+      2
+    ),
+
     fullIngredients: data.fullIngredients || "",
+
     howToUseSteps: (data.howToUseSteps || []).join("\n"),
 
-    image
+    image: data.image || "",
+
+    gallery: (data.gallery || []).join("\n"),
+
+    tag: data.tag || ""
+  };
+
+  fields.featured = Boolean(data.featured);
+
+  applyFormFields(fields);
+
+  selectedMainImage = null;
+
+  initialiseGalleryFromField();
+
+  hasUnsavedImageChanges = false;
+
+  mainImageInput.value = "";
+  galleryInput.value = "";
+
+  renderMainImagePreview();
+  renderGalleryPreview();
+}
+
        
 /* =========================================
    17. UPLOAD MAIN PRODUCT IMAGE
