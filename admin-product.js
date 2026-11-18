@@ -1266,7 +1266,7 @@ async function loadProductForEditing() {
   renderGalleryPreview();
 }
 
-       
+
 /* =========================================
    17. UPLOAD MAIN PRODUCT IMAGE
 ========================================= */
@@ -1550,6 +1550,12 @@ async function saveProduct() {
   }
 }
 
+
+/* =========================================
+   SAVE BUTTON EVENT LISTENER
+========================================= */
+
+alert("SAVE BUTTON LISTENER IS BEING ATTACHED");
 
 productForm.addEventListener("submit", function(event) {
   event.preventDefault();
@@ -1918,18 +1924,6 @@ if (organiseProductButton) {
       assistantMessage.textContent =
         filledCount +
         " section(s) organised successfully. Please review the information before saving.";
-
-    } else {
-
-      assistantMessage.textContent =
-        "No recognised sections found. Please use headings such as Description:, Benefits:, Key Ingredients:, Full Ingredients: and How to Use:.";
-
-    }
-
-  });
-
-}
-
 
     } else {
 
