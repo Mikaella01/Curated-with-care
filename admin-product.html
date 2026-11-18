@@ -696,6 +696,102 @@
   </main>
 
 
+<!-- =========================================
+     FULL-SCREEN PHOTO VIEWER
+========================================= -->
+
+<div id="photo-viewer" class="photo-viewer">
+
+  <button
+    type="button"
+    id="close-photo-viewer"
+    class="photo-viewer-close"
+    aria-label="Close photo viewer"
+  >
+    ×
+  </button>
+
+  <div class="photo-viewer-content">
+
+    <p id="photo-viewer-counter" class="photo-viewer-counter">
+      Photo 1 of 1
+    </p>
+
+    <img
+      id="photo-viewer-image"
+      class="photo-viewer-image"
+      src=""
+      alt="Product photo"
+    >
+
+    <div class="photo-viewer-controls">
+
+      <button type="button" id="previous-photo">
+        Previous
+      </button>
+
+      <button type="button" id="next-photo">
+        Next
+      </button>
+
+      <button
+        type="button"
+        id="delete-current-photo"
+        class="delete-photo"
+      >
+        Delete Photo
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================
+     UNSAVED CHANGES CONFIRMATION
+========================================= -->
+
+<div id="confirm-overlay" class="confirm-overlay">
+
+  <div class="confirm-dialog">
+
+    <h2>Unsaved Changes</h2>
+
+    <p>
+      You have changes that have not been saved to your product.
+      What would you like to do?
+    </p>
+
+    <div class="confirm-actions">
+
+      <button type="button" id="save-before-leaving">
+        Save Changes
+      </button>
+
+      <button
+        type="button"
+        id="discard-before-leaving"
+        class="discard-button"
+      >
+        Discard Changes
+      </button>
+
+      <button
+        type="button"
+        id="continue-editing"
+        class="continue-button"
+      >
+        Continue Editing
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
   <!-- SCRIPTS -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
