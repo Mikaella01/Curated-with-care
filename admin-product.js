@@ -1,3 +1,4 @@
+alert("ADMIN PRODUCT JAVASCRIPT IS LOADING");
 
 /* =========================================
    CURATED WITH CARE BY M.
