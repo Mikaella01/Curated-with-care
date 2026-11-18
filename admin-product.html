@@ -442,6 +442,61 @@
       Add a new beauty favourite to your curated collection.
     </p>
 
+    <!-- =========================================
+     PRODUCT INFORMATION ASSISTANT
+========================================= -->
+
+<section class="form-section" id="product-assistant">
+
+  <h2>Product Information Assistant</h2>
+
+  <p class="help">
+    Find product information and organise it into your product form.
+  </p>
+
+  <div class="field">
+    <label for="product-source-link">
+      Manufacturer or Product Website Link (Optional)
+    </label>
+
+    <input
+      type="url"
+      id="product-source-link"
+      placeholder="https://..."
+    >
+  </div>
+
+  <div class="field">
+    <label for="product-source-text">
+      Product Information
+    </label>
+
+    <textarea
+      id="product-source-text"
+      rows="9"
+      placeholder="Paste the manufacturer's product description, benefits, ingredients and directions here..."
+    ></textarea>
+
+    <small class="help">
+      You can paste information copied from the manufacturer's website.
+    </small>
+  </div>
+
+  <div class="form-actions">
+
+    <button type="button" id="find-product-information">
+      Find Product Information
+    </button>
+
+    <button type="button" id="organise-product-information">
+      Organise Information
+    </button>
+
+  </div>
+
+  <p id="assistant-message" role="status"></p>
+
+</section>
     <div id="draft-notice" class="draft-notice">
       <strong>Unsaved draft found</strong>
 
