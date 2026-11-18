@@ -1039,6 +1039,6 @@ refreshCartFromStorage();
 
 updateCart();
 
-initialiseProductPage();
+loadProductFromSupabase();
 
 displayRelatedProducts();
