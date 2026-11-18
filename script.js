@@ -502,6 +502,62 @@ const products = [
   featured: true
 },
 
+{
+  id: 7,
+  name: "PDRN Pink Collagen Night Mask",
+  brand: "medicube",
+  brandName: "Medicube",
+
+  collection: ["pdrn", "pink-pdrn-line"],
+
+  category: "skincare",
+  productType: "Night Mask",
+  price: 25.00,
+
+  concerns: [
+    "dryness",
+    "dullness",
+    "skin-elasticity"
+  ],
+
+  description:
+    "A night-time skincare treatment from Medicube's Pink PDRN collection, designed to complement your evening skincare ritual.",
+
+  benefits: [
+    "Designed for evening skincare routines",
+    "Helps maintain skin hydration",
+    "A convenient overnight skincare step"
+  ],
+
+  editorialText:
+    "The perfect finishing touch to an evening skincare ritual. Medicube's PDRN Pink Collagen Night Mask joins our curated Pink PDRN collection, bringing a dedicated night-time treatment to your skincare edit.",
+
+  whyWeChoseIt:
+    "We selected this product to complement the Medicube Pink PDRN collection and offer customers another option for their evening skincare routine.",
+
+  ingredients: [],
+
+  fullIngredients: "",
+
+  howToUseSteps: [
+    "Follow the application instructions provided on the product packaging."
+  ],
+
+  image:
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-night-mask/IMG_9215.webp",
+
+  gallery: [
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-night-mask/IMG_9215.webp",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-night-mask/IMG_9292.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-night-mask/IMG_9293.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-night-mask/IMG_9294.jpeg",
+    "images/Brands/Medicube/Pink-PDRN-line/Pdrn-pink-night-mask/IMG_9295.jpeg"
+  ],
+
+  tag: "THE BEAUTY EDIT",
+  featured: true
+},
+
   {
     id: 11,
     name: "PDRN Pink Collagen Volume Multi Balm",
