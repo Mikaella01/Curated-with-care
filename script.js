@@ -15,22 +15,6 @@ const products = [
 
 let products = [];
 
-/* 2. SAVE PRODUCT CATALOGUE */
-
-try {
-
-  localStorage.setItem(
-    "curatedProducts",
-    JSON.stringify(products)
-  );
-
-} catch (error) {
-
-  console.warn("Product catalogue could not be saved.", error);
-
-}
-
-
 /* 3. WEBSITE STATE */
 
 let activeBrand = "all";
