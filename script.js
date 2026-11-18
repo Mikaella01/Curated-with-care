@@ -860,11 +860,9 @@ function getFilteredProducts() {
 
   }
 
-
   return filtered;
 
 }
-
 
 /* 6. DISPLAY PRODUCTS */
 
@@ -967,7 +965,9 @@ function displayProducts() {
       <div
         class="product-image"
         data-view-product="${escapeHTML(product.id)}"
-        style="cursor:pointer"
+        role="link"
+        tabindex="0"
+        aria-label="View ${escapeHTML(product.name)}"
       >
 
         <img
@@ -977,81 +977,21 @@ function displayProducts() {
           onerror="this.style.opacity='0'"
         >
 
-        <span class="product-tag">
-
-          ${escapeHTML(product.tag || "THE BEAUTY EDIT")}
-
-        </span>
-
       </div>
 
 
       <div class="product-info">
 
-        <span class="product-type">
-
-          ${escapeHTML(product.brandName || getBrandName(product.brand))}
-
-        </span>
-
-
         <h3
           data-view-product="${escapeHTML(product.id)}"
-          style="cursor:pointer"
+          role="link"
+          tabindex="0"
+          aria-label="View ${escapeHTML(product.name)}"
         >
 
           ${escapeHTML(product.name)}
 
         </h3>
-
-
-        <p class="product-description">
-
-          ${escapeHTML(product.description)}
-
-        </p>
-
-
-        <div class="product-bottom">
-
-          <span>${formatPrice(product.price)}</span>
-
-          <button
-            class="add-button"
-            data-add="${escapeHTML(product.id)}"
-            type="button"
-          >
-
-            ADD +
-
-          </button>
-
-        </div>
-
-
-        <button
-          class="product-details-link"
-          data-view-product="${escapeHTML(product.id)}"
-          type="button"
-          style="
-            margin-top: 15px;
-            padding: 0 0 4px;
-            background: none;
-            border: none;
-            border-bottom: 1px solid var(--border);
-            color: var(--deep-rose);
-            font-family: inherit;
-            font-size: 11px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: none;
-            cursor: pointer;
-          "
-        >
-
-          View details
-
-        </button>
 
       </div>
 
@@ -1063,7 +1003,6 @@ function displayProducts() {
   });
 
 }
-
 
 /* 7. SHOP NAVIGATION */
 
