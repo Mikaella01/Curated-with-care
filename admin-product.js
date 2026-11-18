@@ -1728,3 +1728,209 @@ async function startProductPage() {
 
 
 startProductPage();
+
+
+
+/* =========================================
+   PRODUCT INFORMATION ASSISTANT
+   FREE PRODUCT RESEARCH HELPER
+========================================= */
+
+const findProductButton = document.getElementById(
+  "find-product-information"
+);
+
+const organiseProductButton = document.getElementById(
+  "organise-product-information"
+);
+
+const assistantMessage = document.getElementById(
+  "assistant-message"
+);
+
+
+// 1. FIND PRODUCT INFORMATION
+
+if (findProductButton) {
+
+  findProductButton.addEventListener("click", function () {
+
+    const name = document.getElementById("name").value.trim();
+    const brand = document.getElementById("brand").value.trim();
+    const sourceLink = document.getElementById(
+      "product-source-link"
+    ).value.trim();
+
+    if (!name) {
+      assistantMessage.textContent =
+        "Please enter the product name first.";
+      return;
+    }
+
+    if (sourceLink) {
+
+      try {
+        const url = new URL(sourceLink);
+
+        if (!["https:", "http:"].includes(url.protocol)) {
+          throw new Error("Invalid website");
+        }
+
+        window.open(url.href, "_blank", "noopener,noreferrer");
+
+        assistantMessage.textContent =
+          "Product website opened. Copy the product information and paste it into the box.";
+
+      } catch (error) {
+
+        assistantMessage.textContent =
+          "Please enter a valid website link.";
+
+      }
+
+    } else {
+
+      const searchText = encodeURIComponent(
+        brand + " " + name + " official ingredients how to use"
+      );
+
+      window.open(
+        "https://www.google.com/search?q=" + searchText,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+      assistantMessage.textContent =
+        "Search opened. Look for the manufacturer's website and copy the product information.";
+
+    }
+
+  });
+
+}
+
+
+// 2. ORGANISE PASTED PRODUCT INFORMATION
+
+if (organiseProductButton) {
+
+  organiseProductButton.addEventListener("click", function () {
+
+    const sourceText = document.getElementById(
+      "product-source-text"
+    ).value.trim();
+
+    if (!sourceText) {
+      assistantMessage.textContent =
+        "Please paste some product information first.";
+      return;
+    }
+
+    // Finds information introduced by a clear heading.
+    function extractSection(labels, text) {
+
+      const labelPattern = labels.join("|");
+
+      const regex = new RegExp(
+        "(?:^|\\n)\\s*(?:" + labelPattern + ")\\s*:\\s*([\\s\\S]*?)(?=\\n\\s*(?:Description|Product Description|Benefits|Key Benefits|Key Ingredients|Ingredients|Full Ingredients|INCI|How to Use|Directions|Usage Instructions)\\s*:|$)",
+        "i"
+      );
+
+      const match = text.match(regex);
+
+      return match ? match[1].trim() : "";
+    }
+
+
+    // Places information into an existing product field.
+    function fillField(id, value) {
+
+      if (!value) return;
+
+      const field = document.getElementById(id);
+
+      if (!field) return;
+
+      field.value = value;
+
+      field.dispatchEvent(
+        new Event("input", { bubbles: true })
+      );
+
+      field.dispatchEvent(
+        new Event("change", { bubbles: true })
+      );
+
+    }
+
+
+    const description = extractSection(
+      ["Description", "Product Description"],
+      sourceText
+    );
+
+    const benefits = extractSection(
+      ["Benefits", "Key Benefits"],
+      sourceText
+    );
+
+    const keyIngredients = extractSection(
+      ["Key Ingredients"],
+      sourceText
+    );
+
+    const fullIngredients = extractSection(
+      ["Full Ingredients", "Ingredients", "INCI"],
+      sourceText
+    );
+
+    const howToUse = extractSection(
+      ["How to Use", "Directions", "Usage Instructions"],
+      sourceText
+    );
+
+
+    let filledCount = 0;
+
+    if (description) {
+      fillField("description", description);
+      filledCount++;
+    }
+
+    if (benefits) {
+      fillField("benefits", benefits);
+      filledCount++;
+    }
+
+    if (keyIngredients) {
+      fillField("ingredients", keyIngredients);
+      filledCount++;
+    }
+
+    if (fullIngredients) {
+      fillField("fullIngredients", fullIngredients);
+      filledCount++;
+    }
+
+    if (howToUse) {
+      fillField("howToUseSteps", howToUse);
+      filledCount++;
+    }
+
+
+    if (filledCount > 0) {
+
+      assistantMessage.textContent =
+        filledCount +
+        " product information section(s) organised. Please review everything before saving.";
+
+    } else {
+
+      assistantMessage.textContent =
+        "I couldn't identify labelled sections. Please organise your pasted text under headings such as Description:, Benefits:, Ingredients: and How to Use:.";
+
+    }
+
+  });
+
+}
