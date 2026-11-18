@@ -2,20 +2,21 @@
 /* =========================================
    CURATED WITH CARE BY M.
    PRODUCT CATALOGUE & WEBSITE FUNCTIONALITY
+   SUPABASE CONNECTED VERSION
 ========================================= */
 
 
-/* 1. PRODUCT DATABASE */
-
-const products = [
-
- /* =========================================
-   PRODUCTS — LOADED FROM SUPABASE
+/* =========================================
+   1. PRODUCTS — LOADED FROM SUPABASE
 ========================================= */
 
 let products = [];
+let productsLoaded = false;
 
-/* 3. WEBSITE STATE */
+
+/* =========================================
+   2. WEBSITE STATE
+========================================= */
 
 let activeBrand = "all";
 let activeCollection = "all";
@@ -46,7 +47,9 @@ try {
 let currentProduct = null;
 
 
-/* 4. HELPER FUNCTIONS */
+/* =========================================
+   3. HELPER FUNCTIONS
+========================================= */
 
 function formatPrice(price) {
 
@@ -89,7 +92,24 @@ function getBrandName(brand) {
 }
 
 
-/* 5. PRODUCT FILTERING */
+function normaliseArray(value) {
+
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (value === null || value === undefined || value === "") {
+    return [];
+  }
+
+  return [value];
+
+}
+
+
+/* =========================================
+   4. PRODUCT FILTERING
+========================================= */
 
 function getFilteredProducts() {
 
@@ -149,20 +169,24 @@ function getFilteredProducts() {
 
   if (sortOrder === "price-low") {
 
-    filtered.sort((a, b) => a.price - b.price);
+    filtered.sort((a, b) =>
+      Number(a.price || 0) - Number(b.price || 0)
+    );
 
   }
 
   else if (sortOrder === "price-high") {
 
-    filtered.sort((a, b) => b.price - a.price);
+    filtered.sort((a, b) =>
+      Number(b.price || 0) - Number(a.price || 0)
+    );
 
   }
 
   else if (sortOrder === "name") {
 
     filtered.sort((a, b) =>
-      a.name.localeCompare(b.name)
+      (a.name || "").localeCompare(b.name || "")
     );
 
   }
@@ -170,7 +194,7 @@ function getFilteredProducts() {
   else {
 
     filtered.sort((a, b) =>
-      Number(b.featured) - Number(a.featured)
+      Number(Boolean(b.featured)) - Number(Boolean(a.featured))
     );
 
   }
@@ -179,7 +203,10 @@ function getFilteredProducts() {
 
 }
 
-/* 6. DISPLAY PRODUCTS */
+
+/* =========================================
+   5. DISPLAY PRODUCTS
+========================================= */
 
 function displayProducts() {
 
@@ -286,7 +313,7 @@ function displayProducts() {
       >
 
         <img
-          src="${escapeHTML(product.image)}"
+          src="${escapeHTML(product.image || "")}"
           alt="${escapeHTML(product.name)}"
           loading="lazy"
           onerror="this.style.opacity='0'"
@@ -319,7 +346,10 @@ function displayProducts() {
 
 }
 
-/* 7. SHOP NAVIGATION */
+
+/* =========================================
+   6. SHOP NAVIGATION
+========================================= */
 
 function updateShopView(view) {
 
@@ -377,7 +407,9 @@ document.querySelectorAll(".shop-tab").forEach(button => {
 });
 
 
-/* 8. BRAND FILTERS */
+/* =========================================
+   7. BRAND FILTERS
+========================================= */
 
 document.querySelectorAll("[data-brand]").forEach(button => {
 
@@ -401,7 +433,9 @@ document.querySelectorAll("[data-brand]").forEach(button => {
 });
 
 
-/* 9. COLLECTION FILTERS */
+/* =========================================
+   8. COLLECTION FILTERS
+========================================= */
 
 document.querySelectorAll("[data-collection]").forEach(button => {
 
@@ -425,7 +459,9 @@ document.querySelectorAll("[data-collection]").forEach(button => {
 });
 
 
-/* 10. SKIN CONCERN FILTERS */
+/* =========================================
+   9. SKIN CONCERN FILTERS
+========================================= */
 
 document.querySelectorAll("[data-concern]").forEach(button => {
 
@@ -449,7 +485,9 @@ document.querySelectorAll("[data-concern]").forEach(button => {
 });
 
 
-/* 11. BRAND LINKS AND URL FILTERING */
+/* =========================================
+   10. BRAND LINKS AND URL FILTERING
+========================================= */
 
 const availableBrands = [
 
@@ -532,7 +570,9 @@ function initialiseBrandFromURL() {
 }
 
 
-/* 12. SEARCH PRODUCTS */
+/* =========================================
+   11. SEARCH PRODUCTS
+========================================= */
 
 const productSearch = document.getElementById("productSearch");
 
@@ -550,7 +590,9 @@ if (productSearch) {
 }
 
 
-/* 13. SORT PRODUCTS */
+/* =========================================
+   12. SORT PRODUCTS
+========================================= */
 
 const productSort = document.getElementById("productSort");
 
@@ -568,7 +610,9 @@ if (productSort) {
 }
 
 
-/* 14. OPEN INDIVIDUAL PRODUCT PAGE */
+/* =========================================
+   13. OPEN INDIVIDUAL PRODUCT PAGE
+========================================= */
 
 document.addEventListener("click", event => {
 
@@ -587,7 +631,9 @@ document.addEventListener("click", event => {
 });
 
 
-/* 15. OLD PRODUCT DETAILS BACK BUTTON */
+/* =========================================
+   14. OLD PRODUCT DETAILS BACK BUTTON
+========================================= */
 
 const backToShop = document.getElementById("backToShop");
 
@@ -622,7 +668,9 @@ if (backToShop) {
 }
 
 
-/* 16. SHOPPING BAG */
+/* =========================================
+   15. SHOPPING BAG
+========================================= */
 
 function addToCart(productId) {
 
@@ -755,7 +803,9 @@ document.addEventListener("click", event => {
 });
 
 
-/* 17. OPEN DEDICATED BASKET PAGE */
+/* =========================================
+   16. OPEN DEDICATED BASKET PAGE
+========================================= */
 
 const bagButton = document.getElementById("bagButton");
 
@@ -772,7 +822,9 @@ if (bagButton) {
 }
 
 
-/* 18. MOBILE NAVIGATION */
+/* =========================================
+   17. MOBILE NAVIGATION
+========================================= */
 
 const menuToggle = document.getElementById("menuToggle");
 
@@ -805,7 +857,9 @@ if (menuToggle && navigation) {
 }
 
 
-/* 19. GIFT FINDER */
+/* =========================================
+   18. GIFT FINDER
+========================================= */
 
 const findGift = document.getElementById("findGift");
 
@@ -850,7 +904,9 @@ if (findGift) {
 }
 
 
-/* 20. NEWSLETTER */
+/* =========================================
+   19. NEWSLETTER
+========================================= */
 
 const newsletterForm =
   document.getElementById("newsletterForm");
@@ -882,18 +938,144 @@ if (newsletterForm) {
 }
 
 
-/* 21. INITIALISE WEBSITE */
+/* =========================================
+   20. LOAD PUBLIC PRODUCTS FROM SUPABASE
+========================================= */
+
+async function loadSupabaseProducts() {
+
+  const productGrid = document.getElementById("productGrid");
+
+
+  if (productGrid) {
+
+    productGrid.innerHTML = `
+
+      <div class="catalogue-empty">
+
+        <p>Preparing your beauty edit...</p>
+
+      </div>
+
+    `;
+
+  }
+
+
+  try {
+
+    if (typeof supabaseClient === "undefined") {
+
+      throw new Error(
+        "Supabase client is not available. Check the Supabase script tags in your HTML."
+      );
+
+    }
+
+
+    const { data, error } = await supabaseClient
+
+      .from("products")
+
+      .select("*")
+
+      .eq("is_active", true);
+
+
+    if (error) {
+
+      throw error;
+
+    }
+
+
+    products = (data || []).map(product => {
+
+      const collections = normaliseArray(
+        product.collection ?? product.collections
+      );
+
+      return {
+
+        ...product,
+
+        collection: collections,
+
+        collections: collections,
+
+        concerns: normaliseArray(product.concerns),
+
+        skinTypes: normaliseArray(product.skinTypes),
+
+        benefits: normaliseArray(product.benefits),
+
+        ingredients: normaliseArray(product.ingredients),
+
+        howToUseSteps: normaliseArray(product.howToUseSteps),
+
+        gallery: normaliseArray(product.gallery)
+
+      };
+
+    });
+
+
+    productsLoaded = true;
+
+
+    console.log(
+      "Supabase products loaded successfully:",
+      products.length,
+      products
+    );
+
+
+    displayProducts();
+
+
+  } catch (error) {
+
+    console.error(
+      "Could not load products from Supabase:",
+      error
+    );
+
+
+    if (productGrid) {
+
+      productGrid.innerHTML = `
+
+        <div class="catalogue-empty">
+
+          <p>We're having trouble loading our beauty edit.</p>
+
+          <p>Please try again shortly.</p>
+
+        </div>
+
+      `;
+
+    }
+
+  }
+
+}
+
+
+/* =========================================
+   21. INITIALISE WEBSITE
+========================================= */
 
 initialiseBrandFromURL();
 
 updateShopView(activeView);
 
-displayProducts();
-
 updateCart();
 
 
-/* REFRESH BAG WHEN RETURNING TO WEBSITE */
+/* =========================================
+   22. REFRESH BAG WHEN RETURNING TO WEBSITE
+========================================= */
 
 window.addEventListener("pageshow", () => {
 
@@ -920,96 +1102,13 @@ window.addEventListener("pageshow", () => {
 });
 
 
+/* =========================================
+   23. START PUBLIC PRODUCT CATALOGUE
+========================================= */
+
+loadSupabaseProducts();
+
+
 console.log(
   "Curated with Care by M. — Website loaded successfully."
 );
-
-/* =========================================
-   LOAD PUBLIC PRODUCTS FROM SUPABASE
-========================================= */
-
-async function loadSupabaseProducts() {
-
-  const productGrid = document.getElementById("productGrid");
-
-  if (productGrid) {
-    productGrid.innerHTML = `
-      <div class="catalogue-empty">
-        <p>Preparing your beauty edit...</p>
-      </div>
-    `;
-  }
-
-  try {
-
-    const { data, error } = await supabaseClient
-      .from("products")
-      .select("*")
-      .eq("is_active", true);
-
-    if (error) {
-      throw error;
-    }
-
-    products = (data || []).map(product => ({
-      ...product,
-
-      collection: Array.isArray(product.collection)
-        ? product.collection
-        : product.collection
-          ? [product.collection]
-          : [],
-
-      concerns: Array.isArray(product.concerns)
-        ? product.concerns
-        : [],
-
-      skinTypes: Array.isArray(product.skinTypes)
-        ? product.skinTypes
-        : [],
-
-      benefits: Array.isArray(product.benefits)
-        ? product.benefits
-        : [],
-
-      ingredients: Array.isArray(product.ingredients)
-        ? product.ingredients
-        : [],
-
-      howToUseSteps: Array.isArray(product.howToUseSteps)
-        ? product.howToUseSteps
-        : [],
-
-      gallery: Array.isArray(product.gallery)
-        ? product.gallery
-        : []
-    }));
-
-    console.log(
-      "Supabase products loaded:",
-      products.length,
-      products
-    );
-
-    displayProducts();
-
-  } catch (error) {
-
-    console.error("Could not load products from Supabase:", error);
-
-    if (productGrid) {
-      productGrid.innerHTML = `
-        <div class="catalogue-empty">
-          <p>We're having trouble loading our beauty edit.</p>
-          <p>Please try again shortly.</p>
-        </div>
-      `;
-    }
-
-  }
-
-}
-
-/* START PUBLIC PRODUCT CATALOGUE */
-
-loadSupabaseProducts();
