@@ -122,21 +122,7 @@ const fieldIds = [
 ];
 
 let currentProduct = null;
-
 let selectedMainImage = null;
-
-/*
-  All gallery photos are now stored together.
-
-  Existing uploaded photo:
-  { type: "url", url: "..." }
-
-  Newly selected photo:
-  { type: "file", file: File }
-
-  This allows both types to be dragged
-  into any position.
-*/
 
 let galleryItems = [];
 let galleryItemCounter = 0;
@@ -518,8 +504,6 @@ async function restoreDraft() {
 
       if (Array.isArray(images.gallery)) {
 
-        // New ordered gallery draft format.
-
         if (
           images.gallery.every(function(item) {
             return item && (
@@ -540,9 +524,6 @@ async function restoreDraft() {
           });
 
         } else {
-          // Compatibility with older drafts
-          // that stored only an array of Files.
-
           galleryItems = images.gallery.map(function(file) {
             return createGalleryItem("file", file);
           });
@@ -552,9 +533,6 @@ async function restoreDraft() {
     } catch (imageError) {
       console.warn("Draft images could not be restored.", imageError);
     }
-
-    // If there were no stored gallery items,
-    // recover existing URLs from the form.
 
     if (galleryItems.length === 0) {
       initialiseGalleryFromField();
@@ -675,8 +653,6 @@ function buildViewerPhotos() {
   viewerUrls = [];
   viewerPhotos = [];
 
-  // Main image.
-
   if (selectedMainImage) {
     const url = URL.createObjectURL(selectedMainImage);
 
@@ -697,8 +673,6 @@ function buildViewerPhotos() {
     });
 
   }
-
-  // Gallery images in their current order.
 
   galleryItems.forEach(function(item, index) {
     let src;
@@ -1049,7 +1023,6 @@ function finishGalleryDrag(event) {
     suppressGalleryClick = false;
   }, 250);
 
-  // Read the new order directly from the preview.
   const orderedKeys = Array.from(
     galleryPreview.querySelectorAll(".image-preview-item")
   ).map(function(element) {
@@ -1130,7 +1103,6 @@ function renderGalleryPreview() {
 
     item.dataset.galleryKey = galleryItem.key;
 
-    // Touch-friendly drag behaviour.
     item.style.touchAction = "none";
     item.style.cursor = "grab";
 
@@ -1197,9 +1169,6 @@ mainImageField.addEventListener("input", function() {
 
 
 galleryField.addEventListener("input", function() {
-  // Preserve newly selected files if the URL list
-  // is edited manually.
-
   const pendingFiles = galleryItems.filter(function(item) {
     return item.type === "file";
   });
@@ -1266,31 +1235,8 @@ async function loadProductForEditing() {
     fullIngredients: data.fullIngredients || "",
     howToUseSteps: (data.howToUseSteps || []).join("\n"),
 
-    image: data.image || "",
-    gallery: (data.gallery || []).join("\n"),
-
-    tag: data.tag || ""
-  };
-
-  fields.featured = Boolean(data.featured);
-
-  applyFormFields(fields);
-
-  selectedMainImage = null;
-
-  // Load existing gallery photos in saved order.
-  initialiseGalleryFromField();
-
-  hasUnsavedImageChanges = false;
-
-  mainImageInput.value = "";
-  galleryInput.value = "";
-
-  renderMainImagePreview();
-  renderGalleryPreview();
-}
-
-
+    image
+       
 /* =========================================
    17. UPLOAD MAIN PRODUCT IMAGE
 ========================================= */
@@ -1350,15 +1296,6 @@ async function uploadGalleryImages() {
   const uploadedUrls = [];
   let uploadedCount = 0;
 
-  /*
-    Upload files in their current gallery order.
-
-    Each successful upload is immediately changed
-    into a URL item. This protects the order and
-    prevents successful uploads being repeated
-    if another upload fails.
-  */
-
   for (let i = 0; i < galleryItems.length; i++) {
 
     const item = galleryItems[i];
@@ -1401,9 +1338,6 @@ async function uploadGalleryImages() {
     const publicUrl = publicData.publicUrl;
 
     uploadedUrls.push(publicUrl);
-
-    // Replace the File with its uploaded URL
-    // without changing its position.
 
     galleryItems[i] = {
       key: item.key,
@@ -1638,8 +1572,6 @@ document.getElementById("save-before-leaving")
   });
 
 
-// Protect links inside the editor.
-
 document.querySelectorAll("a[href]").forEach(function(link) {
   link.addEventListener("click", function(event) {
     if (!dirty || saving) return;
@@ -1656,9 +1588,6 @@ document.querySelectorAll("a[href]").forEach(function(link) {
   });
 });
 
-
-// Browser-controlled warning for refresh, closing
-// or browser navigation.
 
 window.addEventListener("beforeunload", function(event) {
   if (!dirty || saving) return;
@@ -1730,9 +1659,8 @@ async function startProductPage() {
 startProductPage();
 
 
-
 /* =========================================
-   PRODUCT INFORMATION ASSISTANT
+   25. PRODUCT INFORMATION ASSISTANT
    FREE PRODUCT RESEARCH HELPER
 ========================================= */
 
@@ -1749,59 +1677,87 @@ const assistantMessage = document.getElementById(
 );
 
 
-// 1. FIND PRODUCT INFORMATION
+/* =========================================
+   26. FIND PRODUCT INFORMATION
+========================================= */
 
 if (findProductButton) {
 
-  findProductButton.addEventListener("click", function () {
+  findProductButton.addEventListener("click", function(event) {
+
+    event.preventDefault();
 
     const name = document.getElementById("name").value.trim();
+
     const brand = document.getElementById("brand").value.trim();
+
     const sourceLink = document.getElementById(
       "product-source-link"
     ).value.trim();
 
+
     if (!name) {
+
       assistantMessage.textContent =
         "Please enter the product name first.";
+
       return;
     }
+
+
+    let searchUrl;
+
 
     if (sourceLink) {
 
       try {
+
         const url = new URL(sourceLink);
 
         if (!["https:", "http:"].includes(url.protocol)) {
           throw new Error("Invalid website");
         }
 
-        window.open(url.href, "_blank", "noopener,noreferrer");
-
-        assistantMessage.textContent =
-          "Product website opened. Copy the product information and paste it into the box.";
+        searchUrl = url.href;
 
       } catch (error) {
 
         assistantMessage.textContent =
           "Please enter a valid website link.";
 
+        return;
       }
 
     } else {
 
       const searchText = encodeURIComponent(
-        brand + " " + name + " official ingredients how to use"
+        brand + " " + name +
+        " official product ingredients how to use"
       );
 
-      window.open(
-        "https://www.google.com/search?q=" + searchText,
-        "_blank",
-        "noopener,noreferrer"
-      );
+      searchUrl =
+        "https://www.google.com/search?q=" + searchText;
+
+    }
+
+
+    const searchWindow = window.open(
+      searchUrl,
+      "_blank"
+    );
+
+
+    if (searchWindow) {
+
+      searchWindow.opener = null;
 
       assistantMessage.textContent =
-        "Search opened. Look for the manufacturer's website and copy the product information.";
+        "Product search opened. Find the manufacturer's information and paste it into the box below.";
+
+    } else {
+
+      assistantMessage.textContent =
+        "Your browser blocked the new tab. Please allow pop-ups for this website and try again.";
 
     }
 
@@ -1810,29 +1766,43 @@ if (findProductButton) {
 }
 
 
-// 2. ORGANISE PASTED PRODUCT INFORMATION
+/* =========================================
+   27. ORGANISE PRODUCT INFORMATION
+========================================= */
 
 if (organiseProductButton) {
 
-  organiseProductButton.addEventListener("click", function () {
+  organiseProductButton.addEventListener("click", function(event) {
+
+    event.preventDefault();
 
     const sourceText = document.getElementById(
       "product-source-text"
     ).value.trim();
 
+
     if (!sourceText) {
+
       assistantMessage.textContent =
-        "Please paste some product information first.";
+        "Please paste product information first.";
+
       return;
     }
 
-    // Finds information introduced by a clear heading.
+
     function extractSection(labels, text) {
 
       const labelPattern = labels.join("|");
 
+      const nextHeading =
+        "Description|Product Description|Benefits|Key Benefits|Key Ingredients|Ingredients|Full Ingredients|INCI|How to Use|Directions|Usage Instructions";
+
       const regex = new RegExp(
-        "(?:^|\\n)\\s*(?:" + labelPattern + ")\\s*:\\s*([\\s\\S]*?)(?=\\n\\s*(?:Description|Product Description|Benefits|Key Benefits|Key Ingredients|Ingredients|Full Ingredients|INCI|How to Use|Directions|Usage Instructions)\\s*:|$)",
+        "(?:^|\\n)\\s*(?:" +
+        labelPattern +
+        ")\\s*:\\s*([\\s\\S]*?)(?=\\n\\s*(?:" +
+        nextHeading +
+        ")\\s*:|$)",
         "i"
       );
 
@@ -1842,14 +1812,13 @@ if (organiseProductButton) {
     }
 
 
-    // Places information into an existing product field.
     function fillField(id, value) {
 
-      if (!value) return;
+      if (!value) return false;
 
       const field = document.getElementById(id);
 
-      if (!field) return;
+      if (!field) return false;
 
       field.value = value;
 
@@ -1861,6 +1830,7 @@ if (organiseProductButton) {
         new Event("change", { bubbles: true })
       );
 
+      return true;
     }
 
 
@@ -1892,28 +1862,23 @@ if (organiseProductButton) {
 
     let filledCount = 0;
 
-    if (description) {
-      fillField("description", description);
+    if (fillField("description", description)) {
       filledCount++;
     }
 
-    if (benefits) {
-      fillField("benefits", benefits);
+    if (fillField("benefits", benefits)) {
       filledCount++;
     }
 
-    if (keyIngredients) {
-      fillField("ingredients", keyIngredients);
+    if (fillField("ingredients", keyIngredients)) {
       filledCount++;
     }
 
-    if (fullIngredients) {
-      fillField("fullIngredients", fullIngredients);
+    if (fillField("fullIngredients", fullIngredients)) {
       filledCount++;
     }
 
-    if (howToUse) {
-      fillField("howToUseSteps", howToUse);
+    if (fillField("howToUseSteps", howToUse)) {
       filledCount++;
     }
 
@@ -1922,15 +1887,37 @@ if (organiseProductButton) {
 
       assistantMessage.textContent =
         filledCount +
-        " product information section(s) organised. Please review everything before saving.";
+        " section(s) organised successfully. Please review the information before saving.";
 
     } else {
 
       assistantMessage.textContent =
-        "I couldn't identify labelled sections. Please organise your pasted text under headings such as Description:, Benefits:, Ingredients: and How to Use:.";
+        "No recognised sections found. Please use headings such as Description:, Benefits:, Key Ingredients:, Full Ingredients: and How to Use:.";
 
     }
 
   });
 
+}
+: data.image || "",
+    gallery: (data.gallery || []).join("\n"),
+
+    tag: data.tag || ""
+  };
+
+  fields.featured = Boolean(data.featured);
+
+  applyFormFields(fields);
+
+  selectedMainImage = null;
+
+  initialiseGalleryFromField();
+
+  hasUnsavedImageChanges = false;
+
+  mainImageInput.value = "";
+  galleryInput.value = "";
+
+  renderMainImagePreview();
+  renderGalleryPreview();
 }
