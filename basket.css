@@ -1,5 +1,13 @@
+
 /* =========================================
-   24. OLD SHOPPING BAG OVERLAY
+   CURATED WITH CARE BY M.
+   BASKET.CSS
+   SHOPPING BAG & CHECKOUT STYLES
+========================================= */
+
+
+/* =========================================
+   1. OLD SHOPPING BAG OVERLAY
    RETAINED FOR COMPATIBILITY
 ========================================= */
 
@@ -65,8 +73,9 @@
   text-align: center;
 }
 
+
 /* =========================================
-   25. SHOPPING BAG — PRODUCT LAYOUT
+   2. SHOPPING BAG — PRODUCT LAYOUT
 ========================================= */
 
 .cart-item {
@@ -160,8 +169,11 @@
 
 
 /* =========================================
-   26. SEPARATE BASKET PAGE
+   3. SEPARATE BASKET PAGE
 ========================================= */
+
+
+/* BASKET PAGE HEADER */
 
 .site-header {
   min-height: 90px;
@@ -479,8 +491,9 @@
   background: #eee6df;
 }
 
+
 /* =========================================
-   MOBILE BASKET LAYOUT
+   4. MOBILE BASKET LAYOUT
 ========================================= */
 
 @media (max-width: 850px) {
