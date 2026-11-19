@@ -3493,14 +3493,16 @@ footer p,
   flex-shrink: 0;
 }
 
-.product-image {
+/* ADMIN DASHBOARD PRODUCT IMAGES ONLY */
+
+.product-row .product-image {
   width: 65px;
   height: 75px;
   object-fit: contain;
   border-radius: 6px;
   background: #f7f3ef;
+  flex-shrink: 0;
 }
-
 .product-details {
   display: flex;
   flex: 1;
