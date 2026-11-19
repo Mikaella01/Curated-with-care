@@ -1,5 +1,13 @@
- /* =========================================
-   17. STANDALONE PRODUCT PAGE
+
+/* =========================================
+   CURATED WITH CARE BY M.
+   PRODUCT.CSS
+   STANDALONE PRODUCT PAGE STYLES
+========================================= */
+
+
+/* =========================================
+   1. STANDALONE PRODUCT PAGE
 ========================================= */
 
 .product-page-header {
@@ -43,7 +51,9 @@
 }
 
 
-/* PRODUCT GALLERY */
+/* =========================================
+   2. PRODUCT GALLERY
+========================================= */
 
 .gallery-main {
   position: relative;
@@ -118,7 +128,9 @@
 }
 
 
-/* PRODUCT INFORMATION */
+/* =========================================
+   3. PRODUCT INFORMATION
+========================================= */
 
 .standalone-product-info {
   padding-top: 15px;
@@ -154,9 +166,9 @@
   font-size: 14px;
 }
 
+
 /* =========================================
-   19. PRODUCT PAGE — RELATED PRODUCTS
-   YOU MAY ALSO LOVE
+   4. RELATED PRODUCTS — YOU MAY ALSO LOVE
 ========================================= */
 
 .related-products-section {
@@ -260,66 +272,10 @@
   text-decoration: none;
 }
 
-/* =========================================
-   31. RESPONSIVE — PRODUCT PAGE
-========================================= */
-
-@media (max-width: 750px) {
-
-  .standalone-product-page {
-    grid-template-columns: 1fr;
-    gap: 25px;
-    margin: 25px auto;
-  }
-
-  .standalone-product-info h1 {
-    font-size: 28px;
-  }
-
-  .product-brand-name {
-    font-size: 16px;
-  }
-
-  .product-page-header {
-    padding: 18px 4%;
-    gap: 10px;
-  }
-
-  .product-back-link {
-    font-size: 9px;
-  }
-
-}
 
 /* =========================================
-   33. RESPONSIVE — SMALL PRODUCT PAGE
+   5. EDITORIAL PRODUCT PAGE — GENERAL
 ========================================= */
-
-@media (max-width: 600px) {
-
-  .related-products-section {
-    padding: 15px 12px;
-    margin: 30px auto;
-  }
-
-  .related-products-grid {
-    grid-template-columns: repeat(2, minmax(0, 125px));
-    gap: 18px;
-  }
-
-  .related-products-heading h2 {
-    font-size: 19px;
-  }
-
-}
-
-/* =========================================
-   CURATED WITH CARE BY M.
-   EDITORIAL PRODUCT PAGE REDESIGN
-========================================= */
-
-
-/* 1. PRODUCT PAGE GENERAL */
 
 .product-detail-body {
   background: var(--ivory);
@@ -340,7 +296,9 @@
 }
 
 
-/* 2. PRODUCT HEADER */
+/* =========================================
+   6. EDITORIAL PRODUCT HEADER
+========================================= */
 
 .product-page-header {
   background: rgba(248, 245, 239, 0.96);
@@ -378,7 +336,9 @@
 }
 
 
-/* 3. MAIN PRODUCT PRESENTATION */
+/* =========================================
+   7. MAIN PRODUCT PRESENTATION
+========================================= */
 
 .standalone-product-page {
   max-width: 1250px;
@@ -442,7 +402,9 @@
 }
 
 
-/* 4. MAIN PRODUCT INFORMATION */
+/* =========================================
+   8. MAIN PRODUCT INFORMATION
+========================================= */
 
 .standalone-product-info {
   padding-top: 20px;
@@ -507,7 +469,9 @@
 }
 
 
-/* 5. PRODUCT DESCRIPTION */
+/* =========================================
+   9. PRODUCT DESCRIPTION
+========================================= */
 
 .product-description-block {
   margin-top: 35px;
@@ -541,7 +505,9 @@
 }
 
 
-/* 6. EDITORIAL SECTIONS — SHARED */
+/* =========================================
+   10. EDITORIAL SECTIONS — SHARED
+========================================= */
 
 .product-editorial-section,
 .product-glance-section,
@@ -580,7 +546,9 @@
 }
 
 
-/* 7. THE BEAUTY EDIT */
+/* =========================================
+   11. THE BEAUTY EDIT
+========================================= */
 
 .product-editorial-section {
   background: var(--cream);
@@ -610,7 +578,9 @@
 }
 
 
-/* 8. AT A GLANCE */
+/* =========================================
+   12. AT A GLANCE
+========================================= */
 
 .product-glance-section {
   background: var(--ivory);
@@ -652,7 +622,9 @@
 }
 
 
-/* 9. WHY WE CHOSE IT */
+/* =========================================
+   13. WHY WE CHOSE IT
+========================================= */
 
 .product-choice-section {
   background: #eee6df;
@@ -676,7 +648,9 @@
 }
 
 
-/* 10. SKIN DETAILS */
+/* =========================================
+   14. SKIN DETAILS
+========================================= */
 
 .product-skin-section {
   background: var(--ivory);
@@ -713,7 +687,9 @@
 }
 
 
-/* 11. INGREDIENT EDIT */
+/* =========================================
+   15. INGREDIENT EDIT
+========================================= */
 
 .product-ingredients-section {
   background: var(--cream);
@@ -774,7 +750,9 @@
 }
 
 
-/* 12. HOW TO USE */
+/* =========================================
+   16. HOW TO USE
+========================================= */
 
 .product-how-to-section {
   background: #eee6df;
@@ -809,7 +787,9 @@
 }
 
 
-/* 13. COMPLETE THE RITUAL */
+/* =========================================
+   17. COMPLETE THE RITUAL
+========================================= */
 
 .product-routine-section {
   background: var(--ivory);
@@ -859,7 +839,9 @@
 }
 
 
-/* 14. YOU MAY ALSO LOVE */
+/* =========================================
+   18. YOU MAY ALSO LOVE — EDITORIAL
+========================================= */
 
 .related-products-section {
   padding: 85px 7%;
@@ -925,7 +907,9 @@
 }
 
 
-/* 15. HIDDEN SECTIONS */
+/* =========================================
+   19. HIDDEN PRODUCT SECTIONS
+========================================= */
 
 .product-editorial-section[hidden],
 .product-glance-section[hidden],
@@ -939,7 +923,9 @@
 }
 
 
-/* 16. TABLET RESPONSIVE DESIGN */
+/* =========================================
+   20. TABLET RESPONSIVE DESIGN
+========================================= */
 
 @media (max-width: 900px) {
 
@@ -963,9 +949,34 @@
 }
 
 
-/* 17. MOBILE RESPONSIVE DESIGN */
+/* =========================================
+   21. MOBILE PRODUCT PAGE
+========================================= */
 
 @media (max-width: 750px) {
+
+  .standalone-product-page {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin: 25px auto;
+  }
+
+  .standalone-product-info h1 {
+    font-size: 28px;
+  }
+
+  .product-brand-name {
+    font-size: 16px;
+  }
+
+  .product-page-header {
+    padding: 18px 4%;
+    gap: 10px;
+  }
+
+  .product-back-link {
+    font-size: 9px;
+  }
 
   .standalone-product-page {
     margin: 35px auto 55px;
@@ -1013,7 +1024,32 @@
 }
 
 
-/* 18. SMALL MOBILE SCREENS */
+/* =========================================
+   22. SMALL MOBILE PRODUCT PAGE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .related-products-section {
+    padding: 15px 12px;
+    margin: 30px auto;
+  }
+
+  .related-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 125px));
+    gap: 18px;
+  }
+
+  .related-products-heading h2 {
+    font-size: 19px;
+  }
+
+}
+
+
+/* =========================================
+   23. VERY SMALL MOBILE SCREENS
+========================================= */
 
 @media (max-width: 480px) {
 
