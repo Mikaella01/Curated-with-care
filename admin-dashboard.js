@@ -15,6 +15,9 @@ let allProducts = [];
 let draggedProductId = null;
 let draggedSectionName = null;
 
+/* REMEMBER WHICH BRAND SECTIONS ARE OPEN */
+let openSections = new Set();
+
 
 /* =========================================
    1. CHECK ADMIN ACCESS
@@ -873,6 +876,7 @@ function createProductRow(product) {
 
 /* =========================================
    11. CREATE BRAND SECTION
+   COLLAPSIBLE BRAND HEADERS
 ========================================= */
 
 function createBrandSection(section, sectionIndex, totalSections) {
@@ -896,6 +900,8 @@ function createBrandSection(section, sectionIndex, totalSections) {
   titleArea.className = "admin-brand-title-area";
 
 
+  /* SECTION DRAG HANDLE */
+
   const dragHandle = document.createElement("span");
 
   dragHandle.className = "section-drag-handle";
@@ -903,10 +909,26 @@ function createBrandSection(section, sectionIndex, totalSections) {
   dragHandle.title = "Drag to rearrange sections";
 
 
+  /* COLLAPSE ARROW */
+
+  const collapseArrow = document.createElement("span");
+
+  collapseArrow.className = "section-collapse-arrow";
+
+
+  const isOpen = openSections.has(section.name);
+
+  collapseArrow.textContent = isOpen ? "▼" : "▶";
+
+
+  /* BRAND NAME */
+
   const title = document.createElement("h2");
 
   title.textContent = section.name;
 
+
+  /* PRODUCT COUNT */
 
   const count = document.createElement("small");
 
@@ -914,10 +936,17 @@ function createBrandSection(section, sectionIndex, totalSections) {
 
   count.textContent =
     section.products.length +
-    (section.products.length === 1 ? " product" : " products");
+    (section.products.length === 1
+      ? " product"
+      : " products");
 
 
-  titleArea.append(dragHandle, title, count);
+  titleArea.append(
+    dragHandle,
+    collapseArrow,
+    title,
+    count
+  );
 
 
   /* SECTION MOVE BUTTONS */
@@ -934,7 +963,10 @@ function createBrandSection(section, sectionIndex, totalSections) {
   upButton.title = "Move section up";
   upButton.disabled = sectionIndex === 0;
 
-  upButton.addEventListener("click", function() {
+
+  upButton.addEventListener("click", function(event) {
+
+    event.stopPropagation();
 
     moveSection(section.name, -1);
 
@@ -948,21 +980,29 @@ function createBrandSection(section, sectionIndex, totalSections) {
   downButton.title = "Move section down";
   downButton.disabled = sectionIndex === totalSections - 1;
 
-  downButton.addEventListener("click", function() {
+
+  downButton.addEventListener("click", function(event) {
+
+    event.stopPropagation();
 
     moveSection(section.name, 1);
 
   });
 
 
-  /* COLLAPSE SECTION */
+  /* COLLAPSE BUTTON */
 
   const collapseButton = document.createElement("button");
 
   collapseButton.type = "button";
-  collapseButton.textContent = "−";
-  collapseButton.title = "Collapse section";
+
   collapseButton.className = "section-collapse-button";
+
+  collapseButton.textContent = isOpen ? "−" : "+";
+
+  collapseButton.title = isOpen
+    ? "Collapse section"
+    : "Expand section";
 
 
   sectionActions.append(
@@ -972,7 +1012,10 @@ function createBrandSection(section, sectionIndex, totalSections) {
   );
 
 
-  header.append(titleArea, sectionActions);
+  header.append(
+    titleArea,
+    sectionActions
+  );
 
 
   /* PRODUCT CONTAINER */
@@ -980,6 +1023,8 @@ function createBrandSection(section, sectionIndex, totalSections) {
   const body = document.createElement("div");
 
   body.className = "admin-brand-section-products";
+
+  body.hidden = !isOpen;
 
 
   section.products.forEach(product => {
@@ -989,17 +1034,48 @@ function createBrandSection(section, sectionIndex, totalSections) {
   });
 
 
-  collapseButton.addEventListener("click", function() {
+  /* TOGGLE SECTION */
 
-    const collapsed = body.hidden;
+  function toggleSection() {
 
-    body.hidden = !collapsed;
+    const currentlyOpen = openSections.has(section.name);
 
-    collapseButton.textContent = collapsed ? "−" : "+";
+    if (currentlyOpen) {
 
-    collapseButton.title = collapsed
+      openSections.delete(section.name);
+
+    } else {
+
+      openSections.add(section.name);
+
+    }
+
+
+    const nowOpen = openSections.has(section.name);
+
+    body.hidden = !nowOpen;
+
+    collapseArrow.textContent = nowOpen ? "▼" : "▶";
+
+    collapseButton.textContent = nowOpen ? "−" : "+";
+
+    collapseButton.title = nowOpen
       ? "Collapse section"
       : "Expand section";
+
+  }
+
+
+  /* CLICK BRAND HEADER TO OPEN/CLOSE */
+
+  titleArea.addEventListener("click", toggleSection);
+
+
+  collapseButton.addEventListener("click", function(event) {
+
+    event.stopPropagation();
+
+    toggleSection();
 
   });
 
@@ -1020,7 +1096,9 @@ function createBrandSection(section, sectionIndex, totalSections) {
   body.addEventListener("dragleave", function(event) {
 
     if (!body.contains(event.relatedTarget)) {
+
       body.classList.remove("section-drop-target");
+
     }
 
   });
@@ -1030,11 +1108,14 @@ function createBrandSection(section, sectionIndex, totalSections) {
 
     event.preventDefault();
 
+    event.stopPropagation();
+
     body.classList.remove("section-drop-target");
 
     const sourceId = draggedProductId;
 
     if (!sourceId) return;
+
 
     const movedProduct = allProducts.find(item =>
       String(item.id) === sourceId
@@ -1049,6 +1130,12 @@ function createBrandSection(section, sectionIndex, totalSections) {
 
 
     movedProduct.admin_section = section.name;
+
+
+    /* OPEN DESTINATION SECTION */
+
+    openSections.add(section.name);
+
 
     const destinationProducts = allProducts.filter(item =>
       getProductSection(item) === section.name
@@ -1075,8 +1162,11 @@ function createBrandSection(section, sectionIndex, totalSections) {
   header.addEventListener("dragstart", function(event) {
 
     if (draggedProductId) {
+
       event.preventDefault();
+
       return;
+
     }
 
     draggedSectionName = section.name;
@@ -1100,7 +1190,9 @@ function createBrandSection(section, sectionIndex, totalSections) {
     sectionElement.classList.remove("section-dragging");
 
     document.querySelectorAll(".admin-brand-section").forEach(item => {
+
       item.classList.remove("section-drag-over");
+
     });
 
   });
@@ -1120,7 +1212,9 @@ function createBrandSection(section, sectionIndex, totalSections) {
   sectionElement.addEventListener("dragleave", function(event) {
 
     if (!sectionElement.contains(event.relatedTarget)) {
+
       sectionElement.classList.remove("section-drag-over");
+
     }
 
   });
@@ -1131,6 +1225,8 @@ function createBrandSection(section, sectionIndex, totalSections) {
     if (!draggedSectionName) return;
 
     event.preventDefault();
+
+    event.stopPropagation();
 
     sectionElement.classList.remove("section-drag-over");
 
@@ -1158,7 +1254,9 @@ function createBrandSection(section, sectionIndex, totalSections) {
     sections.forEach((item, index) => {
 
       item.products.forEach(product => {
+
         product.admin_section_order = index;
+
       });
 
     });
@@ -1176,7 +1274,6 @@ function createBrandSection(section, sectionIndex, totalSections) {
   return sectionElement;
 
 }
-
 
 /* =========================================
    12. RENDER DASHBOARD
