@@ -478,3 +478,21 @@
 .basket-page + .site-footer {
   background: #eee6df;
 }
+
+/* =========================================
+   MOBILE BASKET LAYOUT
+========================================= */
+
+@media (max-width: 850px) {
+
+  .basket-layout {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .basket-summary {
+    position: static;
+    width: 100%;
+  }
+
+}
