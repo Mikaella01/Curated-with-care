@@ -259,3 +259,34 @@
   letter-spacing: 0.7px;
   text-decoration: none;
 }
+
+/* =========================================
+   31. RESPONSIVE — PRODUCT PAGE
+========================================= */
+
+@media (max-width: 750px) {
+
+  .standalone-product-page {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin: 25px auto;
+  }
+
+  .standalone-product-info h1 {
+    font-size: 28px;
+  }
+
+  .product-brand-name {
+    font-size: 16px;
+  }
+
+  .product-page-header {
+    padding: 18px 4%;
+    gap: 10px;
+  }
+
+  .product-back-link {
+    font-size: 9px;
+  }
+
+}
