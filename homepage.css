@@ -195,3 +195,106 @@ footer p,
   letter-spacing: 2px;
   color: var(--muted);
 }
+
+
+/* =========================================
+   27. BRAND GALLERY
+   THE BRANDS WE LOVE
+========================================= */
+
+.brand-edit {
+  background:
+    radial-gradient(
+      ellipse at 10% 20%,
+      rgba(220, 201, 193, 0.13),
+      transparent 45%
+    ),
+    #f5eee8;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-edit-heading {
+  max-width: 650px;
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+.brand-edit-heading h2 {
+  font-size: clamp(38px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--dark);
+}
+
+.brand-edit-heading p {
+  max-width: 530px;
+  margin: 15px auto 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.brand-edit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  max-width: 1050px;
+  margin: 0 auto;
+  border-top: 1px solid #ded1c9;
+  border-left: 1px solid #ded1c9;
+}
+
+.brand-edit-item {
+  min-height: 135px;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.35);
+  border-right: 1px solid #ded1c9;
+  border-bottom: 1px solid #ded1c9;
+  color: #554946;
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+.brand-edit-item span {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  transition: transform 0.35s ease;
+}
+
+.brand-edit-item small {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #a18a80;
+}
+
+.brand-edit-item:hover {
+  background: #eee2da;
+  color: var(--deep-rose);
+}
+
+.brand-edit-item:hover span {
+  transform: translateY(-2px);
+}
+
+.brand-edit-link {
+  display: inline-block;
+  margin-top: 35px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--dusty-rose);
+  color: var(--deep-rose);
+  font-size: 9px;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+
+.brand-edit-link:hover {
+  color: var(--dark);
+}
