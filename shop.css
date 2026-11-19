@@ -1,0 +1,298 @@
+
+/* =========================================
+   CURATED WITH CARE BY M.
+   SHOP STYLES
+========================================= */
+
+
+/* =========================================
+   1. SHOP NAVIGATION AND FILTERS
+========================================= */
+
+.shop-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 35px;
+}
+
+.shop-tab {
+  background: transparent;
+  border: none;
+  padding: 13px 17px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+  border-bottom: 2px solid transparent;
+}
+
+.shop-tab.active,
+.shop-tab:hover {
+  color: var(--deep-rose);
+  border-bottom-color: var(--deep-rose);
+}
+
+.shop-filter-section {
+  margin-bottom: 25px;
+}
+
+.filter-heading {
+  display: block;
+  color: var(--deep-rose);
+  font-size: 9px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-bottom: 13px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.filter {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  padding: 9px 15px;
+  font-size: 10px;
+  transition: all 0.3s;
+}
+
+.filter:hover,
+.filter.active {
+  background: var(--deep-rose);
+  border-color: var(--deep-rose);
+  color: var(--white);
+}
+
+
+/* =========================================
+   2. SEARCH AND SORT
+========================================= */
+
+.shop-tools {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 35px 0;
+}
+
+.shop-tools input,
+.shop-tools select {
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  padding: 13px 15px;
+  color: var(--dark);
+  font-size: 11px;
+}
+
+.shop-tools input {
+  flex: 1;
+  min-width: 0;
+}
+
+.shop-tools select {
+  width: 190px;
+}
+
+.shop-tools input:focus,
+.shop-tools select:focus {
+  outline: 1px solid var(--dusty-rose);
+}
+
+
+/* =========================================
+   3. SHOP RESULTS HEADING
+========================================= */
+
+.shop-results-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.shop-results-heading p {
+  font-size: 25px;
+}
+
+.shop-results-heading span {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+
+/* =========================================
+   4. PRODUCT GRID
+========================================= */
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 30px;
+  row-gap: 48px;
+  align-items: start;
+}
+
+
+/* =========================================
+   5. PRODUCT CARDS
+========================================= */
+
+.product-card {
+  background: transparent;
+  border: none;
+  min-width: 0;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+
+/* =========================================
+   6. PRODUCT IMAGES
+========================================= */
+
+.product-image {
+  position: relative;
+  width: 100%;
+  height: 235px;
+  background: transparent;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.04);
+}
+
+
+/* =========================================
+   7. PRODUCT NAMES
+========================================= */
+
+.product-info {
+  padding: 18px 8px 0;
+  text-align: center;
+}
+
+.product-info h3 {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  margin: 0;
+  color: var(--dark);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.product-info h3:hover {
+  color: var(--deep-rose);
+}
+
+
+/* =========================================
+   8. EMPTY CATALOGUE MESSAGE
+========================================= */
+
+.catalogue-empty {
+  grid-column: 1 / -1;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--muted);
+  background: var(--cream);
+}
+
+
+/* =========================================
+   9. TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 40px;
+  }
+
+  .product-image {
+    height: 220px;
+  }
+
+}
+
+
+/* =========================================
+   10. MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .shop-navigation {
+    gap: 5px;
+  }
+
+  .shop-tab {
+    padding: 10px 9px;
+    font-size: 9px;
+  }
+
+  .filters {
+    gap: 7px;
+  }
+
+  .filter {
+    padding: 8px 11px;
+    font-size: 9px;
+  }
+
+  .shop-tools {
+    flex-direction: column;
+  }
+
+  .shop-tools select {
+    width: 100%;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 12px;
+  }
+
+  .product-image {
+    height: 220px;
+  }
+
+  .product-info {
+    padding-top: 13px;
+  }
+
+  .product-info h3 {
+    font-size: 12px;
+  }
+
+  .product-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+}
