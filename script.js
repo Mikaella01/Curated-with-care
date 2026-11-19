@@ -324,18 +324,22 @@ function displayProducts() {
 
       <div class="product-info">
 
-        <h3
-          data-view-product="${escapeHTML(product.id)}"
-          role="link"
-          tabindex="0"
-          aria-label="View ${escapeHTML(product.name)}"
-        >
+  <h3
+    data-view-product="${escapeHTML(product.id)}"
+    role="link"
+    tabindex="0"
+    aria-label="View ${escapeHTML(product.name)}"
+  >
 
-          ${escapeHTML(product.name)}
+    ${escapeHTML(product.name)}
 
-        </h3>
+  </h3>
 
-      </div>
+  <p class="product-price">
+    ${formatPrice(product.price)}
+  </p>
+
+</div>
 
     `;
 
