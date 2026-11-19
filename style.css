@@ -3602,3 +3602,47 @@ footer p,
   }
 
 }
+
+/* =========================================
+   COLLAPSIBLE ADMIN BRAND SECTIONS
+========================================= */
+
+.admin-brand-section-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+.admin-brand-title-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.section-collapse-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  font-size: 12px;
+  color: #8d8177;
+  transition: transform 0.2s ease;
+}
+
+.admin-brand-section-products[hidden] {
+  display: none !important;
+}
+
+/* Keep buttons usable */
+.admin-section-actions button {
+  cursor: pointer;
+}
+
+/* Brand header appearance */
+.admin-brand-section-header {
+  transition: background 0.2s ease;
+}
+
+.admin-brand-section-header:hover {
+  background: rgba(220, 210, 198, 0.15);
+}
