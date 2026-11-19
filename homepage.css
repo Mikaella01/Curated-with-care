@@ -298,3 +298,57 @@ footer p,
 .brand-edit-link:hover {
   color: var(--dark);
 }
+
+
+/* =========================================
+   28. INSTAGRAM ICONS
+========================================= */
+
+/* Header Instagram icon */
+
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--deep-rose);
+  text-decoration: none;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.header nav .instagram-link {
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  margin-left: 2px;
+}
+
+.header nav .instagram-link svg {
+  display: block;
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.header nav .instagram-link svg circle:last-child {
+  fill: currentColor;
+  stroke: none;
+}
+
+.instagram-link:hover {
+  color: var(--dusty-rose);
+  transform: translateY(-2px);
+}
+
+.footer-links .instagram-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--deep-rose);
+}
