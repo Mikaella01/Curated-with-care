@@ -793,6 +793,7 @@ function createProductRow(product) {
   row.addEventListener("drop", async function(event) {
 
     event.preventDefault();
+     event.stopPropagation();
 
     row.classList.remove("drag-over");
 
