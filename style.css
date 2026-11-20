@@ -1107,3 +1107,145 @@ select:focus-visible {
   }
 
 }
+
+/* =========================================
+   CINEMATIC STORY — FOUNDATION
+========================================= */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Hero image: continuous movement + scroll movement */
+
+.hero-image {
+  transform: scale(1.04);
+  will-change: transform;
+  transition: filter 0.5s ease;
+}
+
+/* Soft cinematic lighting */
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 75% 25%,
+      rgba(255,255,255,0.20),
+      transparent 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(248,245,239,0.05),
+      transparent 65%
+    );
+
+  opacity: 0.8;
+}
+
+/* Floating petals */
+
+.cinematic-petal {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+
+  width: 17px;
+  height: 25px;
+
+  border-radius: 80% 15% 80% 15%;
+
+  background: rgba(218, 183, 178, 0.55);
+
+  filter: blur(0.3px);
+
+  will-change: transform;
+
+  animation: petalFloat 8s ease-in-out infinite;
+}
+
+.cinematic-petal.petal-one {
+  top: 17%;
+  left: 65%;
+  animation-duration: 9s;
+}
+
+.cinematic-petal.petal-two {
+  top: 48%;
+  left: 82%;
+  width: 12px;
+  height: 19px;
+  animation-duration: 11s;
+  animation-delay: -3s;
+}
+
+.cinematic-petal.petal-three {
+  top: 72%;
+  left: 58%;
+  width: 14px;
+  height: 21px;
+  animation-duration: 10s;
+  animation-delay: -5s;
+}
+
+/* Petal continuous movement */
+
+@keyframes petalFloat {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate3d(18px, -20px, 0) rotate(35deg);
+  }
+
+  50% {
+    transform: translate3d(-8px, 12px, 0) rotate(75deg);
+  }
+
+  75% {
+    transform: translate3d(22px, 24px, 0) rotate(110deg);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotate(145deg);
+  }
+}
+
+/* Hero image gentle breathing */
+
+@keyframes heroBreathing {
+  0%, 100% {
+    background-size: 100% auto;
+  }
+
+  50% {
+    background-size: 104% auto;
+  }
+}
+
+/* Hero text remains above image */
+
+.hero-content {
+  position: relative;
+  z-index: 4;
+}
+
+/* Reduce motion for visitors who prefer it */
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-petal {
+    animation: none !important;
+  }
+
+  .hero-image {
+    transform: none !important;
+  }
+}
