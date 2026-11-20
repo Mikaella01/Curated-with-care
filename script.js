@@ -1116,3 +1116,40 @@ loadSupabaseProducts();
 console.log(
   "Curated with Care by M. — Website loaded successfully."
 );
+
+/* =========================================
+   EDITORIAL INTRO — SCROLL OBSERVER
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const introSection = document.querySelector(".intro");
+
+  if (!introSection) return;
+
+  introSection.classList.add("intro-reveal");
+
+  const introObserver = new IntersectionObserver(
+    function (entries) {
+
+      entries.forEach(function (entry) {
+
+        if (entry.isIntersecting) {
+
+          introSection.classList.add("intro-visible");
+
+          introObserver.unobserve(introSection);
+
+        }
+
+      });
+
+    },
+    {
+      threshold: 0.2
+    }
+  );
+
+  introObserver.observe(introSection);
+
+});
