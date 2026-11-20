@@ -1440,3 +1440,65 @@ document.addEventListener("DOMContentLoaded", function () {
   updateTravellers();
 
 });
+
+/* =========================================
+   INTRO — CINEMATIC SCROLL CONTROL
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const intro = document.querySelector(".intro");
+
+  if (!intro) return;
+
+  let ticking = false;
+
+  function updateIntroMovement() {
+
+    const rect = intro.getBoundingClientRect();
+
+    const screenHeight = window.innerHeight;
+
+    let progress =
+      (screenHeight - rect.top) /
+      (screenHeight * 0.85);
+
+    progress = Math.max(0, Math.min(1, progress));
+
+    intro.style.setProperty(
+      "--intro-progress",
+      progress
+    );
+
+    ticking = false;
+
+  }
+
+  function requestIntroMovement() {
+
+    if (!ticking) {
+
+      window.requestAnimationFrame(
+        updateIntroMovement
+      );
+
+      ticking = true;
+
+    }
+
+  }
+
+  window.addEventListener(
+    "scroll",
+    requestIntroMovement,
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "resize",
+    requestIntroMovement
+  );
+
+  updateIntroMovement();
+
+});
