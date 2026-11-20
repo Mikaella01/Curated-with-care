@@ -1,7 +1,6 @@
-
 /* =========================================
    CURATED WITH CARE BY M.
-   GLOBAL AND HOMEPAGE STYLES
+   CLEANED GLOBAL & HOMEPAGE STYLES
 ========================================= */
 
 
@@ -38,6 +37,7 @@ html {
 
 body {
   background-color: var(--ivory);
+
   background-image:
     radial-gradient(
       ellipse at 10% 15%,
@@ -49,7 +49,9 @@ body {
       rgba(198, 184, 164, 0.09),
       transparent 45%
     );
+
   background-attachment: fixed;
+
   color: var(--dark);
   font-family: 'Montserrat', sans-serif;
   font-size: 13px;
@@ -132,19 +134,24 @@ select:focus-visible {
 
 
 /* =========================================
-   4. HEADER AND NAVIGATION
+   4. HEADER & NAVIGATION
 ========================================= */
 
 .header {
   min-height: 90px;
   padding: 18px 7%;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 25px;
+
   background: rgba(248, 245, 239, 0.98);
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 3px 18px rgba(80, 60, 50, 0.025);
+
+  box-shadow:
+    0 3px 18px rgba(80, 60, 50, 0.025);
+
   position: sticky;
   top: 0;
   z-index: 100;
@@ -217,7 +224,7 @@ select:focus-visible {
 
 
 /* =========================================
-   5. SHARED BUTTONS AND LINKS
+   5. SHARED BUTTONS & LINKS
 ========================================= */
 
 .primary-button {
@@ -246,7 +253,7 @@ select:focus-visible {
 
 
 /* =========================================
-   6. HOMEPAGE — CINEMATIC EDITORIAL HERO
+   6. HOMEPAGE — CINEMATIC HERO
 ========================================= */
 
 .hero {
@@ -254,18 +261,23 @@ select:focus-visible {
   min-height: 720px;
   height: 82vh;
   max-height: 900px;
+
   display: flex;
   align-items: center;
+
   overflow: hidden;
+  isolation: isolate;
+
   background: var(--cream);
 }
 
 
-/* FULL BACKGROUND IMAGE */
+/* HERO IMAGE */
 
 .hero-image {
   position: absolute;
   inset: 0;
+
   width: 100%;
   height: 100%;
   min-height: 0;
@@ -280,13 +292,45 @@ select:focus-visible {
 
   background-size: cover;
   background-position: center;
+
   z-index: 0;
+
+  transform: scale(1.04);
+  transform-origin: center center;
+
+  will-change: transform, opacity, filter;
 
   animation: heroImageReveal 1.5s ease both;
 }
 
 
-/* TEXT PANEL */
+/* SOFT LIGHT OVER IMAGE */
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 75% 25%,
+      rgba(255, 255, 255, 0.20),
+      transparent 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(248, 245, 239, 0.05),
+      transparent 65%
+    );
+
+  opacity: 0.8;
+}
+
+
+/* HERO TEXT PANEL */
 
 .hero-content {
   position: relative;
@@ -310,10 +354,12 @@ select:focus-visible {
   border: 1px solid rgba(255, 255, 255, 0.55);
 
   animation: heroContentReveal 1s ease 0.2s both;
+
+  will-change: transform, opacity;
 }
 
 
-/* SMALL EDITORIAL LABEL */
+/* HERO LABEL */
 
 .hero .eyebrow {
   font-size: 9px;
@@ -323,7 +369,7 @@ select:focus-visible {
 }
 
 
-/* MAIN HEADLINE */
+/* HERO HEADING */
 
 .hero h1 {
   font-family: 'Cormorant Garamond', serif;
@@ -337,14 +383,13 @@ select:focus-visible {
   margin-bottom: 25px;
 }
 
-
 .hero h1 em {
   font-style: italic;
   color: var(--deep-rose);
 }
 
 
-/* DESCRIPTION */
+/* HERO DESCRIPTION */
 
 .hero p {
   max-width: 370px;
@@ -359,7 +404,7 @@ select:focus-visible {
 }
 
 
-/* BUTTON */
+/* HERO BUTTON */
 
 .hero .primary-button {
   padding: 17px 30px;
@@ -378,10 +423,9 @@ select:focus-visible {
 }
 
 
-/* IMAGE ANIMATION */
+/* HERO ENTRANCE ANIMATIONS */
 
 @keyframes heroImageReveal {
-
   from {
     opacity: 0;
     transform: scale(1.04);
@@ -391,14 +435,9 @@ select:focus-visible {
     opacity: 1;
     transform: scale(1);
   }
-
 }
 
-
-/* TEXT ANIMATION */
-
 @keyframes heroContentReveal {
-
   from {
     opacity: 0;
     transform: translateY(25px);
@@ -408,8 +447,8 @@ select:focus-visible {
     opacity: 1;
     transform: translateY(0);
   }
-
 }
+
 
 /* =========================================
    7. HOMEPAGE — INTRODUCTION
@@ -418,36 +457,181 @@ select:focus-visible {
 .intro {
   position: relative;
   isolation: isolate;
-  text-align: center;
-  max-width: 950px;
-  margin: auto;
-  padding: 30px 20px;
+  overflow: hidden;
+
+  width: 100%;
+  max-width: none;
+  margin: 0;
+
+  padding: 110px 9% 120px;
+
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  align-items: center;
+  column-gap: 5%;
+
+  text-align: left;
+
+  background:
+    radial-gradient(
+      ellipse at 15% 30%,
+      rgba(231, 205, 199, 0.24),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 85% 75%,
+      rgba(224, 213, 197, 0.3),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      #f3ebe5 0%,
+      #f5eee8 45%,
+      #f8f5ef 100%
+    );
+
+  --intro-progress: 0;
 }
 
-.intro::before {
-  content: "❀";
-  position: absolute;
-  z-index: -1;
-  left: 0;
-  top: -15px;
-  font-family: Georgia, serif;
-  font-size: 145px;
-  color: #b99b91;
-  opacity: 0.055;
-  pointer-events: none;
+
+/* INTRO LABEL */
+
+.intro .eyebrow {
+  grid-column: 1 / -1;
+
+  margin-bottom: 30px;
+
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--deep-rose);
+
+  transform:
+    translate3d(
+      0,
+      calc((1 - var(--intro-progress)) * 20px),
+      0
+    );
+
+  opacity: var(--intro-progress);
 }
+
+
+/* INTRO HEADING */
 
 .intro h2 {
-  font-size: clamp(35px, 4vw, 52px);
+  grid-column: 1;
+
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(44px, 5vw, 66px);
   font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 22px;
+  line-height: 1.08;
+  letter-spacing: -1px;
+
+  color: var(--dark);
+
+  transform:
+    translate3d(
+      calc((1 - var(--intro-progress)) * -55px),
+      calc((1 - var(--intro-progress)) * 35px),
+      0
+    );
+
+  opacity: var(--intro-progress);
+
+  will-change: transform, opacity;
 }
 
+.intro h2 em {
+  color: var(--deep-rose);
+  font-style: italic;
+}
+
+
+/* INTRO PARAGRAPH */
+
 .intro p {
-  max-width: 570px;
-  margin: auto;
+  grid-column: 2;
+
+  max-width: 390px;
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 2.1;
+  font-weight: 300;
+
   color: var(--muted);
+
+  transform:
+    translate3d(
+      calc((1 - var(--intro-progress)) * 45px),
+      calc((1 - var(--intro-progress)) * 20px),
+      0
+    );
+
+  opacity: var(--intro-progress);
+
+  will-change: transform, opacity;
+}
+
+
+/* DECORATIVE FLOWER */
+
+.intro::after {
+  content: "✿";
+
+  position: absolute;
+  left: 3%;
+  bottom: 15px;
+
+  font-family: serif;
+  font-size: 100px;
+  font-weight: 300;
+
+  color: var(--dusty-rose);
+
+  opacity: calc(0.04 + var(--intro-progress) * 0.12);
+
+  pointer-events: none;
+
+  transform:
+    translate3d(
+      calc(var(--intro-progress) * 35px),
+      calc((1 - var(--intro-progress)) * 70px),
+      0
+    )
+    rotate(
+      calc(var(--intro-progress) * 100deg)
+    );
+
+  will-change: transform, opacity;
+}
+
+
+/* INTRO ATMOSPHERE */
+
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 80% 30%,
+      rgba(220, 190, 184, 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 15% 80%,
+      rgba(255, 255, 255, 0.65),
+      transparent 55%
+    );
+
+  opacity: var(--story-progress, 0);
 }
 
 
@@ -572,14 +756,19 @@ select:focus-visible {
 
 .brand-card {
   min-height: 155px;
+
   background: rgba(255, 255, 255, 0.75);
   border: 1px solid #e8ddd4;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   padding: 20px 10px;
+
   transition: all 0.3s ease;
+
   color: var(--dark);
 }
 
@@ -647,11 +836,12 @@ select:focus-visible {
   }
 
 
-  /* MAIN HEADER */
+  /* HEADER */
 
   .header {
     min-height: 75px;
     padding: 12px 5%;
+
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -676,13 +866,18 @@ select:focus-visible {
 
   .header nav {
     display: none;
+
     position: absolute;
     top: 100%;
     left: 0;
+
     width: 100%;
+
     padding: 20px;
+
     background: var(--ivory);
     border-top: 1px solid var(--border);
+
     flex-direction: column;
     align-items: flex-start;
     gap: 18px;
@@ -709,113 +904,137 @@ select:focus-visible {
   }
 
 
-  /* HERO — MOBILE */
+  /* HERO */
 
-.hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
-  height: auto;
-  min-height: 690px;
-  max-height: none;
+    height: auto;
+    min-height: 690px;
+    max-height: none;
 
-  padding: 0;
+    padding: 0;
 
-  background: var(--cream);
-}
-
-
-/* MOBILE IMAGE */
-
-.hero-image {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-
-  background-image:
-    linear-gradient(
-      to bottom,
-      rgba(248, 245, 239, 0.02) 0%,
-      rgba(248, 245, 239, 0.02) 35%,
-      rgba(248, 245, 239, 0.15) 55%,
-      rgba(248, 245, 239, 0.75) 100%
-    ),
-    url("https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1200&q=85");
-
-  background-size: cover;
-  background-position: center;
-}
-
-
-/* MOBILE TEXT PANEL */
-
-.hero-content {
-  width: 90%;
-  max-width: none;
-
-  margin: 0 auto 25px;
-
-  padding: 35px 25px;
-
-  background: rgba(248, 245, 239, 0.91);
-
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-
-  align-items: flex-start;
-}
-
-
-/* MOBILE LABEL */
-
-.hero .eyebrow {
-  font-size: 8px;
-  letter-spacing: 2px;
-  margin-bottom: 18px;
-}
-
-
-/* MOBILE HEADING */
-
-.hero h1 {
-  font-size: clamp(48px, 13vw, 65px);
-  line-height: 0.98;
-  margin-bottom: 20px;
-}
-
-
-/* MOBILE DESCRIPTION */
-
-.hero p {
-  font-size: 11px;
-  max-width: 300px;
-  margin-bottom: 25px;
-}
-
-
-/* MOBILE BUTTON */
-
-.hero .primary-button {
-  padding: 15px 20px;
-  font-size: 8px;
-  letter-spacing: 1.5px;
-}
-
-
-  /* INTRODUCTION */
-
-  .intro h2 {
-    font-size: 36px;
+    background: var(--cream);
   }
 
-  .intro::before {
-    font-size: 110px;
-    left: -5px;
-    top: -20px;
+  .hero-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+
+    background-image:
+      linear-gradient(
+        to bottom,
+        rgba(248, 245, 239, 0.02) 0%,
+        rgba(248, 245, 239, 0.02) 35%,
+        rgba(248, 245, 239, 0.15) 55%,
+        rgba(248, 245, 239, 0.75) 100%
+      ),
+      url("https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1200&q=85");
+
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-content {
+    width: 90%;
+    max-width: none;
+
+    margin: 0 auto 25px;
+
+    padding: 35px 25px;
+
+    background: rgba(248, 245, 239, 0.91);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    align-items: flex-start;
+  }
+
+  .hero .eyebrow {
+    font-size: 8px;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 13vw, 65px);
+    line-height: 0.98;
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 11px;
+    max-width: 300px;
+    margin-bottom: 25px;
+  }
+
+  .hero .primary-button {
+    padding: 15px 20px;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+  }
+
+
+  /* INTRO */
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    text-align: left;
+
+    padding: 75px 8% 85px;
+    gap: 0;
+  }
+
+  .intro .eyebrow {
+    margin-bottom: 24px;
+  }
+
+  .intro h2 {
+    font-size: clamp(42px, 11vw, 58px);
+    line-height: 1.08;
+    margin-bottom: 25px;
+  }
+
+  .intro p {
+    max-width: 340px;
+    font-size: 12px;
+    line-height: 2;
+  }
+
+  .intro::after {
+    left: auto;
+    right: 2%;
+    bottom: 5px;
+    font-size: 75px;
+  }
+
+  .intro h2 {
+    transform:
+      translate3d(
+        0,
+        calc((1 - var(--intro-progress)) * 35px),
+        0
+      );
+  }
+
+  .intro p {
+    transform:
+      translate3d(
+        0,
+        calc((1 - var(--intro-progress)) * 25px),
+        0
+      );
   }
 
 
@@ -855,7 +1074,7 @@ select:focus-visible {
   }
 
 
-  /* HOMEPAGE PRODUCT DETAILS */
+  /* PRODUCT DETAILS */
 
   .product-details-section {
     padding: 55px 6%;
@@ -886,8 +1105,6 @@ select:focus-visible {
 
 @media (max-width: 480px) {
 
-  /* HOMEPAGE PRODUCT DETAILS */
-
   .product-details-section {
     padding: 45px 5%;
   }
@@ -907,600 +1124,27 @@ select:focus-visible {
 
 }
 
-/* =========================================
-   EDITORIAL INTRODUCTION — REDESIGN
-========================================= */
-
-.intro {
-  max-width: none;
-  width: 100%;
-  margin: 0;
-  padding: 110px 9% 120px;
-
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  align-items: center;
-  column-gap: 8%;
-
-  text-align: left;
-  position: relative;
-  overflow: hidden;
-
-  background:
-    radial-gradient(
-      circle at 12% 30%,
-      rgba(255,255,255,0.65),
-      transparent 35%
-    ),
-    var(--cream);
-}
-
-/* Small introductory text */
-
-.intro .eyebrow {
-  grid-column: 1 / -1;
-  margin-bottom: 30px;
-
-  font-size: 9px;
-  letter-spacing: 3px;
-  color: var(--deep-rose);
-}
-
-/* Main heading */
-
-.intro h2 {
-  grid-column: 1;
-  margin: 0;
-
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(42px, 5.5vw, 72px);
-  font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: -1px;
-
-  color: var(--dark);
-}
-
-.intro h2 em {
-  color: var(--deep-rose);
-  font-style: italic;
-}
-
-/* Supporting paragraph */
-
-.intro p {
-  grid-column: 2;
-  max-width: 430px;
-  margin: 0;
-
-  font-size: 13px;
-  line-height: 2.1;
-  font-weight: 300;
-
-  color: var(--muted);
-}
-
-/* Decorative flower */
-
-.intro::after {
-  content: "✿";
-
-  position: absolute;
-  left: 3%;
-  bottom: 15px;
-
-  font-family: serif;
-  font-size: 100px;
-  font-weight: 300;
-
-  color: var(--dusty-rose);
-  opacity: 0.08;
-
-  pointer-events: none;
-}
-
 
 /* =========================================
-   INTRODUCTION — MOBILE
+   15. MOTION ACCESSIBILITY
 ========================================= */
-
-@media (max-width: 650px) {
-
-  .intro {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    text-align: left;
-
-    padding: 75px 8% 85px;
-    gap: 0;
-  }
-
-  .intro .eyebrow {
-    margin-bottom: 24px;
-  }
-
-  .intro h2 {
-    font-size: clamp(42px, 11vw, 58px);
-    line-height: 1.08;
-    margin-bottom: 25px;
-  }
-
-  .intro p {
-    max-width: 340px;
-    font-size: 12px;
-    line-height: 2;
-  }
-
-  .intro::after {
-    left: auto;
-    right: 2%;
-    bottom: 5px;
-    font-size: 75px;
-  }
-
-}
-
-/* =========================================
-   EDITORIAL INTRO — REFINED PROPORTIONS
-========================================= */
-
-@media (min-width: 651px) {
-
-  .intro {
-    grid-template-columns: 1.35fr 0.65fr;
-    column-gap: 5%;
-    padding-left: 9%;
-    padding-right: 9%;
-  }
-
-  .intro h2 {
-    font-size: clamp(44px, 5vw, 66px);
-    max-width: 760px;
-  }
-
-  .intro p {
-    max-width: 390px;
-  }
-
-}
-
-/* =========================================
-   EDITORIAL INTRO — SCROLL REVEAL
-========================================= */
-
-.intro.intro-reveal .eyebrow,
-.intro.intro-reveal h2,
-.intro.intro-reveal p {
-  opacity: 0;
-  transform: translateY(25px);
-
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s ease;
-}
-
-.intro.intro-reveal h2 {
-  transition-delay: 0.15s;
-}
-
-.intro.intro-reveal p {
-  transition-delay: 0.3s;
-}
-
-.intro.intro-visible .eyebrow,
-.intro.intro-visible h2,
-.intro.intro-visible p {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 @media (prefers-reduced-motion: reduce) {
 
-  .intro.intro-reveal .eyebrow,
-  .intro.intro-reveal h2,
-  .intro.intro-reveal p {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  html {
+    scroll-behavior: auto;
   }
 
-}
-
-/* =========================================
-   CINEMATIC STORY — FOUNDATION
-========================================= */
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-/* Hero image: continuous movement + scroll movement */
-
-.hero-image {
-  transform: scale(1.04);
-  will-change: transform;
-  transition: filter 0.5s ease;
-}
-
-/* Soft cinematic lighting */
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at 75% 25%,
-      rgba(255,255,255,0.20),
-      transparent 50%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(248,245,239,0.05),
-      transparent 65%
-    );
-
-  opacity: 0.8;
-}
-
-/* Floating petals */
-
-.cinematic-petal {
-  position: absolute;
-  z-index: 3;
-  pointer-events: none;
-
-  width: 17px;
-  height: 25px;
-
-  border-radius: 80% 15% 80% 15%;
-
-  background: rgba(218, 183, 178, 0.55);
-
-  filter: blur(0.3px);
-
-  will-change: transform;
-
-  animation: petalFloat 8s ease-in-out infinite;
-}
-
-.cinematic-petal.petal-one {
-  top: 17%;
-  left: 65%;
-  animation-duration: 9s;
-}
-
-.cinematic-petal.petal-two {
-  top: 48%;
-  left: 82%;
-  width: 12px;
-  height: 19px;
-  animation-duration: 11s;
-  animation-delay: -3s;
-}
-
-.cinematic-petal.petal-three {
-  top: 72%;
-  left: 58%;
-  width: 14px;
-  height: 21px;
-  animation-duration: 10s;
-  animation-delay: -5s;
-}
-
-/* Petal continuous movement */
-
-@keyframes petalFloat {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
-  }
-
-  25% {
-    transform: translate3d(18px, -20px, 0) rotate(35deg);
-  }
-
-  50% {
-    transform: translate3d(-8px, 12px, 0) rotate(75deg);
-  }
-
-  75% {
-    transform: translate3d(22px, 24px, 0) rotate(110deg);
-  }
-
-  100% {
-    transform: translate3d(0, 0, 0) rotate(145deg);
-  }
-}
-
-/* Hero image gentle breathing */
-
-@keyframes heroBreathing {
-  0%, 100% {
-    background-size: 100% auto;
-  }
-
-  50% {
-    background-size: 104% auto;
-  }
-}
-
-/* Hero text remains above image */
-
-.hero-content {
-  position: relative;
-  z-index: 4;
-}
-
-/* Reduce motion for visitors who prefer it */
-
-@media (prefers-reduced-motion: reduce) {
-  .cinematic-petal {
+  .hero-image,
+  .hero-content {
     animation: none !important;
   }
 
   .hero-image {
     transform: none !important;
-  }
-}
-
-/* =========================================
-   CINEMATIC TRANSITION — HERO TO INTRO
-========================================= */
-
-.intro {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-
-  --story-progress: 0;
-}
-
-/* A soft blush light gradually enters the scene */
-
-.intro::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  z-index: -1;
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at 80% 30%,
-      rgba(220, 190, 184, 0.35),
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse at 15% 80%,
-      rgba(255,255,255,0.65),
-      transparent 55%
-    );
-
-  opacity: var(--story-progress);
-  transition: opacity 0.15s linear;
-}
-
-/* Keep text and content above the transition background */
-
-.intro > * {
-  position: relative;
-}
-
-/* Decorative flower reacts to the scroll story */
-
-.intro::after {
-  transform:
-    translateY(calc(var(--story-progress) * -25px))
-    rotate(calc(var(--story-progress) * 20deg));
-
-  transition: transform 0.1s linear;
-}
-
-/* =========================================
-   CINEMATIC STORY — TRAVELLING PETALS
-========================================= */
-
-.story-traveller {
-  position: fixed;
-  z-index: 999;
-  pointer-events: none;
-
-  width: 22px;
-  height: 30px;
-
-  opacity: 0;
-
-  will-change: transform, opacity;
-}
-
-.story-traveller-petal {
-  width: 100%;
-  height: 100%;
-
-  border-radius: 80% 15% 80% 15%;
-
-  background: linear-gradient(
-    145deg,
-    rgba(237, 211, 205, 0.9),
-    rgba(190, 145, 139, 0.65)
-  );
-
-  box-shadow:
-    0 3px 12px rgba(140, 100, 90, 0.08);
-
-  animation: travellerRotation 5s ease-in-out infinite;
-}
-
-.story-traveller:nth-child(2) {
-  width: 14px;
-  height: 20px;
-}
-
-.story-traveller:nth-child(3) {
-  width: 18px;
-  height: 25px;
-}
-
-@keyframes travellerRotation {
-
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-
-  50% {
-    transform: rotate(150deg) scale(0.9);
-  }
-
-  100% {
-    transform: rotate(360deg) scale(1);
-  }
-
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-  .story-traveller-petal {
-    animation: none;
-  }
-
-}
-
-/* =========================================
-   CINEMATIC HERO — SCENE TRANSFORMATION
-========================================= */
-
-.hero-image {
-  transform-origin: center center;
-  will-change: transform, opacity, filter, clip-path;
-}
-
-/* Smooth visual blending into the next scene */
-
-.hero {
-  background: var(--cream);
-}
-
-/* The image transforms as the visitor leaves the hero */
-
-@media (prefers-reduced-motion: reduce) {
-
-  .hero-image {
-    clip-path: none !important;
     filter: none !important;
+    clip-path: none !important;
   }
-
-}
-
-/* =========================================
-   INTRO — CINEMATIC MOVEMENT
-========================================= */
-
-.intro {
-  --intro-progress: 0;
-  --intro-shift: 0px;
-}
-
-/* Headline travels into position */
-
-.intro h2 {
-  transform:
-    translate3d(
-      calc((1 - var(--intro-progress)) * -55px),
-      calc((1 - var(--intro-progress)) * 35px),
-      0
-    );
-
-  opacity: var(--intro-progress);
-
-  transition: none !important;
-  will-change: transform, opacity;
-}
-
-/* Paragraph arrives from the opposite direction */
-
-.intro p {
-  transform:
-    translate3d(
-      calc((1 - var(--intro-progress)) * 45px),
-      calc((1 - var(--intro-progress)) * 20px),
-      0
-    );
-
-  opacity: var(--intro-progress);
-
-  transition: none !important;
-  will-change: transform, opacity;
-}
-
-/* Eyebrow follows the story */
-
-.intro .eyebrow {
-  transform:
-    translate3d(
-      0,
-      calc((1 - var(--intro-progress)) * 20px),
-      0
-    );
-
-  opacity: var(--intro-progress);
-
-  transition: none !important;
-}
-
-/* Flower travels and rotates */
-
-.intro::after {
-  transform:
-    translate3d(
-      calc(var(--intro-progress) * 35px),
-      calc((1 - var(--intro-progress)) * 70px),
-      0
-    )
-    rotate(
-      calc(var(--intro-progress) * 100deg)
-    );
-
-  opacity: calc(0.04 + var(--intro-progress) * 0.12);
-
-  transition: none !important;
-  will-change: transform, opacity;
-}
-
-/* Mobile adjustments */
-
-@media (max-width: 650px) {
-
-  .intro h2 {
-    transform:
-      translate3d(
-        0,
-        calc((1 - var(--intro-progress)) * 35px),
-        0
-      );
-  }
-
-  .intro p {
-    transform:
-      translate3d(
-        0,
-        calc((1 - var(--intro-progress)) * 25px),
-        0
-      );
-  }
-
-}
-
-/* Motion accessibility */
-
-@media (prefers-reduced-motion: reduce) {
 
   .intro h2,
   .intro p,
@@ -1510,88 +1154,4 @@ select:focus-visible {
     opacity: 1 !important;
   }
 
-}
-
-.intro.intro-reveal h2,
-.intro.intro-reveal p,
-.intro.intro-reveal .eyebrow {
-  opacity: var(--intro-progress) !important;
-}
-
-/* =========================================
-   CINEMATIC STORY — PETALS
-========================================= */
-
-.story-petal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 32px;
-  height: 42px;
-  pointer-events: none;
-  z-index: 20;
-  will-change: transform, opacity;
-}
-
-.story-petal::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    145deg,
-    rgba(231, 199, 194, 0.85),
-    rgba(190, 145, 140, 0.55)
-  );
-  border-radius: 85% 15% 75% 25%;
-  box-shadow: 0 5px 20px rgba(150, 110, 105, 0.08);
-  animation: petalDrift 4s ease-in-out infinite alternate;
-}
-
-.story-petal-2::before {
-  animation-delay: -1s;
-}
-
-.story-petal-3::before {
-  animation-delay: -2s;
-}
-
-.story-petal-4::before {
-  animation-delay: -3s;
-}
-
-@keyframes petalDrift {
-
-  from {
-    transform: rotate(-20deg) translateY(-5px);
-  }
-
-  to {
-    transform: rotate(25deg) translateY(8px);
-  }
-
-}
-
-
-/* =========================================
-   CONTINUOUS COLOUR ATMOSPHERE
-========================================= */
-
-.intro {
-  background:
-    radial-gradient(
-      ellipse at 15% 30%,
-      rgba(231, 205, 199, 0.24),
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse at 85% 75%,
-      rgba(224, 213, 197, 0.3),
-      transparent 55%
-    ),
-    linear-gradient(
-      180deg,
-      #f3ebe5 0%,
-      #f5eee8 45%,
-      #f8f5ef 100%
-    );
 }
