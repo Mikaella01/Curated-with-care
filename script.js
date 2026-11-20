@@ -1250,3 +1250,60 @@ document.addEventListener("DOMContentLoaded", function () {
   updateHeroAnimation();
 
 });
+
+/* =========================================
+   CINEMATIC TRANSITION — INTRO SCROLL
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const intro = document.querySelector(".intro");
+
+  if (!intro) return;
+
+  let ticking = false;
+
+  function updateIntroScene() {
+
+    const rect = intro.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    const progress = Math.max(
+      0,
+      Math.min(
+        1,
+        (windowHeight - rect.top) /
+        (windowHeight + rect.height)
+      )
+    );
+
+    intro.style.setProperty(
+      "--story-progress",
+      progress
+    );
+
+    ticking = false;
+
+  }
+
+  function requestIntroUpdate() {
+
+    if (!ticking) {
+
+      window.requestAnimationFrame(updateIntroScene);
+
+      ticking = true;
+
+    }
+
+  }
+
+  window.addEventListener("scroll", requestIntroUpdate, {
+    passive: true
+  });
+
+  window.addEventListener("resize", requestIntroUpdate);
+
+  updateIntroScene();
+
+});
