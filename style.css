@@ -1065,3 +1065,46 @@ select:focus-visible {
   }
 
 }
+
+
+/* =========================================
+   EDITORIAL INTRO — SCROLL REVEAL
+========================================= */
+
+.intro.intro-reveal .intro .eyebrow,
+.intro.intro-reveal h2,
+.intro.intro-reveal p {
+  opacity: 0;
+  transform: translateY(25px);
+}
+
+.intro.intro-reveal h2 {
+  transition-delay: 0.15s;
+}
+
+.intro.intro-reveal p {
+  transition-delay: 0.3s;
+}
+
+.intro.intro-visible .eyebrow,
+.intro.intro-visible h2,
+.intro.intro-visible p {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro.intro-reveal .eyebrow,
+  .intro.intro-reveal h2,
+  .intro.intro-reveal p,
+  .intro.intro-visible .eyebrow,
+  .intro.intro-visible h2,
+  .intro.intro-visible p {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
