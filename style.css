@@ -1372,3 +1372,29 @@ select:focus-visible {
   }
 
 }
+
+/* =========================================
+   CINEMATIC HERO — SCENE TRANSFORMATION
+========================================= */
+
+.hero-image {
+  transform-origin: center center;
+  will-change: transform, opacity, filter, clip-path;
+}
+
+/* Smooth visual blending into the next scene */
+
+.hero {
+  background: var(--cream);
+}
+
+/* The image transforms as the visitor leaves the hero */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hero-image {
+    clip-path: none !important;
+    filter: none !important;
+  }
+
+}
