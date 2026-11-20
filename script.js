@@ -1307,3 +1307,121 @@ document.addEventListener("DOMContentLoaded", function () {
   updateIntroScene();
 
 });
+
+/* =========================================
+   CINEMATIC STORY — TRAVELLING PETALS
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const hero = document.querySelector(".hero");
+  const intro = document.querySelector(".intro");
+
+  if (!hero || !intro) return;
+
+  /* Create petals */
+
+  const travellers = [];
+
+  for (let i = 0; i < 3; i++) {
+
+    const wrapper = document.createElement("div");
+    const petal = document.createElement("div");
+
+    wrapper.className = "story-traveller";
+    petal.className = "story-traveller-petal";
+
+    wrapper.setAttribute("aria-hidden", "true");
+
+    wrapper.appendChild(petal);
+    document.body.appendChild(wrapper);
+
+    travellers.push(wrapper);
+
+  }
+
+  let ticking = false;
+
+  function updateTravellers() {
+
+    const heroRect = hero.getBoundingClientRect();
+    const introRect = intro.getBoundingClientRect();
+
+    const start = heroRect.top + window.scrollY;
+    const end = introRect.top + window.scrollY;
+
+    const distance = Math.max(1, end - start);
+
+    const scrollProgress = Math.max(
+      0,
+      Math.min(
+        1,
+        (window.scrollY - start) / distance
+      )
+    );
+
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    travellers.forEach(function (traveller, index) {
+
+      const offset = index * 0.22;
+
+      const progress = Math.max(
+        0,
+        Math.min(1, scrollProgress + offset)
+      );
+
+      /* Petal path */
+
+      const x =
+        viewportWidth * (0.72 - progress * 0.48) +
+        Math.sin(progress * Math.PI * 2 + index) * 70;
+
+      const y =
+        viewportHeight * (0.25 + progress * 0.55) +
+        Math.sin(progress * Math.PI * 3 + index) * 50;
+
+      const rotation = progress * 500 + index * 120;
+
+      const scale = 0.8 + progress * 0.5;
+
+      /* Visibility */
+
+      const opacity = Math.sin(progress * Math.PI);
+
+      traveller.style.opacity = opacity;
+
+      traveller.style.transform =
+        `translate3d(${x}px, ${y}px, 0)`;
+
+      traveller.firstElementChild.style.transform =
+        `rotate(${rotation}deg) scale(${scale})`;
+
+    });
+
+    ticking = false;
+
+  }
+
+  function requestUpdate() {
+
+    if (!ticking) {
+
+      window.requestAnimationFrame(updateTravellers);
+
+      ticking = true;
+
+    }
+
+  }
+
+  window.addEventListener("scroll", requestUpdate, {
+    passive: true
+  });
+
+  window.addEventListener("resize", requestUpdate);
+
+  updateTravellers();
+
+});
