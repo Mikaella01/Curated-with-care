@@ -1215,6 +1215,21 @@ document.addEventListener("DOMContentLoaded", function () {
     heroImage.style.transform =
       `scale(${scale}) translateY(${imageMove}px)`;
 
+     /* Image transforms into the next scene */
+
+const imageInset = progress * 7;
+const imageRadius = progress * 35;
+const imageBlur = progress * 3;
+const imageOpacity = 1 - (progress * 0.35);
+
+heroImage.style.clipPath =
+  `inset(0 ${imageInset}% 0 ${imageInset}% round ${imageRadius}px)`;
+
+heroImage.style.filter =
+  `blur(${imageBlur}px)`;
+
+heroImage.style.opacity = imageOpacity;
+
     /* Text gently moves as the visitor scrolls */
 
     const contentMove = progress * -35;
