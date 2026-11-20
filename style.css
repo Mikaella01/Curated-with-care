@@ -1249,3 +1249,57 @@ select:focus-visible {
     transform: none !important;
   }
 }
+
+/* =========================================
+   CINEMATIC TRANSITION — HERO TO INTRO
+========================================= */
+
+.intro {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  --story-progress: 0;
+}
+
+/* A soft blush light gradually enters the scene */
+
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 80% 30%,
+      rgba(220, 190, 184, 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 15% 80%,
+      rgba(255,255,255,0.65),
+      transparent 55%
+    );
+
+  opacity: var(--story-progress);
+  transition: opacity 0.15s linear;
+}
+
+/* Keep text and content above the transition background */
+
+.intro > * {
+  position: relative;
+}
+
+/* Decorative flower reacts to the scroll story */
+
+.intro::after {
+  transform:
+    translateY(calc(var(--story-progress) * -25px))
+    rotate(calc(var(--story-progress) * 20deg));
+
+  transition: transform 0.1s linear;
+}
