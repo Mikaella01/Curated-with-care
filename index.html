@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="shop.css">
   <link rel="stylesheet" href="homepage.css">
-  
+
 </head>
 
 <body>
@@ -48,6 +48,7 @@
     </button>
 
     <nav id="navigation">
+
       <a href="index.html#home">Home</a>
       <a href="shop.html">Shop</a>
       <a href="index.html#collections">Collections</a>
@@ -92,68 +93,110 @@
 
   <main>
 
-    <!-- HERO SECTION -->
+    <!-- =========================================
+         CINEMATIC HOMEPAGE HERO
+         CURATED WITH CARE BY M.
+    ========================================== -->
 
-    <section class="hero" id="home">
+    <section class="hero hero-world" id="home">
 
-  <!-- CINEMATIC BACKGROUND -->
-  <div class="hero-image"></div>
+      <!-- BACKGROUND WORLD -->
 
-  <!-- ATMOSPHERE -->
-  <div class="hero-atmosphere"></div>
-
-  <!-- FLOATING GLASS DROPLETS -->
-  <div class="hero-droplets" aria-hidden="true">
-
-    <span class="glass-drop drop-1"></span>
-    <span class="glass-drop drop-2"></span>
-    <span class="glass-drop drop-3"></span>
-    <span class="glass-drop drop-4"></span>
-    <span class="glass-drop drop-5"></span>
-    <span class="glass-drop drop-6"></span>
-
-  </div>
-
-  <!-- FLOATING PETALS -->
-  <div class="hero-petals" aria-hidden="true">
-
-    <span class="floating-petal petal-1"></span>
-    <span class="floating-petal petal-2"></span>
-    <span class="floating-petal petal-3"></span>
-    <span class="floating-petal petal-4"></span>
-    <span class="floating-petal petal-5"></span>
-
-  </div>
-
-  <!-- HERO CONTENT -->
-  <div class="hero-content">
-
-    <span class="eyebrow">
-      THE ART OF THOUGHTFUL BEAUTY
-    </span>
-
-    <h1>
-      Beauty, in<br>
-      another <em>dimension.</em>
-    </h1>
-
-    <p>
-      Discover beautiful finds, considered favourites
-      and little luxuries, selected just for you.
-    </p>
-
-    <a href="shop.html" class="primary-button">
-      EXPLORE THE COLLECTION
-    </a>
-
-  </div>
-
-</section>
+      <div
+        class="hero-world__background"
+        aria-hidden="true">
+      </div>
 
 
-    <!-- INTRODUCTION -->
+      <!-- ATMOSPHERIC LIGHT AND MIST -->
 
-    <section class="intro section-padding">
+      <div
+        class="hero-world__light"
+        aria-hidden="true">
+      </div>
+
+      <div
+        class="hero-world__mist"
+        aria-hidden="true">
+      </div>
+
+
+      <!-- LIQUID GLASS -->
+
+      <div
+        class="hero-world__liquid"
+        aria-hidden="true">
+
+        <span class="liquid-ribbon liquid-ribbon--one"></span>
+        <span class="liquid-ribbon liquid-ribbon--two"></span>
+
+      </div>
+
+
+      <!-- FLOATING OBJECTS -->
+
+      <div
+        class="hero-world__objects"
+        aria-hidden="true">
+
+        <span class="hero-orb hero-orb--one"></span>
+        <span class="hero-orb hero-orb--two"></span>
+        <span class="hero-orb hero-orb--three"></span>
+
+        <span class="hero-petal hero-petal--one"></span>
+        <span class="hero-petal hero-petal--two"></span>
+        <span class="hero-petal hero-petal--three"></span>
+
+      </div>
+
+
+      <!-- HERO CONTENT -->
+
+      <div class="hero-world__content">
+
+        <span class="hero-world__eyebrow">
+          A WORLD OF THOUGHTFULLY CURATED BEAUTY
+        </span>
+
+        <h1>
+          Discover beauty.<br>
+          <em>Find your ritual.</em>
+        </h1>
+
+        <p>
+          Explore considered skincare, inspiring beauty
+          discoveries and thoughtful little luxuries,
+          selected with care.
+        </p>
+
+        <a href="shop.html" class="hero-world__button">
+          EXPLORE THE BEAUTY EDIT
+          <span aria-hidden="true">↗</span>
+        </a>
+
+      </div>
+
+
+      <!-- SCROLL INDICATOR -->
+
+      <a
+        href="#intro"
+        class="hero-world__scroll"
+        aria-label="Scroll to discover more">
+
+        <span></span>
+        <small>SCROLL TO DISCOVER</small>
+
+      </a>
+
+    </section>
+
+
+    <!-- =========================================
+         INTRODUCTION
+    ========================================== -->
+
+    <section class="intro section-padding" id="intro">
 
       <span class="eyebrow">
         A MORE PERSONAL KIND OF BEAUTY
@@ -173,13 +216,16 @@
     </section>
 
 
-    <!-- MAIN COLLECTIONS -->
+    <!-- =========================================
+         MAIN COLLECTIONS
+    ========================================== -->
 
     <section class="collections section-padding" id="collections">
 
       <div class="section-heading">
 
         <div>
+
           <span class="eyebrow">
             DISCOVER YOUR FAVOURITES
           </span>
@@ -187,12 +233,14 @@
           <h2>
             Explore our <em>world.</em>
           </h2>
+
         </div>
 
       </div>
 
 
       <div class="collection-grid">
+
 
         <!-- BEAUTY EDIT -->
 
@@ -261,7 +309,9 @@
     </section>
 
 
-    <!-- EDITORIAL BRAND GALLERY -->
+    <!-- =========================================
+         EDITORIAL BRAND GALLERY
+    ========================================== -->
 
     <section class="brand-edit section-padding" id="brands">
 
@@ -338,13 +388,16 @@
     </section>
 
 
-    <!-- HOMEPAGE PRODUCT PREVIEW -->
+    <!-- =========================================
+         HOMEPAGE PRODUCT PREVIEW
+    ========================================== -->
 
     <section class="featured section-padding" id="shop">
 
       <div class="section-heading">
 
         <div>
+
           <span class="eyebrow">
             THE CURRENT BEAUTY EDIT
           </span>
@@ -357,6 +410,7 @@
             A considered selection of beauty,
             skincare and little luxuries.
           </p>
+
         </div>
 
       </div>
@@ -573,13 +627,17 @@
     </section>
 
 
-    <!-- PRODUCT DETAILS -->
+    <!-- =========================================
+         PRODUCT DETAILS
+    ========================================== -->
 
-    <section class="product-details-section"
+    <section
+      class="product-details-section"
       id="productDetails"
       hidden>
 
-      <button type="button"
+      <button
+        type="button"
         class="back-to-shop"
         id="backToShop">
         ← BACK TO SHOP
@@ -590,7 +648,9 @@
     </section>
 
 
-    <!-- GIFT COLLECTION -->
+    <!-- =========================================
+         GIFT COLLECTION
+    ========================================== -->
 
     <section class="gift-section" id="gifts">
 
@@ -622,9 +682,12 @@
     </section>
 
 
-    <!-- GIFT FINDER -->
+    <!-- =========================================
+         GIFT FINDER
+    ========================================== -->
 
-    <section class="gift-finder section-padding"
+    <section
+      class="gift-finder section-padding"
       id="gift-finder">
 
       <span class="eyebrow">
@@ -708,7 +771,8 @@
           FIND MY GIFT
         </button>
 
-        <p id="giftResult"
+        <p
+          id="giftResult"
           class="gift-result"
           aria-live="polite">
         </p>
@@ -718,7 +782,9 @@
     </section>
 
 
-    <!-- NEWSLETTER -->
+    <!-- =========================================
+         NEWSLETTER
+    ========================================== -->
 
     <section class="newsletter">
 
@@ -757,7 +823,9 @@
   </main>
 
 
-  <!-- FOOTER -->
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
 
   <footer id="about">
 
@@ -787,11 +855,12 @@
       <a href="index.html#gifts">Gifting</a>
       <a href="index.html#about">Our Story</a>
 
-      <a href="https://www.instagram.com/curatedwithcarebym/"
-         target="_blank"
-         rel="noopener noreferrer"
-         class="instagram-link"
-         aria-label="Visit our Instagram">
+      <a
+        href="https://www.instagram.com/curatedwithcarebym/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="instagram-link"
+        aria-label="Visit our Instagram">
 
         <svg viewBox="0 0 24 24"
           width="21"
@@ -822,11 +891,16 @@
   </footer>
 
 
-  <!-- JAVASCRIPT -->
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================== -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js"></script>
-<script src="script.js"></script>
+
+  <script src="supabase-config.js"></script>
+
+  <script src="script.js"></script>
 
 </body>
+
 </html>
