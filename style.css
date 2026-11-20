@@ -1511,3 +1511,9 @@ select:focus-visible {
   }
 
 }
+
+.intro.intro-reveal h2,
+.intro.intro-reveal p,
+.intro.intro-reveal .eyebrow {
+  opacity: var(--intro-progress) !important;
+}
