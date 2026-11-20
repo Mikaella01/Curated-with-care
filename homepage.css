@@ -865,3 +865,156 @@ footer p,
     scroll-behavior: auto !important;
   }
 }
+
+
+/* =========================================
+   CINEMATIC HERO — NATURAL MOVEMENT
+========================================= */
+
+/* GLASS DROPLETS */
+
+.hero-orb--one {
+  animation: orbFloatOne 8s ease-in-out infinite;
+}
+
+.hero-orb--two {
+  animation: orbFloatTwo 11s ease-in-out infinite;
+}
+
+.hero-orb--three {
+  animation: orbFloatThree 9s ease-in-out infinite;
+}
+
+@keyframes orbFloatOne {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 12px -22px;
+  }
+}
+
+@keyframes orbFloatTwo {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: -15px -18px;
+  }
+}
+
+@keyframes orbFloatThree {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 8px 16px;
+  }
+}
+
+
+/* FLOATING PETALS */
+
+.hero-petal--one {
+  animation: petalFloatOne 12s ease-in-out infinite;
+}
+
+.hero-petal--two {
+  animation: petalFloatTwo 15s ease-in-out infinite;
+}
+
+.hero-petal--three {
+  animation: petalFloatThree 13s ease-in-out infinite;
+}
+
+@keyframes petalFloatOne {
+  0%, 100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 25px -35px;
+    rotate: 18deg;
+  }
+}
+
+@keyframes petalFloatTwo {
+  0%, 100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: -30px -25px;
+    rotate: -22deg;
+  }
+}
+
+@keyframes petalFloatThree {
+  0%, 100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 18px 28px;
+    rotate: 15deg;
+  }
+}
+
+
+/* FLOWING LIQUID RIBBONS */
+
+.liquid-ribbon--one {
+  animation: ribbonFlowOne 14s ease-in-out infinite;
+}
+
+.liquid-ribbon--two {
+  animation: ribbonFlowTwo 17s ease-in-out infinite;
+}
+
+@keyframes ribbonFlowOne {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -18px;
+  }
+}
+
+@keyframes ribbonFlowTwo {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 20px;
+  }
+}
+
+
+/* MOVING ATMOSPHERIC MIST */
+
+.hero-world__mist {
+  animation: mistDrift 20s ease-in-out infinite alternate;
+}
+
+@keyframes mistDrift {
+  from {
+    translate: -2% 0;
+    opacity: 0.35;
+  }
+  to {
+    translate: 3% -2%;
+    opacity: 0.65;
+  }
+}
+
+
+/* ACCESSIBILITY — REDUCE MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orb,
+  .hero-petal,
+  .liquid-ribbon,
+  .hero-world__mist {
+    animation: none !important;
+  }
+}
