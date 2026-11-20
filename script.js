@@ -1156,3 +1156,97 @@ document.addEventListener("DOMContentLoaded", function () {
   introObserver.observe(introSection);
 
 });
+
+/* =========================================
+   CINEMATIC HERO — SCROLL STORY
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const hero = document.querySelector(".hero");
+  const heroImage = document.querySelector(".hero-image");
+  const heroContent = document.querySelector(".hero-content");
+
+  if (!hero || !heroImage || !heroContent) return;
+
+  /* Create floating petals */
+
+  if (!hero.querySelector(".cinematic-petal")) {
+
+    const petalOne = document.createElement("span");
+    const petalTwo = document.createElement("span");
+    const petalThree = document.createElement("span");
+
+    petalOne.className = "cinematic-petal petal-one";
+    petalTwo.className = "cinematic-petal petal-two";
+    petalThree.className = "cinematic-petal petal-three";
+
+    petalOne.setAttribute("aria-hidden", "true");
+    petalTwo.setAttribute("aria-hidden", "true");
+    petalThree.setAttribute("aria-hidden", "true");
+
+    hero.appendChild(petalOne);
+    hero.appendChild(petalTwo);
+    hero.appendChild(petalThree);
+
+  }
+
+  /* Scroll animation */
+
+  let ticking = false;
+
+  function updateHeroAnimation() {
+
+    const rect = hero.getBoundingClientRect();
+
+    const progress = Math.max(
+      0,
+      Math.min(
+        1,
+        (0 - rect.top) / (rect.height * 0.75)
+      )
+    );
+
+    /* Image moves and enlarges */
+
+    const scale = 1.04 + (progress * 0.08);
+    const imageMove = progress * -45;
+
+    heroImage.style.transform =
+      `scale(${scale}) translateY(${imageMove}px)`;
+
+    /* Text gently moves as the visitor scrolls */
+
+    const contentMove = progress * -35;
+    const contentOpacity = 1 - (progress * 0.45);
+
+    heroContent.style.transform =
+      `translateY(${contentMove}px)`;
+
+    heroContent.style.opacity = contentOpacity;
+
+    ticking = false;
+
+  }
+
+  function requestHeroUpdate() {
+
+    if (!ticking) {
+
+      window.requestAnimationFrame(updateHeroAnimation);
+
+      ticking = true;
+
+    }
+
+  }
+
+  window.addEventListener("scroll", requestHeroUpdate, {
+    passive: true
+  });
+
+  window.addEventListener("resize", requestHeroUpdate);
+
+  updateHeroAnimation();
+
+});
