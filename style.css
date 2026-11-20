@@ -1398,3 +1398,116 @@ select:focus-visible {
   }
 
 }
+
+/* =========================================
+   INTRO — CINEMATIC MOVEMENT
+========================================= */
+
+.intro {
+  --intro-progress: 0;
+  --intro-shift: 0px;
+}
+
+/* Headline travels into position */
+
+.intro h2 {
+  transform:
+    translate3d(
+      calc((1 - var(--intro-progress)) * -55px),
+      calc((1 - var(--intro-progress)) * 35px),
+      0
+    );
+
+  opacity: var(--intro-progress);
+
+  transition: none !important;
+  will-change: transform, opacity;
+}
+
+/* Paragraph arrives from the opposite direction */
+
+.intro p {
+  transform:
+    translate3d(
+      calc((1 - var(--intro-progress)) * 45px),
+      calc((1 - var(--intro-progress)) * 20px),
+      0
+    );
+
+  opacity: var(--intro-progress);
+
+  transition: none !important;
+  will-change: transform, opacity;
+}
+
+/* Eyebrow follows the story */
+
+.intro .eyebrow {
+  transform:
+    translate3d(
+      0,
+      calc((1 - var(--intro-progress)) * 20px),
+      0
+    );
+
+  opacity: var(--intro-progress);
+
+  transition: none !important;
+}
+
+/* Flower travels and rotates */
+
+.intro::after {
+  transform:
+    translate3d(
+      calc(var(--intro-progress) * 35px),
+      calc((1 - var(--intro-progress)) * 70px),
+      0
+    )
+    rotate(
+      calc(var(--intro-progress) * 100deg)
+    );
+
+  opacity: calc(0.04 + var(--intro-progress) * 0.12);
+
+  transition: none !important;
+  will-change: transform, opacity;
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 650px) {
+
+  .intro h2 {
+    transform:
+      translate3d(
+        0,
+        calc((1 - var(--intro-progress)) * 35px),
+        0
+      );
+  }
+
+  .intro p {
+    transform:
+      translate3d(
+        0,
+        calc((1 - var(--intro-progress)) * 25px),
+        0
+      );
+  }
+
+}
+
+/* Motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .intro h2,
+  .intro p,
+  .intro .eyebrow,
+  .intro::after {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+}
