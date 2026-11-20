@@ -1117,313 +1117,220 @@ console.log(
   "Curated with Care by M. — Website loaded successfully."
 );
 
-
 /* =========================================
-   EDITORIAL INTRO — REPLAYABLE SCROLL ANIMATION
+   CURATED WITH CARE
+   UNIFIED CINEMATIC STORY CONTROLLER
 ========================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
-
-  const introSection = document.querySelector(".intro");
-
-  if (!introSection) return;
-
-  introSection.classList.add("intro-reveal");
-
-  const introObserver = new IntersectionObserver(
-    function (entries) {
-
-      entries.forEach(function (entry) {
-
-        if (entry.isIntersecting) {
-
-          introSection.classList.add("intro-visible");
-
-        } else {
-
-          introSection.classList.remove("intro-visible");
-
-        }
-
-      });
-
-    },
-    {
-      threshold: 0.15
-    }
-  );
-
-  introObserver.observe(introSection);
-
-});
-
-/* =========================================
-   CINEMATIC HERO — SCROLL STORY
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
+(function initCinematicStory() {
 
   const hero = document.querySelector(".hero");
   const heroImage = document.querySelector(".hero-image");
   const heroContent = document.querySelector(".hero-content");
-
-  if (!hero || !heroImage || !heroContent) return;
-
-  /* Create floating petals */
-
-  if (!hero.querySelector(".cinematic-petal")) {
-
-    const petalOne = document.createElement("span");
-    const petalTwo = document.createElement("span");
-    const petalThree = document.createElement("span");
-
-    petalOne.className = "cinematic-petal petal-one";
-    petalTwo.className = "cinematic-petal petal-two";
-    petalThree.className = "cinematic-petal petal-three";
-
-    petalOne.setAttribute("aria-hidden", "true");
-    petalTwo.setAttribute("aria-hidden", "true");
-    petalThree.setAttribute("aria-hidden", "true");
-
-    hero.appendChild(petalOne);
-    hero.appendChild(petalTwo);
-    hero.appendChild(petalThree);
-
-  }
-
-  /* Scroll animation */
-
-  let ticking = false;
-
-  function updateHeroAnimation() {
-
-    const rect = hero.getBoundingClientRect();
-
-    const progress = Math.max(
-      0,
-      Math.min(
-        1,
-        (0 - rect.top) / (rect.height * 0.75)
-      )
-    );
-
-    /* Image moves and enlarges */
-
-    const scale = 1.04 + (progress * 0.08);
-    const imageMove = progress * -45;
-
-    heroImage.style.transform =
-      `scale(${scale}) translateY(${imageMove}px)`;
-
-     /* Image transforms into the next scene */
-
-const imageInset = progress * 7;
-const imageRadius = progress * 35;
-const imageBlur = progress * 3;
-const imageOpacity = 1 - (progress * 0.35);
-
-heroImage.style.clipPath =
-  `inset(0 ${imageInset}% 0 ${imageInset}% round ${imageRadius}px)`;
-
-heroImage.style.filter =
-  `blur(${imageBlur}px)`;
-
-heroImage.style.opacity = imageOpacity;
-
-    /* Text gently moves as the visitor scrolls */
-
-    const contentMove = progress * -35;
-    const contentOpacity = 1 - (progress * 0.45);
-
-    heroContent.style.transform =
-      `translateY(${contentMove}px)`;
-
-    heroContent.style.opacity = contentOpacity;
-
-    ticking = false;
-
-  }
-
-  function requestHeroUpdate() {
-
-    if (!ticking) {
-
-      window.requestAnimationFrame(updateHeroAnimation);
-
-      ticking = true;
-
-    }
-
-  }
-
-  window.addEventListener("scroll", requestHeroUpdate, {
-    passive: true
-  });
-
-  window.addEventListener("resize", requestHeroUpdate);
-
-  updateHeroAnimation();
-
-});
-
-/* =========================================
-   CINEMATIC TRANSITION — INTRO SCROLL
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
   const intro = document.querySelector(".intro");
 
-  if (!intro) return;
+  if (!hero || !heroImage || !heroContent || !intro) return;
 
-  let ticking = false;
+  /* ---------------------------------------
+     1. CREATE TRAVELLING PETALS
+  --------------------------------------- */
 
-  function updateIntroScene() {
+  document.querySelectorAll(".story-petal").forEach(el => el.remove());
 
-    const rect = intro.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
+  const petals = [];
 
-    const progress = Math.max(
-      0,
-      Math.min(
-        1,
-        (windowHeight - rect.top) /
-        (windowHeight + rect.height)
-      )
-    );
+  for (let i = 0; i < 4; i++) {
 
-    intro.style.setProperty(
-      "--story-progress",
-      progress
-    );
-
-    ticking = false;
-
-  }
-
-  function requestIntroUpdate() {
-
-    if (!ticking) {
-
-      window.requestAnimationFrame(updateIntroScene);
-
-      ticking = true;
-
-    }
-
-  }
-
-  window.addEventListener("scroll", requestIntroUpdate, {
-    passive: true
-  });
-
-  window.addEventListener("resize", requestIntroUpdate);
-
-  updateIntroScene();
-
-});
-
-/* =========================================
-   CINEMATIC STORY — TRAVELLING PETALS
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const hero = document.querySelector(".hero");
-  const intro = document.querySelector(".intro");
-
-  if (!hero || !intro) return;
-
-  /* Create petals */
-
-  const travellers = [];
-
-  for (let i = 0; i < 3; i++) {
-
-    const wrapper = document.createElement("div");
     const petal = document.createElement("div");
 
-    wrapper.className = "story-traveller";
-    petal.className = "story-traveller-petal";
+    petal.className = `story-petal story-petal-${i + 1}`;
 
-    wrapper.setAttribute("aria-hidden", "true");
+    petal.setAttribute("aria-hidden", "true");
 
-    wrapper.appendChild(petal);
-    document.body.appendChild(wrapper);
+    document.body.appendChild(petal);
 
-    travellers.push(wrapper);
+    petals.push(petal);
 
   }
 
+
+  /* ---------------------------------------
+     2. SCROLL PROGRESS
+  --------------------------------------- */
+
   let ticking = false;
 
-  function updateTravellers() {
+  function clamp(value) {
+
+    return Math.max(0, Math.min(1, value));
+
+  }
+
+
+  function smooth(value) {
+
+    return value * value * (3 - 2 * value);
+
+  }
+
+
+  /* ---------------------------------------
+     3. HERO CAMERA MOVEMENT
+  --------------------------------------- */
+
+  function updateStory() {
 
     const heroRect = hero.getBoundingClientRect();
+
     const introRect = intro.getBoundingClientRect();
 
-    const start = heroRect.top + window.scrollY;
-    const end = introRect.top + window.scrollY;
-
-    const distance = Math.max(1, end - start);
-
-    const scrollProgress = Math.max(
-      0,
-      Math.min(
-        1,
-        (window.scrollY - start) / distance
-      )
-    );
-
-    const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
-    travellers.forEach(function (traveller, index) {
+    const heroProgress = clamp(
+      -heroRect.top / (heroRect.height * 0.8)
+    );
 
-      const offset = index * 0.22;
+    const introProgress = clamp(
+      (viewportHeight - introRect.top) /
+      (viewportHeight + introRect.height)
+    );
 
-      const progress = Math.max(
-        0,
-        Math.min(1, scrollProgress + offset)
-      );
 
-      /* Petal path */
+    /* Camera zoom */
+
+    const zoom = 1.04 + heroProgress * 0.12;
+
+    const verticalMove = heroProgress * -55;
+
+    heroImage.style.transform =
+      `scale(${zoom}) translate3d(0, ${verticalMove}px, 0)`;
+
+
+    /* Image transition */
+
+    const inset = heroProgress * 9;
+
+    const radius = heroProgress * 45;
+
+    const opacity = 1 - heroProgress * 0.28;
+
+    heroImage.style.clipPath =
+      `inset(0 ${inset}% 0 ${inset}% round ${radius}px)`;
+
+
+    heroImage.style.opacity = opacity;
+
+
+    /* Hero text travels upward */
+
+    heroContent.style.transform =
+      `translate3d(0, ${heroProgress * -45}px, 0)`;
+
+
+    heroContent.style.opacity =
+      1 - heroProgress * 0.45;
+
+
+    /* ---------------------------------------
+       4. PETALS TRAVEL BETWEEN SCENES
+    --------------------------------------- */
+
+    const heroStart =
+      heroRect.top + window.scrollY;
+
+    const introEnd =
+      introRect.bottom + window.scrollY;
+
+    const travelDistance =
+      Math.max(1, introEnd - heroStart);
+
+    const storyProgress = clamp(
+      (window.scrollY - heroStart) /
+      travelDistance
+    );
+
+
+    petals.forEach((petal, index) => {
+
+      const offset = index * 0.17;
+
+      const progress = clamp(storyProgress + offset);
+
+      const wave = Math.sin(progress * Math.PI * 2 + index);
 
       const x =
-        viewportWidth * (0.72 - progress * 0.48) +
-        Math.sin(progress * Math.PI * 2 + index) * 70;
+        window.innerWidth *
+        (0.82 - progress * 0.68) +
+        wave * 65;
 
       const y =
-        viewportHeight * (0.25 + progress * 0.55) +
-        Math.sin(progress * Math.PI * 3 + index) * 50;
+        window.innerHeight *
+        (0.20 + progress * 0.65) +
+        Math.cos(progress * Math.PI * 3 + index) * 45;
 
-      const rotation = progress * 500 + index * 120;
+      const rotation =
+        progress * 540 + index * 100;
 
-      const scale = 0.8 + progress * 0.5;
+      const size =
+        0.7 + progress * 0.7;
 
-      /* Visibility */
+      const visibility =
+        Math.sin(progress * Math.PI);
 
-      const opacity = Math.sin(progress * Math.PI);
 
-      traveller.style.opacity = opacity;
-
-      traveller.style.transform =
+      petal.style.transform =
         `translate3d(${x}px, ${y}px, 0)`;
 
-      traveller.firstElementChild.style.transform =
-        `rotate(${rotation}deg) scale(${scale})`;
+      petal.style.opacity =
+        visibility;
+
+      petal.style.setProperty(
+        "--petal-rotation",
+        `${rotation}deg`
+      );
+
+      petal.style.setProperty(
+        "--petal-scale",
+        size
+      );
 
     });
 
+
+    /* ---------------------------------------
+       5. INTRO REPLAY
+    --------------------------------------- */
+
+    intro.style.setProperty(
+      "--story-progress",
+      introProgress
+    );
+
+    if (introProgress > 0.08) {
+
+      intro.classList.add("intro-visible");
+
+    } else {
+
+      intro.classList.remove("intro-visible");
+
+    }
+
+
     ticking = false;
 
   }
+
+
+  /* ---------------------------------------
+     6. PERFORMANCE
+  --------------------------------------- */
 
   function requestUpdate() {
 
     if (!ticking) {
 
-      window.requestAnimationFrame(updateTravellers);
+      window.requestAnimationFrame(updateStory);
 
       ticking = true;
 
@@ -1431,74 +1338,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   }
 
-  window.addEventListener("scroll", requestUpdate, {
-    passive: true
-  });
-
-  window.addEventListener("resize", requestUpdate);
-
-  updateTravellers();
-
-});
-
-/* =========================================
-   INTRO — CINEMATIC SCROLL CONTROL
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const intro = document.querySelector(".intro");
-
-  if (!intro) return;
-
-  let ticking = false;
-
-  function updateIntroMovement() {
-
-    const rect = intro.getBoundingClientRect();
-
-    const screenHeight = window.innerHeight;
-
-    let progress =
-      (screenHeight - rect.top) /
-      (screenHeight * 0.85);
-
-    progress = Math.max(0, Math.min(1, progress));
-
-    intro.style.setProperty(
-      "--intro-progress",
-      progress
-    );
-
-    ticking = false;
-
-  }
-
-  function requestIntroMovement() {
-
-    if (!ticking) {
-
-      window.requestAnimationFrame(
-        updateIntroMovement
-      );
-
-      ticking = true;
-
-    }
-
-  }
 
   window.addEventListener(
     "scroll",
-    requestIntroMovement,
+    requestUpdate,
     { passive: true }
   );
 
   window.addEventListener(
     "resize",
-    requestIntroMovement
+    requestUpdate
   );
 
-  updateIntroMovement();
 
-});
+  /* Initial state */
+
+  updateStory();
+
+
+})();
