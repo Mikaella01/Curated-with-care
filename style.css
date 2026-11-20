@@ -1517,3 +1517,81 @@ select:focus-visible {
 .intro.intro-reveal .eyebrow {
   opacity: var(--intro-progress) !important;
 }
+
+/* =========================================
+   CINEMATIC STORY — PETALS
+========================================= */
+
+.story-petal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 42px;
+  pointer-events: none;
+  z-index: 20;
+  will-change: transform, opacity;
+}
+
+.story-petal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    145deg,
+    rgba(231, 199, 194, 0.85),
+    rgba(190, 145, 140, 0.55)
+  );
+  border-radius: 85% 15% 75% 25%;
+  box-shadow: 0 5px 20px rgba(150, 110, 105, 0.08);
+  animation: petalDrift 4s ease-in-out infinite alternate;
+}
+
+.story-petal-2::before {
+  animation-delay: -1s;
+}
+
+.story-petal-3::before {
+  animation-delay: -2s;
+}
+
+.story-petal-4::before {
+  animation-delay: -3s;
+}
+
+@keyframes petalDrift {
+
+  from {
+    transform: rotate(-20deg) translateY(-5px);
+  }
+
+  to {
+    transform: rotate(25deg) translateY(8px);
+  }
+
+}
+
+
+/* =========================================
+   CONTINUOUS COLOUR ATMOSPHERE
+========================================= */
+
+.intro {
+  background:
+    radial-gradient(
+      ellipse at 15% 30%,
+      rgba(231, 205, 199, 0.24),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 85% 75%,
+      rgba(224, 213, 197, 0.3),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      #f3ebe5 0%,
+      #f5eee8 45%,
+      #f8f5ef 100%
+    );
+}
