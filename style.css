@@ -1041,3 +1041,27 @@ select:focus-visible {
   }
 
 }
+
+/* =========================================
+   EDITORIAL INTRO — REFINED PROPORTIONS
+========================================= */
+
+@media (min-width: 651px) {
+
+  .intro {
+    grid-template-columns: 1.35fr 0.65fr;
+    column-gap: 5%;
+    padding-left: 9%;
+    padding-right: 9%;
+  }
+
+  .intro h2 {
+    font-size: clamp(44px, 5vw, 66px);
+    max-width: 760px;
+  }
+
+  .intro p {
+    max-width: 390px;
+  }
+
+}
