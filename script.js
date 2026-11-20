@@ -1117,8 +1117,9 @@ console.log(
   "Curated with Care by M. — Website loaded successfully."
 );
 
+
 /* =========================================
-   EDITORIAL INTRO — SCROLL OBSERVER
+   EDITORIAL INTRO — REPLAYABLE SCROLL ANIMATION
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1138,7 +1139,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
           introSection.classList.add("intro-visible");
 
-          introObserver.unobserve(introSection);
+        } else {
+
+          introSection.classList.remove("intro-visible");
 
         }
 
@@ -1146,7 +1149,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     },
     {
-      threshold: 0.2
+      threshold: 0.15
     }
   );
 
