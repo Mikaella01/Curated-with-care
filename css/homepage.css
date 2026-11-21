@@ -1035,3 +1035,94 @@ footer p,
     transition: none !important;
   }
 }
+
+
+/* =========================================
+   HOMEPAGE HERO — LUXURY VISUAL FOUNDATION
+========================================= */
+
+.hero-world {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #f4eee7;
+}
+
+.hero-world__background {
+  background-position: center;
+  background-size: cover;
+  filter: saturate(0.82);
+}
+
+.hero-world::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at 75% 30%,
+      rgba(255, 250, 242, 0.28),
+      transparent 48%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(248, 245, 239, 0.72) 0%,
+      rgba(248, 245, 239, 0.42) 48%,
+      rgba(248, 245, 239, 0.08) 100%
+    );
+}
+
+.hero-world__light {
+  background:
+    radial-gradient(
+      circle at 70% 35%,
+      rgba(255, 244, 225, 0.5),
+      transparent 55%
+    );
+  mix-blend-mode: screen;
+}
+
+.hero-world__content {
+  position: relative;
+  z-index: 5;
+}
+
+.hero-world__content h1 {
+  text-shadow: 0 2px 24px rgba(255, 250, 242, 0.25);
+}
+
+.hero-world__mist {
+  opacity: 0.55;
+}
+
+.hero-world__liquid {
+  opacity: 0.75;
+}
+
+.hero-world__objects {
+  perspective: 1000px;
+}
+
+.hero-world__objects > * {
+  transform-style: preserve-3d;
+}
+
+@media (max-width: 750px) {
+  .hero-world::before {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(248, 245, 239, 0.38),
+        rgba(248, 245, 239, 0.12) 55%,
+        rgba(248, 245, 239, 0.48)
+      );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-world__objects > * {
+    transform: none !important;
+  }
+}
