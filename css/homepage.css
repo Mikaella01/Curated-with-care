@@ -1,15 +1,11 @@
-
 /* =========================================
    CURATED WITH CARE BY M.
    HOMEPAGE.CSS
    CLEANED HOMEPAGE SECTIONS & ANIMATIONS
 ========================================= */
-
-
 /* =========================================
    1. GIFT SECTION
 ========================================= */
-
 .gift-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -21,14 +17,12 @@
     ),
     #eee4dc;
 }
-
 .gift-image {
   min-height: 510px;
   background-image: url("https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1200&q=85");
   background-position: center;
   background-size: cover;
 }
-
 .gift-content {
   padding: 80px 12%;
   display: flex;
@@ -37,18 +31,14 @@
   align-items: flex-start;
   background: transparent;
 }
-
 .gift-content p {
   color: var(--muted);
   margin: 20px 0 28px;
   max-width: 400px;
 }
-
-
 /* =========================================
    2. GIFT FINDER
 ========================================= */
-
 .gift-finder {
   text-align: center;
   background:
@@ -59,12 +49,10 @@
     ),
     #faf7f2;
 }
-
 .gift-finder > p {
   color: var(--muted);
   margin: 15px 0 35px;
 }
-
 .finder-box {
   max-width: 520px;
   margin: auto;
@@ -77,35 +65,28 @@
   flex-direction: column;
   text-align: left;
 }
-
 .finder-box label {
   font-size: 10px;
   letter-spacing: 1px;
   margin: 15px 0 8px;
 }
-
 .finder-box select {
   padding: 14px;
   background: var(--white);
   border: 1px solid var(--border);
   color: var(--dark);
 }
-
 .finder-box .primary-button {
   margin-top: 25px;
 }
-
 .gift-result {
   text-align: center;
   color: var(--deep-rose);
   margin-top: 20px;
 }
-
-
 /* =========================================
    3. NEWSLETTER
 ========================================= */
-
 .newsletter {
   padding: 90px 20px;
   text-align: center;
@@ -118,25 +99,21 @@
     );
   color: var(--dark);
 }
-
 .newsletter h2 {
   font-size: 43px;
   font-weight: 400;
   color: var(--dark);
 }
-
 .newsletter p {
   color: var(--muted);
   margin: 12px auto 25px;
   max-width: 450px;
 }
-
 .newsletter form {
   max-width: 500px;
   margin: auto;
   display: flex;
 }
-
 .newsletter input {
   flex: 1;
   min-width: 0;
@@ -145,7 +122,6 @@
   border: 1px solid #e6d9d1;
   font-size: 11px;
 }
-
 .newsletter button {
   background: var(--deep-rose);
   color: var(--white);
@@ -158,17 +134,13 @@
     background 0.3s ease,
     color 0.3s ease;
 }
-
 .newsletter button:hover {
   background: var(--dark);
   border-color: var(--dark);
 }
-
-
 /* =========================================
    4. FOOTER
 ========================================= */
-
 footer,
 .site-footer {
   background: #eee6df;
@@ -176,17 +148,14 @@ footer,
   padding: 65px 20px 25px;
   text-align: center;
 }
-
 .footer-brand {
   margin: 0 auto 25px;
 }
-
 footer p,
 .site-footer p {
   color: var(--muted);
   margin-bottom: 25px;
 }
-
 .footer-links {
   display: flex;
   justify-content: center;
@@ -194,16 +163,13 @@ footer p,
   gap: 25px;
   margin-bottom: 45px;
 }
-
 .footer-links a {
   font-size: 10px;
   transition: color 0.3s ease;
 }
-
 .footer-links a:hover {
   color: var(--deep-rose);
 }
-
 .copyright {
   display: block;
   border-top: 1px solid #dfd3ca;
@@ -212,13 +178,10 @@ footer p,
   letter-spacing: 2px;
   color: var(--muted);
 }
-
-
 /* =========================================
    5. BRAND GALLERY
    THE BRANDS WE LOVE
 ========================================= */
-
 .brand-edit {
   background:
     radial-gradient(
@@ -231,27 +194,23 @@ footer p,
   position: relative;
   overflow: hidden;
 }
-
 .brand-edit-heading {
   max-width: 650px;
   margin: 0 auto 45px;
   text-align: center;
 }
-
 .brand-edit-heading h2 {
   font-size: clamp(38px, 4vw, 52px);
   font-weight: 400;
   line-height: 1.2;
   color: var(--dark);
 }
-
 .brand-edit-heading p {
   max-width: 530px;
   margin: 15px auto 0;
   color: var(--muted);
   font-size: 12px;
 }
-
 .brand-edit-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -261,7 +220,6 @@ footer p,
   border-top: 1px solid #ded1c9;
   border-left: 1px solid #ded1c9;
 }
-
 .brand-edit-item {
   min-height: 135px;
   padding: 25px 15px;
@@ -278,29 +236,24 @@ footer p,
     background 0.35s ease,
     color 0.35s ease;
 }
-
 .brand-edit-item span {
   font-size: 24px;
   font-weight: 400;
   letter-spacing: 0.5px;
   transition: transform 0.35s ease;
 }
-
 .brand-edit-item small {
   font-size: 8px;
   letter-spacing: 2px;
   color: #a18a80;
 }
-
 .brand-edit-item:hover {
   background: #eee2da;
   color: var(--deep-rose);
 }
-
 .brand-edit-item:hover span {
   transform: translateY(-2px);
 }
-
 .brand-edit-link {
   display: inline-block;
   margin-top: 35px;
@@ -311,16 +264,12 @@ footer p,
   letter-spacing: 2px;
   transition: color 0.3s ease;
 }
-
 .brand-edit-link:hover {
   color: var(--dark);
 }
-
-
 /* =========================================
    6. INSTAGRAM ICONS
 ========================================= */
-
 .instagram-link {
   display: inline-flex;
   align-items: center;
@@ -331,7 +280,6 @@ footer p,
     color 0.3s ease,
     transform 0.3s ease;
 }
-
 .header nav .instagram-link {
   flex-shrink: 0;
   width: 25px;
@@ -339,7 +287,6 @@ footer p,
   padding: 0;
   margin-left: 2px;
 }
-
 .header nav .instagram-link svg {
   display: block;
   width: 21px;
@@ -350,30 +297,24 @@ footer p,
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-
 .header nav .instagram-link svg circle:last-child {
   fill: currentColor;
   stroke: none;
 }
-
 .instagram-link:hover {
   color: var(--dusty-rose);
   transform: translateY(-2px);
 }
-
 .footer-links .instagram-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: var(--deep-rose);
 }
-
-
 /* =========================================
    7. CINEMATIC HERO
    WARM EDITORIAL ATMOSPHERE
 ========================================= */
-
 .hero-world {
   position: relative;
   isolation: isolate;
@@ -386,15 +327,11 @@ footer p,
   background: #514641;
   color: #f8f2ed;
 }
-
-
 /* BACKGROUND IMAGE */
-
 .hero-world__background {
   position: absolute;
   inset: 0;
   z-index: -5;
-
   background:
     linear-gradient(
       90deg,
@@ -403,20 +340,15 @@ footer p,
       rgba(65, 51, 46, 0.08) 100%
     ),
     url("../images/hero-world.jpg") center / cover no-repeat;
-
   transform: scale(1.04);
   animation: heroWorldReveal 2s ease-out both;
 }
-
-
 /* ATMOSPHERIC LIGHT */
-
 .hero-world__light {
   position: absolute;
   inset: 0;
   z-index: -4;
   pointer-events: none;
-
   background:
     radial-gradient(
       ellipse at 78% 34%,
@@ -428,34 +360,25 @@ footer p,
       rgba(204, 161, 151, 0.18),
       transparent 36%
     );
-
   mix-blend-mode: screen;
   animation: lightAtmosphere 12s ease-in-out infinite alternate;
 }
-
-
 /* MIST */
-
 .hero-world__mist {
   position: absolute;
   inset: -10%;
   z-index: -3;
   pointer-events: none;
-
   background:
     radial-gradient(
       ellipse at 70% 55%,
       rgba(242, 220, 207, 0.16),
       transparent 38%
     );
-
   filter: blur(35px);
   animation: mistDrift 20s ease-in-out infinite alternate;
 }
-
-
 /* HERO CONTENT */
-
 .hero-world__content {
   position: relative;
   z-index: 5;
@@ -464,7 +387,6 @@ footer p,
   padding: 100px 0;
   animation: heroTextReveal 1.5s 0.3s ease both;
 }
-
 .hero-world__eyebrow {
   display: inline-block;
   margin-bottom: 25px;
@@ -474,7 +396,6 @@ footer p,
   font-weight: 500;
   letter-spacing: 0.25em;
 }
-
 .hero-world__content h1 {
   margin: 0 0 25px;
   color: #f8f2ed;
@@ -484,12 +405,10 @@ footer p,
   line-height: 0.91;
   letter-spacing: -0.045em;
 }
-
 .hero-world__content h1 em {
   color: #e5c0b4;
   font-weight: 400;
 }
-
 .hero-world__content p {
   max-width: 430px;
   margin-bottom: 36px;
@@ -498,10 +417,7 @@ footer p,
   font-size: 22px;
   line-height: 1.45;
 }
-
-
 /* HERO BUTTON */
-
 .hero-world__button {
   display: inline-flex;
   align-items: center;
@@ -520,20 +436,15 @@ footer p,
     border-color 0.4s ease,
     transform 0.4s ease;
 }
-
 .hero-world__button:hover {
   background: rgba(210, 171, 157, 0.2);
   border-color: #f0d6ca;
   transform: translateY(-3px);
 }
-
 .hero-world__button span {
   font-size: 18px;
 }
-
-
 /* LIQUID GLASS RIBBONS */
-
 .hero-world__liquid {
   position: absolute;
   inset: 0;
@@ -541,7 +452,6 @@ footer p,
   overflow: hidden;
   pointer-events: none;
 }
-
 .liquid-ribbon {
   position: absolute;
   display: block;
@@ -552,18 +462,15 @@ footer p,
   border-top: 2px solid rgba(255, 239, 228, 0.7);
   border-bottom: 1px solid rgba(222, 183, 167, 0.45);
   filter: blur(1px);
-
   box-shadow:
     0 -8px 20px rgba(236, 206, 190, 0.12),
     0 8px 25px rgba(28, 24, 20, 0.18);
 }
-
 .liquid-ribbon--one {
   top: 28%;
   transform: rotate(-13deg);
   animation: ribbonFlowOne 14s ease-in-out infinite;
 }
-
 .liquid-ribbon--two {
   top: 48%;
   right: -15%;
@@ -573,10 +480,7 @@ footer p,
   opacity: 0.65;
   animation: ribbonFlowTwo 17s ease-in-out infinite;
 }
-
-
 /* GLASS OBJECTS */
-
 .hero-world__objects {
   position: absolute;
   inset: 0;
@@ -584,12 +488,10 @@ footer p,
   overflow: hidden;
   pointer-events: none;
 }
-
 .hero-orb {
   position: absolute;
   display: block;
   border-radius: 50%;
-
   background:
     radial-gradient(
       circle at 30% 25%,
@@ -600,17 +502,13 @@ footer p,
       rgba(255, 255, 255, 0.55) 74%,
       transparent 80%
     );
-
   border: 1px solid rgba(255, 255, 255, 0.55);
-
   box-shadow:
     inset -8px -10px 18px rgba(55, 40, 34, 0.2),
     inset 4px 4px 12px rgba(255, 255, 255, 0.45),
     0 0 24px rgba(229, 196, 179, 0.16);
-
   backdrop-filter: blur(2px);
 }
-
 .hero-orb--one {
   width: 75px;
   height: 75px;
@@ -618,7 +516,6 @@ footer p,
   right: 21%;
   animation: orbFloatOne 8s ease-in-out infinite;
 }
-
 .hero-orb--two {
   width: 34px;
   height: 34px;
@@ -626,7 +523,6 @@ footer p,
   right: 12%;
   animation: orbFloatTwo 11s ease-in-out infinite;
 }
-
 .hero-orb--three {
   width: 19px;
   height: 19px;
@@ -634,17 +530,13 @@ footer p,
   right: 38%;
   animation: orbFloatThree 9s ease-in-out infinite;
 }
-
-
 /* FLOATING PETALS */
-
 .hero-petal {
   position: absolute;
   display: block;
   width: 62px;
   height: 32px;
   border-radius: 100% 0 100% 0;
-
   background:
     linear-gradient(
       135deg,
@@ -652,18 +544,15 @@ footer p,
       rgba(204, 158, 148, 0.72) 60%,
       rgba(132, 94, 85, 0.45)
     );
-
   box-shadow:
     inset 2px 2px 5px rgba(255, 255, 255, 0.35),
     0 12px 25px rgba(30, 23, 20, 0.2);
 }
-
 .hero-petal--one {
   top: 24%;
   right: 38%;
   animation: petalFloatOne 12s ease-in-out infinite;
 }
-
 .hero-petal--two {
   top: 66%;
   right: 25%;
@@ -671,7 +560,6 @@ footer p,
   height: 24px;
   animation: petalFloatTwo 15s ease-in-out infinite;
 }
-
 .hero-petal--three {
   top: 15%;
   right: 8%;
@@ -679,10 +567,7 @@ footer p,
   height: 20px;
   animation: petalFloatThree 13s ease-in-out infinite;
 }
-
-
 /* SCROLL INDICATOR */
-
 .hero-world__scroll {
   position: absolute;
   z-index: 5;
@@ -696,7 +581,6 @@ footer p,
   text-decoration: none;
   transform: translateX(-50%);
 }
-
 .hero-world__scroll span {
   display: block;
   width: 1px;
@@ -708,18 +592,14 @@ footer p,
   );
   animation: scrollLine 2s ease-in-out infinite;
 }
-
 .hero-world__scroll small {
   font-family: Montserrat, sans-serif;
   font-size: 8px;
   letter-spacing: 0.2em;
 }
-
-
 /* =========================================
    8. HERO ANIMATIONS
 ========================================= */
-
 @keyframes heroWorldReveal {
   from {
     opacity: 0.55;
@@ -730,7 +610,6 @@ footer p,
     transform: scale(1.04);
   }
 }
-
 @keyframes heroTextReveal {
   from {
     opacity: 0;
@@ -741,7 +620,6 @@ footer p,
     transform: translateY(0);
   }
 }
-
 @keyframes lightAtmosphere {
   from {
     transform: translate3d(-2%, 0, 0);
@@ -750,7 +628,6 @@ footer p,
     transform: translate3d(3%, -2%, 0);
   }
 }
-
 @keyframes mistDrift {
   from {
     transform: translate3d(-2%, 1%, 0) scale(1);
@@ -761,7 +638,6 @@ footer p,
     opacity: 0.65;
   }
 }
-
 @keyframes ribbonFlowOne {
   0%, 100% {
     transform: translate3d(0, 0, 0) rotate(-13deg);
@@ -770,7 +646,6 @@ footer p,
     transform: translate3d(-5%, -18px, 0) rotate(-7deg);
   }
 }
-
 @keyframes ribbonFlowTwo {
   0%, 100% {
     transform: translate3d(0, 0, 0) rotate(9deg);
@@ -779,7 +654,6 @@ footer p,
     transform: translate3d(4%, 20px, 0) rotate(15deg);
   }
 }
-
 @keyframes orbFloatOne {
   0%, 100% {
     transform: translate3d(0, 0, 0);
@@ -788,7 +662,6 @@ footer p,
     transform: translate3d(12px, -22px, 0);
   }
 }
-
 @keyframes orbFloatTwo {
   0%, 100% {
     transform: translate3d(0, 0, 0);
@@ -797,7 +670,6 @@ footer p,
     transform: translate3d(-15px, -18px, 0);
   }
 }
-
 @keyframes orbFloatThree {
   0%, 100% {
     transform: translate3d(0, 0, 0);
@@ -806,7 +678,6 @@ footer p,
     transform: translate3d(8px, 16px, 0);
   }
 }
-
 @keyframes petalFloatOne {
   0%, 100% {
     transform: translate3d(0, 0, 0) rotate(0deg);
@@ -815,7 +686,6 @@ footer p,
     transform: translate3d(25px, -35px, 0) rotate(18deg);
   }
 }
-
 @keyframes petalFloatTwo {
   0%, 100% {
     transform: translate3d(0, 0, 0) rotate(0deg);
@@ -824,7 +694,6 @@ footer p,
     transform: translate3d(-30px, -25px, 0) rotate(-22deg);
   }
 }
-
 @keyframes petalFloatThree {
   0%, 100% {
     transform: translate3d(0, 0, 0) rotate(0deg);
@@ -833,7 +702,6 @@ footer p,
     transform: translate3d(18px, 28px, 0) rotate(15deg);
   }
 }
-
 @keyframes scrollLine {
   0%, 100% {
     opacity: 0.4;
@@ -844,183 +712,138 @@ footer p,
     transform: scaleY(1);
   }
 }
-
-
 /* =========================================
    9. TABLET
 ========================================= */
-
 @media (max-width: 800px) {
-
   .hero-world {
     min-height: 760px;
     min-height: 88svh;
   }
-
   .hero-world__content {
     width: 72%;
     margin-left: 7%;
   }
-
   .hero-world__content h1 {
     font-size: clamp(55px, 10vw, 82px);
   }
-
   .liquid-ribbon {
     width: 80%;
     right: -28%;
   }
-
   .brand-edit-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
   .gift-content {
     padding: 65px 9%;
   }
 }
-
-
 /* =========================================
    10. MOBILE
 ========================================= */
-
 @media (max-width: 600px) {
-
   .hero-world {
     min-height: 760px;
     min-height: 88svh;
     align-items: flex-end;
   }
-
   .hero-world__background {
     background-position: 62% center;
   }
-
   .hero-world__content {
     width: 88%;
     margin: 0 6%;
     padding: 100px 0 125px;
   }
-
   .hero-world__content h1 {
     font-size: clamp(48px, 12vw, 68px);
   }
-
   .hero-world__content p {
     font-size: 19px;
   }
-
   .hero-orb--one {
     width: 48px;
     height: 48px;
     right: 12%;
     top: 14%;
   }
-
   .hero-petal--one {
     right: 10%;
     top: 28%;
   }
-
   .hero-petal--two {
     right: 15%;
     top: 52%;
   }
-
   .liquid-ribbon {
     width: 100%;
     right: -40%;
     opacity: 0.7;
   }
-
   .hero-world__scroll {
     bottom: 20px;
   }
-
   .gift-section {
     grid-template-columns: 1fr;
   }
-
   .gift-image {
     min-height: 340px;
   }
-
   .gift-content {
     padding: 55px 8%;
   }
-
   .finder-box {
     padding: 28px 22px;
   }
-
   .newsletter {
     padding: 70px 18px;
   }
-
   .newsletter h2 {
     font-size: 36px;
   }
-
   .newsletter form {
     flex-direction: column;
     gap: 10px;
   }
-
   .newsletter button {
     min-height: 46px;
   }
-
   .brand-edit-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
   .brand-edit-item {
     min-height: 115px;
     padding: 20px 10px;
   }
-
   .brand-edit-item span {
     font-size: 20px;
   }
-
   .footer-links {
     gap: 18px;
   }
 }
-
-
 /* =========================================
    11. SMALL MOBILE
 ========================================= */
-
 @media (max-width: 380px) {
-
   .hero-world__content h1 {
     font-size: 46px;
   }
-
   .hero-world__content p {
     font-size: 18px;
   }
-
   .hero-world__button {
     gap: 16px;
     padding: 15px 18px;
   }
-
   .brand-edit-item span {
     font-size: 18px;
   }
 }
-
-
 /* =========================================
    12. REDUCED MOTION ACCESSIBILITY
 ========================================= */
-
 @media (prefers-reduced-motion: reduce) {
-
   .hero-world *,
   .hero-world *::before,
   .hero-world *::after {
@@ -1028,32 +851,27 @@ footer p,
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
-
   .brand-edit-item,
   .brand-edit-item span,
   .instagram-link {
     transition: none !important;
   }
 }
-
-
 /* =========================================
    HOMEPAGE HERO — LUXURY VISUAL FOUNDATION
 ========================================= */
-
 .hero-world {
   position: relative;
   isolation: isolate;
   overflow: hidden;
   background: #f4eee7;
 }
-
 .hero-world__background {
   background-position: center;
   background-size: cover;
   filter: saturate(0.82);
 }
-
+/* CINEMATIC OVERLAY — UPDATED */
 .hero-world::before {
   content: "";
   position: absolute;
@@ -1062,18 +880,17 @@ footer p,
   pointer-events: none;
   background:
     radial-gradient(
-      ellipse at 75% 30%,
-      rgba(255, 250, 242, 0.28),
-      transparent 48%
+      ellipse at 78% 28%,
+      rgba(255, 238, 220, 0.12),
+      transparent 46%
     ),
     linear-gradient(
       90deg,
-      rgba(248, 245, 239, 0.72) 0%,
-      rgba(248, 245, 239, 0.42) 48%,
-      rgba(248, 245, 239, 0.08) 100%
+      rgba(42, 32, 29, 0.48) 0%,
+      rgba(54, 40, 36, 0.22) 42%,
+      rgba(54, 40, 36, 0.02) 100%
     );
 }
-
 .hero-world__light {
   background:
     radial-gradient(
@@ -1083,60 +900,54 @@ footer p,
     );
   mix-blend-mode: screen;
 }
-
 .hero-world__content {
   position: relative;
   z-index: 5;
 }
-
 .hero-world__content h1 {
   text-shadow: 0 2px 24px rgba(255, 250, 242, 0.25);
 }
-
 .hero-world__mist {
   opacity: 0.55;
 }
-
 .hero-world__liquid {
   opacity: 0.75;
 }
-
 .hero-world__objects {
   perspective: 1000px;
 }
-
 .hero-world__objects > * {
   transform-style: preserve-3d;
 }
-
+/* MOBILE OVERLAY — UPDATED */
 @media (max-width: 750px) {
   .hero-world::before {
     background:
+      radial-gradient(
+        ellipse at 75% 25%,
+        rgba(255, 224, 207, 0.12),
+        transparent 50%
+      ),
       linear-gradient(
         180deg,
-        rgba(248, 245, 239, 0.38),
-        rgba(248, 245, 239, 0.12) 55%,
-        rgba(248, 245, 239, 0.48)
+        rgba(45, 35, 32, 0.08),
+        rgba(45, 35, 32, 0.18) 55%,
+        rgba(45, 35, 32, 0.30)
       );
   }
 }
-
 @media (prefers-reduced-motion: reduce) {
   .hero-world__objects > * {
     transform: none !important;
   }
 }
-
-
 /* =========================================
    3D HERO CANVAS — LAYERING & RESPONSIVE
 ========================================= */
-
 .hero-world {
   position: relative;
   isolation: isolate;
 }
-
 .hero-three-canvas {
   position: absolute;
   inset: 0;
@@ -1146,31 +957,25 @@ footer p,
   pointer-events: none;
   z-index: 2;
 }
-
 .hero-world__content {
   position: relative;
   z-index: 5;
 }
-
 .hero-world__background {
   z-index: 0;
 }
-
 .hero-world__light,
 .hero-world__mist {
   z-index: 1;
   pointer-events: none;
 }
-
 .hero-world__liquid,
 .hero-world__objects {
   z-index: 3;
   pointer-events: none;
 }
-
 @media (max-width: 750px) {
   .hero-three-canvas {
     opacity: 0.8;
   }
 }
-
