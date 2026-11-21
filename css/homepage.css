@@ -2204,3 +2204,78 @@ footer > p,
 .homepage .hero-world__scroll {
   color: rgba(248, 245, 240, 0.8);
 }
+
+
+/* =========================================
+   HOMEPAGE — COHESIVE EDITORIAL FLOW
+========================================= */
+
+.homepage .intro,
+.homepage .collections,
+.homepage .concern-edit,
+.homepage .gift-finder {
+  padding-top: clamp(70px, 8vw, 115px);
+  padding-bottom: clamp(70px, 8vw, 115px);
+}
+
+/* Softer transition after the hero */
+.homepage .intro {
+  background:
+    linear-gradient(
+      180deg,
+      #F0EAE2 0%,
+      #F8F5F0 100%
+    );
+}
+
+/* Collections */
+.homepage .collections {
+  background: #F8F5F0;
+}
+
+/* Skin concerns */
+.homepage .concern-edit {
+  background:
+    linear-gradient(
+      180deg,
+      #F8F5F0 0%,
+      #F0EAE2 100%
+    );
+}
+
+/* Brand directory */
+.homepage .brand-edit {
+  background:
+    linear-gradient(
+      145deg,
+      #F0EAE2 0%,
+      #E9DFD8 50%,
+      #F5EEE8 100%
+    );
+}
+
+/* Gift finder */
+.homepage .gift-finder {
+  background: #F8F5F0;
+}
+
+/* Consistent content width */
+.homepage .brand-edit-inner {
+  max-width: 1320px;
+  margin-inline: auto;
+}
+
+/* Mobile spacing */
+@media (max-width: 600px) {
+  .homepage .intro,
+  .homepage .collections,
+  .homepage .concern-edit,
+  .homepage .gift-finder {
+    padding-top: 65px;
+    padding-bottom: 65px;
+  }
+
+  .homepage .brand-edit {
+    padding: 70px 20px;
+  }
+}
