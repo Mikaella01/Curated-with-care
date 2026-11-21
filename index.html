@@ -654,37 +654,52 @@
 
     <section class="newsletter">
 
-      <span class="eyebrow">
-        A NOTE FROM US
-      </span>
+  <span class="eyebrow">
+    A NOTE FROM US
+  </span>
 
-      <h2>
-        Little luxuries, delivered.
-      </h2>
+  <h2>
+    Little luxuries, delivered.
+  </h2>
 
-      <p>
-        Discover new beauty finds, curated collections
-        and thoughtful gifting inspiration.
-      </p>
+  <p>
+    Discover new beauty finds, curated collections
+    and thoughtful gifting inspiration.
+  </p>
 
-      <form id="newsletterForm">
+  <form id="newsletterForm">
 
-        <input
-          type="email"
-          id="newsletterEmail"
-          placeholder="Your email address"
-          aria-label="Your email address"
-          required>
+    <input
+      type="email"
+      id="newsletterEmail"
+      placeholder="Your email address"
+      aria-label="Your email address"
+      autocomplete="email"
+      required>
 
-        <button type="submit">
-          SUBSCRIBE ↗
-        </button>
+    <div class="newsletter-consent">
 
-      </form>
+      <input
+        type="checkbox"
+        id="newsletterConsent"
+        required>
 
-      <p id="newsletterMessage" aria-live="polite"></p>
+      <label for="newsletterConsent">
+        I agree to receive beauty news, product updates
+        and marketing emails. I can unsubscribe at any time.
+      </label>
 
-    </section>
+    </div>
+
+    <button type="submit">
+      SUBSCRIBE ↗
+    </button>
+
+  </form>
+
+  <p id="newsletterMessage" aria-live="polite"></p>
+
+</section>
 
 
     <!--
