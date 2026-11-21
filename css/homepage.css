@@ -2,7 +2,7 @@
 /* =========================================
    CURATED WITH CARE BY M.
    HOMEPAGE.CSS
-   HOMEPAGE SECTIONS AND FOOTER
+   CLEANED HOMEPAGE SECTIONS & ANIMATIONS
 ========================================= */
 
 
@@ -153,6 +153,15 @@
   padding: 0 20px;
   font-size: 9px;
   letter-spacing: 1px;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.newsletter button:hover {
+  background: var(--dark);
+  border-color: var(--dark);
 }
 
 
@@ -312,8 +321,6 @@ footer p,
    6. INSTAGRAM ICONS
 ========================================= */
 
-/* Header Instagram icon */
-
 .instagram-link {
   display: inline-flex;
   align-items: center;
@@ -363,8 +370,8 @@ footer p,
 
 
 /* =========================================
-   CURATED WITH CARE BY M.
-   CINEMATIC HERO — NEW DESIGN
+   7. CINEMATIC HERO
+   WARM EDITORIAL ATMOSPHERE
 ========================================= */
 
 .hero-world {
@@ -376,9 +383,10 @@ footer p,
   overflow: hidden;
   display: flex;
   align-items: center;
-  background: #292936;
-  color: #f6eeee;
+  background: #514641;
+  color: #f8f2ed;
 }
+
 
 /* BACKGROUND IMAGE */
 
@@ -390,15 +398,16 @@ footer p,
   background:
     linear-gradient(
       90deg,
-      rgba(29, 29, 42, .94) 0%,
-      rgba(43, 39, 52, .70) 38%,
-      rgba(43, 39, 52, .10) 100%
+      rgba(48, 39, 35, 0.82) 0%,
+      rgba(65, 51, 46, 0.53) 42%,
+      rgba(65, 51, 46, 0.08) 100%
     ),
     url("../images/hero-world.jpg") center / cover no-repeat;
 
   transform: scale(1.04);
   animation: heroWorldReveal 2s ease-out both;
 }
+
 
 /* ATMOSPHERIC LIGHT */
 
@@ -411,18 +420,19 @@ footer p,
   background:
     radial-gradient(
       ellipse at 78% 34%,
-      rgba(218, 157, 180, .27),
+      rgba(231, 194, 177, 0.27),
       transparent 34%
     ),
     radial-gradient(
       ellipse at 55% 85%,
-      rgba(181, 126, 157, .17),
+      rgba(204, 161, 151, 0.18),
       transparent 36%
     );
 
   mix-blend-mode: screen;
   animation: lightAtmosphere 12s ease-in-out infinite alternate;
 }
+
 
 /* MIST */
 
@@ -435,13 +445,14 @@ footer p,
   background:
     radial-gradient(
       ellipse at 70% 55%,
-      rgba(232, 198, 207, .13),
+      rgba(242, 220, 207, 0.16),
       transparent 38%
     );
 
   filter: blur(35px);
-  animation: mistDrift 18s ease-in-out infinite alternate;
+  animation: mistDrift 20s ease-in-out infinite alternate;
 }
+
 
 /* HERO CONTENT */
 
@@ -451,66 +462,68 @@ footer p,
   width: min(620px, 52%);
   margin-left: 8%;
   padding: 100px 0;
-  animation: heroTextReveal 1.5s .3s ease both;
+  animation: heroTextReveal 1.5s 0.3s ease both;
 }
 
 .hero-world__eyebrow {
   display: inline-block;
   margin-bottom: 25px;
-  color: #dcb5c1;
+  color: #ead0c4;
   font-family: Montserrat, sans-serif;
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: .25em;
+  letter-spacing: 0.25em;
 }
 
 .hero-world__content h1 {
   margin: 0 0 25px;
-  color: #f5eeee;
+  color: #f8f2ed;
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(58px, 7vw, 105px);
   font-weight: 400;
-  line-height: .91;
-  letter-spacing: -.045em;
+  line-height: 0.91;
+  letter-spacing: -0.045em;
 }
 
 .hero-world__content h1 em {
-  color: #d9a8b8;
+  color: #e5c0b4;
   font-weight: 400;
 }
 
 .hero-world__content p {
   max-width: 430px;
   margin-bottom: 36px;
-  color: rgba(250, 239, 241, .83);
+  color: rgba(250, 242, 236, 0.88);
   font-family: "Cormorant Garamond", serif;
   font-size: 22px;
   line-height: 1.45;
 }
 
-/* BUTTON */
+
+/* HERO BUTTON */
 
 .hero-world__button {
   display: inline-flex;
   align-items: center;
   gap: 28px;
   padding: 17px 24px;
-  color: #f7edf0;
-  border: 1px solid rgba(229, 190, 204, .8);
-  background: rgba(255, 255, 255, .035);
+  color: #f8f2ed;
+  border: 1px solid rgba(238, 211, 199, 0.8);
+  background: rgba(255, 255, 255, 0.045);
   font-family: Montserrat, sans-serif;
   font-size: 10px;
-  letter-spacing: .19em;
+  letter-spacing: 0.19em;
   text-decoration: none;
   backdrop-filter: blur(12px);
-  transition: background .4s ease,
-              border-color .4s ease,
-              transform .4s ease;
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease,
+    transform 0.4s ease;
 }
 
 .hero-world__button:hover {
-  background: rgba(204, 151, 172, .2);
-  border-color: #e6c0ce;
+  background: rgba(210, 171, 157, 0.2);
+  border-color: #f0d6ca;
   transform: translateY(-3px);
 }
 
@@ -518,7 +531,8 @@ footer p,
   font-size: 18px;
 }
 
-/* LIQUID GLASS */
+
+/* LIQUID GLASS RIBBONS */
 
 .hero-world__liquid {
   position: absolute;
@@ -535,19 +549,19 @@ footer p,
   height: 180px;
   right: -8%;
   border-radius: 50%;
-  border-top: 2px solid rgba(255, 229, 239, .7);
-  border-bottom: 1px solid rgba(217, 165, 188, .45);
+  border-top: 2px solid rgba(255, 239, 228, 0.7);
+  border-bottom: 1px solid rgba(222, 183, 167, 0.45);
   filter: blur(1px);
 
   box-shadow:
-    0 -8px 20px rgba(236, 192, 211, .12),
-    0 8px 25px rgba(28, 24, 40, .18);
+    0 -8px 20px rgba(236, 206, 190, 0.12),
+    0 8px 25px rgba(28, 24, 20, 0.18);
 }
 
 .liquid-ribbon--one {
   top: 28%;
   transform: rotate(-13deg);
-  animation: ribbonOne 13s ease-in-out infinite alternate;
+  animation: ribbonFlowOne 14s ease-in-out infinite;
 }
 
 .liquid-ribbon--two {
@@ -556,9 +570,10 @@ footer p,
   width: 75%;
   height: 125px;
   transform: rotate(9deg);
-  opacity: .65;
-  animation: ribbonTwo 16s ease-in-out infinite alternate;
+  opacity: 0.65;
+  animation: ribbonFlowTwo 17s ease-in-out infinite;
 }
+
 
 /* GLASS OBJECTS */
 
@@ -578,20 +593,20 @@ footer p,
   background:
     radial-gradient(
       circle at 30% 25%,
-      rgba(255, 255, 255, .9),
-      rgba(241, 199, 217, .36) 12%,
-      rgba(164, 114, 151, .12) 48%,
-      rgba(255, 255, 255, .2) 70%,
-      rgba(255, 255, 255, .55) 74%,
+      rgba(255, 255, 255, 0.9),
+      rgba(242, 218, 207, 0.36) 12%,
+      rgba(183, 148, 135, 0.12) 48%,
+      rgba(255, 255, 255, 0.2) 70%,
+      rgba(255, 255, 255, 0.55) 74%,
       transparent 80%
     );
 
-  border: 1px solid rgba(255, 255, 255, .55);
+  border: 1px solid rgba(255, 255, 255, 0.55);
 
   box-shadow:
-    inset -8px -10px 18px rgba(37, 28, 48, .25),
-    inset 4px 4px 12px rgba(255, 255, 255, .45),
-    0 0 24px rgba(229, 179, 204, .16);
+    inset -8px -10px 18px rgba(55, 40, 34, 0.2),
+    inset 4px 4px 12px rgba(255, 255, 255, 0.45),
+    0 0 24px rgba(229, 196, 179, 0.16);
 
   backdrop-filter: blur(2px);
 }
@@ -601,7 +616,7 @@ footer p,
   height: 75px;
   top: 19%;
   right: 21%;
-  animation: orbOne 11s ease-in-out infinite;
+  animation: orbFloatOne 8s ease-in-out infinite;
 }
 
 .hero-orb--two {
@@ -609,7 +624,7 @@ footer p,
   height: 34px;
   top: 56%;
   right: 12%;
-  animation: orbTwo 9s ease-in-out infinite;
+  animation: orbFloatTwo 11s ease-in-out infinite;
 }
 
 .hero-orb--three {
@@ -617,8 +632,9 @@ footer p,
   height: 19px;
   top: 35%;
   right: 38%;
-  animation: orbThree 8s ease-in-out infinite;
+  animation: orbFloatThree 9s ease-in-out infinite;
 }
+
 
 /* FLOATING PETALS */
 
@@ -632,20 +648,20 @@ footer p,
   background:
     linear-gradient(
       135deg,
-      rgba(246, 205, 216, .95),
-      rgba(183, 112, 145, .72) 60%,
-      rgba(112, 72, 100, .45)
+      rgba(246, 224, 211, 0.95),
+      rgba(204, 158, 148, 0.72) 60%,
+      rgba(132, 94, 85, 0.45)
     );
 
   box-shadow:
-    inset 2px 2px 5px rgba(255, 255, 255, .35),
-    0 12px 25px rgba(20, 16, 30, .2);
+    inset 2px 2px 5px rgba(255, 255, 255, 0.35),
+    0 12px 25px rgba(30, 23, 20, 0.2);
 }
 
 .hero-petal--one {
   top: 24%;
   right: 38%;
-  animation: petalOne 15s ease-in-out infinite;
+  animation: petalFloatOne 12s ease-in-out infinite;
 }
 
 .hero-petal--two {
@@ -653,7 +669,7 @@ footer p,
   right: 25%;
   width: 44px;
   height: 24px;
-  animation: petalTwo 18s ease-in-out infinite;
+  animation: petalFloatTwo 15s ease-in-out infinite;
 }
 
 .hero-petal--three {
@@ -661,8 +677,9 @@ footer p,
   right: 8%;
   width: 35px;
   height: 20px;
-  animation: petalThree 13s ease-in-out infinite;
+  animation: petalFloatThree 13s ease-in-out infinite;
 }
+
 
 /* SCROLL INDICATOR */
 
@@ -675,7 +692,7 @@ footer p,
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  color: rgba(255, 240, 245, .75);
+  color: rgba(255, 244, 237, 0.8);
   text-decoration: none;
   transform: translateX(-50%);
 }
@@ -687,7 +704,7 @@ footer p,
   background: linear-gradient(
     to bottom,
     transparent,
-    #e8c1cf
+    #ead0c4
   );
   animation: scrollLine 2s ease-in-out infinite;
 }
@@ -695,14 +712,17 @@ footer p,
 .hero-world__scroll small {
   font-family: Montserrat, sans-serif;
   font-size: 8px;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
 }
 
-/* ANIMATIONS */
+
+/* =========================================
+   8. HERO ANIMATIONS
+========================================= */
 
 @keyframes heroWorldReveal {
   from {
-    opacity: .55;
+    opacity: 0.55;
     transform: scale(1.1);
   }
   to {
@@ -723,63 +743,115 @@ footer p,
 }
 
 @keyframes lightAtmosphere {
-  from { transform: translate3d(-2%, 0, 0); }
-  to { transform: translate3d(3%, -2%, 0); }
+  from {
+    transform: translate3d(-2%, 0, 0);
+  }
+  to {
+    transform: translate3d(3%, -2%, 0);
+  }
 }
 
 @keyframes mistDrift {
-  from { transform: translate3d(-2%, 1%, 0) scale(1); }
-  to { transform: translate3d(3%, -2%, 0) scale(1.08); }
+  from {
+    transform: translate3d(-2%, 1%, 0) scale(1);
+    opacity: 0.35;
+  }
+  to {
+    transform: translate3d(3%, -2%, 0) scale(1.08);
+    opacity: 0.65;
+  }
 }
 
-@keyframes ribbonOne {
-  from { transform: translate3d(0, 0, 0) rotate(-13deg); }
-  to { transform: translate3d(-5%, -25px, 0) rotate(-7deg); }
+@keyframes ribbonFlowOne {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-13deg);
+  }
+  50% {
+    transform: translate3d(-5%, -18px, 0) rotate(-7deg);
+  }
 }
 
-@keyframes ribbonTwo {
-  from { transform: translate3d(0, 0, 0) rotate(9deg); }
-  to { transform: translate3d(4%, 20px, 0) rotate(15deg); }
+@keyframes ribbonFlowTwo {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(9deg);
+  }
+  50% {
+    transform: translate3d(4%, 20px, 0) rotate(15deg);
+  }
 }
 
-@keyframes orbOne {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(-18px, -32px, 0); }
+@keyframes orbFloatOne {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(12px, -22px, 0);
+  }
 }
 
-@keyframes orbTwo {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(12px, -25px, 0); }
+@keyframes orbFloatTwo {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-15px, -18px, 0);
+  }
 }
 
-@keyframes orbThree {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(-12px, 18px, 0); }
+@keyframes orbFloatThree {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(8px, 16px, 0);
+  }
 }
 
-@keyframes petalOne {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(20deg); }
-  50% { transform: translate3d(-35px, -45px, 0) rotate(95deg); }
+@keyframes petalFloatOne {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(25px, -35px, 0) rotate(18deg);
+  }
 }
 
-@keyframes petalTwo {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(15deg); }
-  50% { transform: translate3d(28px, -38px, 0) rotate(-55deg); }
+@keyframes petalFloatTwo {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-30px, -25px, 0) rotate(-22deg);
+  }
 }
 
-@keyframes petalThree {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(35deg); }
-  50% { transform: translate3d(-24px, 30px, 0) rotate(110deg); }
+@keyframes petalFloatThree {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(18px, 28px, 0) rotate(15deg);
+  }
 }
 
 @keyframes scrollLine {
-  0%, 100% { opacity: .4; transform: scaleY(.7); }
-  50% { opacity: 1; transform: scaleY(1); }
+  0%, 100% {
+    opacity: 0.4;
+    transform: scaleY(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 }
 
-/* TABLET */
+
+/* =========================================
+   9. TABLET
+========================================= */
 
 @media (max-width: 800px) {
+
   .hero-world {
     min-height: 760px;
     min-height: 88svh;
@@ -798,11 +870,23 @@ footer p,
     width: 80%;
     right: -28%;
   }
+
+  .brand-edit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gift-content {
+    padding: 65px 9%;
+  }
 }
 
-/* MOBILE */
+
+/* =========================================
+   10. MOBILE
+========================================= */
 
 @media (max-width: 600px) {
+
   .hero-world {
     min-height: 760px;
     min-height: 88svh;
@@ -847,174 +931,107 @@ footer p,
   .liquid-ribbon {
     width: 100%;
     right: -40%;
-    opacity: .7;
+    opacity: 0.7;
   }
 
   .hero-world__scroll {
     bottom: 20px;
   }
-}
 
-/* REDUCED MOTION ACCESSIBILITY */
+  .gift-section {
+    grid-template-columns: 1fr;
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-world *,
-  .hero-world *::before,
-  .hero-world *::after {
-    animation: none !important;
-    scroll-behavior: auto !important;
+  .gift-image {
+    min-height: 340px;
+  }
+
+  .gift-content {
+    padding: 55px 8%;
+  }
+
+  .finder-box {
+    padding: 28px 22px;
+  }
+
+  .newsletter {
+    padding: 70px 18px;
+  }
+
+  .newsletter h2 {
+    font-size: 36px;
+  }
+
+  .newsletter form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .newsletter button {
+    min-height: 46px;
+  }
+
+  .brand-edit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .brand-edit-item {
+    min-height: 115px;
+    padding: 20px 10px;
+  }
+
+  .brand-edit-item span {
+    font-size: 20px;
+  }
+
+  .footer-links {
+    gap: 18px;
   }
 }
 
 
 /* =========================================
-   CINEMATIC HERO — NATURAL MOVEMENT
+   11. SMALL MOBILE
 ========================================= */
 
-/* GLASS DROPLETS */
+@media (max-width: 380px) {
 
-.hero-orb--one {
-  animation: orbFloatOne 8s ease-in-out infinite;
-}
-
-.hero-orb--two {
-  animation: orbFloatTwo 11s ease-in-out infinite;
-}
-
-.hero-orb--three {
-  animation: orbFloatThree 9s ease-in-out infinite;
-}
-
-@keyframes orbFloatOne {
-  0%, 100% {
-    translate: 0 0;
+  .hero-world__content h1 {
+    font-size: 46px;
   }
-  50% {
-    translate: 12px -22px;
-  }
-}
 
-@keyframes orbFloatTwo {
-  0%, 100% {
-    translate: 0 0;
+  .hero-world__content p {
+    font-size: 18px;
   }
-  50% {
-    translate: -15px -18px;
-  }
-}
 
-@keyframes orbFloatThree {
-  0%, 100% {
-    translate: 0 0;
+  .hero-world__button {
+    gap: 16px;
+    padding: 15px 18px;
   }
-  50% {
-    translate: 8px 16px;
+
+  .brand-edit-item span {
+    font-size: 18px;
   }
 }
 
 
-/* FLOATING PETALS */
-
-.hero-petal--one {
-  animation: petalFloatOne 12s ease-in-out infinite;
-}
-
-.hero-petal--two {
-  animation: petalFloatTwo 15s ease-in-out infinite;
-}
-
-.hero-petal--three {
-  animation: petalFloatThree 13s ease-in-out infinite;
-}
-
-@keyframes petalFloatOne {
-  0%, 100% {
-    translate: 0 0;
-    rotate: 0deg;
-  }
-  50% {
-    translate: 25px -35px;
-    rotate: 18deg;
-  }
-}
-
-@keyframes petalFloatTwo {
-  0%, 100% {
-    translate: 0 0;
-    rotate: 0deg;
-  }
-  50% {
-    translate: -30px -25px;
-    rotate: -22deg;
-  }
-}
-
-@keyframes petalFloatThree {
-  0%, 100% {
-    translate: 0 0;
-    rotate: 0deg;
-  }
-  50% {
-    translate: 18px 28px;
-    rotate: 15deg;
-  }
-}
-
-
-/* FLOWING LIQUID RIBBONS */
-
-.liquid-ribbon--one {
-  animation: ribbonFlowOne 14s ease-in-out infinite;
-}
-
-.liquid-ribbon--two {
-  animation: ribbonFlowTwo 17s ease-in-out infinite;
-}
-
-@keyframes ribbonFlowOne {
-  0%, 100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 0 -18px;
-  }
-}
-
-@keyframes ribbonFlowTwo {
-  0%, 100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 0 20px;
-  }
-}
-
-
-/* MOVING ATMOSPHERIC MIST */
-
-.hero-world__mist {
-  animation: mistDrift 20s ease-in-out infinite alternate;
-}
-
-@keyframes mistDrift {
-  from {
-    translate: -2% 0;
-    opacity: 0.35;
-  }
-  to {
-    translate: 3% -2%;
-    opacity: 0.65;
-  }
-}
-
-
-/* ACCESSIBILITY — REDUCE MOTION */
+/* =========================================
+   12. REDUCED MOTION ACCESSIBILITY
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-orb,
-  .hero-petal,
-  .liquid-ribbon,
-  .hero-world__mist {
+
+  .hero-world *,
+  .hero-world *::before,
+  .hero-world *::after {
     animation: none !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .brand-edit-item,
+  .brand-edit-item span,
+  .instagram-link {
+    transition: none !important;
   }
 }
