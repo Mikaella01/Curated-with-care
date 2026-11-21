@@ -44,7 +44,7 @@
           throw new Error("Administrator access is required.");
         }
 
-        const response = await fetch("script.js");
+        const response = await fetch("js/script.js");
 
         if (!response.ok) {
           throw new Error("Could not load script.js.");
