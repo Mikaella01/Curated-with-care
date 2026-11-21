@@ -1,6 +1,7 @@
+
 /* =========================================
    CURATED WITH CARE BY M.
-   CLEANED GLOBAL & HOMEPAGE STYLES
+   CLEAN GLOBAL STYLES
 ========================================= */
 
 
@@ -66,7 +67,8 @@ a {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -100,7 +102,8 @@ em {
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
-select:focus-visible {
+select:focus-visible,
+textarea:focus-visible {
   outline: 2px solid var(--deep-rose);
   outline-offset: 3px;
 }
@@ -253,205 +256,7 @@ select:focus-visible {
 
 
 /* =========================================
-   6. HOMEPAGE — CINEMATIC HERO
-========================================= */
-
-.hero {
-  position: relative;
-  min-height: 720px;
-  height: 82vh;
-  max-height: 900px;
-
-  display: flex;
-  align-items: center;
-
-  overflow: hidden;
-  isolation: isolate;
-
-  background: var(--cream);
-}
-
-
-/* HERO IMAGE */
-
-.hero-image {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-
-  background-image:
-    linear-gradient(
-      90deg,
-      rgba(248, 245, 239, 0.12),
-      rgba(248, 245, 239, 0.02)
-    ),
-    url("https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1800&q=85");
-
-  background-size: cover;
-  background-position: center;
-
-  z-index: 0;
-
-  transform: scale(1.04);
-  transform-origin: center center;
-
-  will-change: transform, opacity, filter;
-
-  animation: heroImageReveal 1.5s ease both;
-}
-
-
-/* SOFT LIGHT OVER IMAGE */
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  z-index: 1;
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at 75% 25%,
-      rgba(255, 255, 255, 0.20),
-      transparent 50%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(248, 245, 239, 0.05),
-      transparent 65%
-    );
-
-  opacity: 0.8;
-}
-
-
-/* HERO TEXT PANEL */
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-
-  width: min(570px, 52%);
-  margin-left: 7%;
-
-  padding: 65px 55px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-
-  background: rgba(248, 245, 239, 0.86);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  border: 1px solid rgba(255, 255, 255, 0.55);
-
-  animation: heroContentReveal 1s ease 0.2s both;
-
-  will-change: transform, opacity;
-}
-
-
-/* HERO LABEL */
-
-.hero .eyebrow {
-  font-size: 9px;
-  letter-spacing: 3px;
-  margin-bottom: 25px;
-  color: var(--deep-rose);
-}
-
-
-/* HERO HEADING */
-
-.hero h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(58px, 6.5vw, 88px);
-  font-weight: 400;
-  line-height: 0.98;
-  letter-spacing: -1.5px;
-
-  color: var(--dark);
-
-  margin-bottom: 25px;
-}
-
-.hero h1 em {
-  font-style: italic;
-  color: var(--deep-rose);
-}
-
-
-/* HERO DESCRIPTION */
-
-.hero p {
-  max-width: 370px;
-
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 2;
-
-  font-weight: 300;
-
-  margin-bottom: 32px;
-}
-
-
-/* HERO BUTTON */
-
-.hero .primary-button {
-  padding: 17px 30px;
-
-  font-size: 9px;
-  letter-spacing: 2px;
-
-  transition:
-    background 0.35s ease,
-    color 0.35s ease,
-    transform 0.35s ease;
-}
-
-.hero .primary-button:hover {
-  transform: translateY(-3px);
-}
-
-
-/* HERO ENTRANCE ANIMATIONS */
-
-@keyframes heroImageReveal {
-  from {
-    opacity: 0;
-    transform: scale(1.04);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes heroContentReveal {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-/* =========================================
-   7. HOMEPAGE — INTRODUCTION
+   6. HOMEPAGE — INTRODUCTION
 ========================================= */
 
 .intro {
@@ -490,7 +295,7 @@ select:focus-visible {
       #f8f5ef 100%
     );
 
-  --intro-progress: 0;
+  --intro-progress: 1;
 }
 
 
@@ -636,7 +441,7 @@ select:focus-visible {
 
 
 /* =========================================
-   8. SHARED SECTION HEADINGS
+   7. SHARED SECTION HEADINGS
 ========================================= */
 
 .section-heading {
@@ -662,7 +467,7 @@ select:focus-visible {
 
 
 /* =========================================
-   9. HOMEPAGE — COLLECTIONS
+   8. HOMEPAGE — COLLECTIONS
 ========================================= */
 
 .collections {
@@ -735,7 +540,7 @@ select:focus-visible {
 
 
 /* =========================================
-   10. HOMEPAGE — BRAND CARDS
+   9. HOMEPAGE — BRAND CARDS
 ========================================= */
 
 .brands-section {
@@ -785,7 +590,7 @@ select:focus-visible {
 
 
 /* =========================================
-   11. RESPONSIVE — TABLET
+   10. RESPONSIVE — TABLET
 ========================================= */
 
 @media (max-width: 1000px) {
@@ -819,7 +624,7 @@ select:focus-visible {
 
 
 /* =========================================
-   12. RESPONSIVE — MOBILE
+   11. RESPONSIVE — MOBILE
 ========================================= */
 
 @media (max-width: 650px) {
@@ -904,85 +709,6 @@ select:focus-visible {
   }
 
 
-  /* HERO */
-
-  .hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-
-    height: auto;
-    min-height: 690px;
-    max-height: none;
-
-    padding: 0;
-
-    background: var(--cream);
-  }
-
-  .hero-image {
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-
-    background-image:
-      linear-gradient(
-        to bottom,
-        rgba(248, 245, 239, 0.02) 0%,
-        rgba(248, 245, 239, 0.02) 35%,
-        rgba(248, 245, 239, 0.15) 55%,
-        rgba(248, 245, 239, 0.75) 100%
-      ),
-      url("https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1200&q=85");
-
-    background-size: cover;
-    background-position: center;
-  }
-
-  .hero-content {
-    width: 90%;
-    max-width: none;
-
-    margin: 0 auto 25px;
-
-    padding: 35px 25px;
-
-    background: rgba(248, 245, 239, 0.91);
-
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-
-    align-items: flex-start;
-  }
-
-  .hero .eyebrow {
-    font-size: 8px;
-    letter-spacing: 2px;
-    margin-bottom: 18px;
-  }
-
-  .hero h1 {
-    font-size: clamp(48px, 13vw, 65px);
-    line-height: 0.98;
-    margin-bottom: 20px;
-  }
-
-  .hero p {
-    font-size: 11px;
-    max-width: 300px;
-    margin-bottom: 25px;
-  }
-
-  .hero .primary-button {
-    padding: 15px 20px;
-    font-size: 8px;
-    letter-spacing: 1.5px;
-  }
-
-
   /* INTRO */
 
   .intro {
@@ -1004,22 +730,7 @@ select:focus-visible {
     font-size: clamp(42px, 11vw, 58px);
     line-height: 1.08;
     margin-bottom: 25px;
-  }
 
-  .intro p {
-    max-width: 340px;
-    font-size: 12px;
-    line-height: 2;
-  }
-
-  .intro::after {
-    left: auto;
-    right: 2%;
-    bottom: 5px;
-    font-size: 75px;
-  }
-
-  .intro h2 {
     transform:
       translate3d(
         0,
@@ -1029,12 +740,23 @@ select:focus-visible {
   }
 
   .intro p {
+    max-width: 340px;
+    font-size: 12px;
+    line-height: 2;
+
     transform:
       translate3d(
         0,
         calc((1 - var(--intro-progress)) * 25px),
         0
       );
+  }
+
+  .intro::after {
+    left: auto;
+    right: 2%;
+    bottom: 5px;
+    font-size: 75px;
   }
 
 
@@ -1100,7 +822,7 @@ select:focus-visible {
 
 
 /* =========================================
-   13. RESPONSIVE — SMALL MOBILE
+   12. RESPONSIVE — SMALL MOBILE
 ========================================= */
 
 @media (max-width: 480px) {
@@ -1113,37 +835,13 @@ select:focus-visible {
 
 
 /* =========================================
-   14. RESPONSIVE — VERY SMALL MOBILE
-========================================= */
-
-@media (max-width: 380px) {
-
-  .hero h1 {
-    font-size: 50px;
-  }
-
-}
-
-
-/* =========================================
-   15. MOTION ACCESSIBILITY
+   13. MOTION ACCESSIBILITY
 ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
   html {
     scroll-behavior: auto;
-  }
-
-  .hero-image,
-  .hero-content {
-    animation: none !important;
-  }
-
-  .hero-image {
-    transform: none !important;
-    filter: none !important;
-    clip-path: none !important;
   }
 
   .intro h2,
@@ -1154,335 +852,12 @@ select:focus-visible {
     opacity: 1 !important;
   }
 
-}
-
-
-/* =========================================
-   CINEMATIC HERO — NEW VISUAL DIRECTION
-========================================= */
-
-.hero {
-  position: relative;
-  min-height: 92vh;
-  min-height: 92svh;
-  overflow: hidden;
-  isolation: isolate;
-  background: #252b3b;
-}
-
-/* BACKGROUND IMAGE */
-
-.hero-image {
-  position: absolute;
-  inset: 0;
-  z-index: -3;
-
-  background-image:
-    url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=90");
-
-  background-size: cover;
-  background-position: center;
-  transform: scale(1.08);
-
-  animation: cinematicBackground 18s ease-in-out infinite alternate;
-}
-
-/* DARK CINEMATIC ATMOSPHERE */
-
-.hero-atmosphere {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(24, 27, 39, 0.72) 0%,
-      rgba(35, 33, 47, 0.35) 48%,
-      rgba(25, 30, 44, 0.08) 100%
-    ),
-    linear-gradient(
-      0deg,
-      rgba(27, 27, 39, 0.38),
-      transparent 45%
-    );
-
-  pointer-events: none;
-}
-
-/* HERO CONTENT */
-
-.hero-content {
-  position: relative;
-  z-index: 5;
-
-  max-width: 650px;
-  padding: 100px 8%;
-
-  color: #f4ecee;
-}
-
-.hero-content .eyebrow {
-  color: #d8b9c3;
-  letter-spacing: 0.24em;
-  font-size: 11px;
-}
-
-.hero-content h1 {
-  font-size: clamp(48px, 7vw, 100px);
-  line-height: 0.98;
-  font-weight: 400;
-  letter-spacing: -0.045em;
-}
-
-.hero-content h1 em {
-  color: #d7aab9;
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 400;
-}
-
-.hero-content p {
-  max-width: 430px;
-  color: rgba(244, 236, 238, 0.78);
-  line-height: 1.9;
-}
-
-/* GLASS DROPLETS */
-
-.hero-droplets {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.glass-drop {
-  position: absolute;
-  display: block;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle at 30% 25%,
-      rgba(255, 255, 255, 0.95),
-      rgba(231, 182, 200, 0.42) 18%,
-      rgba(180, 125, 160, 0.18) 45%,
-      rgba(255, 255, 255, 0.08) 70%
-    );
-
-  border: 1px solid rgba(255, 255, 255, 0.28);
-
-  box-shadow:
-    inset -3px -4px 9px rgba(40, 30, 60, 0.2),
-    inset 2px 2px 5px rgba(255, 255, 255, 0.55),
-    0 0 18px rgba(211, 168, 195, 0.12);
-
-  backdrop-filter: blur(2px);
-
-  animation: glassDrift 9s ease-in-out infinite;
-}
-
-.drop-1 {
-  width: 42px;
-  height: 42px;
-  top: 14%;
-  left: 69%;
-}
-
-.drop-2 {
-  width: 17px;
-  height: 17px;
-  top: 24%;
-  left: 83%;
-  animation-delay: -3s;
-}
-
-.drop-3 {
-  width: 28px;
-  height: 28px;
-  top: 58%;
-  left: 74%;
-  animation-delay: -5s;
-}
-
-.drop-4 {
-  width: 12px;
-  height: 12px;
-  top: 37%;
-  left: 57%;
-  animation-delay: -2s;
-}
-
-.drop-5 {
-  width: 23px;
-  height: 23px;
-  top: 72%;
-  left: 88%;
-  animation-delay: -6s;
-}
-
-.drop-6 {
-  width: 9px;
-  height: 9px;
-  top: 18%;
-  left: 47%;
-  animation-delay: -4s;
-}
-
-/* FLOATING PETALS */
-
-.hero-petals {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.floating-petal {
-  position: absolute;
-  width: 45px;
-  height: 24px;
-
-  border-radius: 100% 0 100% 0;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(238, 197, 211, 0.8),
-      rgba(160, 103, 133, 0.4)
-    );
-
-  box-shadow:
-    inset 1px 1px 5px rgba(255, 255, 255, 0.35),
-    0 8px 20px rgba(20, 15, 30, 0.15);
-
-  filter: blur(0.3px);
-
-  animation: petalMotion 14s ease-in-out infinite;
-}
-
-.petal-1 {
-  top: 23%;
-  left: 77%;
-  transform: rotate(35deg);
-}
-
-.petal-2 {
-  top: 68%;
-  left: 58%;
-  width: 32px;
-  height: 18px;
-  animation-delay: -4s;
-}
-
-.petal-3 {
-  top: 42%;
-  left: 91%;
-  width: 24px;
-  height: 14px;
-  animation-delay: -7s;
-}
-
-.petal-4 {
-  top: 81%;
-  left: 34%;
-  width: 38px;
-  height: 20px;
-  animation-delay: -2s;
-}
-
-.petal-5 {
-  top: 12%;
-  left: 52%;
-  width: 26px;
-  height: 15px;
-  animation-delay: -9s;
-}
-
-/* MOTION */
-
-@keyframes cinematicBackground {
-  from {
-    transform: scale(1.08) translate3d(0, 0, 0);
-  }
-
-  to {
-    transform: scale(1.16) translate3d(-1%, 1%, 0);
-  }
-}
-
-@keyframes glassDrift {
-  0%, 100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-
-  50% {
-    transform: translate3d(12px, -24px, 0) scale(1.06);
-  }
-}
-
-@keyframes petalMotion {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
-  }
-
-  25% {
-    transform: translate3d(-25px, -35px, 0) rotate(45deg);
-  }
-
-  50% {
-    transform: translate3d(18px, -65px, 0) rotate(100deg);
-  }
-
-  75% {
-    transform: translate3d(-15px, -30px, 0) rotate(160deg);
-  }
-
-  100% {
-    transform: translate3d(0, 0, 0) rotate(220deg);
-  }
-}
-
-/* MOBILE */
-
-@media (max-width: 650px) {
-
-  .hero {
-    min-height: 88svh;
-  }
-
-  .hero-image {
-    background-position: 58% center;
-  }
-
-  .hero-content {
-    padding: 100px 7% 75px;
-  }
-
-  .hero-content h1 {
-    font-size: clamp(46px, 13vw, 70px);
-  }
-
-  .glass-drop {
-    transform: scale(0.75);
-  }
-
-  .floating-petal {
-    opacity: 0.7;
-  }
-
-}
-
-/* ACCESSIBILITY */
-
-@media (prefers-reduced-motion: reduce) {
-
-  .hero-image,
-  .glass-drop,
-  .floating-petal {
-    animation: none !important;
+  .collection-photo,
+  .brand-card,
+  .header nav a,
+  .primary-button,
+  .bag-button {
+    transition: none !important;
   }
 
 }
