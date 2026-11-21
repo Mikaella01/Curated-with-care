@@ -718,6 +718,25 @@ transform-origin: center;
     transform: translate3d(8px, 16px, 0);
   }
 }
+@keyframes petalFloatOne {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(-22px, 18px, 0) rotate(20deg);
+  }
+}
+
+@keyframes petalFloatTwo {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(18px, -24px, 0) rotate(-15deg);
+  }
+}
 @keyframes petalFloatThree {
   0%, 100% {
     transform: translate3d(0, 0, 0) rotate(0deg);
