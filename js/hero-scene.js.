@@ -1,0 +1,268 @@
+
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
+
+const hero = document.querySelector(".hero-world");
+
+if (hero && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(
+    38,
+    hero.clientWidth / hero.clientHeight,
+    0.1,
+    100
+  );
+
+  camera.position.set(0, 0, 9);
+
+  const renderer = new THREE.WebGLRenderer({
+    alpha: true,
+    antialias: true
+  });
+
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.7));
+  renderer.setSize(hero.clientWidth, hero.clientHeight);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.15;
+
+  renderer.domElement.className = "hero-three-canvas";
+
+  Object.assign(renderer.domElement.style, {
+    position: "absolute",
+    inset: "0",
+    width: "100%",
+    height: "100%",
+    pointerEvents: "none",
+    zIndex: "2"
+  });
+
+  hero.prepend(renderer.domElement);
+
+  // LIGHTING
+
+  scene.add(new THREE.AmbientLight(0xfff3e7, 2));
+
+  const mainLight = new THREE.DirectionalLight(0xfff4df, 3);
+  mainLight.position.set(-3, 5, 6);
+  scene.add(mainLight);
+
+  const softLight = new THREE.PointLight(0xe8bdb1, 18, 15);
+  softLight.position.set(3, 1, 4);
+  scene.add(softLight);
+
+  const goldLight = new THREE.PointLight(0xffdfac, 10, 12);
+  goldLight.position.set(-3, -2, 3);
+  scene.add(goldLight);
+
+  // MATERIALS
+
+  const glassMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0xf9eee5,
+    metalness: 0,
+    roughness: 0.08,
+    transmission: 0.94,
+    thickness: 0.8,
+    transparent: true,
+    opacity: 0.9
+  });
+
+  const liquidMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0xd9a9a0,
+    roughness: 0.2,
+    metalness: 0,
+    transmission: 0.25
+  });
+
+  const goldMaterial = new THREE.MeshStandardMaterial({
+    color: 0xc5a477,
+    metalness: 0.8,
+    roughness: 0.24
+  });
+
+  // MAIN SKINCARE BOTTLE
+
+  const bottle = new THREE.Group();
+
+  const bottleBody = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.62, 0.68, 2.15, 64, 1),
+    glassMaterial
+  );
+
+  bottleBody.position.y = -0.15;
+  bottle.add(bottleBody);
+
+  const bottleLiquid = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.53, 0.59, 1.15, 48),
+    liquidMaterial
+  );
+
+  bottleLiquid.position.y = -0.55;
+  bottle.add(bottleLiquid);
+
+  const bottleNeck = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.25, 0.3, 0.3, 48),
+    glassMaterial
+  );
+
+  bottleNeck.position.y = 1.1;
+  bottle.add(bottleNeck);
+
+  const bottleCap = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.28, 0.28, 0.58, 48),
+    goldMaterial
+  );
+
+  bottleCap.position.y = 1.53;
+  bottle.add(bottleCap);
+
+  bottle.position.set(1.75, -0.05, 0);
+  bottle.rotation.z = -0.08;
+  scene.add(bottle);
+
+  // SECOND SMALLER BOTTLE
+
+  const secondBottle = bottle.clone();
+
+  secondBottle.scale.setScalar(0.58);
+  secondBottle.position.set(3.35, -0.65, -0.8);
+  secondBottle.rotation.z = 0.12;
+
+  scene.add(secondBottle);
+
+  // FLOATING GLASS SPHERES
+
+  const spheres = [];
+
+  [
+    { x: 0.7, y: 1.5, z: 0.2, size: 0.38 },
+    { x: 3.1, y: 1.35, z: 0.5, size: 0.22 },
+    { x: 3.9, y: -1.1, z: 0.2, size: 0.42 },
+    { x: 0.4, y: -1.5, z: -0.5, size: 0.18 }
+  ].forEach((item, index) => {
+
+    const sphere = new THREE.Mesh(
+      new THREE.SphereGeometry(item.size, 48, 48),
+      glassMaterial
+    );
+
+    sphere.position.set(item.x, item.y, item.z);
+
+    scene.add(sphere);
+
+    spheres.push({
+      mesh: sphere,
+      originalY: item.y,
+      offset: index * 1.4
+    });
+
+  });
+
+  // FLOATING PETALS
+
+  const petals = [];
+
+  const petalMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0xe8c9c0,
+    roughness: 0.35,
+    metalness: 0.05,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: 0.82
+  });
+
+  function createPetal() {
+
+    const shape = new THREE.Shape();
+
+    shape.moveTo(0, 0);
+    shape.bezierCurveTo(0.35, 0.35, 0.55, 0.75, 0, 1);
+    shape.bezierCurveTo(-0.55, 0.75, -0.35, 0.35, 0, 0);
+
+    const geometry = new THREE.ShapeGeometry(shape, 20);
+
+    const petal = new THREE.Mesh(geometry, petalMaterial);
+
+    petal.position.set(
+      THREE.MathUtils.randFloat(-1.5, 4.5),
+      THREE.MathUtils.randFloat(-2, 2),
+      THREE.MathUtils.randFloat(-1, 1)
+    );
+
+    petal.scale.setScalar(THREE.MathUtils.randFloat(0.12, 0.24));
+
+    scene.add(petal);
+
+    petals.push({
+      mesh: petal,
+      speed: THREE.MathUtils.randFloat(0.15, 0.35),
+      rotationSpeed: THREE.MathUtils.randFloat(-0.3, 0.3)
+    });
+
+  }
+
+  for (let i = 0; i < 9; i++) {
+    createPetal();
+  }
+
+  // ANIMATION
+
+  const clock = new THREE.Clock();
+
+  function animate() {
+
+    const elapsed = clock.getElapsedTime();
+
+    bottle.position.y = -0.05 + Math.sin(elapsed * 0.7) * 0.08;
+    bottle.rotation.y = Math.sin(elapsed * 0.35) * 0.08;
+
+    secondBottle.position.y =
+      -0.65 + Math.sin(elapsed * 0.6 + 1) * 0.07;
+
+    spheres.forEach((item) => {
+
+      item.mesh.position.y =
+        item.originalY + Math.sin(elapsed * 0.65 + item.offset) * 0.12;
+
+    });
+
+    petals.forEach((item) => {
+
+      item.mesh.position.y -= item.speed * 0.008;
+      item.mesh.rotation.z += item.rotationSpeed * 0.003;
+
+      if (item.mesh.position.y < -2.5) {
+        item.mesh.position.y = 2.5;
+        item.mesh.position.x = THREE.MathUtils.randFloat(-1.5, 4.5);
+      }
+
+    });
+
+    renderer.render(scene, camera);
+
+    requestAnimationFrame(animate);
+
+  }
+
+  animate();
+
+  // RESPONSIVE SIZE
+
+  const resizeObserver = new ResizeObserver(() => {
+
+    const width = hero.clientWidth;
+    const height = hero.clientHeight;
+
+    if (!width || !height) return;
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(width, height);
+
+  });
+
+  resizeObserver.observe(hero);
+
+}
