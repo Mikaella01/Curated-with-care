@@ -2092,3 +2092,86 @@ footer > p,
   opacity: 0.6;
   cursor: wait;
 }
+
+/* ==========================================
+   HOMEPAGE — LUXURY VISUAL FOUNDATION
+   CURATED WITH CARE BY M.
+========================================== */
+
+:root {
+  --home-plum: #4A263F;
+  --home-deep-plum: #35182D;
+  --home-champagne: #C5B5A2;
+  --home-ivory: #F8F5F0;
+  --home-cream: #F0EAE2;
+  --home-rose: #D6C5C2;
+  --home-mocha: #77665C;
+}
+
+/* Homepage background */
+
+.homepage {
+  background: var(--home-ivory);
+  color: var(--home-deep-plum);
+  overflow: hidden;
+}
+
+/* Smooth section transitions */
+
+.homepage section {
+  position: relative;
+}
+
+/* Elegant headings */
+
+.homepage h1,
+.homepage h2,
+.homepage h3 {
+  color: var(--home-plum);
+}
+
+/* Editorial text */
+
+.homepage p {
+  color: var(--home-mocha);
+}
+
+/* Buttons */
+
+.homepage button,
+.homepage .button {
+  transition:
+    transform 0.35s ease,
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+.homepage button:hover,
+.homepage .button:hover {
+  transform: translateY(-2px);
+}
+
+/* Image movement */
+
+.homepage img {
+  transition: transform 0.8s cubic-bezier(.2,.7,.2,1);
+}
+
+.homepage .image-hover:hover img {
+  transform: scale(1.04);
+}
+
+/* Scroll reveal */
+
+.homepage .reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.homepage .reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
