@@ -861,3 +861,59 @@ textarea:focus-visible {
   }
 
 }
+
+/* ==========================================
+   GLOBAL — LUXURY BRAND DESIGN
+   CURATED WITH CARE BY M.
+========================================== */
+
+:root {
+  --brand-plum: #4A263F;
+  --brand-deep-plum: #35182D;
+  --brand-champagne: #C5B5A2;
+  --brand-ivory: #F8F5F0;
+  --brand-cream: #F0EAE2;
+  --brand-rose-taupe: #D6C5C2;
+  --brand-mocha: #77665C;
+}
+
+/* Global smooth scrolling */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection colour */
+
+::selection {
+  background: var(--brand-rose-taupe);
+  color: var(--brand-deep-plum);
+}
+
+/* Luxury button interaction */
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Consistent image rendering */
+
+img {
+  max-width: 100%;
+}
+
+/* Accessibility: reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
