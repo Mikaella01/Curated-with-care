@@ -545,12 +545,13 @@ footer p,
   animation: orbFloatTwo 11s ease-in-out infinite;
 }
 .hero-orb--three {
-  width: 19px;
-  height: 19px;
-  top: 35%;
-  right: 38%;
+  width: 25px;
+  height: 25px;
+  top: 30%;
+  right: 32%;
   animation: orbFloatThree 9s ease-in-out infinite;
 }
+
 /* FLOATING PETALS */
 .hero-petal {
   position: absolute;
