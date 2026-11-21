@@ -17,9 +17,11 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+  <!-- STYLESHEETS -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/shop.css">
   <link rel="stylesheet" href="css/homepage.css">
+
 </head>
 
 <body>
@@ -43,12 +45,14 @@
     <button
       class="menu-toggle"
       id="menuToggle"
+      type="button"
       aria-label="Open navigation"
-      aria-expanded="false">
+      aria-expanded="false"
+      aria-controls="navigation">
       ☰
     </button>
 
-    <nav id="navigation">
+    <nav id="navigation" aria-label="Main navigation">
 
       <a href="index.html#home">Home</a>
       <a href="shop.html">Shop</a>
@@ -92,7 +96,10 @@
   </header>
 
 
-  <main>
+  <!-- MAIN HOMEPAGE -->
+
+  <main class="homepage">
+
 
     <!-- HERO -->
 
@@ -277,282 +284,372 @@
 
     </section>
 
-<!-- DISCOVER BY SKIN CONCERN -->
 
-<section class="concern-edit section-padding" id="skin-concerns">
+    <!-- DISCOVER BY SKIN CONCERN -->
 
-  <div class="concern-edit-heading">
-    <span class="eyebrow">YOUR SKIN, YOUR WAY</span>
+    <section class="concern-edit section-padding" id="skin-concerns">
 
-    <h2>
-      Discover your <em>skin's focus.</em>
-    </h2>
+      <div class="concern-edit-heading">
 
-    <p>
-      Explore thoughtful skincare selections for the
-      little things you want to focus on in your routine.
-    </p>
-  </div>
+        <span class="eyebrow">
+          YOUR SKIN, YOUR WAY
+        </span>
 
-  <div class="concern-editorial-grid">
+        <h2>
+          Discover your <em>skin's focus.</em>
+        </h2>
 
-    <a href="shop.html?concern=dryness"
-       class="concern-editorial-card concern-card--hydration">
+        <p>
+          Explore thoughtful skincare selections for the
+          little things you want to focus on in your routine.
+        </p>
 
-      <div class="concern-editorial-image"></div>
-
-      <div class="concern-editorial-overlay">
-        <span>01 / HYDRATION</span>
-        <h3>A softer<br>kind of glow.</h3>
-        <span class="concern-discover">EXPLORE THE EDIT ↗</span>
       </div>
 
-    </a>
+      <div class="concern-editorial-grid">
 
-    <a href="shop.html?concern=dullness"
-       class="concern-editorial-card concern-card--radiance">
+        <a
+          href="shop.html?concern=dryness"
+          class="concern-editorial-card concern-card--hydration">
 
-      <div class="concern-editorial-image"></div>
+          <div class="concern-editorial-image"></div>
 
-      <div class="concern-editorial-overlay">
-        <span>02 / RADIANCE</span>
-        <h3>Your daily<br>radiance ritual.</h3>
-        <span class="concern-discover">EXPLORE THE EDIT ↗</span>
+          <div class="concern-editorial-overlay">
+
+            <span>01 / HYDRATION</span>
+
+            <h3>A softer<br>kind of glow.</h3>
+
+            <span class="concern-discover">
+              EXPLORE THE EDIT ↗
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <a
+          href="shop.html?concern=dullness"
+          class="concern-editorial-card concern-card--radiance">
+
+          <div class="concern-editorial-image"></div>
+
+          <div class="concern-editorial-overlay">
+
+            <span>02 / RADIANCE</span>
+
+            <h3>Your daily<br>radiance ritual.</h3>
+
+            <span class="concern-discover">
+              EXPLORE THE EDIT ↗
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <a
+          href="shop.html?concern=pores"
+          class="concern-editorial-card concern-card--pores">
+
+          <div class="concern-editorial-image"></div>
+
+          <div class="concern-editorial-overlay">
+
+            <span>03 / PORES</span>
+
+            <h3>Thoughtful<br>skin essentials.</h3>
+
+            <span class="concern-discover">
+              EXPLORE THE EDIT ↗
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <a
+          href="shop.html?concern=sensitive-skin"
+          class="concern-editorial-card concern-card--comfort">
+
+          <div class="concern-editorial-image"></div>
+
+          <div class="concern-editorial-overlay">
+
+            <span>04 / COMFORT</span>
+
+            <h3>A moment<br>of calm.</h3>
+
+            <span class="concern-discover">
+              EXPLORE THE EDIT ↗
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <a
+          href="shop.html?concern=uneven-tone"
+          class="concern-editorial-card concern-card--tone">
+
+          <div class="concern-editorial-image"></div>
+
+          <div class="concern-editorial-overlay">
+
+            <span>05 / SKIN TONE</span>
+
+            <h3>Beauty in<br>your own light.</h3>
+
+            <span class="concern-discover">
+              EXPLORE THE EDIT ↗
+            </span>
+
+          </div>
+
+        </a>
+
       </div>
 
-    </a>
+    </section>
 
-    <a href="shop.html?concern=pores"
-       class="concern-editorial-card concern-card--pores">
 
-      <div class="concern-editorial-image"></div>
+    <!-- FAVOURITE BEAUTY BRANDS -->
 
-      <div class="concern-editorial-overlay">
-        <span>03 / PORES</span>
-        <h3>Thoughtful<br>skin essentials.</h3>
-        <span class="concern-discover">EXPLORE THE EDIT ↗</span>
+    <section class="brand-edit" id="brands">
+
+      <div class="brand-edit-inner">
+
+        <div class="brand-edit-heading">
+
+          <span class="eyebrow">
+            A WORLD OF DISCOVERY
+          </span>
+
+          <h2>
+            Beautiful things begin<br>
+            with <em>the right discovery.</em>
+          </h2>
+
+          <p>
+            An edited collection of beauty names we love.
+            Explore thoughtful formulations, modern rituals
+            and the stories behind each brand.
+          </p>
+
+        </div>
+
+
+        <div class="brand-edit-intro">
+
+          <span>THE BRAND DIRECTORY</span>
+
+          <span>01 — 07</span>
+
+        </div>
+
+
+        <div class="brand-edit-grid">
+
+
+          <!-- MEDICUBE -->
+
+          <a
+            href="shop.html?brand=medicube"
+            class="brand-edit-item brand-medicube">
+
+            <span class="brand-edit-number">
+              01 / K-BEAUTY
+            </span>
+
+            <span class="brand-edit-name">
+              medicube
+            </span>
+
+            <span class="brand-edit-description">
+              Modern skincare innovation
+            </span>
+
+            <span class="brand-edit-arrow">
+              ↗
+            </span>
+
+          </a>
+
+
+          <!-- ANUA -->
+
+          <a
+            href="shop.html?brand=anua"
+            class="brand-edit-item brand-anua">
+
+            <span class="brand-edit-number">
+              02 / K-BEAUTY
+            </span>
+
+            <span class="brand-edit-name">
+              ANUA
+            </span>
+
+            <span class="brand-edit-description">
+              A gentler approach to daily rituals
+            </span>
+
+            <span class="brand-edit-arrow">
+              ↗
+            </span>
+
+          </a>
+
+
+          <!-- BEAUTY OF JOSEON -->
+
+          <a
+            href="shop.html?brand=beauty-of-joseon"
+            class="brand-edit-item brand-joseon">
+
+            <span class="brand-edit-number">
+              03 / K-BEAUTY
+            </span>
+
+            <span class="brand-edit-name">
+              BEAUTY<br>OF JOSEON
+            </span>
+
+            <span class="brand-edit-description">
+              Heritage meets modern beauty
+            </span>
+
+            <span class="brand-edit-arrow">
+              ↗
+            </span>
+
+          </a>
+
+
+          <!-- COSRX -->
+
+          <a
+            href="shop.html?brand=cosrx"
+            class="brand-edit-item brand-cosrx">
+
+            <span class="brand-edit-number">
+              04 / K-BEAUTY
+            </span>
+
+            <span class="brand-edit-name">
+              COSRX
+            </span>
+
+            <span class="brand-edit-description">
+              Ingredient-focused skincare
+            </span>
+
+            <span class="brand-edit-arrow">
+              ↗
+            </span>
+
+          </a>
+
+
+          <!-- VT COSMETICS -->
+
+          <a
+            href="shop.html?brand=vt-cosmetics"
+            class="brand-edit-item brand-vt">
+
+            <span class="brand-edit-number">
+              05 / K-BEAUTY
+            </span>
+
+            <span class="brand-edit-name">
+              VT COSMETICS
+            </span>
+
+            <span class="brand-edit-description">
+              Contemporary beauty technology
+            </span>
+
+            <span class="brand-edit-arrow">
+              ↗
+            </span>
+
+          </a>
+
+
+          <!-- SKIN1004 -->
+
+          <a
+            href="shop.html?brand=skin1004"
+            class="brand-edit-item brand-skin1004">
+
+            <span class="brand-edit-number">
+              06 / K-BEAUTY
+            </span>
+
+            <span class="brand-edit-name">
+              SKIN1004
+            </span>
+
+            <span class="brand-edit-description">
+              Inspired by nature
+            </span>
+
+            <span class="brand-edit-arrow">
+              ↗
+            </span>
+
+          </a>
+
+
+          <!-- TORRIDEN -->
+
+          <a
+            href="shop.html?brand=torriden"
+            class="brand-edit-item brand-torriden">
+
+            <span class="brand-edit-number">
+              07 / K-BEAUTY
+            </span>
+
+            <span class="brand-edit-name">
+              Torriden
+            </span>
+
+            <span class="brand-edit-description">
+              Thoughtful everyday hydration
+            </span>
+
+            <span class="brand-edit-arrow">
+              ↗
+            </span>
+
+          </a>
+
+        </div>
+
+
+        <div class="brand-edit-footer">
+
+          <p>
+            GOOD BEAUTY IS ABOUT DISCOVERY,
+            NOT JUST THE LABEL.
+          </p>
+
+          <a href="shop.html">
+            EXPLORE THE COMPLETE COLLECTION
+            <span>↗</span>
+          </a>
+
+        </div>
+
       </div>
 
-    </a>
+    </section>
 
-    <a href="shop.html?concern=sensitive-skin"
-       class="concern-editorial-card concern-card--comfort">
-
-      <div class="concern-editorial-image"></div>
-
-      <div class="concern-editorial-overlay">
-        <span>04 / COMFORT</span>
-        <h3>A moment<br>of calm.</h3>
-        <span class="concern-discover">EXPLORE THE EDIT ↗</span>
-      </div>
-
-    </a>
-
-    <a href="shop.html?concern=uneven-tone"
-       class="concern-editorial-card concern-card--tone">
-
-      <div class="concern-editorial-image"></div>
-
-      <div class="concern-editorial-overlay">
-        <span>05 / SKIN TONE</span>
-        <h3>Beauty in<br>your own light.</h3>
-        <span class="concern-discover">EXPLORE THE EDIT ↗</span>
-      </div>
-
-    </a>
-
-  </div>
-
-</section>
-    
-<!-- =========================================
-     FAVOURITE BEAUTY BRANDS
-     THE EDITORIAL BRAND DIRECTORY
-========================================= -->
-
-<section class="brand-edit" id="brands">
-
-  <div class="brand-edit-inner">
-
-    <div class="brand-edit-heading">
-
-      <span class="eyebrow">
-        A WORLD OF DISCOVERY
-      </span>
-
-      <h2>
-        Beautiful things begin<br>
-        with <em>the right discovery.</em>
-      </h2>
-
-      <p>
-        An edited collection of beauty names we love.
-        Explore thoughtful formulations, modern rituals
-        and the stories behind each brand.
-      </p>
-
-    </div>
-
-
-    <div class="brand-edit-intro">
-
-      <span>THE BRAND DIRECTORY</span>
-
-      <span>01 — 07</span>
-
-    </div>
-
-
-    <div class="brand-edit-grid">
-
-      <!-- MEDICUBE -->
-
-      <a href="shop.html?brand=medicube"
-         class="brand-edit-item brand-medicube">
-
-        <span class="brand-edit-number">01 / K-BEAUTY</span>
-
-        <span class="brand-edit-name">medicube</span>
-
-        <span class="brand-edit-description">
-          Modern skincare innovation
-        </span>
-
-        <span class="brand-edit-arrow">↗</span>
-
-      </a>
-
-
-      <!-- ANUA -->
-
-      <a href="shop.html?brand=anua"
-         class="brand-edit-item brand-anua">
-
-        <span class="brand-edit-number">02 / K-BEAUTY</span>
-
-        <span class="brand-edit-name">ANUA</span>
-
-        <span class="brand-edit-description">
-          A gentler approach to daily rituals
-        </span>
-
-        <span class="brand-edit-arrow">↗</span>
-
-      </a>
-
-
-      <!-- BEAUTY OF JOSEON -->
-
-      <a href="shop.html?brand=beauty-of-joseon"
-         class="brand-edit-item brand-joseon">
-
-        <span class="brand-edit-number">03 / K-BEAUTY</span>
-
-        <span class="brand-edit-name">
-          BEAUTY<br>OF JOSEON
-        </span>
-
-        <span class="brand-edit-description">
-          Heritage meets modern beauty
-        </span>
-
-        <span class="brand-edit-arrow">↗</span>
-
-      </a>
-
-
-      <!-- COSRX -->
-
-      <a href="shop.html?brand=cosrx"
-         class="brand-edit-item brand-cosrx">
-
-        <span class="brand-edit-number">04 / K-BEAUTY</span>
-
-        <span class="brand-edit-name">COSRX</span>
-
-        <span class="brand-edit-description">
-          Ingredient-focused skincare
-        </span>
-
-        <span class="brand-edit-arrow">↗</span>
-
-      </a>
-
-
-      <!-- VT COSMETICS -->
-
-      <a href="shop.html?brand=vt-cosmetics"
-         class="brand-edit-item brand-vt">
-
-        <span class="brand-edit-number">05 / K-BEAUTY</span>
-
-        <span class="brand-edit-name">VT COSMETICS</span>
-
-        <span class="brand-edit-description">
-          Contemporary beauty technology
-        </span>
-
-        <span class="brand-edit-arrow">↗</span>
-
-      </a>
-
-
-      <!-- SKIN1004 -->
-
-      <a href="shop.html?brand=skin1004"
-         class="brand-edit-item brand-skin1004">
-
-        <span class="brand-edit-number">06 / K-BEAUTY</span>
-
-        <span class="brand-edit-name">SKIN1004</span>
-
-        <span class="brand-edit-description">
-          Inspired by nature
-        </span>
-
-        <span class="brand-edit-arrow">↗</span>
-
-      </a>
-
-
-      <!-- TORRIDEN -->
-
-      <a href="shop.html?brand=torriden"
-         class="brand-edit-item brand-torriden">
-
-        <span class="brand-edit-number">07 / K-BEAUTY</span>
-
-        <span class="brand-edit-name">Torriden</span>
-
-        <span class="brand-edit-description">
-          Thoughtful everyday hydration
-        </span>
-
-        <span class="brand-edit-arrow">↗</span>
-
-      </a>
-
-    </div>
-
-
-    <div class="brand-edit-footer">
-
-      <p>
-        GOOD BEAUTY IS ABOUT DISCOVERY,
-        NOT JUST THE LABEL.
-      </p>
-
-      <a href="shop.html">
-        EXPLORE THE COMPLETE COLLECTION <span>↗</span>
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- END BRAND DIRECTORY -->
 
     <!-- GIFT COLLECTION -->
 
@@ -621,6 +718,7 @@
 
         </select>
 
+
         <label for="giftBudget">
           Your preferred budget
         </label>
@@ -635,15 +733,23 @@
 
         </select>
 
-        <button class="primary-button" id="findGift">
+
+        <button
+          class="primary-button"
+          id="findGift"
+          type="button">
+
           FIND MY GIFT
+
         </button>
 
+
         <div
-  id="giftResult"
-  class="gift-result"
-  aria-live="polite">
-</div>
+          id="giftResult"
+          class="gift-result"
+          aria-live="polite">
+
+        </div>
 
       </div>
 
@@ -654,52 +760,57 @@
 
     <section class="newsletter">
 
-  <span class="eyebrow">
-    A NOTE FROM US
-  </span>
+      <span class="eyebrow">
+        A NOTE FROM US
+      </span>
 
-  <h2>
-    Little luxuries, delivered.
-  </h2>
+      <h2>
+        Little luxuries, delivered.
+      </h2>
 
-  <p>
-    Discover new beauty finds, curated collections
-    and thoughtful gifting inspiration.
-  </p>
+      <p>
+        Discover new beauty finds, curated collections
+        and thoughtful gifting inspiration.
+      </p>
 
-  <form id="newsletterForm">
+      <form id="newsletterForm">
 
-    <input
-      type="email"
-      id="newsletterEmail"
-      placeholder="Your email address"
-      aria-label="Your email address"
-      autocomplete="email"
-      required>
+        <input
+          type="email"
+          id="newsletterEmail"
+          placeholder="Your email address"
+          aria-label="Your email address"
+          autocomplete="email"
+          required>
 
-    <div class="newsletter-consent">
 
-      <input
-        type="checkbox"
-        id="newsletterConsent"
-        required>
+        <div class="newsletter-consent">
 
-      <label for="newsletterConsent">
-        I agree to receive beauty news, product updates
-        and marketing emails. I can unsubscribe at any time.
-      </label>
+          <input
+            type="checkbox"
+            id="newsletterConsent"
+            required>
 
-    </div>
+          <label for="newsletterConsent">
+            I agree to receive beauty news, product updates
+            and marketing emails. I can unsubscribe at any time.
+          </label>
 
-    <button type="submit">
-      SUBSCRIBE ↗
-    </button>
+        </div>
 
-  </form>
 
-  <p id="newsletterMessage" aria-live="polite"></p>
+        <button type="submit">
+          SUBSCRIBE ↗
+        </button>
 
-</section>
+      </form>
+
+      <p
+        id="newsletterMessage"
+        aria-live="polite">
+      </p>
+
+    </section>
 
 
     <!--
@@ -710,76 +821,180 @@
       with the current JavaScript while we move the catalogue.
     -->
 
-    <section class="featured section-padding" id="shop" hidden>
+    <section
+      class="featured section-padding"
+      id="shop"
+      hidden>
 
       <div class="shop-navigation">
 
-        <button class="shop-tab active" data-view="all">
+        <button
+          class="shop-tab active"
+          data-view="all"
+          type="button">
+
           All Products
+
         </button>
 
-        <button class="shop-tab" data-view="brands">
+        <button
+          class="shop-tab"
+          data-view="brands"
+          type="button">
+
           By Brand
+
         </button>
 
-        <button class="shop-tab" data-view="collections">
+        <button
+          class="shop-tab"
+          data-view="collections"
+          type="button">
+
           By Collection
+
         </button>
 
-        <button class="shop-tab" data-view="concerns">
+        <button
+          class="shop-tab"
+          data-view="concerns"
+          type="button">
+
           By Skin Concern
+
         </button>
 
       </div>
 
-      <div class="shop-filter-section" id="brandFilters">
+
+      <!-- BRAND FILTERS -->
+
+      <div
+        class="shop-filter-section"
+        id="brandFilters">
 
         <div class="filters">
 
-          <button class="filter active" data-brand="all">All Brands</button>
-          <button class="filter" data-brand="medicube">Medicube</button>
-          <button class="filter" data-brand="anua">Anua</button>
-          <button class="filter" data-brand="beauty-of-joseon">Beauty of Joseon</button>
-          <button class="filter" data-brand="cosrx">COSRX</button>
-          <button class="filter" data-brand="vt-cosmetics">VT Cosmetics</button>
-          <button class="filter" data-brand="skin1004">SKIN1004</button>
-          <button class="filter" data-brand="torriden">Torriden</button>
+          <button class="filter active" data-brand="all" type="button">
+            All Brands
+          </button>
+
+          <button class="filter" data-brand="medicube" type="button">
+            Medicube
+          </button>
+
+          <button class="filter" data-brand="anua" type="button">
+            Anua
+          </button>
+
+          <button class="filter" data-brand="beauty-of-joseon" type="button">
+            Beauty of Joseon
+          </button>
+
+          <button class="filter" data-brand="cosrx" type="button">
+            COSRX
+          </button>
+
+          <button class="filter" data-brand="vt-cosmetics" type="button">
+            VT Cosmetics
+          </button>
+
+          <button class="filter" data-brand="skin1004" type="button">
+            SKIN1004
+          </button>
+
+          <button class="filter" data-brand="torriden" type="button">
+            Torriden
+          </button>
 
         </div>
 
       </div>
 
-      <div class="shop-filter-section" id="collectionFilters">
+
+      <!-- COLLECTION FILTERS -->
+
+      <div
+        class="shop-filter-section"
+        id="collectionFilters">
 
         <div class="filters">
 
-          <button class="filter active" data-collection="all">All Collections</button>
-          <button class="filter" data-collection="pdrn">PDRN</button>
-          <button class="filter" data-collection="collagen">Collagen</button>
-          <button class="filter" data-collection="pore-care">Pore Care</button>
-          <button class="filter" data-collection="hydration">Hydration</button>
-          <button class="filter" data-collection="brightening">Brightening</button>
-          <button class="filter" data-collection="sun-care">Sun Care</button>
-          <button class="filter" data-collection="beauty-devices">Beauty Devices</button>
+          <button class="filter active" data-collection="all" type="button">
+            All Collections
+          </button>
+
+          <button class="filter" data-collection="pdrn" type="button">
+            PDRN
+          </button>
+
+          <button class="filter" data-collection="collagen" type="button">
+            Collagen
+          </button>
+
+          <button class="filter" data-collection="pore-care" type="button">
+            Pore Care
+          </button>
+
+          <button class="filter" data-collection="hydration" type="button">
+            Hydration
+          </button>
+
+          <button class="filter" data-collection="brightening" type="button">
+            Brightening
+          </button>
+
+          <button class="filter" data-collection="sun-care" type="button">
+            Sun Care
+          </button>
+
+          <button class="filter" data-collection="beauty-devices" type="button">
+            Beauty Devices
+          </button>
 
         </div>
 
       </div>
 
-      <div class="shop-filter-section" id="concernFilters">
+
+      <!-- CONCERN FILTERS -->
+
+      <div
+        class="shop-filter-section"
+        id="concernFilters">
 
         <div class="filters">
 
-          <button class="filter active" data-concern="all">All Concerns</button>
-          <button class="filter" data-concern="dryness">Dryness</button>
-          <button class="filter" data-concern="dullness">Dullness</button>
-          <button class="filter" data-concern="pores">Visible Pores</button>
-          <button class="filter" data-concern="uneven-tone">Uneven Tone</button>
-          <button class="filter" data-concern="sensitive-skin">Sensitive Skin</button>
+          <button class="filter active" data-concern="all" type="button">
+            All Concerns
+          </button>
+
+          <button class="filter" data-concern="dryness" type="button">
+            Dryness
+          </button>
+
+          <button class="filter" data-concern="dullness" type="button">
+            Dullness
+          </button>
+
+          <button class="filter" data-concern="pores" type="button">
+            Visible Pores
+          </button>
+
+          <button class="filter" data-concern="uneven-tone" type="button">
+            Uneven Tone
+          </button>
+
+          <button class="filter" data-concern="sensitive-skin" type="button">
+            Sensitive Skin
+          </button>
 
         </div>
 
       </div>
+
+
+      <!-- SEARCH AND SORT -->
 
       <div class="shop-tools">
 
@@ -789,24 +1004,39 @@
           placeholder="Search products or brands..."
           aria-label="Search products">
 
-        <select id="productSort" aria-label="Sort products">
+        <select
+          id="productSort"
+          aria-label="Sort products">
+
           <option value="featured">Featured</option>
           <option value="price-low">Price: Low to High</option>
           <option value="price-high">Price: High to Low</option>
           <option value="name">Name: A to Z</option>
+
         </select>
 
       </div>
 
+
+      <!-- PRODUCT RESULTS -->
+
       <div class="shop-results-heading">
-        <p id="resultsTitle">All beauty favourites</p>
+
+        <p id="resultsTitle">
+          All beauty favourites
+        </p>
+
         <span id="resultsCount"></span>
+
       </div>
+
 
       <div class="product-grid" id="productGrid">
 
         <div class="catalogue-empty">
+
           <p>Your beauty edit is being prepared.</p>
+
         </div>
 
       </div>
@@ -825,12 +1055,15 @@
         type="button"
         class="back-to-shop"
         id="backToShop">
+
         ← BACK TO SHOP
+
       </button>
 
       <div id="productDetailContent"></div>
 
     </section>
+
 
   </main>
 
@@ -851,17 +1084,23 @@
 
     </a>
 
+
     <p>
       Beauty, thoughtfully selected.<br>
       Little luxuries, beautifully packaged.
     </p>
 
+
     <div class="footer-links">
 
       <a href="shop.html">Shop</a>
+
       <a href="index.html#collections">Collections</a>
+
       <a href="index.html#gifts">Gifting</a>
+
       <a href="index.html#about">Our Story</a>
+
 
       <a
         href="https://www.instagram.com/curatedwithcarebym/"
@@ -891,6 +1130,7 @@
 
     </div>
 
+
     <span class="copyright">
       © 2026 CURATED WITH CARE BY M.
       ALL RIGHTS RESERVED.
@@ -901,11 +1141,25 @@
 
   <!-- JAVASCRIPT -->
 
+  <!-- Supabase library -->
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+  <!-- Supabase configuration -->
 
   <script src="js/supabase-config.js"></script>
 
+
+  <!-- Main website functionality -->
+
   <script src="js/script.js"></script>
+
+
+  <!-- Interactive 3D hero -->
+
+  <script type="module" src="js/hero-scene.js"></script>
+
 
 </body>
 
