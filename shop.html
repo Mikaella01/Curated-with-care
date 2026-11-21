@@ -6,22 +6,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Shop | Curated with Care by M.</title>
+  <title>The Beauty Edit | Curated with Care by M.</title>
 
   <meta name="description"
-    content="Discover thoughtfully curated skincare and beauty favourites at Curated with Care by M.">
+    content="Explore thoughtfully curated Korean skincare, beauty favourites and everyday essentials at Curated with Care by M.">
 
   <meta name="theme-color" content="#f8f1ef">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
     rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/shop.css">
-  
+
 </head>
 
 <body>
@@ -50,7 +51,8 @@
     </a>
 
 
-    <button class="menu-toggle"
+    <button
+      class="menu-toggle"
       id="menuToggle"
       aria-label="Open navigation"
       aria-expanded="false">
@@ -64,7 +66,7 @@
 
       <a href="index.html#home">Home</a>
 
-      <a href="shop.html">Shop</a>
+      <a href="shop.html" aria-current="page">Shop</a>
 
       <a href="index.html#brands">Brands</a>
 
@@ -74,10 +76,14 @@
 
       <a href="index.html#about">Our Story</a>
 
-      <a href="https://www.instagram.com/curatedwithcarebym/"
+      <a href="questionnaire.html">Your Personal Edit</a>
+
+      <a
+        href="https://www.instagram.com/curatedwithcarebym/"
         target="_blank"
         rel="noopener noreferrer"
-        class="instagram-link">
+        class="instagram-link"
+        aria-label="Visit our Instagram">
 
         Instagram ↗
 
@@ -95,10 +101,9 @@
   </header>
 
 
-
   <main>
 
-    <!-- SHOP INTRODUCTION -->
+    <!-- SHOP EDITORIAL INTRODUCTION -->
 
     <section class="intro section-padding">
 
@@ -111,16 +116,19 @@
       </h1>
 
       <p>
-        Thoughtfully selected skincare, considered beauty
-        essentials and little luxuries to make every
-        daily ritual feel special.
+        A considered collection of skincare,
+        beauty essentials and little luxuries.
+        Each selection chosen with care.
       </p>
+
+      <a href="#shop" class="primary-button">
+        EXPLORE THE COLLECTION ↓
+      </a>
 
     </section>
 
 
-
-    <!-- PRODUCT SHOP -->
+    <!-- BEAUTY EDIT -->
 
     <section class="featured section-padding" id="shop">
 
@@ -129,7 +137,7 @@
         <div>
 
           <span class="eyebrow">
-            EXPLORE OUR SELECTION
+            THOUGHTFULLY SELECTED
           </span>
 
           <h2>
@@ -145,34 +153,53 @@
       </div>
 
 
-
-      <!-- SHOP NAVIGATION -->
+      <!-- DISCOVERY NAVIGATION -->
 
       <div class="shop-navigation">
 
-        <button class="shop-tab active" data-view="all">
+        <button
+          type="button"
+          class="shop-tab active"
+          data-view="all">
+
           All Products
+
         </button>
 
-        <button class="shop-tab" data-view="brands">
+        <button
+          type="button"
+          class="shop-tab"
+          data-view="brands">
+
           By Brand
+
         </button>
 
-        <button class="shop-tab" data-view="collections">
+        <button
+          type="button"
+          class="shop-tab"
+          data-view="collections">
+
           By Collection
+
         </button>
 
-        <button class="shop-tab" data-view="concerns">
+        <button
+          type="button"
+          class="shop-tab"
+          data-view="concerns">
+
           By Skin Concern
+
         </button>
 
       </div>
 
 
-
       <!-- BRAND FILTERS -->
 
-      <div class="shop-filter-section"
+      <div
+        class="shop-filter-section"
         id="brandFilters"
         hidden>
 
@@ -182,35 +209,35 @@
 
         <div class="filters">
 
-          <button class="filter active" data-brand="all">
+          <button type="button" class="filter active" data-brand="all">
             All Brands
           </button>
 
-          <button class="filter" data-brand="medicube">
+          <button type="button" class="filter" data-brand="medicube">
             Medicube
           </button>
 
-          <button class="filter" data-brand="anua">
+          <button type="button" class="filter" data-brand="anua">
             Anua
           </button>
 
-          <button class="filter" data-brand="beauty-of-joseon">
+          <button type="button" class="filter" data-brand="beauty-of-joseon">
             Beauty of Joseon
           </button>
 
-          <button class="filter" data-brand="cosrx">
+          <button type="button" class="filter" data-brand="cosrx">
             COSRX
           </button>
 
-          <button class="filter" data-brand="vt-cosmetics">
+          <button type="button" class="filter" data-brand="vt-cosmetics">
             VT Cosmetics
           </button>
 
-          <button class="filter" data-brand="skin1004">
+          <button type="button" class="filter" data-brand="skin1004">
             SKIN1004
           </button>
 
-          <button class="filter" data-brand="torriden">
+          <button type="button" class="filter" data-brand="torriden">
             Torriden
           </button>
 
@@ -219,10 +246,10 @@
       </div>
 
 
-
       <!-- COLLECTION FILTERS -->
 
-      <div class="shop-filter-section"
+      <div
+        class="shop-filter-section"
         id="collectionFilters"
         hidden>
 
@@ -232,35 +259,35 @@
 
         <div class="filters">
 
-          <button class="filter active" data-collection="all">
+          <button type="button" class="filter active" data-collection="all">
             All Collections
           </button>
 
-          <button class="filter" data-collection="pdrn">
+          <button type="button" class="filter" data-collection="pdrn">
             PDRN
           </button>
 
-          <button class="filter" data-collection="collagen">
+          <button type="button" class="filter" data-collection="collagen">
             Collagen
           </button>
 
-          <button class="filter" data-collection="pore-care">
+          <button type="button" class="filter" data-collection="pore-care">
             Pore Care
           </button>
 
-          <button class="filter" data-collection="hydration">
+          <button type="button" class="filter" data-collection="hydration">
             Hydration
           </button>
 
-          <button class="filter" data-collection="brightening">
+          <button type="button" class="filter" data-collection="brightening">
             Brightening
           </button>
 
-          <button class="filter" data-collection="sun-care">
+          <button type="button" class="filter" data-collection="sun-care">
             Sun Care
           </button>
 
-          <button class="filter" data-collection="beauty-devices">
+          <button type="button" class="filter" data-collection="beauty-devices">
             Beauty Devices
           </button>
 
@@ -269,10 +296,10 @@
       </div>
 
 
+      <!-- SKIN CONCERN FILTERS -->
 
-      <!-- SKIN CONCERNS -->
-
-      <div class="shop-filter-section"
+      <div
+        class="shop-filter-section"
         id="concernFilters"
         hidden>
 
@@ -282,27 +309,27 @@
 
         <div class="filters">
 
-          <button class="filter active" data-concern="all">
+          <button type="button" class="filter active" data-concern="all">
             All Concerns
           </button>
 
-          <button class="filter" data-concern="dryness">
+          <button type="button" class="filter" data-concern="dryness">
             Dryness
           </button>
 
-          <button class="filter" data-concern="dullness">
+          <button type="button" class="filter" data-concern="dullness">
             Dullness
           </button>
 
-          <button class="filter" data-concern="pores">
+          <button type="button" class="filter" data-concern="pores">
             Visible Pores
           </button>
 
-          <button class="filter" data-concern="uneven-tone">
+          <button type="button" class="filter" data-concern="uneven-tone">
             Uneven Tone
           </button>
 
-          <button class="filter" data-concern="sensitive-skin">
+          <button type="button" class="filter" data-concern="sensitive-skin">
             Sensitive Skin
           </button>
 
@@ -311,8 +338,7 @@
       </div>
 
 
-
-      <!-- SEARCH AND SORTING -->
+      <!-- SEARCH AND SORT -->
 
       <div class="shop-tools">
 
@@ -322,7 +348,9 @@
           placeholder="Search products or brands..."
           aria-label="Search products">
 
-        <select id="productSort" aria-label="Sort products">
+        <select
+          id="productSort"
+          aria-label="Sort products">
 
           <option value="featured">Featured</option>
 
@@ -343,8 +371,7 @@
       </div>
 
 
-
-      <!-- RESULTS -->
+      <!-- RESULTS HEADING -->
 
       <div class="shop-results-heading">
 
@@ -374,13 +401,12 @@
     </section>
 
 
-
-    <!-- SHOP FOOTER MESSAGE -->
+    <!-- CLOSING EDITORIAL -->
 
     <section class="intro section-padding">
 
       <span class="eyebrow">
-        CURATED WITH CARE
+        A LITTLE MORE BEAUTY
       </span>
 
       <h2>
@@ -388,14 +414,17 @@
       </h2>
 
       <p>
-        Every selection is chosen with thought,
-        care and attention to detail.
+        Thoughtful choices. Beautiful rituals.
+        Little luxuries worth discovering.
       </p>
+
+      <a href="index.html#home" class="primary-button">
+        RETURN HOME ↗
+      </a>
 
     </section>
 
   </main>
-
 
 
   <!-- FOOTER -->
@@ -433,7 +462,10 @@
 
       <a href="index.html#about">Our Story</a>
 
-      <a href="https://www.instagram.com/curatedwithcarebym/"
+      <a href="questionnaire.html">Your Personal Edit</a>
+
+      <a
+        href="https://www.instagram.com/curatedwithcarebym/"
         target="_blank"
         rel="noopener noreferrer">
 
@@ -452,12 +484,14 @@
   </footer>
 
 
-
   <!-- JAVASCRIPT -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase-config.js"></script>
-<script src="js/script.js"></script>
+
+  <script src="js/supabase-config.js"></script>
+
+  <script src="js/script.js"></script>
 
 </body>
+
 </html>
