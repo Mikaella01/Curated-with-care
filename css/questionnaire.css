@@ -1,0 +1,475 @@
+
+/* =========================================
+   CURATED WITH CARE BY M.
+   THE PERSONAL EDIT — QUESTIONNAIRE
+========================================= */
+
+
+/* 1. BRAND COLOURS */
+
+:root {
+  --ivory: #faf7f2;
+  --cream: #f3ede6;
+  --soft-blush: #eadbd7;
+  --dusty-rose: #b99491;
+  --taupe: #9b8980;
+  --dark: #49413d;
+  --muted: #8d817b;
+  --white: #ffffff;
+  --border: #e7ded6;
+}
+
+
+/* 2. GENERAL RESET */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--dark);
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8;
+  min-height: 100vh;
+}
+
+
+/* 3. HEADER */
+
+.questionnaire-header {
+  text-align: center;
+  padding: 30px 20px 25px;
+  background: var(--ivory);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand-name {
+  display: inline-block;
+  color: var(--dark);
+  text-decoration: none;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 27px;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.brand-name span {
+  display: block;
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  letter-spacing: 5px;
+  margin-top: -3px;
+}
+
+.header-caption {
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  margin-top: 14px;
+}
+
+
+/* 4. MAIN AREA */
+
+.questionnaire-main {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 75px 25px 100px;
+}
+
+
+/* 5. INTRODUCTION */
+
+.intro-screen {
+  max-width: 720px;
+  margin: 35px auto;
+  text-align: center;
+  padding: 70px 45px;
+  background: var(--white);
+  border: 1px solid var(--border);
+}
+
+.eyebrow {
+  display: block;
+  color: var(--dusty-rose);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.intro-screen h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(48px, 7vw, 76px);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 28px;
+}
+
+.intro-description {
+  max-width: 510px;
+  margin: 0 auto 15px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 2;
+}
+
+.intro-note {
+  margin: 32px auto;
+  color: var(--taupe);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.privacy-note {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+
+/* 6. BUTTONS */
+
+.primary-button,
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 32px;
+  border: 1px solid var(--dark);
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primary-button {
+  background: var(--dark);
+  color: var(--white);
+}
+
+.primary-button:hover {
+  background: var(--dusty-rose);
+  border-color: var(--dusty-rose);
+}
+
+.secondary-button {
+  background: transparent;
+  color: var(--dark);
+}
+
+.secondary-button:hover {
+  background: var(--cream);
+}
+
+
+/* 7. QUESTIONNAIRE AREA */
+
+.questions-screen {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.progress-area {
+  margin-bottom: 65px;
+}
+
+.progress-area p {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.progress-track {
+  height: 2px;
+  width: 100%;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 11.11%;
+  background: var(--dusty-rose);
+  transition: width 0.4s ease;
+}
+
+
+/* 8. QUESTION HEADINGS */
+
+.question-step {
+  border: none;
+  min-width: 0;
+  animation: questionAppear 0.45s ease;
+}
+
+.question-step .eyebrow {
+  margin-bottom: 15px;
+}
+
+.question-step h2 {
+  max-width: 680px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(34px, 5vw, 49px);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.question-description {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+  margin-bottom: 35px;
+}
+
+
+/* 9. ANSWER OPTIONS */
+
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  margin-top: 35px;
+}
+
+.option-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 35px;
+}
+
+.option-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 68px;
+  padding: 17px 20px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.option-card:hover {
+  border-color: var(--dusty-rose);
+  background: #fdfaf8;
+}
+
+.option-card:has(input:checked) {
+  background: #f5eae7;
+  border-color: var(--dusty-rose);
+}
+
+.option-card input {
+  width: 17px;
+  height: 17px;
+  margin-right: 14px;
+  accent-color: var(--dusty-rose);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.option-card span {
+  color: var(--dark);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+
+/* 10. TEXT FIELDS */
+
+.form-field {
+  margin-top: 30px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--dark);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 17px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  color: var(--dark);
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.25s ease;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-field textarea:focus,
+.form-field select:focus {
+  border-color: var(--dusty-rose);
+}
+
+.form-field textarea::placeholder {
+  color: #b4aaa4;
+}
+
+
+/* 11. QUESTION NAVIGATION */
+
+.question-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 55px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+}
+
+.question-navigation button[hidden] {
+  display: none;
+}
+
+.form-message {
+  margin-top: 18px;
+  color: #9b6965;
+  font-size: 12px;
+  min-height: 20px;
+}
+
+
+/* 12. FOOTER */
+
+.questionnaire-footer {
+  padding: 35px 20px;
+  text-align: center;
+  background: var(--cream);
+  border-top: 1px solid var(--border);
+}
+
+.questionnaire-footer p:first-child {
+  color: var(--dark);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+.questionnaire-footer p:last-child {
+  margin-top: 8px;
+  color: var(--muted);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px;
+  font-style: italic;
+}
+
+
+/* 13. ANIMATION */
+
+@keyframes questionAppear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* 14. RESPONSIVE DESIGN */
+
+@media (max-width: 650px) {
+
+  .questionnaire-header {
+    padding: 23px 15px;
+  }
+
+  .brand-name {
+    font-size: 23px;
+  }
+
+  .questionnaire-main {
+    padding: 40px 17px 70px;
+  }
+
+  .intro-screen {
+    margin: 10px auto;
+    padding: 55px 22px;
+  }
+
+  .intro-screen h1 {
+    font-size: 49px;
+  }
+
+  .intro-description {
+    font-size: 12px;
+  }
+
+  .intro-note {
+    font-size: 18px;
+  }
+
+  .progress-area {
+    margin-bottom: 45px;
+  }
+
+  .question-step h2 {
+    font-size: 36px;
+  }
+
+  .option-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .option-card {
+    min-height: 62px;
+    padding: 15px;
+  }
+
+  .question-navigation {
+    margin-top: 40px;
+  }
+
+  .primary-button,
+  .secondary-button {
+    padding: 13px 18px;
+    font-size: 9px;
+  }
+
+}
+
+@media (min-width: 651px) and (max-width: 900px) {
+
+  .questionnaire-main {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+}
