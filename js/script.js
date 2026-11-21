@@ -1080,6 +1080,7 @@ if (findGift) {
 
 /* =========================================
    19. NEWSLETTER
+   CONNECTED TO SUPABASE
 ========================================= */
 
 const newsletterForm =
@@ -1088,24 +1089,102 @@ const newsletterForm =
 
 if (newsletterForm) {
 
-  newsletterForm.addEventListener("submit", event => {
+  newsletterForm.addEventListener("submit", async event => {
 
     event.preventDefault();
 
+    const emailInput =
+      document.getElementById("newsletterEmail");
+
+    const consentInput =
+      document.getElementById("newsletterConsent");
 
     const message =
       document.getElementById("newsletterMessage");
 
+    const submitButton =
+      newsletterForm.querySelector('button[type="submit"]');
 
-    if (message) {
+    const email = emailInput.value.trim().toLowerCase();
+
+
+    if (!consentInput.checked) {
 
       message.textContent =
-        "Thank you for your interest! Newsletter registration will be connected soon.";
+        "Please confirm your consent before subscribing.";
+
+      return;
 
     }
 
 
-    newsletterForm.reset();
+    if (typeof supabaseClient === "undefined") {
+
+      message.textContent =
+        "Our newsletter is temporarily unavailable. Please try again later.";
+
+      return;
+
+    }
+
+
+    submitButton.disabled = true;
+
+    submitButton.textContent = "SUBSCRIBING...";
+
+    message.textContent = "Please wait...";
+
+
+    try {
+
+      const { error } = await supabaseClient
+
+        .from("newsletter_subscribers")
+
+        .insert([
+          {
+            email: email,
+            marketing_consent: true
+          }
+        ]);
+
+
+      if (error) {
+
+        if (error.code === "23505") {
+
+          message.textContent =
+            "This email address is already subscribed.";
+
+          return;
+
+        }
+
+        throw error;
+
+      }
+
+
+      message.textContent =
+        "Thank you! You're now on our beauty list.";
+
+      newsletterForm.reset();
+
+
+    } catch (error) {
+
+      console.error("Newsletter signup failed:", error);
+
+      message.textContent =
+        "We couldn't complete your subscription. Please try again.";
+
+    } finally {
+
+      submitButton.disabled = false;
+
+      submitButton.textContent = "SUBSCRIBE ↗";
+
+    }
 
   });
 
