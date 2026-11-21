@@ -366,17 +366,27 @@ footer p,
 /* MIST */
 .hero-world__mist {
   position: absolute;
-  inset: -10%;
-  z-index: -3;
+  inset: 0;
+  z-index: 2;
   pointer-events: none;
+
   background:
     radial-gradient(
-      ellipse at 70% 55%,
-      rgba(242, 220, 207, 0.16),
-      transparent 38%
+      ellipse at 72% 58%,
+      rgba(255, 239, 228, 0.12),
+      transparent 42%
+    ),
+    linear-gradient(
+      115deg,
+      transparent 35%,
+      rgba(255, 242, 232, 0.07) 58%,
+      transparent 78%
     );
-  filter: blur(35px);
-  animation: mistDrift 20s ease-in-out infinite alternate;
+
+  filter: blur(28px);
+  opacity: 0.65;
+
+  animation: mistDrift 18s ease-in-out infinite alternate;
 }
 /* HERO CONTENT */
 .hero-world__content {
