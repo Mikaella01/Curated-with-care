@@ -2061,3 +2061,34 @@ footer > p,
 
 }
 
+/* NEWSLETTER CONSENT */
+
+.newsletter .newsletter-consent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  max-width: 480px;
+  margin: 18px auto;
+  text-align: left;
+}
+
+.newsletter .newsletter-consent input {
+  width: 14px;
+  min-width: 14px;
+  height: 14px;
+  margin: 2px 0 0;
+  padding: 0;
+  accent-color: #80645c;
+}
+
+.newsletter .newsletter-consent label {
+  color: #74645c;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.newsletter button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
