@@ -902,12 +902,13 @@ if (menuToggle && navigation) {
 }
 
 
+
 /* =========================================
    18. GIFT FINDER
+   REAL PRODUCT RECOMMENDATIONS
 ========================================= */
 
 const findGift = document.getElementById("findGift");
-
 
 if (findGift) {
 
@@ -925,24 +926,152 @@ if (findGift) {
 
     if (!occasion || !budget) {
 
-      if (result) {
-
-        result.textContent =
-          "Please select an occasion and your preferred budget.";
-
-      }
+      result.textContent =
+        "Please select an occasion and your preferred budget.";
 
       return;
 
     }
 
 
-    if (result) {
+    if (!products.length) {
 
       result.textContent =
-        "Thank you! We're preparing thoughtful gift suggestions for you.";
+        "Our gift collection is being prepared. Please check back soon.";
+
+      return;
 
     }
+
+
+    const budgetRanges = {
+
+      "under-30": [0, 30],
+
+      "30-60": [30, 60],
+
+      "60-100": [60, 100],
+
+      "100-plus": [100, Infinity]
+
+    };
+
+
+    const occasions = {
+
+      "birthday": "Birthday gifts",
+
+      "christmas": "Christmas gifting",
+
+      "thank-you": "Thoughtful thank-you gifts",
+
+      "self-care": "Self-care treats",
+
+      "just-because": "Little gifts, just because"
+
+    };
+
+
+    const [minimum, maximum] =
+      budgetRanges[budget];
+
+
+    const suggestions = products
+
+      .filter(product => {
+
+        const price = Number(product.price || 0);
+
+        return price >= minimum && price <= maximum;
+
+      })
+
+      .sort((a, b) => {
+
+        return Number(Boolean(b.featured)) -
+          Number(Boolean(a.featured));
+
+      })
+
+      .slice(0, 3);
+
+
+    if (!suggestions.length) {
+
+      result.innerHTML = `
+        <p>
+          We don't have products in this budget yet.
+          Please explore our complete collection.
+        </p>
+
+        <a href="shop.html">
+          EXPLORE THE COLLECTION ↗
+        </a>
+      `;
+
+      return;
+
+    }
+
+
+    result.innerHTML = `
+
+      <div class="gift-result-heading">
+
+        <span>YOUR CURATED GIFT EDIT</span>
+
+        <h3>
+          ${escapeHTML(occasions[occasion])}
+        </h3>
+
+        <p>
+          A few thoughtful discoveries within your budget.
+        </p>
+
+      </div>
+
+
+      <div class="gift-result-grid">
+
+        ${suggestions.map(product => `
+
+          <a
+            href="shop.html#shop"
+            class="gift-result-card">
+
+            <div class="gift-result-image">
+
+              <img
+                src="${escapeHTML(product.image || "")}"
+                alt="${escapeHTML(product.name)}"
+                loading="lazy">
+
+            </div>
+
+            <h4>
+              ${escapeHTML(product.name)}
+            </h4>
+
+            <span>
+              ${formatPrice(product.price)}
+            </span>
+
+          </a>
+
+        `).join("")}
+
+      </div>
+
+
+      <a
+        href="shop.html"
+        class="gift-result-link">
+
+        DISCOVER MORE GIFT IDEAS ↗
+
+      </a>
+
+    `;
 
   });
 
