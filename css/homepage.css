@@ -2175,3 +2175,32 @@ footer > p,
   opacity: 1;
   transform: translateY(0);
 }
+
+
+/* =========================================
+   HERO — TEXT COLOUR CORRECTION
+========================================= */
+
+.homepage .hero-world__content h1 {
+  color: #F8F5F0;
+}
+
+.homepage .hero-world__content h1 em {
+  color: #D6C5C2;
+}
+
+.homepage .hero-world__content p {
+  color: rgba(248, 245, 240, 0.88);
+}
+
+.homepage .hero-world__eyebrow {
+  color: #C5B5A2;
+}
+
+.homepage .hero-world__button {
+  color: #F8F5F0;
+}
+
+.homepage .hero-world__scroll {
+  color: rgba(248, 245, 240, 0.8);
+}
