@@ -1070,7 +1070,109 @@ async function loadSupabaseProducts() {
    21. INITIALISE WEBSITE
 ========================================= */
 
-initialiseBrandFromURL();
+function initialiseBrandFromURL() {
+
+  const urlParams = new URLSearchParams(
+    window.location.search
+  );
+
+  const requestedBrand = urlParams.get("brand");
+  const requestedConcern = urlParams.get("concern");
+
+
+  // BRAND FILTER
+
+  if (
+    requestedBrand &&
+    availableBrands.includes(requestedBrand)
+  ) {
+
+    activeBrand = requestedBrand;
+
+    activeCollection = "all";
+
+    activeConcern = "all";
+
+    searchTerm = "";
+
+    activeView = "brands";
+
+  }
+
+
+  // SKIN CONCERN FILTER
+
+  else if (
+    requestedConcern &&
+    [
+      "dryness",
+      "dullness",
+      "pores",
+      "uneven-tone",
+      "sensitive-skin"
+    ].includes(requestedConcern)
+  ) {
+
+    activeBrand = "all";
+
+    activeCollection = "all";
+
+    activeConcern = requestedConcern;
+
+    searchTerm = "";
+
+    activeView = "concerns";
+
+  }
+
+
+  // UPDATE BRAND BUTTONS
+
+  document.querySelectorAll("[data-brand]").forEach(button => {
+
+    button.classList.toggle(
+      "active",
+      button.dataset.brand === activeBrand
+    );
+
+  });
+
+
+  // UPDATE COLLECTION BUTTONS
+
+  document.querySelectorAll("[data-collection]").forEach(button => {
+
+    button.classList.toggle(
+      "active",
+      button.dataset.collection === activeCollection
+    );
+
+  });
+
+
+  // UPDATE CONCERN BUTTONS
+
+  document.querySelectorAll("[data-concern]").forEach(button => {
+
+    button.classList.toggle(
+      "active",
+      button.dataset.concern === activeConcern
+    );
+
+  });
+
+
+  // CLEAR SEARCH
+
+  const searchInput = document.getElementById("productSearch");
+
+  if (searchInput) {
+
+    searchInput.value = "";
+
+  }
+
+}
 
 updateShopView(activeView);
 
