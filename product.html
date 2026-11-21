@@ -29,6 +29,11 @@
 
 <body class="product-detail-body">
 
+  <a class="skip-link" href="#mainContent">
+    Skip to product details
+  </a>
+
+
   <!-- =====================================
        PRODUCT PAGE HEADER
   ====================================== -->
@@ -36,10 +41,15 @@
   <header class="product-page-header">
 
     <a href="shop.html" class="product-back-link">
-      <span aria-hidden="true">←</span> Back to shop
+      <span aria-hidden="true">←</span>
+      Back to shop
     </a>
 
-    <a href="index.html" class="product-brand-name">
+    <a
+      href="index.html"
+      class="product-brand-name"
+      aria-label="Curated with Care by M. Home"
+    >
       Curated with Care <span>by M.</span>
     </a>
 
@@ -50,7 +60,7 @@
       aria-label="Shopping bag"
     >
       BAG
-      <span id="bagCount">0</span>
+      <span id="bagCount" aria-live="polite">0</span>
     </a>
 
   </header>
@@ -60,9 +70,12 @@
        MAIN PRODUCT PRESENTATION
   ====================================== -->
 
-  <main>
+  <main id="mainContent">
 
-    <section class="standalone-product-page">
+    <section
+      class="standalone-product-page"
+      aria-label="Product information"
+    >
 
       <!-- PRODUCT IMAGE GALLERY -->
 
@@ -83,6 +96,7 @@
             id="mainProductPhoto"
             src=""
             alt="Product photograph"
+            decoding="async"
           >
 
           <button
@@ -121,7 +135,10 @@
 
         <p id="productSize" class="product-size"></p>
 
-        <p id="productPrice" class="product-detail-price"></p>
+        <p
+          id="productPrice"
+          class="product-detail-price"
+        ></p>
 
         <button
           type="button"
@@ -490,8 +507,8 @@
   ====================================== -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase-config.js"></script>
-<script src="js/product-page.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/product-page.js"></script>
 
 </body>
 </html>
