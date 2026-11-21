@@ -394,7 +394,7 @@ footer p,
       rgba(43, 39, 52, .70) 38%,
       rgba(43, 39, 52, .10) 100%
     ),
-    url("images/hero-world.jpg") center / cover no-repeat;
+    url("../images/hero-world.jpg") center / cover no-repeat;
 
   transform: scale(1.04);
   animation: heroWorldReveal 2s ease-out both;
