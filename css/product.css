@@ -2,305 +2,22 @@
 /* =========================================
    CURATED WITH CARE BY M.
    PRODUCT.CSS
-   STANDALONE PRODUCT PAGE STYLES
+   STANDALONE PRODUCT PAGE
 ========================================= */
 
 
 /* =========================================
-   1. STANDALONE PRODUCT PAGE
+   1. PRODUCT PAGE HEADER
 ========================================= */
 
 .product-page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
   padding: 25px 6%;
-  border-bottom: 1px solid var(--border);
   position: relative;
   z-index: 110;
-  background: var(--ivory);
-}
-
-.product-back-link {
-  text-decoration: none;
-  color: #806b67;
-  font-size: 11px;
-  letter-spacing: 1px;
-}
-
-.product-brand-name {
-  text-decoration: none;
-  color: var(--deep-rose);
-  font-size: 20px;
-}
-
-.product-page-header .bag-button {
-  position: relative;
-  z-index: 111;
-}
-
-.standalone-product-page {
-  max-width: 1250px;
-  margin: 65px auto;
-  padding: 0 5%;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 65px;
-  align-items: start;
-  background: transparent;
-}
-
-
-/* =========================================
-   2. PRODUCT GALLERY
-========================================= */
-
-.gallery-main {
-  position: relative;
-  background-color: #f4eee8;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.gallery-main img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.gallery-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  border: none;
-  background: rgba(255, 255, 255, 0.85);
-  color: #806b67;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  font-size: 26px;
-  cursor: pointer;
-}
-
-#previousPhoto {
-  left: 12px;
-}
-
-#nextPhoto {
-  right: 12px;
-}
-
-.product-thumbnails {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 14px 2px;
-  scroll-behavior: smooth;
-}
-
-.product-thumbnail {
-  flex: 0 0 76px;
-  height: 76px;
-  border: 1px solid #e8dcd8;
-  background: #f4eee8;
-  padding: 3px;
-  cursor: pointer;
-}
-
-.product-thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.product-thumbnail.selected {
-  border: 2px solid #a77d78;
-}
-
-.gallery-hint {
-  color: #9b8984;
-  font-size: 11px;
-  text-align: center;
-}
-
-
-/* =========================================
-   3. PRODUCT INFORMATION
-========================================= */
-
-.standalone-product-info {
-  padding-top: 15px;
-}
-
-.standalone-product-info h1 {
-  font-size: 34px;
-  font-weight: 400;
-  line-height: 1.25;
-  color: var(--dark);
-}
-
-.standalone-product-info > p {
-  color: #8b7772;
-}
-
-.product-description-block {
-  margin: 35px 0;
-  border-top: 1px solid var(--border);
-  padding-top: 20px;
-}
-
-.product-description-block h3 {
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: #806b67;
-}
-
-.product-description-block p,
-.product-description-block li {
-  color: #766966;
-  line-height: 1.8;
-  font-size: 14px;
-}
-
-
-/* =========================================
-   4. RELATED PRODUCTS — YOU MAY ALSO LOVE
-========================================= */
-
-.related-products-section {
-  max-width: 900px;
-  margin: 35px auto;
-  padding: 20px 25px;
-}
-
-.related-products-section[hidden] {
-  display: none !important;
-}
-
-.related-products-heading {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.related-products-heading h2 {
-  font-size: 21px;
-  font-weight: normal;
-  color: #76575b;
-  margin: 5px 0;
-}
-
-.related-products-heading > p:last-child {
-  font-size: 11px;
-  color: #817575;
-}
-
-.related-products-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 135px));
-  justify-content: center;
-  gap: 16px;
-}
-
-.related-product-card {
-  width: 100%;
-  min-width: 0;
-}
-
-.related-product-image {
-  overflow: hidden;
-  background: var(--cream);
-}
-
-.related-product-image img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-}
-
-.related-product-info {
-  padding-top: 7px;
-}
-
-.related-product-brand {
-  font-size: 8px;
-  letter-spacing: 1px;
-  color: #987b7e;
-  margin: 3px 0;
-}
-
-.related-product-info h3 {
-  font-size: 11px;
-  font-weight: normal;
-  line-height: 1.35;
-  margin: 4px 0;
-}
-
-.related-product-info h3 a {
-  color: #514346;
-  text-decoration: none;
-}
-
-.related-product-price {
-  font-size: 10px;
-  margin: 6px 0;
-  color: #514346;
-}
-
-.related-add-button {
-  width: 100%;
-  padding: 7px 3px;
-  background: var(--deep-rose);
-  color: white;
-  border: none;
-  font-size: 8px;
-  letter-spacing: 1px;
-  cursor: pointer;
-}
-
-.related-view-link {
-  display: block;
-  margin-top: 7px;
-  text-align: center;
-  color: #76575b;
-  font-size: 8px;
-  letter-spacing: 0.7px;
-  text-decoration: none;
-}
-
-
-/* =========================================
-   5. EDITORIAL PRODUCT PAGE — GENERAL
-========================================= */
-
-.product-detail-body {
-  background: var(--ivory);
-}
-
-.product-detail-body main {
-  overflow: hidden;
-}
-
-.product-editorial-eyebrow {
-  margin: 0 0 15px;
-  color: var(--deep-rose);
-  font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-}
-
-
-/* =========================================
-   6. EDITORIAL PRODUCT HEADER
-========================================= */
-
-.product-page-header {
   background: rgba(248, 245, 239, 0.96);
   border-bottom: 1px solid var(--border);
 }
@@ -309,6 +26,8 @@
   color: var(--muted);
   font-size: 11px;
   letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .product-back-link:hover {
@@ -321,6 +40,7 @@
   font-size: 25px;
   font-weight: 500;
   letter-spacing: 0.5px;
+  text-decoration: none;
 }
 
 .product-brand-name span {
@@ -329,35 +49,67 @@
   font-size: 23px;
 }
 
+.product-page-header .bag-button {
+  position: relative;
+  z-index: 111;
+}
+
 .product-bag-link {
   color: var(--dark);
   font-size: 10px;
   letter-spacing: 1.5px;
+  text-decoration: none;
 }
 
 
 /* =========================================
-   7. MAIN PRODUCT PRESENTATION
+   2. PRODUCT PAGE LAYOUT
 ========================================= */
 
+.product-detail-body {
+  background: var(--ivory);
+}
+
+.product-detail-body main {
+  overflow: hidden;
+}
+
 .standalone-product-page {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: start;
+  gap: 75px;
   max-width: 1250px;
   margin: 75px auto 95px;
-  gap: 75px;
-  align-items: start;
+  padding: 0 5%;
 }
+
+
+/* =========================================
+   3. PRODUCT GALLERY
+========================================= */
 
 .product-page-gallery {
   position: relative;
+  min-width: 0;
 }
 
 .gallery-main {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: #f1ece5;
   border: 1px solid rgba(231, 220, 211, 0.6);
 }
 
 .gallery-main img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   transition: transform 0.5s ease;
 }
 
@@ -366,9 +118,21 @@
 }
 
 .gallery-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  transform: translateY(-50%);
+  border: 1px solid rgba(231, 220, 211, 0.8);
+  border-radius: 50%;
   background: rgba(248, 245, 239, 0.85);
   color: var(--dark);
-  border: 1px solid rgba(231, 220, 211, 0.8);
+  font-size: 26px;
+  cursor: pointer;
   transition: background 0.3s ease;
 }
 
@@ -376,20 +140,43 @@
   background: var(--white);
 }
 
+#previousPhoto {
+  left: 12px;
+}
+
+#nextPhoto {
+  right: 12px;
+}
+
 .product-thumbnails {
+  display: flex;
   gap: 12px;
+  overflow-x: auto;
   margin-top: 18px;
+  padding: 4px 2px 14px;
+  scroll-behavior: smooth;
 }
 
 .product-thumbnail {
+  flex: 0 0 76px;
+  width: 76px;
+  height: 76px;
+  padding: 3px;
   border: 1px solid transparent;
   background: #f1ece5;
-  padding: 3px;
+  cursor: pointer;
   transition: border-color 0.3s ease;
 }
 
+.product-thumbnail img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .product-thumbnail.selected {
-  border-color: var(--deep-rose);
+  border: 2px solid var(--deep-rose);
 }
 
 .gallery-hint {
@@ -403,10 +190,11 @@
 
 
 /* =========================================
-   8. MAIN PRODUCT INFORMATION
+   4. PRODUCT INFORMATION
 ========================================= */
 
 .standalone-product-info {
+  min-width: 0;
   padding-top: 20px;
 }
 
@@ -426,6 +214,10 @@
   font-size: clamp(34px, 4vw, 48px);
   font-weight: 500;
   line-height: 1.12;
+}
+
+.standalone-product-info > p {
+  color: var(--muted);
 }
 
 .product-size {
@@ -453,6 +245,7 @@
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 2px;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -470,16 +263,17 @@
 
 
 /* =========================================
-   9. PRODUCT DESCRIPTION
+   5. PRODUCT DESCRIPTION
 ========================================= */
 
 .product-description-block {
-  margin-top: 35px;
+  margin: 35px 0;
   padding-top: 25px;
   border-top: 1px solid var(--border);
 }
 
-.product-description-block .product-section-label {
+.product-description-block .product-section-label,
+.product-description-block h3 {
   margin-bottom: 13px;
   color: var(--deep-rose);
   font-size: 10px;
@@ -506,8 +300,18 @@
 
 
 /* =========================================
-   10. EDITORIAL SECTIONS — SHARED
+   6. EDITORIAL SHARED STYLES
 ========================================= */
+
+.product-editorial-eyebrow {
+  margin: 0 0 15px;
+  color: var(--deep-rose);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
 
 .product-editorial-section,
 .product-glance-section,
@@ -547,7 +351,7 @@
 
 
 /* =========================================
-   11. THE BEAUTY EDIT
+   7. THE BEAUTY EDIT
 ========================================= */
 
 .product-editorial-section {
@@ -562,10 +366,7 @@
 
 .product-editorial-inner h2 {
   margin-bottom: 22px;
-  color: var(--dark);
-  font-family: 'Cormorant Garamond', serif;
   font-size: clamp(34px, 4vw, 48px);
-  font-weight: 500;
 }
 
 .product-editorial-inner > p:last-child {
@@ -579,7 +380,7 @@
 
 
 /* =========================================
-   12. AT A GLANCE
+   8. AT A GLANCE
 ========================================= */
 
 .product-glance-section {
@@ -597,8 +398,8 @@
 
 .product-glance-item {
   padding: 28px 20px;
-  text-align: center;
   border-right: 1px solid var(--border);
+  text-align: center;
 }
 
 .product-glance-item:last-child {
@@ -623,7 +424,7 @@
 
 
 /* =========================================
-   13. WHY WE CHOSE IT
+   9. WHY WE CHOSE IT
 ========================================= */
 
 .product-choice-section {
@@ -649,7 +450,7 @@
 
 
 /* =========================================
-   14. SKIN DETAILS
+   10. SKIN DETAILS
 ========================================= */
 
 .product-skin-section {
@@ -688,7 +489,7 @@
 
 
 /* =========================================
-   15. INGREDIENT EDIT
+   11. INGREDIENT EDIT
 ========================================= */
 
 .product-ingredients-section {
@@ -705,8 +506,8 @@
 
 .product-ingredient-item {
   padding: 28px 24px;
-  background: rgba(255, 255, 255, 0.45);
   border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.45);
   text-align: center;
 }
 
@@ -751,7 +552,7 @@
 
 
 /* =========================================
-   16. HOW TO USE
+   12. HOW TO USE
 ========================================= */
 
 .product-how-to-section {
@@ -788,7 +589,7 @@
 
 
 /* =========================================
-   17. COMPLETE THE RITUAL
+   13. COMPLETE THE RITUAL
 ========================================= */
 
 .product-routine-section {
@@ -804,6 +605,7 @@
 }
 
 .product-routine-card {
+  min-width: 0;
   text-align: center;
 }
 
@@ -811,9 +613,9 @@
   display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
-  object-fit: contain;
-  background: #f1ece5;
   margin-bottom: 18px;
+  background: #f1ece5;
+  object-fit: contain;
 }
 
 .product-routine-card > p {
@@ -832,6 +634,7 @@
 .product-routine-card a {
   color: var(--dark);
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .product-routine-card a:hover {
@@ -840,17 +643,29 @@
 
 
 /* =========================================
-   18. YOU MAY ALSO LOVE — EDITORIAL
+   14. YOU MAY ALSO LOVE
 ========================================= */
 
 .related-products-section {
+  max-width: none;
+  margin: 0;
   padding: 85px 7%;
   background: var(--cream);
+}
+
+.related-products-section[hidden] {
+  display: none !important;
 }
 
 .related-products-heading {
   margin-bottom: 45px;
   text-align: center;
+}
+
+.related-products-heading h2 {
+  margin: 5px 0 15px;
+  color: var(--dark);
+  font-size: clamp(30px, 4vw, 42px);
 }
 
 .related-products-heading > p:last-child {
@@ -859,9 +674,37 @@
   line-height: 1.8;
 }
 
+.related-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-content: center;
+  gap: 20px;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
 .related-product-card {
-  background: rgba(255, 255, 255, 0.35);
+  width: 100%;
+  min-width: 0;
   padding-bottom: 20px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.related-product-image {
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.related-product-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.related-product-card:hover .related-product-image img {
+  transform: scale(1.04);
 }
 
 .related-product-info {
@@ -869,6 +712,7 @@
 }
 
 .related-product-brand {
+  margin: 3px 0;
   color: var(--deep-rose);
   font-size: 9px;
   letter-spacing: 1.5px;
@@ -876,9 +720,11 @@
 }
 
 .related-product-info h3 {
+  margin: 8px 0;
   font-family: 'Cormorant Garamond', serif;
   font-size: 21px;
   font-weight: 500;
+  line-height: 1.25;
 }
 
 .related-product-info h3 a {
@@ -887,17 +733,21 @@
 }
 
 .related-product-price {
+  margin: 6px 0;
   color: var(--dark);
   font-size: 12px;
 }
 
 .related-add-button {
+  width: 100%;
   margin-top: 10px;
+  padding: 10px 5px;
   border: 1px solid var(--border);
   background: transparent;
   color: var(--deep-rose);
   font-size: 9px;
   letter-spacing: 1.5px;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -906,9 +756,19 @@
   color: var(--white);
 }
 
+.related-view-link {
+  display: block;
+  margin-top: 9px;
+  color: var(--deep-rose);
+  font-size: 9px;
+  letter-spacing: 0.7px;
+  text-align: center;
+  text-decoration: none;
+}
+
 
 /* =========================================
-   19. HIDDEN PRODUCT SECTIONS
+   15. HIDDEN PRODUCT SECTIONS
 ========================================= */
 
 .product-editorial-section[hidden],
@@ -924,7 +784,7 @@
 
 
 /* =========================================
-   20. TABLET RESPONSIVE DESIGN
+   16. TABLET RESPONSIVE DESIGN
 ========================================= */
 
 @media (max-width: 900px) {
@@ -946,41 +806,40 @@
     border-bottom: 1px solid var(--border);
   }
 
+  .related-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 600px;
+  }
 }
 
 
 /* =========================================
-   21. MOBILE PRODUCT PAGE
+   17. MOBILE PRODUCT PAGE
 ========================================= */
 
 @media (max-width: 750px) {
 
-  .standalone-product-page {
-    grid-template-columns: 1fr;
-    gap: 25px;
-    margin: 25px auto;
-  }
-
-  .standalone-product-info h1 {
-    font-size: 28px;
-  }
-
-  .product-brand-name {
-    font-size: 16px;
-  }
-
   .product-page-header {
-    padding: 18px 4%;
     gap: 10px;
+    padding: 18px 4%;
   }
 
   .product-back-link {
     font-size: 9px;
   }
 
+  .product-brand-name {
+    font-size: 19px;
+  }
+
+  .product-brand-name span {
+    font-size: 19px;
+  }
+
   .standalone-product-page {
-    margin: 35px auto 55px;
+    grid-template-columns: 1fr;
     gap: 30px;
+    margin: 35px auto 55px;
     padding: 0 5%;
   }
 
@@ -1020,56 +879,21 @@
   .product-section-heading {
     margin-bottom: 32px;
   }
-
 }
 
 
 /* =========================================
-   22. SMALL MOBILE PRODUCT PAGE
-========================================= */
-
-@media (max-width: 600px) {
-
-  .related-products-section {
-    padding: 15px 12px;
-    margin: 30px auto;
-  }
-
-  .related-products-grid {
-    grid-template-columns: repeat(2, minmax(0, 125px));
-    gap: 18px;
-  }
-
-  .related-products-heading h2 {
-    font-size: 19px;
-  }
-
-}
-
-
-/* =========================================
-   23. VERY SMALL MOBILE SCREENS
+   18. SMALL MOBILE SCREENS
 ========================================= */
 
 @media (max-width: 480px) {
 
-  .product-brand-name {
-    font-size: 19px;
-  }
-
-  .product-brand-name span {
-    font-size: 19px;
-  }
-
   .product-page-header {
-    padding-left: 4%;
     padding-right: 4%;
+    padding-left: 4%;
   }
 
-  .product-back-link {
-    font-size: 9px;
-  }
-
+  .product-back-link,
   .product-bag-link {
     font-size: 9px;
   }
@@ -1086,8 +910,45 @@
     font-size: 17px;
   }
 
+  .related-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .related-product-info {
+    padding: 12px 10px 0;
+  }
+
+  .related-product-info h3 {
+    font-size: 18px;
+  }
+
   .product-routine-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================================
+   19. REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .gallery-main img,
+  .gallery-arrow,
+  .product-thumbnail,
+  #productAddToCart,
+  .product-routine-card a,
+  .related-product-image img,
+  .related-add-button,
+  .product-back-link {
+    transition: none !important;
+  }
+
+  .gallery-main:hover img,
+  .related-product-card:hover .related-product-image img {
+    transform: none;
   }
 
 }
