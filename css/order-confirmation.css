@@ -1,1 +1,275 @@
 
+    .confirmation-page {
+      max-width: 900px;
+      margin: 65px auto;
+      padding: 25px;
+      text-align: center;
+      color: #756963;
+    }
+
+    .confirmation-icon {
+      width: 65px;
+      height: 65px;
+      margin: 0 auto 25px;
+      border: 1px solid #c8b8ad;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 27px;
+      color: #986b72;
+    }
+
+    .confirmation-brand {
+      letter-spacing: 2.5px;
+      font-size: 10px;
+      color: #987b75;
+    }
+
+    .confirmation-page h1 {
+      font-family: Georgia, serif;
+      font-weight: normal;
+      font-size: 38px;
+      margin: 20px 0;
+      color: #655650;
+    }
+
+    .confirmation-message {
+      font-family: Georgia, serif;
+      font-size: 15px;
+      line-height: 1.9;
+      margin: 0 auto 30px;
+      max-width: 570px;
+    }
+
+    .order-reference {
+      background: #f5f1e9;
+      padding: 25px;
+      margin: 30px auto;
+      max-width: 500px;
+      border: 1px solid #e8ded5;
+    }
+
+    .order-reference p {
+      margin: 7px 0;
+      font-size: 11px;
+    }
+
+    .order-reference strong {
+      font-family: Georgia, serif;
+      font-size: 20px;
+      font-weight: normal;
+      color: #986b72;
+      letter-spacing: 1px;
+    }
+
+    .confirmation-content {
+      max-width: 650px;
+      margin: 35px auto;
+      text-align: left;
+    }
+
+    .confirmation-card {
+      background: #fbf7f4;
+      padding: 28px;
+      margin-bottom: 22px;
+      border: 1px solid #eee4de;
+    }
+
+    .confirmation-card h2 {
+      font-family: Georgia, serif;
+      font-size: 23px;
+      font-weight: normal;
+      color: #655650;
+      margin: 0 0 22px;
+    }
+
+    .confirmation-product {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      padding: 17px 0;
+      border-bottom: 1px solid #e8dad4;
+    }
+
+    .confirmation-product img {
+      width: 90px;
+      height: 105px;
+      object-fit: contain;
+      background: white;
+      padding: 5px;
+      box-sizing: border-box;
+      flex-shrink: 0;
+    }
+
+    .confirmation-product-info {
+      flex: 1;
+      line-height: 1.7;
+      font-size: 12px;
+      min-width: 0;
+    }
+
+    .confirmation-product-info strong {
+      font-family: Georgia, serif;
+      font-size: 15px;
+      font-weight: normal;
+      color: #655650;
+    }
+
+    .confirmation-product-info p {
+      margin: 4px 0;
+    }
+
+    .confirmation-product-brand {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: #987b75;
+      text-transform: uppercase;
+    }
+
+    .confirmation-total {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #c8b8ad;
+      font-family: Georgia, serif;
+      font-size: 19px;
+      color: #655650;
+    }
+
+    /* CUSTOMER DETAILS */
+
+    .customer-details {
+      font-size: 13px;
+      line-height: 2;
+      color: #756963;
+    }
+
+    .customer-details p {
+      margin: 3px 0;
+    }
+
+    .customer-details .customer-name {
+      font-family: Georgia, serif;
+      font-size: 17px;
+      color: #655650;
+      margin-bottom: 8px;
+    }
+
+    /* GIFT MESSAGE */
+
+    .confirmation-gift {
+      background: #f5f1e9;
+      border: 1px solid #e5d8ce;
+      padding: 25px;
+      margin-bottom: 22px;
+    }
+
+    .confirmation-gift h2 {
+      font-family: Georgia, serif;
+      font-weight: normal;
+      font-size: 22px;
+      color: #655650;
+      margin: 0 0 12px;
+    }
+
+    .confirmation-gift p {
+      font-size: 13px;
+      line-height: 1.9;
+      color: #897c74;
+      margin: 8px 0;
+    }
+
+    .confirmation-gift .gift-message-text {
+      font-family: Georgia, serif;
+      font-size: 16px;
+      font-style: italic;
+      color: #986b72;
+      padding: 12px 0;
+    }
+
+    .confirmation-email-note {
+      max-width: 540px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #f5f1e9;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .confirmation-email-note strong {
+      font-family: Georgia, serif;
+      font-size: 16px;
+      font-weight: normal;
+      color: #655650;
+    }
+
+    .confirmation-demo-note {
+      max-width: 570px;
+      margin: 25px auto;
+      font-size: 11px;
+      line-height: 1.9;
+      color: #98877f;
+    }
+
+    .confirmation-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 17px 32px;
+      background: #986b72;
+      color: white;
+      text-decoration: none;
+      font-size: 10px;
+      letter-spacing: 1.7px;
+      transition: background 0.3s;
+    }
+
+    .confirmation-button:hover {
+      background: #756963;
+    }
+
+    .confirmation-empty {
+      text-align: center;
+      line-height: 1.9;
+      font-size: 13px;
+    }
+
+    .confirmation-empty a {
+      color: #986b72;
+    }
+
+    .confirmation-closing {
+      margin-top: 35px;
+      font-family: Georgia, serif;
+      font-size: 15px;
+      font-style: italic;
+      color: #987b75;
+    }
+
+    @media (max-width: 600px) {
+      .confirmation-page {
+        margin: 35px auto;
+        padding: 18px;
+      }
+
+      .confirmation-page h1 {
+        font-size: 30px;
+      }
+
+      .confirmation-card {
+        padding: 20px;
+      }
+
+      .confirmation-product img {
+        width: 75px;
+        height: 95px;
+      }
+
+      .confirmation-total {
+        font-size: 17px;
+      }
+    }
+  <
+
