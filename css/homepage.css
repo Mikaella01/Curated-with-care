@@ -567,6 +567,8 @@ box-shadow:
   inset 2px 2px 8px rgba(255, 255, 255, 0.55),
   inset -3px -4px 8px rgba(133, 86, 79, 0.12),
   0 10px 25px rgba(40, 28, 25, 0.12);
+
+transform-origin: center;
 }
 
 .hero-petal--one {
