@@ -1,4 +1,3 @@
-
 /* =========================================
    CURATED WITH CARE BY M.
    PRODUCT CATALOGUE & WEBSITE FUNCTIONALITY
@@ -324,22 +323,22 @@ function displayProducts() {
 
       <div class="product-info">
 
-  <h3
-    data-view-product="${escapeHTML(product.id)}"
-    role="link"
-    tabindex="0"
-    aria-label="View ${escapeHTML(product.name)}"
-  >
+        <h3
+          data-view-product="${escapeHTML(product.id)}"
+          role="link"
+          tabindex="0"
+          aria-label="View ${escapeHTML(product.name)}"
+        >
 
-    ${escapeHTML(product.name)}
+          ${escapeHTML(product.name)}
 
-  </h3>
+        </h3>
 
-  <p class="product-price">
-    ${formatPrice(product.price)}
-  </p>
+        <p class="product-price">
+          ${formatPrice(product.price)}
+        </p>
 
-</div>
+      </div>
 
     `;
 
@@ -506,6 +505,17 @@ const availableBrands = [
 ];
 
 
+const availableConcerns = [
+
+  "dryness",
+  "dullness",
+  "pores",
+  "uneven-tone",
+  "sensitive-skin"
+
+];
+
+
 function initialiseBrandFromURL() {
 
   const urlParams = new URLSearchParams(
@@ -513,7 +523,10 @@ function initialiseBrandFromURL() {
   );
 
   const requestedBrand = urlParams.get("brand");
+  const requestedConcern = urlParams.get("concern");
 
+
+  // BRAND FILTER
 
   if (
     requestedBrand &&
@@ -533,6 +546,28 @@ function initialiseBrandFromURL() {
   }
 
 
+  // SKIN CONCERN FILTER
+
+  else if (
+    requestedConcern &&
+    availableConcerns.includes(requestedConcern)
+  ) {
+
+    activeBrand = "all";
+
+    activeCollection = "all";
+
+    activeConcern = requestedConcern;
+
+    searchTerm = "";
+
+    activeView = "concerns";
+
+  }
+
+
+  // UPDATE BRAND BUTTONS
+
   document.querySelectorAll("[data-brand]").forEach(button => {
 
     button.classList.toggle(
@@ -542,6 +577,8 @@ function initialiseBrandFromURL() {
 
   });
 
+
+  // UPDATE COLLECTION BUTTONS
 
   document.querySelectorAll("[data-collection]").forEach(button => {
 
@@ -553,6 +590,8 @@ function initialiseBrandFromURL() {
   });
 
 
+  // UPDATE CONCERN BUTTONS
+
   document.querySelectorAll("[data-concern]").forEach(button => {
 
     button.classList.toggle(
@@ -562,6 +601,8 @@ function initialiseBrandFromURL() {
 
   });
 
+
+  // CLEAR SEARCH
 
   const searchInput = document.getElementById("productSearch");
 
@@ -1070,112 +1111,13 @@ async function loadSupabaseProducts() {
    21. INITIALISE WEBSITE
 ========================================= */
 
-function initialiseBrandFromURL() {
+// Read URL parameters first
+initialiseBrandFromURL();
 
-  const urlParams = new URLSearchParams(
-    window.location.search
-  );
-
-  const requestedBrand = urlParams.get("brand");
-  const requestedConcern = urlParams.get("concern");
-
-
-  // BRAND FILTER
-
-  if (
-    requestedBrand &&
-    availableBrands.includes(requestedBrand)
-  ) {
-
-    activeBrand = requestedBrand;
-
-    activeCollection = "all";
-
-    activeConcern = "all";
-
-    searchTerm = "";
-
-    activeView = "brands";
-
-  }
-
-
-  // SKIN CONCERN FILTER
-
-  else if (
-    requestedConcern &&
-    [
-      "dryness",
-      "dullness",
-      "pores",
-      "uneven-tone",
-      "sensitive-skin"
-    ].includes(requestedConcern)
-  ) {
-
-    activeBrand = "all";
-
-    activeCollection = "all";
-
-    activeConcern = requestedConcern;
-
-    searchTerm = "";
-
-    activeView = "concerns";
-
-  }
-
-
-  // UPDATE BRAND BUTTONS
-
-  document.querySelectorAll("[data-brand]").forEach(button => {
-
-    button.classList.toggle(
-      "active",
-      button.dataset.brand === activeBrand
-    );
-
-  });
-
-
-  // UPDATE COLLECTION BUTTONS
-
-  document.querySelectorAll("[data-collection]").forEach(button => {
-
-    button.classList.toggle(
-      "active",
-      button.dataset.collection === activeCollection
-    );
-
-  });
-
-
-  // UPDATE CONCERN BUTTONS
-
-  document.querySelectorAll("[data-concern]").forEach(button => {
-
-    button.classList.toggle(
-      "active",
-      button.dataset.concern === activeConcern
-    );
-
-  });
-
-
-  // CLEAR SEARCH
-
-  const searchInput = document.getElementById("productSearch");
-
-  if (searchInput) {
-
-    searchInput.value = "";
-
-  }
-
-}
-
+// Display the correct shop navigation
 updateShopView(activeView);
 
+// Update shopping bag count
 updateCart();
 
 
@@ -1219,6 +1161,7 @@ console.log(
   "Curated with Care by M. — Website loaded successfully."
 );
 
+
 /* =========================================
    CURATED WITH CARE
    UNIFIED CINEMATIC STORY CONTROLLER
@@ -1232,6 +1175,7 @@ console.log(
   const intro = document.querySelector(".intro");
 
   if (!hero || !heroImage || !heroContent || !intro) return;
+
 
   /* ---------------------------------------
      1. CREATE TRAVELLING PETALS
