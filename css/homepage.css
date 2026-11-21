@@ -549,6 +549,13 @@ footer p,
   border-radius: 100% 0 100% 0;
   background:
   linear-gradient(
+    115deg,
+    transparent 46%,
+    rgba(255, 255, 255, 0.25) 49%,
+    rgba(255, 255, 255, 0.10) 51%,
+    transparent 55%
+  ),
+  linear-gradient(
     145deg,
     rgba(255, 246, 239, 0.96) 0%,
     rgba(239, 208, 195, 0.88) 35%,
