@@ -1051,3 +1051,222 @@ transform-origin: center;
     opacity: 0.8;
   }
 }
+
+
+/* =========================================
+   DISCOVER BY SKIN CONCERN
+   EDITORIAL PHOTOGRAPHIC CARDS
+========================================= */
+
+.concern-edit {
+  background: #f5efeb;
+  overflow: hidden;
+}
+
+.concern-edit-heading {
+  max-width: 760px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.concern-edit-heading h2 {
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 400;
+  margin: 14px 0;
+}
+
+.concern-edit-heading h2 em {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+}
+
+.concern-edit-heading p {
+  max-width: 520px;
+  margin: 18px auto 0;
+  line-height: 1.9;
+  color: var(--muted);
+}
+
+/* PHOTO GRID */
+
+.concern-editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.concern-editorial-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  min-height: 430px;
+  color: #fff;
+  text-decoration: none;
+  isolation: isolate;
+  grid-column: span 2;
+}
+
+.concern-editorial-card:nth-child(4),
+.concern-editorial-card:nth-child(5) {
+  grid-column: span 3;
+  min-height: 470px;
+}
+
+.concern-editorial-image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  transition:
+    transform 1s cubic-bezier(.2,.7,.2,1),
+    filter 0.7s ease;
+}
+
+/* PHOTO DIRECTIONS */
+
+.concern-card--hydration .concern-editorial-image {
+  background-image:
+    url("https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1100&q=85");
+}
+
+.concern-card--radiance .concern-editorial-image {
+  background-image:
+    url("https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=1100&q=85");
+}
+
+.concern-card--pores .concern-editorial-image {
+  background-image:
+    url("https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=1100&q=85");
+}
+
+.concern-card--comfort .concern-editorial-image {
+  background-image:
+    url("https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1100&q=85");
+}
+
+.concern-card--tone .concern-editorial-image {
+  background-image:
+    url("https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=1100&q=85");
+}
+
+/* MUTED EDITORIAL COLOR TREATMENT */
+
+.concern-editorial-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(45, 32, 30, 0.04) 5%,
+      rgba(45, 32, 30, 0.12) 38%,
+      rgba(45, 32, 30, 0.66) 100%
+    );
+
+  transition: opacity 0.5s ease;
+}
+
+/* TYPOGRAPHY */
+
+.concern-editorial-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.concern-editorial-overlay > span:first-child {
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  margin-bottom: 16px;
+}
+
+.concern-editorial-overlay h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(34px, 3.4vw, 49px);
+  font-weight: 400;
+  line-height: 0.98;
+  margin: 0 0 20px;
+}
+
+.concern-discover {
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(255,255,255,.65);
+}
+
+/* INTERACTION */
+
+.concern-editorial-card:hover .concern-editorial-image {
+  transform: scale(1.07);
+}
+
+.concern-editorial-card:hover::after {
+  opacity: 0.86;
+}
+
+.concern-editorial-card:hover .concern-discover {
+  letter-spacing: 2.8px;
+}
+
+.concern-editorial-card:focus-visible {
+  outline: 2px solid var(--deep-rose);
+  outline-offset: 4px;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+  .concern-editorial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .concern-editorial-card,
+  .concern-editorial-card:nth-child(4),
+  .concern-editorial-card:nth-child(5) {
+    grid-column: span 1;
+    min-height: 390px;
+  }
+
+  .concern-editorial-card:nth-child(5) {
+    grid-column: 1 / -1;
+    min-height: 430px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .concern-edit-heading {
+    margin-bottom: 30px;
+  }
+
+  .concern-editorial-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .concern-editorial-card,
+  .concern-editorial-card:nth-child(4),
+  .concern-editorial-card:nth-child(5) {
+    grid-column: auto;
+    min-height: 420px;
+  }
+
+  .concern-editorial-overlay {
+    padding: 25px;
+  }
+
+  .concern-editorial-overlay h3 {
+    font-size: 43px;
+  }
+}
