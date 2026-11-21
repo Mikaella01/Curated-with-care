@@ -548,15 +548,18 @@ footer p,
   height: 32px;
   border-radius: 100% 0 100% 0;
   background:
-    linear-gradient(
-      135deg,
-      rgba(246, 224, 211, 0.95),
-      rgba(204, 158, 148, 0.72) 60%,
-      rgba(132, 94, 85, 0.45)
-    );
-  box-shadow:
-    inset 2px 2px 5px rgba(255, 255, 255, 0.35),
-    0 12px 25px rgba(30, 23, 20, 0.2);
+  linear-gradient(
+    145deg,
+    rgba(255, 246, 239, 0.96) 0%,
+    rgba(239, 208, 195, 0.88) 35%,
+    rgba(210, 165, 154, 0.78) 72%,
+    rgba(166, 119, 111, 0.55) 100%
+  );
+
+box-shadow:
+  inset 2px 2px 8px rgba(255, 255, 255, 0.55),
+  inset -3px -4px 8px rgba(133, 86, 79, 0.12),
+  0 10px 25px rgba(40, 28, 25, 0.12);
 }
 
 .hero-petal--one {
