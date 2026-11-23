@@ -1611,3 +1611,79 @@ console.log(
 
 
 })();
+
+/* =====================================================
+   EDITORIAL SCROLL REVEAL
+   ===================================================== */
+
+(function initEditorialReveal() {
+
+  function startEditorialReveal() {
+
+    const revealElements = document.querySelectorAll(
+      '[data-editorial-reveal]'
+    );
+
+    if (!revealElements.length) return;
+
+    /* Respect accessibility settings */
+    if (
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+
+    /* Fallback for browsers without IntersectionObserver */
+    if (!('IntersectionObserver' in window)) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      function (entries, observer) {
+
+        entries.forEach(function (entry) {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add('is-revealed');
+
+            observer.unobserve(entry.target);
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      }
+    );
+
+    revealElements.forEach(function (element, index) {
+
+      element.style.transitionDelay = (index * 120) + 'ms';
+
+      observer.observe(element);
+
+    });
+
+    document.documentElement.classList.add('reveal-active');
+
+  }
+
+  if (document.readyState === 'loading') {
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      startEditorialReveal,
+      { once: true }
+    );
+
+  } else {
+
+    startEditorialReveal();
+
+  }
+
+})();
