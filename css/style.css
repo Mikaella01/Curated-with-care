@@ -917,3 +917,42 @@ img {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* =====================================================
+   CURATED WITH CARE BY M.
+   EDITORIAL SCROLL REVEAL
+   ===================================================== */
+
+[data-editorial-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Reveal animation activates only when JavaScript works */
+.reveal-active [data-editorial-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+
+  will-change: opacity, transform;
+}
+
+/* Element becomes visible when it enters the screen */
+.reveal-active [data-editorial-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Accessibility: respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-active [data-editorial-reveal],
+  .reveal-active [data-editorial-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}
