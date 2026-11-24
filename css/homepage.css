@@ -1,9 +1,14 @@
+
 /* =====================================================
    CURATED WITH CARE BY M.
-   HOMEPAGE.CSS — CONSOLIDATED EDITORIAL DESIGN
+   HOMEPAGE.CSS — CONSOLIDATED MASTER STYLESHEET
+   Luxury Editorial Beauty Boutique
    ===================================================== */
 
-/* ---------- HOMEPAGE FOUNDATION ---------- */
+
+/* =====================================================
+   01. HOMEPAGE FOUNDATION
+   ===================================================== */
 
 :root {
   --home-plum: #4A263F;
@@ -51,7 +56,10 @@
   text-decoration: none;
 }
 
-/* ---------- HERO ---------- */
+
+/* =====================================================
+   02. HERO
+   ===================================================== */
 
 .hero-world {
   position: relative;
@@ -59,11 +67,10 @@
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 780px;
   min-height: min(92svh, 1050px);
-  overflow: hidden;
   background: #514641;
   color: var(--home-ivory);
+  overflow: hidden;
 }
 
 .hero-world__background {
@@ -193,7 +200,6 @@
   font-family: Montserrat, sans-serif;
   font-size: 9px;
   letter-spacing: 0.19em;
-  text-decoration: none;
   backdrop-filter: blur(12px);
   transition:
     background 0.4s ease,
@@ -210,6 +216,7 @@
 .hero-world__button span {
   font-size: 18px;
 }
+
 
 /* Hero decorative ribbons */
 
@@ -252,6 +259,7 @@
   opacity: 0.65;
   animation: ribbonFlowTwo 17s ease-in-out infinite;
 }
+
 
 /* Hero glass objects */
 
@@ -323,6 +331,7 @@
   animation: orbFloatThree 9s ease-in-out infinite;
 }
 
+
 /* Floating petals */
 
 .hero-petal {
@@ -378,6 +387,7 @@
   animation-delay: -6s;
 }
 
+
 /* Scroll cue */
 
 .hero-world__scroll {
@@ -407,6 +417,7 @@
   letter-spacing: 2px;
   white-space: nowrap;
 }
+
 
 /* Hero animations */
 
@@ -481,7 +492,10 @@
   50% { opacity: 1; transform: scaleY(1); }
 }
 
-/* ---------- INTRODUCTION ---------- */
+
+/* =====================================================
+   03. INTRODUCTION
+   ===================================================== */
 
 .homepage .intro {
   background:
@@ -500,7 +514,10 @@
   color: #98766d;
 }
 
-/* ---------- COLLECTIONS ---------- */
+
+/* =====================================================
+   04. COLLECTIONS
+   ===================================================== */
 
 .homepage .collections {
   background: var(--home-ivory);
@@ -542,7 +559,10 @@
   letter-spacing: 1.8px;
 }
 
-/* ---------- DISCOVER BY SKIN CONCERN ---------- */
+
+/* =====================================================
+   05. DISCOVER BY SKIN CONCERN
+   ===================================================== */
 
 .homepage .concern-edit {
   background:
@@ -578,6 +598,7 @@
   line-height: 1.9;
 }
 
+
 /* Concern card layout */
 
 .concern-editorial-grid {
@@ -603,7 +624,8 @@
   min-height: 470px;
 }
 
-/* Photo layers */
+
+/* Concern images */
 
 .concern-editorial-image {
   position: absolute;
@@ -641,6 +663,7 @@
     url("https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=1100&q=85");
 }
 
+
 /* Text readability overlay */
 
 .concern-editorial-card::after {
@@ -657,6 +680,7 @@
     );
   transition: opacity 0.5s ease;
 }
+
 
 /* Concern card text */
 
@@ -696,7 +720,8 @@
   transition: letter-spacing 0.3s ease;
 }
 
-/* Concern hover */
+
+/* Concern interactions */
 
 .concern-editorial-card:hover .concern-editorial-image {
   transform: scale(1.07);
@@ -715,7 +740,10 @@
   outline-offset: 4px;
 }
 
-/* ---------- BRAND DIRECTORY ---------- */
+
+/* =====================================================
+   06. BRAND DIRECTORY
+   ===================================================== */
 
 .brand-edit {
   position: relative;
@@ -744,6 +772,7 @@
   max-width: 1320px;
   margin: 0 auto;
 }
+
 
 /* Brand heading */
 
@@ -785,6 +814,7 @@
   line-height: 2;
 }
 
+
 /* Directory intro */
 
 .brand-edit-intro {
@@ -799,6 +829,7 @@
   letter-spacing: 2.5px;
 }
 
+
 /* Brand grid */
 
 .brand-edit-grid {
@@ -806,8 +837,6 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 13px;
 }
-
-/* Brand tiles */
 
 .brand-edit-item {
   position: relative;
@@ -850,7 +879,8 @@
   bottom: -65px;
 }
 
-/* Tile composition */
+
+/* Brand tile composition */
 
 .brand-medicube {
   grid-column: span 7;
@@ -894,7 +924,8 @@
   background: #e5e1dc;
 }
 
-/* Tile numbers */
+
+/* Brand tile numbers */
 
 .brand-edit-number {
   position: relative;
@@ -904,6 +935,7 @@
   font-size: 8px;
   letter-spacing: 2.5px;
 }
+
 
 /* Brand names */
 
@@ -954,6 +986,7 @@
   font-size: clamp(38px, 4vw, 53px);
 }
 
+
 /* Brand descriptions */
 
 .brand-edit-description {
@@ -965,7 +998,8 @@
   letter-spacing: 0.5px;
 }
 
-/* Tile arrow */
+
+/* Brand arrows */
 
 .brand-edit-arrow {
   position: absolute;
@@ -986,6 +1020,7 @@
     color 0.35s ease,
     transform 0.35s ease;
 }
+
 
 /* Brand interactions */
 
@@ -1012,6 +1047,7 @@
   outline: 2px solid #94736d;
   outline-offset: 4px;
 }
+
 
 /* Directory footer */
 
@@ -1046,7 +1082,10 @@
   color: #b17f78;
 }
 
-/* ---------- GIFT COLLECTION ---------- */
+
+/* =====================================================
+   07. GIFT COLLECTION
+   ===================================================== */
 
 .gift-section {
   position: relative;
@@ -1111,7 +1150,10 @@
   margin-top: 5px;
 }
 
-/* ---------- GIFT FINDER ---------- */
+
+/* =====================================================
+   08. GIFT FINDER
+   ===================================================== */
 
 .gift-finder {
   text-align: center;
@@ -1146,6 +1188,7 @@
   margin: 15px 0 35px;
   color: var(--home-mocha);
 }
+
 
 /* Finder form */
 
@@ -1188,7 +1231,8 @@
   margin-top: 25px;
 }
 
-/* Finder result area */
+
+/* Finder results */
 
 .gift-result {
   width: 100%;
@@ -1221,6 +1265,7 @@
   font-size: 10px;
   line-height: 1.8;
 }
+
 
 /* Gift recommendations */
 
@@ -1277,7 +1322,10 @@
   text-decoration: none;
 }
 
-/* ---------- NEWSLETTER ---------- */
+
+/* =====================================================
+   09. NEWSLETTER
+   ===================================================== */
 
 .newsletter {
   position: relative;
@@ -1351,7 +1399,8 @@
   line-height: 1.9;
 }
 
-/* ---------- NEWSLETTER FORM ---------- */
+
+/* Newsletter form */
 
 .newsletter form {
   position: relative;
@@ -1408,11 +1457,15 @@
   cursor: wait;
 }
 
+
+/* Newsletter consent — consolidated */
+
 .newsletter .newsletter-consent {
   grid-column: 1 / -1;
   grid-row: 2;
   display: flex;
   align-items: flex-start;
+  justify-content: flex-start;
   gap: 10px;
   width: 100%;
   max-width: 480px;
@@ -1439,39 +1492,10 @@
   min-height: 20px;
 }
 
-/* Newsletter consent */
 
-.newsletter .newsletter-consent {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 480px;
-  margin: 18px auto;
-  text-align: left;
-}
-
-.newsletter .newsletter-consent input {
-  width: 14px;
-  min-width: 14px;
-  height: 14px;
-  margin: 2px 0 0;
-  padding: 0;
-  accent-color: #80645c;
-}
-
-.newsletter .newsletter-consent label {
-  color: #74645c;
-  font-size: 10px;
-  line-height: 1.7;
-}
-
-#newsletterMessage {
-  min-height: 20px;
-}
-
-/* ---------- FOOTER ---------- */
+/* =====================================================
+   10. FOOTER
+   ===================================================== */
 
 footer,
 .site-footer {
@@ -1529,18 +1553,168 @@ footer > p,
   letter-spacing: 2px;
 }
 
+
 /* =====================================================
-   RESPONSIVE DESIGN
+   11. EDITORIAL INTRODUCTION
    ===================================================== */
 
-/* ---------- TABLET ---------- */
+.intro.intro-editorial {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding:
+    clamp(80px, 10vw, 145px)
+    clamp(24px, 8vw, 120px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(40px, 7vw, 100px);
+  text-align: left;
+  background: #F5F1EA;
+  overflow: hidden;
+}
+
+
+/* Editorial text */
+
+.intro-editorial__copy {
+  position: relative;
+  z-index: 2;
+  max-width: 540px;
+}
+
+.intro-editorial .eyebrow {
+  display: block;
+  margin-bottom: 28px;
+  color: #9A777A;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.8;
+}
+
+.intro-editorial h2 {
+  margin: 0 0 27px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(45px, 5.2vw, 72px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -1.2px;
+  color: #40352F;
+}
+
+.intro-editorial h2 em {
+  color: #A77F82;
+  font-style: italic;
+}
+
+.intro-editorial p {
+  max-width: 420px;
+  margin: 0;
+  color: #82766D;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 2.1;
+}
+
+
+/* Editorial signature */
+
+.intro-editorial__signature {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 42px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(116, 96, 83, 0.22);
+  color: #9A777A;
+  font-size: 8px;
+  letter-spacing: 2px;
+  line-height: 1.8;
+}
+
+.intro-editorial__signature span:last-child {
+  color: #8B8178;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+}
+
+
+/* Editorial image */
+
+.intro-editorial__visual {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+  max-height: 720px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #E5DDD2;
+}
+
+.intro-editorial__visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition:
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* Editorial image hover */
+
+@media (hover: hover) {
+  .intro-editorial__visual:hover img {
+    transform: scale(1.035);
+  }
+}
+
+
+/* Fine image border */
+
+.intro-editorial__visual::after {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+}
+
+
+/* Image caption */
+
+.intro-editorial__image-note {
+  position: absolute;
+  z-index: 2;
+  left: 28px;
+  bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 17px 21px;
+  background: rgba(248, 245, 239, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #675950;
+  font-size: 8px;
+  letter-spacing: 1.7px;
+  line-height: 1.8;
+}
+
+
+/* =====================================================
+   12. TABLET RESPONSIVENESS
+   ===================================================== */
 
 @media (max-width: 1000px) {
 
   /* Hero */
 
   .hero-world {
-    min-height: 720px;
     min-height: 85svh;
   }
 
@@ -1583,7 +1757,7 @@ footer > p,
     min-height: 215px;
   }
 
-  /* Concern cards */
+  /* Skin concerns */
 
   .concern-editorial-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1609,14 +1783,40 @@ footer > p,
 
 }
 
-/* ---------- MOBILE ---------- */
+
+/* Editorial introduction tablet layout */
+
+@media (max-width: 850px) {
+
+  .intro.intro-editorial {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    padding: 85px 7%;
+  }
+
+  .intro-editorial__copy {
+    max-width: 650px;
+  }
+
+  .intro-editorial__visual {
+    width: 100%;
+    max-width: 580px;
+    min-height: 0;
+    justify-self: center;
+  }
+
+}
+
+
+/* =====================================================
+   13. MOBILE RESPONSIVENESS
+   ===================================================== */
 
 @media (max-width: 650px) {
 
   /* Hero */
 
   .hero-world {
-    min-height: 740px;
     min-height: 88svh;
     align-items: flex-end;
   }
@@ -1711,11 +1911,13 @@ footer > p,
     opacity: 0.8;
   }
 
-  /* Intro */
+
+  /* Introduction */
 
   .homepage .intro {
     padding: 70px 7% 80px;
   }
+
 
   /* Collections */
 
@@ -1740,6 +1942,7 @@ footer > p,
   .homepage .collection-caption h3 {
     font-size: 28px;
   }
+
 
   /* Skin concerns */
 
@@ -1766,6 +1969,7 @@ footer > p,
   .concern-editorial-overlay h3 {
     font-size: 43px;
   }
+
 
   /* Brand directory */
 
@@ -1869,6 +2073,7 @@ footer > p,
     gap: 15px;
   }
 
+
   /* Gift section */
 
   .gift-section {
@@ -1886,6 +2091,7 @@ footer > p,
   .gift-content h2 {
     font-size: 43px;
   }
+
 
   /* Gift finder */
 
@@ -1906,7 +2112,8 @@ footer > p,
     font-size: 9px;
   }
 
-  /* ---------- NEWSLETTER: MOBILE ---------- */
+
+  /* Newsletter */
 
   .newsletter {
     padding: 85px 20px;
@@ -1921,7 +2128,6 @@ footer > p,
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     gap: 10px;
-    flex-direction: unset;
     max-width: 100%;
     margin: 30px auto 0;
     padding: 0;
@@ -1954,6 +2160,7 @@ footer > p,
     box-sizing: border-box;
   }
 
+
   /* Footer */
 
   footer,
@@ -1967,7 +2174,62 @@ footer > p,
 
 }
 
-/* ---------- SMALL MOBILE ---------- */
+
+/* Editorial introduction mobile layout */
+
+@media (max-width: 600px) {
+
+  .intro.intro-editorial {
+    padding: 70px 6%;
+    gap: 32px;
+  }
+
+  .intro-editorial .eyebrow {
+    font-size: 8px;
+    letter-spacing: 2px;
+    margin-bottom: 21px;
+  }
+
+  .intro-editorial h2 {
+    font-size: clamp(43px, 11vw, 58px);
+    line-height: 1.04;
+    letter-spacing: -0.7px;
+    margin-bottom: 22px;
+  }
+
+  .intro-editorial p {
+    font-size: 11px;
+    line-height: 2;
+  }
+
+  .intro-editorial__signature {
+    margin-top: 30px;
+  }
+
+  .intro-editorial__visual {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    min-height: 0;
+  }
+
+  .intro-editorial__image-note {
+    left: 17px;
+    bottom: 17px;
+    padding: 13px 15px;
+    font-size: 7px;
+    letter-spacing: 1.2px;
+  }
+
+  .intro-editorial__visual::after {
+    inset: 10px;
+  }
+
+}
+
+
+/* =====================================================
+   14. SMALL MOBILE
+   ===================================================== */
 
 @media (max-width: 380px) {
 
@@ -2006,7 +2268,10 @@ footer > p,
 
 }
 
-/* ---------- ACCESSIBILITY: REDUCED MOTION ---------- */
+
+/* =====================================================
+   15. ACCESSIBILITY — REDUCED MOTION
+   ===================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -2043,259 +2308,6 @@ footer > p,
   .concern-editorial-card:hover .concern-editorial-image,
   .collection-card:hover .collection-photo {
     transform: none !important;
-  }
-
-}
-
-
-/* =====================================================
-   CURATED WITH CARE BY M.
-   EDITORIAL INTRODUCTION
-   ===================================================== */
-
-.intro.intro-editorial {
-  position: relative;
-  isolation: isolate;
-
-  width: 100%;
-  max-width: none;
-  margin: 0;
-
-  padding: clamp(80px, 10vw, 145px)
-           clamp(24px, 8vw, 120px);
-
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-
-  align-items: center;
-  gap: clamp(40px, 7vw, 100px);
-
-  text-align: left;
-  background: #F5F1EA;
-  overflow: hidden;
-}
-
-/* ---------- TEXT COLUMN ---------- */
-
-.intro-editorial__copy {
-  position: relative;
-  z-index: 2;
-  max-width: 540px;
-}
-
-.intro-editorial .eyebrow {
-  display: block;
-  margin-bottom: 28px;
-
-  color: #9A777A;
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 3px;
-  line-height: 1.8;
-}
-
-.intro-editorial h2 {
-  margin: 0 0 27px;
-
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(45px, 5.2vw, 72px);
-  font-weight: 400;
-  line-height: 1.04;
-  letter-spacing: -1.2px;
-
-  color: #40352F;
-}
-
-.intro-editorial h2 em {
-  color: #A77F82;
-  font-style: italic;
-}
-
-.intro-editorial p {
-  max-width: 420px;
-  margin: 0;
-
-  color: #82766D;
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 2.1;
-}
-
-/* ---------- EDITORIAL SIGNATURE ---------- */
-
-.intro-editorial__signature {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-
-  margin-top: 42px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(116, 96, 83, 0.22);
-
-  color: #9A777A;
-  font-size: 8px;
-  letter-spacing: 2px;
-  line-height: 1.8;
-}
-
-.intro-editorial__signature span:last-child {
-  color: #8B8178;
-  font-size: 8px;
-  letter-spacing: 1.5px;
-}
-
-/* ---------- IMAGE COLUMN ---------- */
-
-.intro-editorial__visual {
-  position: relative;
-
-  width: 100%;
-  min-height: 480px;
-  max-height: 720px;
-
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-
-  background: #E5DDD2;
-}
-
-.intro-editorial__visual img {
-  display: block;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  object-position: center;
-
-  transition:
-    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Gentle image movement on desktop hover */
-
-@media (hover: hover) {
-  .intro-editorial__visual:hover img {
-    transform: scale(1.035);
-  }
-}
-
-/* Fine border inside the photograph */
-
-.intro-editorial__visual::after {
-  content: "";
-
-  position: absolute;
-  inset: 15px;
-
-  border: 1px solid rgba(255, 255, 255, 0.55);
-
-  pointer-events: none;
-}
-
-/* ---------- TRANSLUCENT IMAGE CAPTION ---------- */
-
-.intro-editorial__image-note {
-  position: absolute;
-  z-index: 2;
-
-  left: 28px;
-  bottom: 28px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-
-  padding: 17px 21px;
-
-  background: rgba(248, 245, 239, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  color: #675950;
-  font-size: 8px;
-  letter-spacing: 1.7px;
-  line-height: 1.8;
-}
-
-/* =====================================================
-   TABLET LAYOUT
-   ===================================================== */
-
-@media (max-width: 850px) {
-
-  .intro.intro-editorial {
-    grid-template-columns: 1fr;
-    gap: 42px;
-
-    padding: 85px 7%;
-  }
-
-  .intro-editorial__copy {
-    max-width: 650px;
-  }
-
-  .intro-editorial__visual {
-    width: 100%;
-    max-width: 580px;
-    min-height: 0;
-
-    justify-self: center;
-  }
-
-}
-
-/* =====================================================
-   MOBILE LAYOUT
-   ===================================================== */
-
-@media (max-width: 600px) {
-
-  .intro.intro-editorial {
-    padding: 70px 6%;
-    gap: 32px;
-  }
-
-  .intro-editorial .eyebrow {
-    font-size: 8px;
-    letter-spacing: 2px;
-    margin-bottom: 21px;
-  }
-
-  .intro-editorial h2 {
-    font-size: clamp(43px, 11vw, 58px);
-    line-height: 1.04;
-    letter-spacing: -0.7px;
-
-    margin-bottom: 22px;
-  }
-
-  .intro-editorial p {
-    font-size: 11px;
-    line-height: 2;
-  }
-
-  .intro-editorial__signature {
-    margin-top: 30px;
-  }
-
-  .intro-editorial__visual {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    min-height: 0;
-  }
-
-  .intro-editorial__image-note {
-    left: 17px;
-    bottom: 17px;
-    padding: 13px 15px;
-
-    font-size: 7px;
-    letter-spacing: 1.2px;
-  }
-
-  .intro-editorial__visual::after {
-    inset: 10px;
   }
 
 }
