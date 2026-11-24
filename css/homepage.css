@@ -2046,3 +2046,256 @@ footer > p,
   }
 
 }
+
+
+/* =====================================================
+   CURATED WITH CARE BY M.
+   EDITORIAL INTRODUCTION
+   ===================================================== */
+
+.intro.intro-editorial {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  max-width: none;
+  margin: 0;
+
+  padding: clamp(80px, 10vw, 145px)
+           clamp(24px, 8vw, 120px);
+
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+
+  align-items: center;
+  gap: clamp(40px, 7vw, 100px);
+
+  text-align: left;
+  background: #F5F1EA;
+  overflow: hidden;
+}
+
+/* ---------- TEXT COLUMN ---------- */
+
+.intro-editorial__copy {
+  position: relative;
+  z-index: 2;
+  max-width: 540px;
+}
+
+.intro-editorial .eyebrow {
+  display: block;
+  margin-bottom: 28px;
+
+  color: #9A777A;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.8;
+}
+
+.intro-editorial h2 {
+  margin: 0 0 27px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(45px, 5.2vw, 72px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -1.2px;
+
+  color: #40352F;
+}
+
+.intro-editorial h2 em {
+  color: #A77F82;
+  font-style: italic;
+}
+
+.intro-editorial p {
+  max-width: 420px;
+  margin: 0;
+
+  color: #82766D;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 2.1;
+}
+
+/* ---------- EDITORIAL SIGNATURE ---------- */
+
+.intro-editorial__signature {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  margin-top: 42px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(116, 96, 83, 0.22);
+
+  color: #9A777A;
+  font-size: 8px;
+  letter-spacing: 2px;
+  line-height: 1.8;
+}
+
+.intro-editorial__signature span:last-child {
+  color: #8B8178;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+}
+
+/* ---------- IMAGE COLUMN ---------- */
+
+.intro-editorial__visual {
+  position: relative;
+
+  width: 100%;
+  min-height: 480px;
+  max-height: 720px;
+
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+
+  background: #E5DDD2;
+}
+
+.intro-editorial__visual img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition:
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Gentle image movement on desktop hover */
+
+@media (hover: hover) {
+  .intro-editorial__visual:hover img {
+    transform: scale(1.035);
+  }
+}
+
+/* Fine border inside the photograph */
+
+.intro-editorial__visual::after {
+  content: "";
+
+  position: absolute;
+  inset: 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+
+  pointer-events: none;
+}
+
+/* ---------- TRANSLUCENT IMAGE CAPTION ---------- */
+
+.intro-editorial__image-note {
+  position: absolute;
+  z-index: 2;
+
+  left: 28px;
+  bottom: 28px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  padding: 17px 21px;
+
+  background: rgba(248, 245, 239, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  color: #675950;
+  font-size: 8px;
+  letter-spacing: 1.7px;
+  line-height: 1.8;
+}
+
+/* =====================================================
+   TABLET LAYOUT
+   ===================================================== */
+
+@media (max-width: 850px) {
+
+  .intro.intro-editorial {
+    grid-template-columns: 1fr;
+    gap: 42px;
+
+    padding: 85px 7%;
+  }
+
+  .intro-editorial__copy {
+    max-width: 650px;
+  }
+
+  .intro-editorial__visual {
+    width: 100%;
+    max-width: 580px;
+    min-height: 0;
+
+    justify-self: center;
+  }
+
+}
+
+/* =====================================================
+   MOBILE LAYOUT
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+  .intro.intro-editorial {
+    padding: 70px 6%;
+    gap: 32px;
+  }
+
+  .intro-editorial .eyebrow {
+    font-size: 8px;
+    letter-spacing: 2px;
+    margin-bottom: 21px;
+  }
+
+  .intro-editorial h2 {
+    font-size: clamp(43px, 11vw, 58px);
+    line-height: 1.04;
+    letter-spacing: -0.7px;
+
+    margin-bottom: 22px;
+  }
+
+  .intro-editorial p {
+    font-size: 11px;
+    line-height: 2;
+  }
+
+  .intro-editorial__signature {
+    margin-top: 30px;
+  }
+
+  .intro-editorial__visual {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    min-height: 0;
+  }
+
+  .intro-editorial__image-note {
+    left: 17px;
+    bottom: 17px;
+    padding: 13px 15px;
+
+    font-size: 7px;
+    letter-spacing: 1.2px;
+  }
+
+  .intro-editorial__visual::after {
+    inset: 10px;
+  }
+
+}
