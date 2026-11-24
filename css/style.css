@@ -1,30 +1,69 @@
 
-/* =========================================
+/* =====================================================
    CURATED WITH CARE BY M.
-   CLEAN GLOBAL STYLES
-========================================= */
+   GLOBAL DESIGN SYSTEM
+   LUXURY BEAUTY EDITORIAL
+   ===================================================== */
 
 
-/* =========================================
+/* =====================================================
    1. BRAND COLOURS
-========================================= */
+   ===================================================== */
 
 :root {
-  --ivory: #f8f5ef;
-  --cream: #f1eae3;
-  --dusty-rose: #c5a09b;
-  --soft-rose: #eadbd5;
-  --deep-rose: #906b69;
-  --dark: #403633;
-  --muted: #887d76;
-  --white: #ffffff;
-  --border: #e7dcd3;
+
+  /* Primary palette */
+
+  --ivory: #F4F0E8;
+  --cream: #EDE6DC;
+  --champagne: #DED2C3;
+
+  --dusty-rose: #B58F8B;
+  --soft-rose: #E9DEDA;
+
+  --taupe: #8A796B;
+  --deep-rose: #8A796B;
+
+  --dark: #382E2A;
+  --muted: #81766D;
+
+  --white: #FFFFFF;
+  --border: #E3DAD0;
+
+  --sage: #A4A995;
+  --espresso: #382E2A;
+
+
+  /* Compatibility variables
+     These protect older CSS files that
+     still use the previous variable names. */
+
+  --brand-plum: var(--espresso);
+  --brand-deep-plum: var(--espresso);
+  --brand-champagne: var(--champagne);
+  --brand-ivory: var(--ivory);
+  --brand-cream: var(--cream);
+  --brand-rose-taupe: var(--dusty-rose);
+  --brand-mocha: var(--taupe);
+
+
+  /* Shared design values */
+
+  --page-background: var(--ivory);
+  --surface-background: var(--white);
+
+  --heading-font: 'Cormorant Garamond', serif;
+  --body-font: 'Montserrat', sans-serif;
+
+  --transition-smooth:
+    0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
 }
 
 
-/* =========================================
-   2. GLOBAL SETTINGS
-========================================= */
+/* =====================================================
+   2. GLOBAL FOUNDATION
+   ===================================================== */
 
 * {
   margin: 0;
@@ -34,35 +73,31 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background-color: var(--ivory);
-
-  background-image:
-    radial-gradient(
-      ellipse at 10% 15%,
-      rgba(220, 201, 193, 0.12),
-      transparent 45%
-    ),
-    radial-gradient(
-      ellipse at 90% 80%,
-      rgba(198, 184, 164, 0.09),
-      transparent 45%
-    );
-
-  background-attachment: fixed;
+  background-color: var(--page-background);
 
   color: var(--dark);
-  font-family: 'Montserrat', sans-serif;
+
+  font-family: var(--body-font);
   font-size: 13px;
   font-weight: 400;
   line-height: 1.8;
+
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--champagne);
+  color: var(--espresso);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button,
@@ -74,11 +109,12 @@ textarea {
 
 button {
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 img {
-  width: 100%;
   display: block;
+  max-width: 100%;
   object-fit: cover;
 }
 
@@ -86,27 +122,38 @@ h1,
 h2,
 h3,
 .product-brand-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--heading-font);
+  font-weight: 400;
 }
 
 em {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--heading-font);
   font-weight: 400;
-  color: var(--deep-rose);
+  color: var(--dusty-rose);
 }
 
 [hidden] {
   display: none !important;
 }
 
+
+/* =====================================================
+   3. ACCESSIBILITY
+   ===================================================== */
+
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--deep-rose);
+  outline: 2px solid var(--taupe);
   outline-offset: 3px;
 }
+
+
+/* =====================================================
+   4. SHARED SECTION STYLING
+   ===================================================== */
 
 .section-padding {
   padding: 100px 8%;
@@ -114,33 +161,46 @@ textarea:focus-visible {
 
 .eyebrow {
   display: block;
-  font-size: 9px;
-  letter-spacing: 3px;
-  color: var(--deep-rose);
-  font-weight: 600;
+
   margin-bottom: 18px;
+
+  color: var(--taupe);
+
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.8;
 }
 
 
-/* =========================================
-   3. ANNOUNCEMENT BAR
-========================================= */
+/* =====================================================
+   5. ANNOUNCEMENT BAR
+   ===================================================== */
 
 .announcement {
-  background: var(--deep-rose);
+  background: var(--taupe);
   color: var(--white);
+
   text-align: center;
+
   padding: 9px 12px;
+
   font-size: 9px;
+  font-weight: 400;
   letter-spacing: 2.5px;
+  line-height: 1.7;
 }
 
 
-/* =========================================
-   4. HEADER & NAVIGATION
-========================================= */
+/* =====================================================
+   6. HEADER & NAVIGATION
+   ===================================================== */
 
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
   min-height: 90px;
   padding: 18px 7%;
 
@@ -149,36 +209,42 @@ textarea:focus-visible {
   align-items: center;
   gap: 25px;
 
-  background: rgba(248, 245, 239, 0.98);
+  background: rgba(244, 240, 232, 0.97);
+
   border-bottom: 1px solid var(--border);
 
-  box-shadow:
-    0 3px 18px rgba(80, 60, 50, 0.025);
+  box-shadow: 0 3px 18px rgba(56, 46, 42, 0.025);
 
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .brand {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   min-width: 190px;
 }
 
 .brand-script {
   font-family: 'Great Vibes', cursive;
+
   font-size: 38px;
-  color: var(--deep-rose);
+  font-weight: 400;
+
+  color: var(--taupe);
+
   line-height: 1.2;
 }
 
 .brand-by {
+  margin-top: 3px;
+
+  color: var(--muted);
+
   font-size: 9px;
   letter-spacing: 5px;
-  margin-top: 3px;
-  color: #82736c;
 }
 
 .header nav {
@@ -189,295 +255,159 @@ textarea:focus-visible {
 }
 
 .header nav a {
+  color: var(--dark);
+
   font-size: 10px;
   letter-spacing: 1px;
-  transition: color 0.3s ease;
+
+  transition: color var(--transition-smooth);
 }
 
 .header nav a:hover {
-  color: var(--deep-rose);
+  color: var(--dusty-rose);
 }
 
 .menu-toggle {
   display: none;
-  background: none;
+
+  background: transparent;
   border: none;
-  font-size: 25px;
+
   color: var(--dark);
+
+  font-size: 25px;
 }
 
 .bag-button {
-  background: none;
-  border: 1px solid var(--dusty-rose);
-  color: var(--dark);
+  position: relative;
+  z-index: 101;
+
   padding: 10px 18px;
+
+  background: transparent;
+
+  border: 1px solid var(--champagne);
+
+  color: var(--dark);
+
   font-size: 10px;
   letter-spacing: 1px;
   white-space: nowrap;
-  cursor: pointer;
-  position: relative;
-  z-index: 101;
-  transition: all 0.3s ease;
+
+  transition: all var(--transition-smooth);
 }
 
 .bag-button:hover {
-  background: var(--soft-rose);
-  border-color: var(--deep-rose);
+  background: var(--champagne);
+  border-color: var(--taupe);
 }
 
 
-/* =========================================
-   5. SHARED BUTTONS & LINKS
-========================================= */
+/* =====================================================
+   7. SHARED BUTTONS & LINKS
+   ===================================================== */
 
 .primary-button {
   display: inline-block;
-  background: var(--deep-rose);
-  color: var(--white);
+
   padding: 15px 28px;
-  border: 1px solid var(--deep-rose);
+
+  background: var(--espresso);
+
+  color: var(--white);
+
+  border: 1px solid var(--espresso);
+
   font-size: 9px;
   letter-spacing: 1.6px;
   text-align: center;
-  transition: all 0.3s ease;
+
+  transition: all var(--transition-smooth);
 }
 
 .primary-button:hover {
   background: transparent;
-  color: var(--deep-rose);
+  color: var(--espresso);
 }
 
 .text-link {
+  display: inline-block;
+
+  padding-bottom: 5px;
+
+  border-bottom: 1px solid var(--champagne);
+
+  color: var(--dark);
+
   font-size: 9px;
   letter-spacing: 2px;
-  border-bottom: 1px solid var(--dusty-rose);
-  padding-bottom: 5px;
+
+  transition: border-color var(--transition-smooth);
+}
+
+.text-link:hover {
+  border-color: var(--dusty-rose);
 }
 
 
-/* =========================================
-   6. HOMEPAGE — INTRODUCTION
-========================================= */
+/* =====================================================
+   8. HOMEPAGE — INTRODUCTION BASE
+   Detailed editorial layout belongs in homepage.css.
+   ===================================================== */
 
 .intro {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
 
   width: 100%;
   max-width: none;
+
   margin: 0;
 
-  padding: 110px 9% 120px;
+  padding: 100px 8%;
 
-  display: grid;
-  grid-template-columns: 1.35fr 0.65fr;
-  align-items: center;
-  column-gap: 5%;
+  background: var(--ivory);
 
   text-align: left;
-
-  background:
-    radial-gradient(
-      ellipse at 15% 30%,
-      rgba(231, 205, 199, 0.24),
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse at 85% 75%,
-      rgba(224, 213, 197, 0.3),
-      transparent 55%
-    ),
-    linear-gradient(
-      180deg,
-      #f3ebe5 0%,
-      #f5eee8 45%,
-      #f8f5ef 100%
-    );
-
-  --intro-progress: 1;
 }
 
 
-/* INTRO LABEL */
-
-.intro .eyebrow {
-  grid-column: 1 / -1;
-
-  margin-bottom: 30px;
-
-  font-size: 9px;
-  letter-spacing: 3px;
-  color: var(--deep-rose);
-
-  transform:
-    translate3d(
-      0,
-      calc((1 - var(--intro-progress)) * 20px),
-      0
-    );
-
-  opacity: var(--intro-progress);
-}
-
-
-/* INTRO HEADING */
-
-.intro h2 {
-  grid-column: 1;
-
-  margin: 0;
-
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(44px, 5vw, 66px);
-  font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: -1px;
-
-  color: var(--dark);
-
-  transform:
-    translate3d(
-      calc((1 - var(--intro-progress)) * -55px),
-      calc((1 - var(--intro-progress)) * 35px),
-      0
-    );
-
-  opacity: var(--intro-progress);
-
-  will-change: transform, opacity;
-}
-
-.intro h2 em {
-  color: var(--deep-rose);
-  font-style: italic;
-}
-
-
-/* INTRO PARAGRAPH */
-
-.intro p {
-  grid-column: 2;
-
-  max-width: 390px;
-  margin: 0;
-
-  font-size: 13px;
-  line-height: 2.1;
-  font-weight: 300;
-
-  color: var(--muted);
-
-  transform:
-    translate3d(
-      calc((1 - var(--intro-progress)) * 45px),
-      calc((1 - var(--intro-progress)) * 20px),
-      0
-    );
-
-  opacity: var(--intro-progress);
-
-  will-change: transform, opacity;
-}
-
-
-/* DECORATIVE FLOWER */
-
-.intro::after {
-  content: "✿";
-
-  position: absolute;
-  left: 3%;
-  bottom: 15px;
-
-  font-family: serif;
-  font-size: 100px;
-  font-weight: 300;
-
-  color: var(--dusty-rose);
-
-  opacity: calc(0.04 + var(--intro-progress) * 0.12);
-
-  pointer-events: none;
-
-  transform:
-    translate3d(
-      calc(var(--intro-progress) * 35px),
-      calc((1 - var(--intro-progress)) * 70px),
-      0
-    )
-    rotate(
-      calc(var(--intro-progress) * 100deg)
-    );
-
-  will-change: transform, opacity;
-}
-
-
-/* INTRO ATMOSPHERE */
-
-.intro::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  z-index: -1;
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at 80% 30%,
-      rgba(220, 190, 184, 0.35),
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse at 15% 80%,
-      rgba(255, 255, 255, 0.65),
-      transparent 55%
-    );
-
-  opacity: var(--story-progress, 0);
-}
-
-
-/* =========================================
-   7. SHARED SECTION HEADINGS
-========================================= */
+/* =====================================================
+   9. SHARED SECTION HEADINGS
+   ===================================================== */
 
 .section-heading {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+
   gap: 20px;
+
   margin-bottom: 40px;
 }
 
 .section-heading h2,
 .gift-content h2,
 .gift-finder h2 {
+  color: var(--dark);
+
   font-size: clamp(38px, 4vw, 53px);
   font-weight: 400;
   line-height: 1.15;
 }
 
 .section-heading p {
-  color: var(--muted);
   margin-top: 12px;
+  color: var(--muted);
 }
 
 
-/* =========================================
-   8. HOMEPAGE — COLLECTIONS
-========================================= */
+/* =====================================================
+   10. HOMEPAGE — COLLECTIONS
+   ===================================================== */
 
 .collections {
-  background:
-    radial-gradient(
-      ellipse at 95% 10%,
-      rgba(220, 201, 193, 0.15),
-      transparent 40%
-    ),
-    #f8f5ef;
+  background: var(--ivory);
 }
 
 .collection-grid {
@@ -492,9 +422,11 @@ textarea:focus-visible {
 
 .collection-photo {
   height: 390px;
+
   background-size: cover;
   background-position: center;
-  transition: transform 0.5s ease;
+
+  transition: transform 0.7s ease;
 }
 
 .collection-card:hover .collection-photo {
@@ -502,15 +434,21 @@ textarea:focus-visible {
 }
 
 .photo-skincare {
-  background-image: url("https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=800&q=85");
+  background-image: url(
+    "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=800&q=85"
+  );
 }
 
 .photo-gifts {
-  background-image: url("https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=85");
+  background-image: url(
+    "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=85"
+  );
 }
 
 .photo-glow {
-  background-image: url("https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=800&q=85");
+  background-image: url(
+    "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=800&q=85"
+  );
 }
 
 .collection-caption {
@@ -518,39 +456,39 @@ textarea:focus-visible {
 }
 
 .collection-caption > span:first-child {
+  color: var(--muted);
+
   font-size: 8px;
   letter-spacing: 2px;
-  color: var(--muted);
 }
 
 .collection-caption h3 {
+  margin: 5px 0;
+
+  color: var(--dark);
+
   font-size: 29px;
   font-weight: 400;
-  margin: 5px 0;
-  color: var(--dark);
 }
 
 .discover {
   display: inline-block;
-  color: var(--deep-rose);
+
+  margin-top: 8px;
+
+  color: var(--taupe);
+
   font-size: 9px;
   letter-spacing: 2px;
-  margin-top: 8px;
 }
 
 
-/* =========================================
-   9. HOMEPAGE — BRAND CARDS
-========================================= */
+/* =====================================================
+   11. HOMEPAGE — BRAND CARDS
+   ===================================================== */
 
 .brands-section {
-  background:
-    linear-gradient(
-      135deg,
-      #f5eee8,
-      #faf7f2,
-      #f2ebe5
-    );
+  background: var(--cream);
 }
 
 .brand-grid {
@@ -562,9 +500,6 @@ textarea:focus-visible {
 .brand-card {
   min-height: 155px;
 
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid #e8ddd4;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -572,14 +507,19 @@ textarea:focus-visible {
 
   padding: 20px 10px;
 
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.65);
+
+  border: 1px solid var(--border);
 
   color: var(--dark);
+
+  transition: all var(--transition-smooth);
 }
 
 .brand-card:hover {
-  background: var(--cream);
-  border-color: var(--dusty-rose);
+  background: var(--ivory);
+  border-color: var(--champagne);
+
   transform: translateY(-4px);
 }
 
@@ -589,9 +529,30 @@ textarea:focus-visible {
 }
 
 
-/* =========================================
-   10. RESPONSIVE — TABLET
-========================================= */
+/* =====================================================
+   12. PRODUCT DETAILS — RESPONSIVE FOUNDATION
+   ===================================================== */
+
+.product-details-section {
+  padding: 80px 8%;
+}
+
+.product-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+}
+
+.product-detail-info h2 {
+  color: var(--dark);
+  font-size: 42px;
+  line-height: 1.15;
+}
+
+
+/* =====================================================
+   13. TABLET RESPONSIVE
+   ===================================================== */
 
 @media (max-width: 1000px) {
 
@@ -623,28 +584,31 @@ textarea:focus-visible {
 }
 
 
-/* =========================================
-   11. RESPONSIVE — MOBILE
-========================================= */
+/* =====================================================
+   14. MOBILE RESPONSIVE
+   ===================================================== */
 
 @media (max-width: 650px) {
 
-  /* GENERAL */
+  /* General */
 
   .section-padding {
     padding: 65px 6%;
   }
 
   .announcement {
+    padding: 8px 10px;
+
     font-size: 8px;
     letter-spacing: 1.5px;
   }
 
 
-  /* HEADER */
+  /* Header */
 
   .header {
     min-height: 75px;
+
     padding: 12px 5%;
 
     display: flex;
@@ -681,6 +645,7 @@ textarea:focus-visible {
     padding: 20px;
 
     background: var(--ivory);
+
     border-top: 1px solid var(--border);
 
     flex-direction: column;
@@ -709,58 +674,14 @@ textarea:focus-visible {
   }
 
 
-  /* INTRO */
+  /* Introduction fallback */
 
   .intro {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    text-align: left;
-
-    padding: 75px 8% 85px;
-    gap: 0;
-  }
-
-  .intro .eyebrow {
-    margin-bottom: 24px;
-  }
-
-  .intro h2 {
-    font-size: clamp(42px, 11vw, 58px);
-    line-height: 1.08;
-    margin-bottom: 25px;
-
-    transform:
-      translate3d(
-        0,
-        calc((1 - var(--intro-progress)) * 35px),
-        0
-      );
-  }
-
-  .intro p {
-    max-width: 340px;
-    font-size: 12px;
-    line-height: 2;
-
-    transform:
-      translate3d(
-        0,
-        calc((1 - var(--intro-progress)) * 25px),
-        0
-      );
-  }
-
-  .intro::after {
-    left: auto;
-    right: 2%;
-    bottom: 5px;
-    font-size: 75px;
+    padding: 70px 7%;
   }
 
 
-  /* SECTION HEADINGS */
+  /* Section headings */
 
   .section-heading {
     align-items: flex-start;
@@ -768,7 +689,7 @@ textarea:focus-visible {
   }
 
 
-  /* COLLECTIONS */
+  /* Collections */
 
   .collection-grid {
     grid-template-columns: 1fr;
@@ -780,7 +701,7 @@ textarea:focus-visible {
   }
 
 
-  /* BRAND CARDS */
+  /* Brand cards */
 
   .brand-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -796,7 +717,7 @@ textarea:focus-visible {
   }
 
 
-  /* PRODUCT DETAILS */
+  /* Product details */
 
   .product-details-section {
     padding: 55px 6%;
@@ -812,7 +733,7 @@ textarea:focus-visible {
   }
 
 
-  /* OLD BAG PANEL */
+  /* Cart panel */
 
   .cart-panel {
     padding: 50px 22px;
@@ -821,9 +742,9 @@ textarea:focus-visible {
 }
 
 
-/* =========================================
-   12. RESPONSIVE — SMALL MOBILE
-========================================= */
+/* =====================================================
+   15. SMALL MOBILE
+   ===================================================== */
 
 @media (max-width: 480px) {
 
@@ -834,103 +755,22 @@ textarea:focus-visible {
 }
 
 
-/* =========================================
-   13. MOTION ACCESSIBILITY
-========================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  html {
-    scroll-behavior: auto;
-  }
-
-  .intro h2,
-  .intro p,
-  .intro .eyebrow,
-  .intro::after {
-    transform: none !important;
-    opacity: 1 !important;
-  }
-
-  .collection-photo,
-  .brand-card,
-  .header nav a,
-  .primary-button,
-  .bag-button {
-    transition: none !important;
-  }
-
-}
-
-/* ==========================================
-   GLOBAL — LUXURY BRAND DESIGN
-   CURATED WITH CARE BY M.
-========================================== */
-
-:root {
-  --brand-plum: #4A263F;
-  --brand-deep-plum: #35182D;
-  --brand-champagne: #C5B5A2;
-  --brand-ivory: #F8F5F0;
-  --brand-cream: #F0EAE2;
-  --brand-rose-taupe: #D6C5C2;
-  --brand-mocha: #77665C;
-}
-
-/* Global smooth scrolling */
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* Selection colour */
-
-::selection {
-  background: var(--brand-rose-taupe);
-  color: var(--brand-deep-plum);
-}
-
-/* Luxury button interaction */
-
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Consistent image rendering */
-
-img {
-  max-width: 100%;
-}
-
-/* Accessibility: reduced motion */
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
 /* =====================================================
-   CURATED WITH CARE BY M.
-   EDITORIAL SCROLL REVEAL
+   16. EDITORIAL SCROLL REVEAL
    ===================================================== */
+
+/* Normal appearance if animation is unavailable */
 
 [data-editorial-reveal] {
   opacity: 1;
   transform: none;
 }
 
-/* Reveal animation activates only when JavaScript works */
+/* Animation activates when JavaScript is ready */
+
 .reveal-active [data-editorial-reveal] {
   opacity: 0;
+
   transform: translateY(28px);
 
   transition:
@@ -940,19 +780,39 @@ img {
   will-change: opacity, transform;
 }
 
-/* Element becomes visible when it enters the screen */
+/* Visible state */
+
 .reveal-active [data-editorial-reveal].is-revealed {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Accessibility: respect reduced-motion preferences */
+
+/* =====================================================
+   17. ACCESSIBILITY — REDUCED MOTION
+   ===================================================== */
+
 @media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-editorial-reveal],
   .reveal-active [data-editorial-reveal],
   .reveal-active [data-editorial-reveal].is-revealed {
-    opacity: 1;
-    transform: none;
-    transition: none;
+    opacity: 1 !important;
+    transform: none !important;
     will-change: auto;
   }
+
 }
