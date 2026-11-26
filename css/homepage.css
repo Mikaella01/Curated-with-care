@@ -2310,4 +2310,153 @@ footer > p,
     transform: none !important;
   }
 
+
+   
+/* =====================================================
+   CURATED WITH CARE BY M.
+   HERO — CINEMATIC EDITORIAL MOTION
+   ===================================================== */
+
+/* Gentle background camera movement */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  .homepage .hero-world__background {
+    animation: cwcHeroBackgroundDrift 28s ease-in-out infinite alternate;
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+  @keyframes cwcHeroBackgroundDrift {
+
+    0% {
+      transform: scale(1.035) translate3d(0, 0, 0);
+    }
+
+    100% {
+      transform: scale(1.085) translate3d(0, -1.2%, 0);
+    }
+
+  }
+
+
+  /* Soft movement in the atmospheric lighting */
+
+  .homepage .hero-world__light {
+    animation: cwcHeroLightDrift 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes cwcHeroLightDrift {
+
+    0% {
+      opacity: 0.55;
+    }
+
+    100% {
+      opacity: 0.82;
+    }
+
+  }
+
+
+  /* Subtle movement in the mist */
+
+  .homepage .hero-world__mist {
+    animation: cwcHeroMist 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes cwcHeroMist {
+
+    0% {
+      opacity: 0.25;
+    }
+
+    100% {
+      opacity: 0.43;
+    }
+
+  }
+
+
+  /* Headline and hero content entrance */
+
+  .homepage .hero-world__content {
+    animation: cwcHeroContentReveal 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both;
+  }
+
+  @keyframes cwcHeroContentReveal {
+
+    from {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+  }
+
+
+  /* Scroll indicator entrance */
+
+  .homepage .hero-world__scroll {
+    animation: cwcHeroScrollReveal 1s ease-out 0.8s both;
+  }
+
+  @keyframes cwcHeroScrollReveal {
+
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE — SLOWER, MORE SUBTLE MOTION
+   ===================================================== */
+
+@media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
+
+  .homepage .hero-world__background {
+    animation-duration: 34s;
+  }
+
+  .homepage .hero-world__light {
+    animation-duration: 25s;
+  }
+
+  .homepage .hero-world__mist {
+    animation-duration: 22s;
+  }
+
+}
+
+
+/* =====================================================
+   ACCESSIBILITY — RESPECT REDUCED MOTION
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .homepage .hero-world__background,
+  .homepage .hero-world__light,
+  .homepage .hero-world__mist,
+  .homepage .hero-world__content,
+  .homepage .hero-world__scroll {
+    animation: none !important;
+  }
+
+}
+
 }
