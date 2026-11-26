@@ -2254,21 +2254,6 @@ footer > p,
     font-size: 20px;
   }
 
-  .brand-medicube .brand-edit-name {
-    font-size: 36px;
-  }
-
-  .brand-anua .brand-edit-name {
-    font-size: 42px;
-  }
-
-  .brand-torriden .brand-edit-name {
-    font-size: 34px;
-  }
-
-}
-
-
 /* =====================================================
    15. ACCESSIBILITY — REDUCED MOTION
    ===================================================== */
@@ -2296,7 +2281,6 @@ footer > p,
 
   .hero-world__background,
   .hero-world__content {
-    animation: none !important;
     transform: none !important;
   }
 
@@ -2310,16 +2294,16 @@ footer > p,
     transform: none !important;
   }
 
+}
 
-   
+
 /* =====================================================
-   CURATED WITH CARE BY M.
-   HERO — CINEMATIC EDITORIAL MOTION
+   16. HERO — CINEMATIC EDITORIAL MOTION
    ===================================================== */
 
-/* Gentle background camera movement */
-
 @media (prefers-reduced-motion: no-preference) {
+
+  /* Gentle background movement */
 
   .homepage .hero-world__background {
     animation: cwcHeroBackgroundDrift 28s ease-in-out infinite alternate;
@@ -2328,64 +2312,57 @@ footer > p,
   }
 
   @keyframes cwcHeroBackgroundDrift {
-
-    0% {
+    from {
       transform: scale(1.035) translate3d(0, 0, 0);
     }
 
-    100% {
+    to {
       transform: scale(1.085) translate3d(0, -1.2%, 0);
     }
-
   }
 
 
-  /* Soft movement in the atmospheric lighting */
+  /* Atmospheric lighting */
 
   .homepage .hero-world__light {
     animation: cwcHeroLightDrift 20s ease-in-out infinite alternate;
   }
 
   @keyframes cwcHeroLightDrift {
-
-    0% {
+    from {
       opacity: 0.55;
     }
 
-    100% {
+    to {
       opacity: 0.82;
     }
-
   }
 
 
-  /* Subtle movement in the mist */
+  /* Floating mist */
 
   .homepage .hero-world__mist {
     animation: cwcHeroMist 18s ease-in-out infinite alternate;
   }
 
   @keyframes cwcHeroMist {
-
-    0% {
+    from {
       opacity: 0.25;
     }
 
-    100% {
+    to {
       opacity: 0.43;
     }
-
   }
 
 
-  /* Headline and hero content entrance */
+  /* Hero text entrance */
 
   .homepage .hero-world__content {
     animation: cwcHeroContentReveal 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both;
   }
 
   @keyframes cwcHeroContentReveal {
-
     from {
       opacity: 0;
       transform: translate3d(0, 20px, 0);
@@ -2395,7 +2372,6 @@ footer > p,
       opacity: 1;
       transform: translate3d(0, 0, 0);
     }
-
   }
 
 
@@ -2406,24 +2382,22 @@ footer > p,
   }
 
   @keyframes cwcHeroScrollReveal {
-
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translate(-50%, 10px);
     }
 
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate(-50%, 0);
     }
-
   }
 
 }
 
 
 /* =====================================================
-   MOBILE — SLOWER, MORE SUBTLE MOTION
+   17. MOBILE — SUBTLE HERO MOTION
    ===================================================== */
 
 @media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
@@ -2444,7 +2418,7 @@ footer > p,
 
 
 /* =====================================================
-   ACCESSIBILITY — RESPECT REDUCED MOTION
+   18. REDUCED MOTION — FINAL HERO OVERRIDE
    ===================================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2459,4 +2433,18 @@ footer > p,
 
 }
 
+  .brand-medicube .brand-edit-name {
+    font-size: 36px;
+  }
+
+  .brand-anua .brand-edit-name {
+    font-size: 42px;
+  }
+
+  .brand-torriden .brand-edit-name {
+    font-size: 34px;
+  }
+
 }
+
+
